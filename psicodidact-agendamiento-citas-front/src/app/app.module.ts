@@ -8,6 +8,12 @@ import { LoginComponent } from './login/login/login.component';
 import { FooterComponent } from './footer/footer/footer.component';
 import { BodyComponent } from './body/body/body.component';
 import { HeaderComponent } from './header/header/header.component';
+import { RouterModule, Routes } from '@angular/router';
+
+//const routes: Routes =[
+ // {path: '' ,redirectTo:  '/clientes', pathMatch: 'full'}
+//  
+//]
 
 @NgModule({
   declarations: [
