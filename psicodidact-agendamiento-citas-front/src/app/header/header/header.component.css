@@ -1,19 +1,13 @@
-header {
-    background-color: #FFFFFF ;
-    padding: 20px;
-    text-align: center;
-  }
+
   
-  h1 {
-    color: #FFFFFF;
-    font-family: "Arial", sans-serif;
-    font-size: 30px;
+  .fondo_header {
+    background-image: url("/assets/imagenes/logo.png");
+    background-size: cover;
+    background-repeat: no-repeat;
     margin: 0;
-  }
+    height: 50px;
+    width: 100%;
+}
+ 
   
-  p {
-    color: #FFFFFF ;
-    font-family: "Arial", sans-serif;
-    font-size: 16px;
-    margin: 0;
-  }
+ 

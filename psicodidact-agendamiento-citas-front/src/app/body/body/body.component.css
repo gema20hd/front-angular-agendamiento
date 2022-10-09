@@ -1,5 +1,8 @@
-.body {
-    margin-bottom: 100px;
+.fondo {
     background-image: url('/assets/imagenes/FONDO.png');
+    background-size: cover;
+    background-repeat: no-repeat;
+    margin: 0;
+    height: 500px;
 }
 
