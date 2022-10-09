@@ -9,6 +9,8 @@ import { FooterComponent } from './footer/footer/footer.component';
 import { BodyComponent } from './body/body/body.component';
 import { HeaderComponent } from './header/header/header.component';
 import { RouterModule, Routes } from '@angular/router';
+import { BarraMenuComponent } from './barra_menu/barra-menu/barra-menu.component';
+import { HeaderLoginComponent } from './header_login/header-login/header-login.component';
 
 //const routes: Routes =[
  // {path: '' ,redirectTo:  '/clientes', pathMatch: 'full'}
@@ -21,7 +23,9 @@ import { RouterModule, Routes } from '@angular/router';
     LoginComponent,
     FooterComponent,
     BodyComponent,
-    HeaderComponent
+    HeaderComponent,
+    BarraMenuComponent,
+    HeaderLoginComponent
   ],
   imports: [
     BrowserModule,
