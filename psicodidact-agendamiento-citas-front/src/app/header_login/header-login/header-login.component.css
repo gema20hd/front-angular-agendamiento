@@ -1,6 +1,9 @@
-.img {
-    width: 100% !important;
-    height: 100% !important;
+img {
+    width: 100%;
+    height: 100px;
     display: block;
-    margin-left: auto;
+}
+
+.header_login {
+    background-color: #FFFFFF;
 }

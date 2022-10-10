@@ -1,25 +1,32 @@
 <app-header-login> </app-header-login>
+<link href="http://getbootstrap.com/dist/css/bootstrap.min.css" rel="stylesheet" />
+
 <div class="container">
-    <div class="login">
-        <form class="custom-form" method="post">
-            <div class="wrap">
-                <h3 class="mb-4 text-center"><strong> Iniciar sesión </strong></h3>
-            </div>
-            <div class="login-wrap">
+    <div class="row">
+        <div class="login">
+            <form class="custom-form" method="post">
+                <div class="wrap">
+                    <h3 class="mb-4 text-center"><strong> Iniciar sesión </strong></h3>
+                </div>
+
                 <div class="input-group">
                     <span class="input-group-addon"><i class="bi bi-person"></i></span>
-                    <input type="email" placeholder="Username" required="required" />
+                    <input type="text" placeholder="Usuario" required="required" />
                 </div>
                 <div class="input-group">
                     <span class="input-group-addon"><i class="bi bi-key"></i></span>
-                    <input type="password" placeholder="Password" required="required" />
+                    <input type="password" placeholder="Contraseña" required="required" />
                 </div>
-                <button type="submit">Log in</button>
-            </div>
-        </form>
+                <button type="submit">Ingresar</button>
+
+
+            </form>
+        </div>
+
     </div>
 
 </div>
+
 
 
 <app-footer></app-footer>
