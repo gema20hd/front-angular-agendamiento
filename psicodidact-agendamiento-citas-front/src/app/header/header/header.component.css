@@ -1,6 +1,4 @@
-
-  
-  .fondo_header {
+.fondo_header {
     background-image: url("/assets/imagenes/logo.png");
     background-size: cover;
     background-repeat: no-repeat;
@@ -8,6 +6,3 @@
     height: 50px;
     width: 100%;
 }
- 
-  
- 

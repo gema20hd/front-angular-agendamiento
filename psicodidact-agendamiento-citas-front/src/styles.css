@@ -1,0 +1,14 @@
+.body {
+    background-image: url('/assets/imagenes/FONDO.png');
+    background-position: center center !important;
+    background-attachment: fixed !important;
+    background-repeat: no-repeat !important;
+    background-size: cover !important;
+}
+
+hr {
+    height: 10px;
+    color: #00A7E3;
+    background-color: #00A7E3;
+    width: 100%;
+}

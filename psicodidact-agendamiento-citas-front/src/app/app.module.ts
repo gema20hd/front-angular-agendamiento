@@ -6,14 +6,13 @@ import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { LoginComponent } from './login/login/login.component';
 import { FooterComponent } from './footer/footer/footer.component';
-import { BodyComponent } from './body/body/body.component';
 import { HeaderComponent } from './header/header/header.component';
 import { RouterModule, Routes } from '@angular/router';
 import { HeaderLoginComponent } from './header_login/header-login/header-login.component';
 import { HomeComponent } from './home/home/home.component';
 
 const routes: Routes =[
- {path: '' ,redirectTo:  '/home', pathMatch: 'full'}
+// {path: '' ,redirectTo:  '/home', pathMatch: 'full'}
   ]
 
 @NgModule({
@@ -21,10 +20,9 @@ const routes: Routes =[
     AppComponent,
     LoginComponent,
     FooterComponent,
-    BodyComponent,
     HeaderComponent,
     HeaderLoginComponent,
-    HomeComponent
+    HomeComponent,
   ],
   imports: [
     BrowserModule,
