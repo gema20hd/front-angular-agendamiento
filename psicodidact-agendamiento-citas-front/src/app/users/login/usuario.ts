@@ -3,5 +3,5 @@ export class Usuario {
   username: string = "";
   password: string = "";
   enabled: boolean= false;
-  rol: string = "";
+  roles: string[] = [];
 }

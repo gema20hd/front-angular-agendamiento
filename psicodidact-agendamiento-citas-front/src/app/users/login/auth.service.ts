@@ -38,11 +38,13 @@ export class AuthService {
   }
 
   login(usuario: Usuario): Observable<any> {
-    const urlEndpoint = 'http://localhost:8080/generate-token';
+    const urlEndpoint = 'http://localhost:8080/oauth/token';
+
+    const credenciales = btoa('angularapp' + ':' + '12345');
 
     const httpHeaders = new HttpHeaders({
       'Content-Type': 'application/x-www-form-urlencoded',
-      'Authorization': 'Basic '
+      'Authorization': 'Basic ' + credenciales
     });
 
     let params = new URLSearchParams();
@@ -57,7 +59,7 @@ export class AuthService {
     let payload = this.obtenerDatosToken(accessToken);
     this._usuario = new Usuario();
     this._usuario.username = payload.user_name;
-    this._usuario.rol = payload.authorities;
+    this._usuario.roles = payload.authorities;
     sessionStorage.setItem('usuario', JSON.stringify(this._usuario));
   }
 
@@ -82,7 +84,7 @@ export class AuthService {
   }
 
   hasRole(role: string): boolean {
-    if (this.usuario.rol.includes(role)) {
+    if (this.usuario.roles.includes(role)) {
       return true;
     }
     return false;
