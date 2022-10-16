@@ -5,23 +5,13 @@ img {
 }
 
 h1 {
-    top: 30%;
-    left: 50%;
-    -webkit-transform: translate(-50%, -50%);
-    transform: translate(-50%, -50%);
-    position: absolute;
-    font-size: 40px;
-    margin: 0;
+    font-size: 35px;
     font-family: fantasy;
     font-weight: 700;
 }
 
-section {
-    padding: 60px 0;
-    overflow: hidden;
-}
-
-.section-title {
+.div-title {
+    padding-top: 30px;
     text-align: center;
     padding-bottom: 30px;
 }
