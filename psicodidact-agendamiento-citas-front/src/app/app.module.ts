@@ -11,7 +11,7 @@ import { HeaderLoginComponent } from './header_login/header-login/header-login.c
 import { HomeComponent } from './home/home/home.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import {HttpClientModule} from '@angular/common/http';
-import { CookieService } from 'ngx-cookie-service';
+//import { CookieService } from 'ngx-cookie-service';
 import { LoginComponent } from './users/login/login.component';
 
 
@@ -35,7 +35,7 @@ import { LoginComponent } from './users/login/login.component';
     BrowserAnimationsModule,
     ReactiveFormsModule
   ],
-  providers: [CookieService],
+  providers: [],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
