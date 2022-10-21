@@ -70,13 +70,13 @@ export class AuthService {
     this._token = accessToken;
     sessionStorage.setItem('token', accessToken);
   }
-
+/*
   logout():void{
     sessionStorage.removeItem('token');
     sessionStorage.removeItem('usuario');
 
   }
-
+*/
 
   obtenerDatosToken(accessToken: string): any {
     if (accessToken) {
@@ -101,5 +101,12 @@ export class AuthService {
     return false;
   }
 
+  logout(): void {
+    this._token = "";
+    //this._usuario =null;
+    sessionStorage.clear();
+    sessionStorage.removeItem('token');
+    sessionStorage.removeItem('usuario');
+  }
 
 }
