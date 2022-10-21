@@ -7,3 +7,12 @@ img {
 .header_login {
     background-color: #FFFFFF;
 }
+
+.espacio{
+    width: 2%;
+}
+
+.nuevo{
+    height: 100px;
+    width: 450px
+}

@@ -1,0 +1,23 @@
+<app-header-login> </app-header-login>
+<div class="container">
+    <div class="row">
+        <div class="login">
+            <form class="custom-form" method="post"  (ngSubmit)="onSubmit()">
+                <div >
+                    <h3 class="mb-4 text-center "><strong> Ups! Recurso solicitado no existe </strong></h3>
+                </div>
+                     
+                <div class="col-lg-4 col-md-5">
+                    <img src="/assets/imagenes/logo_error.jpg" alt="cat">   
+                </div>
+                <button (click)="login() " type="submit " >Ir Login</button>
+
+
+            </form>
+        </div>
+
+    </div>
+
+</div>
+
+<app-footer></app-footer>

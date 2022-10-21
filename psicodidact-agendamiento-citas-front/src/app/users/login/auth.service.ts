@@ -10,6 +10,9 @@ export class AuthService {
 
   private _usuario: Usuario ;
   private _token: string;
+  
+  public campo:boolean=true;
+
 
   constructor(private http: HttpClient) {   
      this._usuario = new Usuario();
@@ -68,8 +71,16 @@ export class AuthService {
     sessionStorage.setItem('token', accessToken);
   }
 
+  logout():void{
+    sessionStorage.removeItem('token');
+    sessionStorage.removeItem('usuario');
+
+  }
+
+
   obtenerDatosToken(accessToken: string): any {
-    if (accessToken != null) {
+    if (accessToken) {
+    
       return JSON.parse(atob(accessToken.split(".")[1]));
     }
     return null;
