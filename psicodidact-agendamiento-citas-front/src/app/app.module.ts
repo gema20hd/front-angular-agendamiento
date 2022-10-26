@@ -4,29 +4,38 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { LoginComponent } from './login/login/login.component';
 import { FooterComponent } from './footer/footer/footer.component';
-import { BodyComponent } from './body/body/body.component';
 import { HeaderComponent } from './header/header/header.component';
 import { RouterModule, Routes } from '@angular/router';
+import { HeaderLoginComponent } from './header_login/header-login/header-login.component';
+import { HomeComponent } from './home/home/home.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import {HttpClientModule} from '@angular/common/http';
+//import { CookieService } from 'ngx-cookie-service';
+import { LoginComponent } from './users/login/login.component';
+import { PageComponent } from './error_page/page/page.component';
 
-//const routes: Routes =[
- // {path: '' ,redirectTo:  '/clientes', pathMatch: 'full'}
-//  
-//]
+
 
 @NgModule({
   declarations: [
     AppComponent,
-    LoginComponent,
     FooterComponent,
-    BodyComponent,
-    HeaderComponent
+    HeaderComponent,
+    HeaderLoginComponent,
+    HomeComponent,
+    LoginComponent,
+    PageComponent,
+    
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    BrowserAnimationsModule
+    BrowserModule,
+    HttpClientModule,
+    FormsModule,
+    BrowserAnimationsModule,
+    ReactiveFormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
