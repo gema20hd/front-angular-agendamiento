@@ -14,7 +14,7 @@ h3 {
 }
 
 .custom-form {
-    min-width: 300px;
+    min-width: 100%;
     max-width: 36%;
     margin: 0px auto;
     background: rgba(255, 255, 255, 0.15);
@@ -57,7 +57,7 @@ h3 {
 }
 
 .login-wrap {
-    padding: 20px 20px 20px 20px;
+    padding: 100px 20px 20px 20px;
 }
 
 .custom-form .input-group-addon {

@@ -14,6 +14,7 @@ import {HttpClientModule} from '@angular/common/http';
 //import { CookieService } from 'ngx-cookie-service';
 import { LoginComponent } from './users/login/login.component';
 import { PageComponent } from './error_page/page/page.component';
+import { ProfessionalComponent } from './professional/professional/professional.component';
 
 
 
@@ -26,6 +27,7 @@ import { PageComponent } from './error_page/page/page.component';
     HomeComponent,
     LoginComponent,
     PageComponent,
+    ProfessionalComponent,
     
   ],
   imports: [

@@ -8,11 +8,18 @@ img {
     background-color: #FFFFFF;
 }
 
-.espacio{
+.espacio {
     width: 2%;
 }
 
-.nuevo{
+.nuevo {
     height: 100px;
     width: 450px
+}
+
+hr {
+    height: 10px;
+    color: #00A7E3;
+    background-color: #00A7E3;
+    width: 100%;
 }
