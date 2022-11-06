@@ -12,8 +12,10 @@ const routes: Routes = [
   {path: '',component: LoginComponent, pathMatch: 'full', canActivate: [AuthGuard]},
   { path: 'login', component: LoginComponent },
   {path: 'home',component: HomeComponent,pathMatch: 'full',canActivate: [DesactiveGuard] },
-  { path: 'profesionales', component: ProfessionalComponent },
- 
+  { path: 'profesionales/:id', component: ProfessionalComponent },
+  { path: 'profesionales/identificacion/:dni', component: ProfessionalComponent },
+  { path: 'profesionales/apellidoPaterno/:name', component: ProfessionalComponent },
+  { path: 'profesionales/apellidoMaterno/:lastname', component: ProfessionalComponent },
 ];
 
 @NgModule({
