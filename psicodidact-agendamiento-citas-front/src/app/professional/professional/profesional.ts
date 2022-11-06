@@ -1,3 +1,12 @@
+import { Cuenta } from "src/app/models/cuenta";
+import { Discapacidad } from "src/app/models/discapacidad";
+import { EstadoCivil } from "src/app/models/estadoCivil";
+import { Genero } from "src/app/models/genero";
+import { ProfesionProfesional } from "src/app/models/profesionProfesional";
+import { TipoSangre } from "src/app/models/tipoSangre";
+
+
+
 export class Profesional {
     idProfesional:number=0;
     identificacionProfesional: string = "";
@@ -13,12 +22,12 @@ export class Profesional {
     hojaVida: string = "";
     nivelEducacion: string = "";
     tituloCuartoNivelProfesional: string = "";
-    EstadoCivil: string = "";
-    tipoSangre: string = "";
-    discapacidad: string = "";
-    genero: string = "";
-    profesionProfesional: string = "";
-    cuenta: string = "";
+    estadoCivil: EstadoCivil = new EstadoCivil;
+    tipoSangre: TipoSangre = new TipoSangre();
+    discapacidad: Discapacidad = new Discapacidad();
+    genero: Genero = new Genero();
+    profesionProfesional: ProfesionProfesional = new ProfesionProfesional();
+    cuenta: Cuenta = new Cuenta();
 
 
 }

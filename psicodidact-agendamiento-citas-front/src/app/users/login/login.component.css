@@ -79,3 +79,9 @@ h3 {
     padding-bottom: 15px;
     flex-wrap: nowrap !important;
 }
+
+.btn.disabled,
+.btn[disabled],
+fieldset[disabled] .btn {
+    cursor: not-allowed;
+}
