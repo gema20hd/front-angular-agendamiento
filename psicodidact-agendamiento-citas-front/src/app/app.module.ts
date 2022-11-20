@@ -15,6 +15,7 @@ import {HttpClientModule} from '@angular/common/http';
 import { LoginComponent } from './users/login/login.component';
 import { PageComponent } from './error_page/page/page.component';
 import { ProfessionalComponent } from './professional/professional/professional.component';
+import { ModalComponent } from './modal/modal.component';
 
 
 
@@ -28,6 +29,7 @@ import { ProfessionalComponent } from './professional/professional/professional.
     LoginComponent,
     PageComponent,
     ProfessionalComponent,
+    ModalComponent,
     
   ],
   imports: [
