@@ -87,7 +87,7 @@
     }
     
     .nav-menu>ul>li {
-        position: relative;
+        
         white-space: nowrap;
     }
     
@@ -112,7 +112,7 @@
     
     .nav-menu .drop-down ul {
         display: block;
-        position: absolute;
+        position:  absolute;
         left: 15px;
         top: calc(100% + 30px);
         z-index: 99;
@@ -147,6 +147,11 @@
     .dropdown-menu {
         position: relative;
         background-color: #00A7E3;
+        top: 100%;
+        left: 0;
+        transform: none;
+        float: initial !important;
+
     }
     
     .dropdown-item {
@@ -162,3 +167,8 @@
         background-color: transparent;
         border: 0;
     }
+   
+    .nav-item {
+        float: right !important;
+    }
+
