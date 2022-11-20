@@ -1,57 +1,64 @@
 <app-header></app-header>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 
-<div class="card bg-light mb-3" style="max-width: 18rem;">
-    <div class="card-header">panel de búsqueda</div>
-    <div class="card-body">
-        <form>
-            <div class="row">
-                <div class="col">
-                    <input type="text" class="form-control" placeholder="First name">
-                </div>
-                <div class="col">
-                    <input type="text" class="form-control" placeholder="Last name">
-                </div>
+<body id="body">
+    <div class="container">
+        <div class="card bg-light mb-3 panel mt-5">
+            <div class="card-header border border-primary panel">Panel de búsqueda</div>
+            <div class="card-body">
+                <nav class="navbar navbar-light bg-light">
+                    <form class="form-inline">
+                        <input id="miid" class="input-align form-control mr-sm-3" type="search" placeholder="Cédula o pasaporte" aria-label="Search">
+                        <input id="miid" class="input-align form-control mr-sm-2" type="search" placeholder="Primer Apellido" aria-label="Search">
+                        <button class="button-align btn btn-outline-primary my-2 my-sm-0" type="submit ">Crear Profesional</button>
+                    </form>
+                </nav>
             </div>
-        </form>
-    </div>
-</div>
-<div class="card border-primary mb-3">
-    <div class="card-header">Profesional</div>
-    <div class="card-body text-primary">
-        <h5 class="card-title">Listado</h5>
-        <div class="my-2 text-left">
-            <button class="btn btn-rounded btn-primary" type="button"> Crear Profesional</button>
         </div>
-        <div *ngIf="profesionales?.length == 0" class="alert alert-info">
-            No hay registros en la base de datos!
+        <div class="card border-primary mb-3 table ">
+            <div class="card-header ">Datos del Profesional</div>
+            <div class="card-body text-primary ">
+                <div *ngIf="profesionales?.length==0 " class="alert alert-info ">
+                    No hay registros en la base de datos!
+                </div>
+                <table class="table table-bordered table-striped ">
+                    <thead>
+                        <tr>
+                            <th>Identificación</th>
+                            <th>Nombres</th>
+                            <th>Apellidos</th>
+                            <th>Teléfono</th>
+                            <th>Especialidad</th>
+                            <th>Estado</th>
+                            <th>Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>1</td>
+                            <td>2</td>
+                            <td>3</td>
+                            <td>4</td>
+                            <td>5</td>
+                            <td>6</td>
+                            <td class="mb-5 small text-center ">
+                                <a class="btn btn-primary btn-circle btn-outline-success border border-light btn-sm small mr-sm-2 "><span>Editar</span></a>
+                                <a class="btn btn-primary btn-circle btn-outline-danger border border-light  btn-sm small  mr-sm-2 "> <span>Eliminar</span></a>
+                                <a class="btn btn-primary btn-circle btn-outline-info   border border-light btn-sm small  mr-sm-2 "> <span>Detalle</span></a>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+
+
+            </div>
         </div>
-        <table class="table table-bordered table-striped">
-            <thead>
-                <tr>
-                    <th>nombre</th>
-                    <th>apellido</th>
-                    <th>email</th>
-                    <th>fecha</th>
-                    <th>detalle</th>
-                    <th>editar</th>
-                    <th>eliminar</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr *ngFor="let profesional of profesionales">
-                    <td>1</td>
-                    <td>2}</td>
-                    <td>3</td>
-                    <td>4</td>
-                    <td><button type="button" name="detalle" class="btn btn-success btn-sm">detalle</button></td>
-                    <td><button type="button" name="editar" class="btn btn-primary btn-sm">editar</button> </td>
-                    <td><button type="button" name="eliminar" class="btn btn-primary btn-sm">eliminar</button> </td>
-                </tr>
-            </tbody>
-        </table>
-
     </div>
-</div>
-
-
+</body>
 <app-footer></app-footer>

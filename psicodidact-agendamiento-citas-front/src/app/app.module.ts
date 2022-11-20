@@ -15,6 +15,8 @@ import {HttpClientModule} from '@angular/common/http';
 import { LoginComponent } from './users/login/login.component';
 import { PageComponent } from './error_page/page/page.component';
 import { ProfessionalComponent } from './professional/professional/professional.component';
+import { DetalleComponent } from './professional/professional/detalles/detalle/detalle.component';
+import { FormComponent } from './professional/professional/form/form.component';
 
 
 
@@ -28,6 +30,8 @@ import { ProfessionalComponent } from './professional/professional/professional.
     LoginComponent,
     PageComponent,
     ProfessionalComponent,
+    DetalleComponent,
+    FormComponent,
     
   ],
   imports: [

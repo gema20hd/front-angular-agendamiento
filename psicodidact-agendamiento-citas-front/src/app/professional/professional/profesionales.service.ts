@@ -38,6 +38,10 @@ export class ProfesionalesService {
     return this.http.get<Discapacidad[]>(this.urlEndPointProfesionales + '/discapacidad');
   }
 
+  getTipoDiscapacidad(): Observable<TipoDiscapacidad[]> {
+    return this.http.get<TipoDiscapacidad[]>(this.urlEndPointProfesionales + '/tipoDiscapacidad');
+  }
+
   getTipoSangre(): Observable<TipoSangre[]> {
     return this.http.get<TipoSangre[]>(this.urlEndPointProfesionales + '/tipoSangre');
   }

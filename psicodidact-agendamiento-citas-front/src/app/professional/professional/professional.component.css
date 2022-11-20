@@ -1,0 +1,39 @@
+.panel {
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+.table {
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 10px;
+    justify-content: center;
+    text-align: center;
+}
+
+.button-align {
+    margin-left: 230px;
+    padding-top: auto;
+}
+
+.input-align {
+    padding-left: 140px;
+    margin: 0 auto;
+    justify-content: center;
+}
+
+#miid::placeholder {
+    color: rgb(19, 18, 18);
+    margin-left: 0px !important;
+}
+
+#body {
+    padding-top: 30px;
+    padding-bottom: 30px;
+}
