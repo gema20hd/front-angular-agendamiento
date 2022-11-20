@@ -16,9 +16,7 @@ import { LoginComponent } from './users/login/login.component';
 import { PageComponent } from './error_page/page/page.component';
 import { ProfessionalComponent } from './professional/professional/professional.component';
 import { DetalleComponent } from './professional/professional/detalles/detalle/detalle.component';
-import { FormComponent } from './professional/professional/form/form.component';
-
-
+import { ModalComponent } from './modal/modal.component';
 
 @NgModule({
   declarations: [
@@ -31,7 +29,9 @@ import { FormComponent } from './professional/professional/form/form.component';
     PageComponent,
     ProfessionalComponent,
     DetalleComponent,
-    FormComponent,
+    ModalComponent,
+
+    
     
   ],
   imports: [
