@@ -87,7 +87,6 @@
     }
     
     .nav-menu>ul>li {
-        position: relative;
         white-space: nowrap;
     }
     
@@ -146,4 +145,31 @@
     
     .bottomBar {
         margin-bottom: 500px;
+    }
+    
+    .dropdown-menu {
+        position: relative;
+        background-color: #00A7E3;
+        top: 100%;
+        left: 0;
+        transform: none;
+        float: initial !important;
+    }
+    
+    .dropdown-item {
+        background-color: #00A7E3;
+        display: block;
+        width: 100%;
+        margin-left: 10px;
+        font-weight: 400;
+        color: var(--bs-dropdown-link-color);
+        text-align: inherit;
+        text-decoration: none;
+        white-space: nowrap;
+        background-color: transparent;
+        border: 0;
+    }
+    
+    .nav-item {
+        float: right !important;
     }

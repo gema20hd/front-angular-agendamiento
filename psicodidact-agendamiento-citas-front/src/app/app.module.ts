@@ -16,7 +16,8 @@ import { LoginComponent } from './users/login/login.component';
 import { PageComponent } from './error_page/page/page.component';
 import { ProfessionalComponent } from './professional/professional/professional.component';
 import { DetalleComponent } from './professional/professional/detalles/detalle/detalle.component';
-import { ModalComponent } from './modal/modal.component';
+
+
 
 @NgModule({
   declarations: [
@@ -29,10 +30,9 @@ import { ModalComponent } from './modal/modal.component';
     PageComponent,
     ProfessionalComponent,
     DetalleComponent,
-    ModalComponent,
-
-    
-    
+    ProfessionalComponent
+ 
+   
   ],
   imports: [
     BrowserModule,
