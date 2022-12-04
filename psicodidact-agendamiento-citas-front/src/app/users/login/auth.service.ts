@@ -2,14 +2,15 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Usuario } from './usuario';
+import { CookieService } from 'ngx-cookie-service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
 
-  private _usuario: Usuario ;
-  private _token: string;
+  public _usuario: Usuario ;
+  public _token: string;
   
   public campo:boolean=true;
 
@@ -68,7 +69,7 @@ export class AuthService {
 
   guardarToken(accessToken: string): void {
     this._token = accessToken;
-    sessionStorage.setItem('token', accessToken);
+    sessionStorage.setItem('token', this._token);
   }
 
   obtenerDatosToken(accessToken: string): any {
@@ -89,6 +90,7 @@ export class AuthService {
 
   hasRole(role: string): boolean {
     if (this.usuario.roles.includes(role)) {
+      console.log("rol....", role)
       return true;
     }
     return false;

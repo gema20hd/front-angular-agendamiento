@@ -23,7 +23,7 @@
 }
 
 .input-align {
-    padding-left: 140px;
+    padding-left: 100px;
     margin: 0 auto;
     justify-content: center;
 }
@@ -36,4 +36,18 @@
 #body {
     padding-top: 30px;
     padding-bottom: 30px;
+}
+
+table {
+    width: 100%;
+}
+
+.example-form {
+    min-width: 150px;
+    max-width: 500px;
+    width: 100%;
+}
+
+.example-full-width {
+    width: 100%;
 }

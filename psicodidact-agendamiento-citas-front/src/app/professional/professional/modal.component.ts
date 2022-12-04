@@ -15,14 +15,12 @@ export class ModalComponent implements OnInit {
   titulo: string = "Ingresar nuevo profesional";
   progreso: number = 0;
 
-  constructor(public profesionalesService: ProfesionalesService,
-    private authService: AuthService,
-    private modalService: ModalService) { }
+  constructor(
+    public profesionalesService: ProfesionalesService,
+    public authService: AuthService,
+    public modalService: ModalService) { }
 
   ngOnInit() { }
-
-
-  
 
   cerrarModal() {
     this.modalService.cerrarModal();

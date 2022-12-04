@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Profesional } from './profesional';;
+import { Profesional } from './profesional';
 import swal from 'sweetalert2';
 import { HttpClient } from '@angular/common/http';
 import { AuthService } from 'src/app/users/login/auth.service';
@@ -14,17 +14,46 @@ import { TipoCuenta } from 'src/app/models/tipoCuenta';
 import { TipoDiscapacidad } from 'src/app/models/tipoDiscapacidad';
 import { Banco } from 'src/app/models/banco';
 import { ProfesionProfesional } from 'src/app/models/profesionProfesional';
-import { Observable } from 'rxjs';
+import { flatMap, Observable, startWith } from 'rxjs';
+import { ModalService } from './modal.service';
+import { map } from 'rxjs/operators';
+import { MatAutocompleteSelectedEvent } from '@angular/material/autocomplete';
+import { MatTableDataSource } from '@angular/material/table';
+import { MatPaginator } from '@angular/material/paginator';
+import { SelectionModel } from '@angular/cdk/collections';
 
 @Component({
   selector: 'app-professional',
   templateUrl: './professional.component.html',
-  styleUrls: ['./professional.component.css']
+  styleUrls: ['./professional.component.css'],
 })
 export class ProfessionalComponent {
- 
+
+
+  mostrarColumnas: string[] = ['identificacionProfesional', 'nombresProfesional', 'apellidoPaternoProfesional', 'celularProfesional' , 'estado','editar','ver'];
+  //mostrarColumnasAlumnos: string[] = ['id', 'nombre', 'apellido', 'email', 'eliminar'];
+
+  profesionalesAsignar: Profesional[] = [];
+  bancosAsignar: Banco[] = [];
+
+
+  autocompleteControlCedula = new FormControl();
+  autocompleteControlApellido = new FormControl();
+  autocompleteControlBanco = new FormControl();
+
+
+  profesionalesFiltrados: Observable<Profesional[]> = new Observable();
+  cedulaProfesionalesFiltrados: Observable<Profesional[]> = new Observable();
+  bancosFiltrados: Observable<Banco[]> = new Observable();
+  //generoFiltrados: Observable<Genero[]> = new Observable();
+
+
   titulo: string = 'Nuevo Profesional';
   profesional: Profesional = new Profesional();
+  banco: Banco = new Banco();
+  genero: Genero = new Genero();
+
+
   profesionales: Profesional[] = [];
   generos: Genero[] = [];
   estadoCivil: EstadoCivil[] = [];
@@ -36,64 +65,97 @@ export class ProfessionalComponent {
   profesionProfesionales: ProfesionProfesional[] = [];
   errores: string[] = [];
 
-  generoFiltrados: Observable<Genero[]> = new Observable;
+  constructor(
+    public http: HttpClient,
+    public modalService: ModalService,
+    public authService: AuthService,
+    public profesionalService: ProfesionalesService,
+    public router: Router,
+    public activatedRoute: ActivatedRoute
+  ) {}
 
-  constructor(private http: HttpClient, 
-    private authService: AuthService, 
-    public profesionalService: ProfesionalesService,    
-    private router: Router,
-    private activatedRoute: ActivatedRoute) { }
 
-    ngOnInit() {
-      this.activatedRoute.paramMap.subscribe(params => {
-        let id = +(params.get('id') != null);
-        if (id) {
-          this.profesionalService.getProfesionalId(id).subscribe((profesional) => this.profesional = profesional);
-        }
-      });
+
+  ngOnInit() {
+
+		
+    this.profesionalesFiltrados = this.autocompleteControlApellido.valueChanges.pipe(
+      map(value => typeof value === 'string' ? value : value.apellidoPaternoProfesional), 
+      flatMap(value => value ? this._filterApellido(value) : []));
+	  
+	  
+      this.cedulaProfesionalesFiltrados = this.autocompleteControlCedula.valueChanges.pipe(
+        map(value => typeof value === 'string' ? value : value.identificacionProfesional), 
+        flatMap(value => value ? this._filterCedula(value) : []));
+
+        
+
+
+  }
+
   
-      this.profesionalService.getGenero().subscribe((generos) => {this.generos = generos})
-      this.profesionalService.getEstadoCivil().subscribe((estadoCivil) => {this.estadoCivil = estadoCivil})
-      this.profesionalService.getDiscapacidad().subscribe((discapacidades) => {this.discapacidades = discapacidades})
-      this.profesionalService.getTipoDiscapacidad().subscribe((tiposDiscapacidades) => {this.tiposDiscapacidades = tiposDiscapacidades})
-      this.profesionalService.getTipoCuentas().subscribe((tiposCuentas) => {this.tiposCuentas = tiposCuentas})
-      this.profesionalService.getBanco().subscribe((bancos) => {this.bancos= bancos})
-      this.profesionalService.getTipoSangre().subscribe((tipoSangre) => {this.tipoSangre = tipoSangre})
-      this.profesionalService.getProfesionProfesional().subscribe((profesionProfesionales) => {this.profesionProfesionales = profesionProfesionales})
+  //cedula
+  private _filterCedula(value: string): Observable<Profesional[]> {
+    const filterValue = value;
+    return this.profesionalService.getFiltrarProfesionalDni(filterValue);
+  }
 
-    }
- 
+  mostrarCedula(profesional ? : Profesional): string | "" {
+    return profesional ? profesional.identificacionProfesional : "";
+  }
 
-    create(): void {
-      console.log(this.profesional);
-      this.profesionalService.create(this.profesional).subscribe((profesional)=>  {
-            this.router.navigate(['/profesionales']);
-            console.log("estoy aqui")
-            swal.fire('Nuevo Profesional', `El profesional ${this.profesional.nombresProfesional} ha sido creado con éxito`, 'success');
-          },
-          err => {
-            this.errores = err.error.errors as string[];
-            console.error('Código del error desde el backend: ' + err.status);
-            console.error(err.error.errors);
-          }
-        );
-    }
+  seleccionarCedula(event: MatAutocompleteSelectedEvent): void {
+    let profesional = event.option.value as Profesional;
+    console.log(profesional);
+    //this.profesionalesAsignar.push(profesional);
+    this.autocompleteControlCedula.setValue('');
+    event.option.focus();
+    event.option.deselect();
 
-    update(): void {
-      console.log(this.profesional);
-      this.profesional.genero;
-      this.profesionalService.update(this.profesional)
-        .subscribe(
-          json => {
-            this.router.navigate(['/profesionales']);
-            swal.fire('Profesional Actualizado', `${json.mensaje}: ${json.profesional.nombresProfesional}`, 'success');
-          },
-          err => {
-            this.errores = err.error.errors as string[];
-            console.error('Código del error desde el backend: ' + err.status);
-            console.error(err.error.errors);
-          }
-        )
-    }
+  }
+
+  //apellido
+  private _filterApellido(value: string): Observable<Profesional[]> {
+    const filterValue = value;
+    return this.profesionalService.getFiltrarProfesionalApellidoPaterno(filterValue);
+  }
+
+  
+  mostrarApellido(profesional ? : Profesional): string | "" {
+    return profesional ? profesional.apellidoPaternoProfesional : "";
+    console.log("mostrar apellido",profesional)
+  }
+
+  seleccionarApellido(event: MatAutocompleteSelectedEvent): void {
+    let profesional = event.option.value as Profesional;
+    console.log(profesional);
+    this.profesionalesAsignar.push(profesional);
+    this.autocompleteControlApellido.setValue('');
+    event.option.focus();
+    event.option.deselect();
+
+  }
+
+  //banco
+  private _filterBanco(value: string): Observable<Banco[]> {
+    const filterValue = value;
+    return this.profesionalService.getFiltrarBanco(filterValue);
+  }
+
+  
+  mostrarBanco(banco ? : Banco): string | "" {
+    return banco ? banco.descripcionBanco : "";
+  }
+
+  seleccionarBanco(event: MatAutocompleteSelectedEvent): void {
+    let banco = event.option.value as Banco;
+    console.log(banco);
+    this.bancosAsignar.push(banco);
+    this.autocompleteControlBanco.setValue('');
+    event.option.focus();
+    event.option.deselect();
+
+  }
   
 }
+

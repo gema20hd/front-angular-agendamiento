@@ -5,13 +5,18 @@ import { PageComponent } from './error_page/page/page.component';
 import { HomeComponent } from './home/home/home.component';
 import { ProfessionalComponent } from './professional/professional/professional.component';
 import { AuthGuard } from './users/login/guards/auth.guard';
-import { DesactiveGuard } from './users/login/guards/desactive.guard';
+import { RoleGuard } from './users/login/guards/role.guard';
 import { LoginComponent } from './users/login/login.component';
+import { MatAutocompleteModule } from '@angular/material/autocomplete';
+import { MatInputModule } from '@angular/material/input';
+import { MatFormFieldModule } from '@angular/material/form-field';
+
+
 
 const routes: Routes = [
   {path: '',component: LoginComponent, pathMatch: 'full', canActivate: [AuthGuard]},
   { path: 'login', component: LoginComponent },
-  {path: 'home',component: HomeComponent,pathMatch: 'full',canActivate: [DesactiveGuard] },
+  {path: 'home',component: HomeComponent,pathMatch: 'full' },
   { path: 'profesionales', component: ProfessionalComponent },
   { path: 'profesionales/:id', component: ProfessionalComponent },
   { path: 'profesionales/identificacion/:dni', component: ProfessionalComponent },

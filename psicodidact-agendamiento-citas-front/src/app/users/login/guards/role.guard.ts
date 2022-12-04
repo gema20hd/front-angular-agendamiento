@@ -3,14 +3,16 @@ import { Router, CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot } from
 import { Observable } from 'rxjs';
 import { AuthService } from '../auth.service';
 import swal from 'sweetalert2';
+import { Usuario } from '../usuario';
 
 @Injectable({
   providedIn: 'root'
 })
 export class RoleGuard implements CanActivate {
 
-  constructor(private authService: AuthService,
-    private router: Router) { }
+  usuario: Usuario;
+  constructor(public authService: AuthService,
+    public router: Router) { this.usuario = new Usuario()}
 
   canActivate(
     next: ActivatedRouteSnapshot,
@@ -22,7 +24,7 @@ export class RoleGuard implements CanActivate {
     }
 
     let role = next.data['role'] as string;
-    console.log(role);
+    console.log( "Role-----",role);
     if (this.authService.hasRole(role)) {
       return true;
     }
