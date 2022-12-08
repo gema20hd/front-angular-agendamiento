@@ -1,0 +1,152 @@
+<h2 mat-dialog-title class="card_title">Crear Profesionales</h2>
+<mat-dialog-content>
+
+    <form [formGroup]="dialogForm">
+        <div class="container">
+            <div class="row">
+                <div class="row">
+                    <div class="col-md-4">
+                        <mat-form-field appearance="outline">
+                            <mat-label>identificación</mat-label>
+                            <input matInput placeholder="Identificación" formControlName="Identificación" />
+                        </mat-form-field>
+                    </div>
+
+                    <div class="col-md-4">
+                        <mat-form-field appearance="outline">
+                            <mat-label>Nombres</mat-label>
+                            <input matInput placeholder="Apellidos" formControlName="Nombres" />
+                        </mat-form-field>
+                    </div>
+                    <div class="col-md-4">
+                        <mat-form-field appearance="outline">
+                            <mat-label>Apellido Paterno</mat-label>
+                            <input matInput placeholder="Apellido Paterno" formControlName="apellidoPaterno" />
+                        </mat-form-field>
+                    </div>
+
+                </div>
+
+
+                <div class="row">
+                    <div class="col-md-4">
+                        <mat-form-field appearance="outline">
+                            <mat-label>Apellido Materno</mat-label>
+                            <input matInput placeholder="Apellido Materno" formControlName="apellidoMaterno" />
+                        </mat-form-field>
+                    </div>
+
+                    <!--
+                    <div class="col-md-4">
+                        <mat-form-field appearance="fill">
+                            <mat-label>Género </mat-label>
+                            <mat-select [(ngModel)]="selectedGenero" name="genero" formControlName="genero">
+                                <mat-option *ngFor="let genero of generos" [value]="genero.idGenero">
+                                </mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                    </div>
+                    -->
+                    <div class="col-md-4">
+                        <mat-form-field appearance="outline">
+                            <mat-label>Email</mat-label>
+                            <input matInput placeholder="Correo electrónico" formControlName="email" />
+                        </mat-form-field>
+                    </div>
+
+                </div>
+
+                <div class="row">
+                    <div class="col-md-4">
+                        <mat-form-field appearance="outline">
+                            <mat-label>Celular</mat-label>
+                            <input matInput placeholder="Teléfono Móvil" formControlName="celular" />
+                        </mat-form-field>
+                    </div>
+
+                    <div class="col-md-4">
+                        <mat-form-field appearance="outline">
+                            <mat-label>Telefóno</mat-label>
+                            <input matInput placeholder="teléfono" formControlName="telefono" />
+                        </mat-form-field>
+                    </div>
+                    <div class="col-md-4">
+                        <mat-form-field appearance="outline">
+                            <mat-label>Dirección</mat-label>
+                            <input matInput placeholder="Dirección domiciliaria" formControlName="direccion" />
+                        </mat-form-field>
+                    </div>
+
+                </div>
+
+                <div class="row">
+                    <div class="col-md-4">
+                        <ng-template [ngIf]="discapacidadRadio == 1">
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <mat-form-field appearance="fill">
+                                        <mat-label>Tipo Discapacidad </mat-label>
+                                        <mat-select [(ngModel)]="selectTipoDiscapacidad" name="tipo.idTipoDiscapacidad" formControlName="tipoDiscapacidad">
+
+                                            <mat-option *ngFor="let tipo of tipoDiscapacidades">
+                                                {{tipo.descripcionTipoDiscapacidad}}
+                                            </mat-option>
+
+                                        </mat-select>
+                                    </mat-form-field>
+                                </div>
+
+                                <div class="col-md-4">
+                                    <mat-form-field appearance="outline">
+                                        <mat-label>Porcentaje Discapacidad</mat-label>
+                                        <input matInput placeholder="Porcentaje Discapacidad" formControlName="porcentajeDiscapacidad" />
+                                    </mat-form-field>
+                                </div>
+
+                                <div class="col-md-4">
+                                    <mat-form-field appearance="outline">
+                                        <mat-label>Descripcion Discapacidad</mat-label>
+                                        <input matInput placeholder="Descripcion Discapacidad" formControlName="descripcionDiscapacidad" />
+                                    </mat-form-field>
+                                </div>
+
+                            </div>
+
+                        </ng-template>
+
+
+                        <!--
+                    <div class="col-md-4">
+                        <mat-form-field appearance="fill">
+                            <mat-label>Género </mat-label>
+                            <mat-select [(ngModel)]="selectedGenero" name="genero" formControlName="genero">
+                                <mat-option *ngFor="let genero of generos" [value]="genero.idGenero">
+                                </mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                    </div>
+                    -->
+                        <!--
+                    <div class="col-md-4">
+                        <mat-form-field appearance="fill">
+                            <mat-label>Género </mat-label>
+                            <mat-select [(ngModel)]="selectedGenero" name="genero" formControlName="genero">
+                                <mat-option *ngFor="let genero of generos" [value]="genero.idGenero">
+                                </mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                    </div>
+                    -->
+
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+    </form>
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+    <button mat-button (click)="cancelar()">Cancelar</button>
+    <button mat-button mat-raised-button class="button" (click)="creaeProfesional()">Guardar</button>
+</mat-dialog-actions>

@@ -15,12 +15,15 @@ import { TipoDiscapacidad } from 'src/app/models/tipoDiscapacidad';
 import { Banco } from 'src/app/models/banco';
 import { ProfesionProfesional } from 'src/app/models/profesionProfesional';
 import { flatMap, Observable, startWith } from 'rxjs';
-import { ModalService } from './modal.service';
 import { map } from 'rxjs/operators';
 import { MatAutocompleteSelectedEvent } from '@angular/material/autocomplete';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatPaginator } from '@angular/material/paginator';
 import { SelectionModel } from '@angular/cdk/collections';
+import { MatDialog } from '@angular/material/dialog';
+import { DetalleProfesionalModalComponent } from './detalles_profesional/detalle-profesional-modal/detalle-profesional-modal.component';
+import { EditarProfesionalModalComponent } from './editar_profesional/editar-profesional-modal/editar-profesional-modal.component';
+import { CrearProfesionalModalComponent } from './crear_profesional/crear-profesional-modal/crear-profesional-modal.component';
 
 @Component({
   selector: 'app-professional',
@@ -67,10 +70,10 @@ export class ProfessionalComponent {
 
   constructor(
     public http: HttpClient,
-    public modalService: ModalService,
     public authService: AuthService,
     public profesionalService: ProfesionalesService,
     public router: Router,
+    public dialog: MatDialog,
     public activatedRoute: ActivatedRoute
   ) {}
 
@@ -156,6 +159,56 @@ export class ProfessionalComponent {
     event.option.deselect();
 
   }
+
+  verInformacionProfesiona(row :any){
+    this.dialog.open(DetalleProfesionalModalComponent,{
+      data:row
+    });
+    console.log('el  row '+row);
+   }
+
+   /*
+   // verInformacionProfesional(profesional: Profesional): void {
+     verInformacionProfesional(profesional: any) {
+  //  this.profesionalService.getProfesionalId( profesional.idProfesional)
+  //  .subscribe(rs => {
+    //  const modalRef = this.dialog.open(DetalleProfesionalModalComponent, {
+    //    width: '800px',
+    //    data: {rs}
+      
+    //  });
+   //   modalRef.afterClosed().subscribe(() => {
+   //     console.log('Modal ver detalle cerrado');
+   //   })
+   //   console.log( " data oficial", profesional)
+   // });
+   this.dialog.open(DetalleProfesionalModalComponent, { 
+       data: profesional
+      });
+
+   */
+ 
+   verInformacionProfesional(profesional: Profesional) {
+     this.dialog.open(DetalleProfesionalModalComponent, { 
+       data: profesional
+      });
+
+  }
   
+
+  editarInformacionProfesional(profesional: Profesional) {
+    this.dialog.open(EditarProfesionalModalComponent, { 
+      data: profesional
+     });
+
+ }
+
+ crearProfesional(){
+  this.dialog.open(CrearProfesionalModalComponent,{
+  });
+
+  
+  
+ }
 }
 

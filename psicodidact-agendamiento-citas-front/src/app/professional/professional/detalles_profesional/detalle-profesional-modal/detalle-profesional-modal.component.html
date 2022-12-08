@@ -1,0 +1,135 @@
+<h1 mat-dialog-title class="text-title">Detalle del profesional</h1>
+<mat-dialog-content>
+    <!-- <mat-expansion-panel *ngFor="let profesional of profesionales"> -->
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="row">
+                    <div class="col-md-2 color_colum text">Identificación:</div>
+                    <div class="col-md-4 color_info">
+                        {{profesional?.identificacionProfesional}}
+                    </div>
+                    <div class="col-md-2 color_colum text">Nombres:</div>
+                    <div class="col-md-4 color_info">
+                        {{profesional?.nombresProfesional}}
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-12">
+                <div class="row">
+                    <div class="col-md-2 color_colum text">Apellidos:</div>
+                    <div class="col-md-4 color_info">
+                        {{profesional?.apellidoPaternoProfesional}} {{profesional?.apellidoMaternoProfesional}}
+                    </div>
+                    <div class="col-md-2 color_colum text">F Nacimiento:</div>
+                    <div class="col-md-4 color_info">
+                        {{profesional?.fechaNacimientoProfesional}}
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-sm-12">
+                <div class="row">
+                    <div class="col-md-2 color_colum text">Edad:</div>
+                    <div class="col-md-4 color_info">
+                        02/04/1995
+                    </div>
+                    <div class="col-md-2 color_colum text">Genero:</div>
+                    <div class="col-md-4 color_info">
+                        {{profesional?.genero?.descripcionGenero}}
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-sm-12">
+                <div class="row">
+                    <div class="col-md-2 color_colum text">Estado Civil:</div>
+                    <div class="col-md-4 color_info">
+                        {{profesional?.estadoCivil?.descripcionEstadoCivil}}
+                    </div>
+                    <div class="col-md-2 color_colum text">N Educación:</div>
+                    <div class="col-md-4 color_info">
+                        {{profesional?.nivelEducacion}}
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-sm-12">
+                <div class="row">
+                    <div class="col-md-2 color_colum text">Celular:</div>
+                    <div class="col-md-4 color_info">
+                        {{profesional?.celularProfesional}}
+                    </div>
+                    <div class="col-md-2 color_colum text">Email:</div>
+                    <div class="col-md-4 color_info">
+                        hdhadsh
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-sm-12">
+                <div class="row">
+                    <div class="col-md-2 color_colum text">Telefono:</div>
+                    <div class="col-md-4 color_info">
+                        {{profesional?.telefonoEmergenciaProfesional}}
+                    </div>
+                    <div class="col-md-2 color_colum text">Dirección:</div>
+                    <div class="col-md-4 color_info">
+                        {{profesional?.direccionDomicilioProfesional}}
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-12">
+                <div class="row">
+                    <div class="col-md-2 color_colum text">Especialidad:</div>
+                    <div class="col-md-4 color_info">
+                        {{profesional?.profesionProfesional?.tercerNivelProfesionProfesional}}
+                    </div>
+                    <div class="col-md-2 color_colum text">Estado:</div>
+                    <div class="col-md-4 color_info">
+                        {{profesional?.estadoProfesional}}
+                    </div>
+                </div>
+            </div>
+            <br>
+            <br>
+            <div class="card_title  text-center text">
+                Información Adicional
+            </div>
+            <br>
+            <br>
+            <div class="col-sm-12">
+                <div class="row">
+                    <div class="col-md-2 color_colum text">Hoja de Vida:</div>
+                    <div class="col-md-4 color_info">
+                        {{profesional?.hojaVida}}
+                    </div>
+                    <div class="col-md-2 color_colum text">Tipo Cuenta:</div>
+                    <div class="col-md-4 color_info">
+                        {{profesional?.cuenta?.tipoCuenta?.descripcionTipoCuenta}}
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-sm-12">
+                <div class="row">
+                    <div class="col-md-2 color_colum text">Cuenta:</div>
+                    <div class="col-md-4 color_info">
+                        {{profesional?.cuenta?.numeroCuenta}}
+                    </div>
+                    <div class="col-md-2 color_colum text">Banco:</div>
+                    <div class="col-md-4 color_info">
+                        {{profesional?.cuenta?.banco?.descripcionBanco}}
+                    </div>
+                </div>
+            </div>
+
+
+        </div>
+
+    </div>
+    <!--  </mat-expansion-panel> -->
+</mat-dialog-content>
+<div mat-dialog-actions align="end">
+    <button mat-button (click)="cerrar()">Cerrar</button>
+</div>

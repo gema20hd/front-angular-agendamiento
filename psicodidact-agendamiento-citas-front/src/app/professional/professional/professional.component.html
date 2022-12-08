@@ -7,9 +7,14 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <div class="row">
-
-    <div class="col-sm-6">
+    <div class="col-sm-4">
         <form class="example-form">
             <mat-form-field class="example-full-width" appearance="fill">
                 <mat-label>Identificación</mat-label>
@@ -22,7 +27,7 @@
             </mat-form-field>
         </form>
     </div>
-    <div class="col-sm-6">
+    <div class="col-sm-4">
         <form class="example-form">
             <mat-form-field class="example-full-width" appearance="fill">
                 <mat-label>Apellido Paterno</mat-label>
@@ -36,12 +41,20 @@
         </form>
 
     </div>
+    <br>
+    <br>
+    <br>
+    <br>
+    <div class="col-sm-4">
+        <button mat-stroked-button color="primary" (click)="crearProfesional()">Crear Profesional</button>
+    </div>
 </div>
 <br>
 <br>
 <br>
 <br>
 <br>
+
 
 <table mat-table [dataSource]="cedulaProfesionalesFiltrados" class="mat-elevation-z8">
     <!-- Name Column -->
@@ -78,14 +91,14 @@
     <ng-container matColumnDef="editar">
         <th mat-header-cell *matHeaderCellDef>Editar</th>
         <td mat-cell *matCellDef="let profesional">
-            <button mat-mini-fab color="warn">XX</button>
+            <button mat-stroked-button color="primary" (click)="editarInformacionProfesional(profesional)">Editar</button>
         </td>
     </ng-container>
     <!-- Symbol Column -->
     <ng-container matColumnDef="ver">
         <th mat-header-cell *matHeaderCellDef>Ver detalle</th>
         <td mat-cell *matCellDef="let profesional">
-            <button mat-mini-fab color="warn">x</button>
+            <button mat-stroked-button color="primary" (click)="verInformacionProfesional(profesional)">Ver</button>
         </td>
     </ng-container>
 
