@@ -24,6 +24,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { DetalleProfesionalModalComponent } from './detalles_profesional/detalle-profesional-modal/detalle-profesional-modal.component';
 import { EditarProfesionalModalComponent } from './editar_profesional/editar-profesional-modal/editar-profesional-modal.component';
 import { CrearProfesionalModalComponent } from './crear_profesional/crear-profesional-modal/crear-profesional-modal.component';
+import { AuxProfesional } from 'src/app/models/auxProfesional';
 
 @Component({
   selector: 'app-professional',
@@ -35,6 +36,8 @@ export class ProfessionalComponent {
 
   mostrarColumnas: string[] = ['identificacionProfesional', 'nombresProfesional', 'apellidoPaternoProfesional', 'celularProfesional' , 'estado','editar','ver'];
   //mostrarColumnasAlumnos: string[] = ['id', 'nombre', 'apellido', 'email', 'eliminar'];
+
+  dataSource = new MatTableDataSource<Profesional>();
 
   profesionalesAsignar: Profesional[] = [];
   bancosAsignar: Banco[] = [];
@@ -53,19 +56,8 @@ export class ProfessionalComponent {
 
   titulo: string = 'Nuevo Profesional';
   profesional: Profesional = new Profesional();
-  banco: Banco = new Banco();
-  genero: Genero = new Genero();
-
-
+  auxProfesionales: AuxProfesional[] =[];
   profesionales: Profesional[] = [];
-  generos: Genero[] = [];
-  estadoCivil: EstadoCivil[] = [];
-  discapacidades: Discapacidad[] = [];
-  tiposDiscapacidades: TipoDiscapacidad[] = [];
-  tipoSangre: TipoSangre[] = [];
-  tiposCuentas: TipoCuenta[] = [];
-  bancos: Banco[] = [];
-  profesionProfesionales: ProfesionProfesional[] = [];
   errores: string[] = [];
 
   constructor(
@@ -196,19 +188,31 @@ export class ProfessionalComponent {
   }
   
 
-  editarInformacionProfesional(profesional: Profesional) {
-    this.dialog.open(EditarProfesionalModalComponent, { 
-      data: profesional
-     });
+ 
+ 
 
- }
+   /*
+ private crearDtoProfesional(profesionales:Profesional[]){
+  this.dataSource = new MatTableDataSource<Profesional>();
+  let nuevoProfesional:AuxProfesional;
 
- crearProfesional(){
-  this.dialog.open(CrearProfesionalModalComponent,{
-  });
+  for (let i = 0; i < this.profesionales.length; i++) {
+    nuevoProfesional= new AuxProfesional();
+    this.profesional=profesionales[i];
+     
+    if (this.profesional) {
+      nuevoProfesional.id=this.profesional.idProfesional;
+      this.profesional.idProfesional ? nuevoProfesional.estado="Activo": nuevoProfesional.estado="Inactivo";
+      this.profesional.idProfesional ? nuevoProfesional.posee_carnet="Si":  nuevoProfesional.posee_carnet="No";
+      console.log("LO QUE INGRESA");
+      console.log(nuevoProfesional);
+      this.auxProfesionales.push(nuevoProfesional);
+    }
 
-  
-  
+   }
+   */
+
+   
  }
 }
 

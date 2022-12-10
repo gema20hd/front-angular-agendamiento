@@ -34,7 +34,6 @@ export class ProfesionalesService {
    private agregarAuthorizationHeader() {
      
     let token = sessionStorage.getItem('token');
-    //console.log("token desde sessionStorage",token)
    
     if (token != null) {
       return this.httpHeaders.append('Authorization', 'Bearer ' + token);
@@ -229,7 +228,8 @@ getBancoId(id: number): Observable<Banco> {
 
 
   create(profesional: Profesional): Observable<Profesional> {
-    return this.http.post(this.urlEndPointProfesionales, profesional)
+    return this.http.post(this.urlEndPointProfesionales, profesional,
+      { headers: this.agregarAuthorizationHeader()})
       .pipe(
         map((response: any) => response.profesional as Profesional),
         catchError(e => {
@@ -244,7 +244,8 @@ getBancoId(id: number): Observable<Banco> {
   }
   
   update(profesional: Profesional): Observable<any> {
-    return this.http.put<any>(`${this.urlEndPointProfesionales}/${profesional.idProfesional}`, Profesional).pipe(
+    return this.http.put<any>(`${this.urlEndPointProfesionales}/${profesional.idProfesional}`, Profesional,
+    { headers: this.agregarAuthorizationHeader()}).pipe(
       catchError(e => {
         if (e.status == 400) {
           return throwError(e);
@@ -257,7 +258,8 @@ getBancoId(id: number): Observable<Banco> {
   }
 
   delete(id: number): Observable<Profesional> {
-    return this.http.delete<Profesional>(`${this.urlEndPointProfesionales}/${id}`).pipe(
+    return this.http.delete<Profesional>(`${this.urlEndPointProfesionales}/${id}`,
+    { headers: this.agregarAuthorizationHeader()}).pipe(
       catchError(e => {
         if (e.error.mensaje) {
           console.error(e.error.mensaje);
