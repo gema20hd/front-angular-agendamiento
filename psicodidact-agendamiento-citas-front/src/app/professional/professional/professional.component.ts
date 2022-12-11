@@ -20,11 +20,13 @@ import { MatAutocompleteSelectedEvent } from '@angular/material/autocomplete';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatPaginator } from '@angular/material/paginator';
 import { SelectionModel } from '@angular/cdk/collections';
+
 import { MatDialog } from '@angular/material/dialog';
 import { DetalleProfesionalModalComponent } from './detalles_profesional/detalle-profesional-modal/detalle-profesional-modal.component';
 import { EditarProfesionalModalComponent } from './editar_profesional/editar-profesional-modal/editar-profesional-modal.component';
 import { CrearProfesionalModalComponent } from './crear_profesional/crear-profesional-modal/crear-profesional-modal.component';
 import { AuxProfesional } from 'src/app/models/auxProfesional';
+
 
 @Component({
   selector: 'app-professional',
@@ -37,6 +39,7 @@ export class ProfessionalComponent {
   mostrarColumnas: string[] = ['identificacionProfesional', 'nombresProfesional', 'apellidoPaternoProfesional', 'celularProfesional' , 'estado','editar','ver'];
   //mostrarColumnasAlumnos: string[] = ['id', 'nombre', 'apellido', 'email', 'eliminar'];
 
+
   dataSource = new MatTableDataSource<Profesional>();
 
   profesionalesAsignar: Profesional[] = [];
@@ -45,10 +48,18 @@ export class ProfessionalComponent {
 
   autocompleteControlCedula = new FormControl();
   autocompleteControlApellido = new FormControl();
+
+  
+  bancosAsignar: Banco[] = [];
+  inputTest="0";
+
+  autocompleteControlApellidoCedula = new FormControl();
+
   
 
 
   profesionalesFiltrados: Observable<Profesional[]> = new Observable();
+
   cedulaProfesionalesFiltrados: Observable<Profesional[]> = new Observable();
  
   //generoFiltrados: Observable<Genero[]> = new Observable();
@@ -57,6 +68,11 @@ export class ProfessionalComponent {
   titulo: string = 'Nuevo Profesional';
   profesional: Profesional = new Profesional();
   auxProfesionales: AuxProfesional[] =[];
+  banco: Banco = new Banco();
+  genero: Genero = new Genero();
+
+
+
   profesionales: Profesional[] = [];
   errores: string[] = [];
 
@@ -66,6 +82,9 @@ export class ProfessionalComponent {
     public profesionalService: ProfesionalesService,
     public router: Router,
     public dialog: MatDialog,
+
+
+
     public activatedRoute: ActivatedRoute
   ) {}
 
@@ -73,65 +92,17 @@ export class ProfessionalComponent {
 
   ngOnInit() {
 
-		
+	
     this.profesionalesFiltrados = this.autocompleteControlApellido.valueChanges.pipe(
       map(value => typeof value === 'string' ? value : value.apellidoPaternoProfesional), 
-      flatMap(value => value ? this._filterApellido(value) : []));
+      flatMap(value => value ? this._filterApellidoCedula(value) : []));
 	  
-	  
-      this.cedulaProfesionalesFiltrados = this.autocompleteControlCedula.valueChanges.pipe(
-        map(value => typeof value === 'string' ? value : value.identificacionProfesional), 
-        flatMap(value => value ? this._filterCedula(value) : []));
-
-        
-
+	
+	
 
   }
 
-  
-  //cedula
-  private _filterCedula(value: string): Observable<Profesional[]> {
-    const filterValue = value;
-    return this.profesionalService.getFiltrarProfesionalDni(filterValue);
-  }
 
-  mostrarCedula(profesional ? : Profesional): string | "" {
-    return profesional ? profesional.identificacionProfesional : "";
-  }
-
-  seleccionarCedula(event: MatAutocompleteSelectedEvent): void {
-    let profesional = event.option.value as Profesional;
-    console.log(profesional);
-    //this.profesionalesAsignar.push(profesional);
-    this.autocompleteControlCedula.setValue('');
-    event.option.focus();
-    event.option.deselect();
-
-  }
-
-  //apellido
-  private _filterApellido(value: string): Observable<Profesional[]> {
-    const filterValue = value;
-    return this.profesionalService.getFiltrarProfesionalApellidoPaterno(filterValue);
-  }
-
-  
-  mostrarApellido(profesional ? : Profesional): string | "" {
-    return profesional ? profesional.apellidoPaternoProfesional : "";
-    console.log("mostrar apellido",profesional)
-  }
-
-  seleccionarApellido(event: MatAutocompleteSelectedEvent): void {
-    let profesional = event.option.value as Profesional;
-    console.log(profesional);
-    this.profesionalesAsignar.push(profesional);
-    this.autocompleteControlApellido.setValue('');
-    event.option.focus();
-    event.option.deselect();
-
-  }
-
-  
 
   verInformacionProfesiona(row :any){
     this.dialog.open(DetalleProfesionalModalComponent,{
@@ -205,5 +176,42 @@ export class ProfessionalComponent {
 
    
  
+
+  private _filterApellidoCedula(value: string): Observable<Profesional[]> {
+    const filterValue = value.toLowerCase();
+    
+    if(filterValue.match(/^[0-9]+$/)) {
+      this.inputTest="0";
+      return this.profesionalService.getFiltrarProfesionalDni(filterValue);
+    } else {
+      this.inputTest="1";
+      return this.profesionalService.getFiltrarProfesionalApellidoPaterno(filterValue);
+    }
+    
+  }
+
+  mostrarApellidoCedula(profesional ? : Profesional): string | "" {
+    if(this.inputTest=="0"){
+      return profesional ? profesional.identificacionProfesional : "";
+    }else{
+      return profesional ? profesional.apellidoPaternoProfesional: "";
+    }  
+  
+  }
+
+  seleccionarApellidoCedula(event: MatAutocompleteSelectedEvent): void {
+    let profesional = event.option.value as Profesional;
+    console.log(profesional);
+    //this.profesionalesAsignar.push(profesional);
+    this.autocompleteControlApellidoCedula.setValue('');
+    event.option.focus();
+    event.option.deselect();
+
+  }
+
+  
+  
+  
+
 }
 

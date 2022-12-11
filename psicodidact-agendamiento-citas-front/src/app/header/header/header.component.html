@@ -42,9 +42,9 @@
                     </a>
                     <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                         <a class="dropdown-item" href="#">Paciente</a>
-                        <a *ngIf="authService.hasRole('ROLE_ADMIN')" class="dropdown-item" [routerLink]="[ '/profesionales']">Profesional</a>
-                        <a class="dropdown-item" href="#">Especialidad</a>
-                        <a class="dropdown-item" href="#">Unidad Educativa</a>
+                        <a class="dropdown-item" [routerLink]="[ '/profesionales']">Profesional</a>
+                        <a class="dropdown-item" [routerLink]="[ '/especialidades']">Especialidad</a>
+                        <a class="dropdown-item" [routerLink]="[ '/unidadEducativa']">Unidad Educativa</a>
                     </div>
                 </li>
                 <li class="nav-item" routerLinkActive="active">

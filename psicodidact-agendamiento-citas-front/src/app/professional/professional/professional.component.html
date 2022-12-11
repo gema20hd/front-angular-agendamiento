@@ -16,109 +16,103 @@
 <div class="row">
     <div class="col-sm-4">
         <form class="example-form">
-            <mat-form-field class="example-full-width" appearance="fill">
-                <mat-label>Identificación</mat-label>
-                <input type="text" placeholder="Seleccioné un elemento" aria-label="Profesionales" matInput [formControl]="autocompleteControlCedula" [matAutocomplete]="auto">
-                <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete" [displayWith]="mostrarCedula" (optionSelected)="seleccionarCedula($event)">
-                    <mat-option *ngFor="let profesional of cedulaProfesionalesFiltrados | async" [value]="profesional">
-                        {{profesional.identificacionProfesional}}
-                    </mat-option>
-                </mat-autocomplete>
-            </mat-form-field>
-        </form>
-    </div>
-    <div class="col-sm-4">
-        <form class="example-form">
-            <mat-form-field class="example-full-width" appearance="fill">
-                <mat-label>Apellido Paterno</mat-label>
-                <input type="text" placeholder="Seleccioné un elemento" aria-label="Profesionales" matInput [formControl]="autocompleteControlApellido" [matAutocomplete]="auto">
-                <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete" [displayWith]="mostrarApellido" (optionSelected)="seleccionarApellido($event)">
-                    <mat-option *ngFor="let profesional of profesionalesFiltrados | async" [value]="profesional">
-                        {{profesional.apellidoPaternoProfesional}}
-                    </mat-option>
-                </mat-autocomplete>
-            </mat-form-field>
-        </form>
+            <div class="col-sm-6">
+                <form class="example-form">
+                    <mat-form-field class="example-full-width" appearance="fill">
+                        <mat-label>Apellido o cedula de profesional</mat-label>
+                        <input type="text" placeholder="Seleccioné un elemento" aria-label="Profesional" matInput [formControl]="autocompleteControlApellidoCedula" [matAutocomplete]="auto">
+                        <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete" [displayWith]="mostrarApellidoCedula" (optionSelected)="seleccionarApellidoCedula($event)">
+                            <mat-option *ngFor="let profesional of profesionalesFiltrados | async" [value]="profesional" [displayWith]="mostrarApellidoCedula">
+                                {{ mostrarApellidoCedula(profesional) }}
+                            </mat-option>
+                        </mat-autocomplete>
+                    </mat-form-field>
+                </form>
+            </div>
 
-    </div>
-    <br>
-    <br>
-    <br>
-    <br>
-    <div class="col-sm-4">
-        <button mat-stroked-button color="primary" (click)="crearProfesional()">Crear Profesional</button>
-    </div>
-</div>
-<br>
-<br>
-<br>
-<br>
-<br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <div class="col-sm-4">
+                <button mat-stroked-button color="primary" (click)="crearProfesional()">Crear Profesional</button>
+            </div>
 
 
-<table mat-table [dataSource]="cedulaProfesionalesFiltrados" class="mat-elevation-z8">
-    <!-- Name Column -->
-    <ng-container matColumnDef="identificacionProfesional">
-        <th mat-header-cell *matHeaderCellDef> Identificación </th>
-        <td mat-cell *matCellDef="let profesional"> {{profesional.identificacionProfesional}} </td>
-    </ng-container>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
 
-    <!-- Weight Column -->
-    <ng-container matColumnDef="nombresProfesional">
-        <th mat-header-cell *matHeaderCellDef> Nombres </th>
-        <td mat-cell *matCellDef="let profesional"> {{profesional.nombresProfesional}}</td>
-    </ng-container>
+            <table mat-table [dataSource]="profesionalesFiltrados" class="mat-elevation-z8">
 
-    <!-- Weight Column -->
-    <ng-container matColumnDef="apellidoPaternoProfesional">
-        <th mat-header-cell *matHeaderCellDef> Apellidos </th>
-        <td mat-cell *matCellDef="let profesional">{{profesional.apellidoPaternoProfesional}} </td>
-    </ng-container>
+                <!-- Name Column -->
+                <ng-container matColumnDef="identificacionProfesional">
+                    <th mat-header-cell *matHeaderCellDef> Identificación </th>
+                    <td mat-cell *matCellDef="let profesional"> {{profesional.identificacionProfesional}} </td>
+                </ng-container>
+
+                <!-- Weight Column -->
+                <ng-container matColumnDef="nombresProfesional">
+                    <th mat-header-cell *matHeaderCellDef> Nombres </th>
+                    <td mat-cell *matCellDef="let profesional"> {{profesional.nombresProfesional}}</td>
+                </ng-container>
+
+                <!-- Weight Column -->
+                <ng-container matColumnDef="apellidoPaternoProfesional">
+                    <th mat-header-cell *matHeaderCellDef> Apellidos </th>
+                    <td mat-cell *matCellDef="let profesional">{{profesional.apellidoPaternoProfesional}} </td>
+                </ng-container>
 
 
-    <!-- Symbol Column -->
-    <ng-container matColumnDef="celularProfesional">
-        <th mat-header-cell *matHeaderCellDef> Celular </th>
-        <td mat-cell *matCellDef="let profesional"> {{profesional.celularProfesional}} </td>
-    </ng-container>
+                <!-- Symbol Column -->
+                <ng-container matColumnDef="celularProfesional">
+                    <th mat-header-cell *matHeaderCellDef> Celular </th>
+                    <td mat-cell *matCellDef="let profesional"> {{profesional.celularProfesional}} </td>
+                </ng-container>
 
-    <!-- Symbol Column -->
-    <ng-container matColumnDef="estado">
-        <th mat-header-cell *matHeaderCellDef>Estado </th>
-        <td mat-cell *matCellDef="let profesional"> {{profesional.estadoProfesional}} </td>
-    </ng-container>
-    <!-- Symbol Column -->
-    <ng-container matColumnDef="editar">
-        <th mat-header-cell *matHeaderCellDef>Editar</th>
-        <td mat-cell *matCellDef="let profesional">
-            <button mat-stroked-button color="primary" (click)="editarInformacionProfesional(profesional)">Editar</button>
-        </td>
-    </ng-container>
-    <!-- Symbol Column -->
-    <ng-container matColumnDef="ver">
-        <th mat-header-cell *matHeaderCellDef>Ver detalle</th>
-        <td mat-cell *matCellDef="let profesional">
-            <button mat-stroked-button color="primary" (click)="verInformacionProfesional(profesional)">Ver</button>
-        </td>
-    </ng-container>
+                <!-- Symbol Column -->
+                <ng-container matColumnDef="estado">
+                    <th mat-header-cell *matHeaderCellDef>Estado </th>
+                    <td mat-cell *matCellDef="let profesional"> {{profesional.estadoProfesional}} </td>
+                </ng-container>
+                <!-- Symbol Column -->
+                <ng-container matColumnDef="editar">
+                    <th mat-header-cell *matHeaderCellDef>Editar</th>
+                    <td mat-cell *matCellDef="let profesional">
+                        <<<<<<< HEAD <button mat-stroked-button color="primary" (click)="editarInformacionProfesional(profesional)">Editar</button>
+                            =======
+                            <button mat-mini-fab color="warn">XX</button> >>>>>>> origin/feature_especiadadess
+                    </td>
+                </ng-container>
+                <!-- Symbol Column -->
+                <ng-container matColumnDef="ver">
+                    <th mat-header-cell *matHeaderCellDef>Ver detalle</th>
+                    <td mat-cell *matCellDef="let profesional">
+                        <<<<<<< HEAD <button mat-stroked-button color="primary" (click)="verInformacionProfesional(profesional)">Ver</button>
+                            =======
+                            <button mat-mini-fab color="warn">x</button> >>>>>>> origin/feature_especiadadess
+                    </td>
+                </ng-container>
 
-    <tr mat-header-row *matHeaderRowDef="mostrarColumnas "></tr>
-    <tr mat-row *matRowDef="let row; columns: mostrarColumnas; "></tr>
-</table>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
+                <tr mat-header-row *matHeaderRowDef="mostrarColumnas "></tr>
+                <tr mat-row *matRowDef="let row; columns: mostrarColumnas; "></tr>
+            </table>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
 
-<app-footer></app-footer>
+            <app-footer></app-footer>

@@ -34,6 +34,7 @@ export class ProfesionalesService {
    private agregarAuthorizationHeader() {
      
     let token = sessionStorage.getItem('token');
+
    
     if (token != null) {
       return this.httpHeaders.append('Authorization', 'Bearer ' + token);

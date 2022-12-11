@@ -18,6 +18,7 @@ import { ProfessionalComponent } from './professional/professional/professional.
 import { ProfesionalesService } from './professional/professional/profesionales.service';
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core'
 import { MatTableModule } from '@angular/material/table'
+
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -26,6 +27,10 @@ import { CrearProfesionalModalComponent } from './professional/professional/crea
 import { DetalleProfesionalModalComponent } from './professional/professional/detalles_profesional/detalle-profesional-modal/detalle-profesional-modal.component';
 import {MatDialogModule} from '@angular/material/dialog';
 import { EditarProfesionalModalComponent } from './professional/professional/editar_profesional/editar-profesional-modal/editar-profesional-modal.component';
+
+import { UnidadEducativaComponent } from './unidadEducativa/unidad-educativa/unidad-educativa.component';
+import { EspecialidadComponent } from './especialidad/especialidad/especialidad.component';
+
 
 
 @NgModule({
@@ -38,10 +43,13 @@ import { EditarProfesionalModalComponent } from './professional/professional/edi
     LoginComponent,
     PageComponent,
     ProfessionalComponent,
-    ProfessionalComponent,
     CrearProfesionalModalComponent,
     DetalleProfesionalModalComponent,
     EditarProfesionalModalComponent,
+
+    UnidadEducativaComponent,
+    EspecialidadComponent,
+
     
  
    
@@ -65,7 +73,9 @@ import { EditarProfesionalModalComponent } from './professional/professional/edi
     MatFormFieldModule,
     MatDatepickerModule,
     MatTableModule,
-    MatDialogModule
+    MatDialogModule,
+    MatTableModule
+
     
   ],
   providers: [ProfesionalesService,
