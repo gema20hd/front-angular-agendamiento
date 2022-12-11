@@ -71,23 +71,13 @@ getEspecialidadId(id: number): Observable<Especialidad> {
 } 
 
 getFiltrarNombreEspecialidad(nombre : String): Observable<Especialidad[]> {
-  if (isNaN(Number(nombre))) {
-    return this.http.get<Especialidad[]>(`${this.urlEndPointEspecialidades+'/descripcion'}/${nombre}`,
+  return this.http.get<Especialidad[]>(`${this.urlEndPointEspecialidades+'/descripcion'}/${nombre}`,
     { headers: this.agregarAuthorizationHeader()}).pipe(
      catchError(e => {
        this.isNoAutorizado(e);
        return throwError(e);
      })
    );
-  } else {
-    return this.http.get<Especialidad[]>(`${this.urlEndPointEspecialidades+'/descripcionid'}/${nombre}`,
-    { headers: this.agregarAuthorizationHeader()}).pipe(
-     catchError(e => {
-       this.isNoAutorizado(e);
-       return throwError(e);
-     })
-   );
-  }
  }
 
   create(especialidad: Especialidad): Observable<Especialidad> {

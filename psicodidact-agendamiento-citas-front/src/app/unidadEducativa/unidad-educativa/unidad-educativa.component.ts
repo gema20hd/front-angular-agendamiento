@@ -6,8 +6,12 @@ import { MatAutocompleteSelectedEvent } from '@angular/material/autocomplete';
 import { ActivatedRoute, Router } from '@angular/router';
 import { flatMap, map, Observable } from 'rxjs';
 import { AuthService } from 'src/app/users/login/auth.service';
+import Swal from 'sweetalert2';
+import { CrearUnidadEducativaMpdalComponent } from '../crear-unidad-educativa/crear-unidad-educativa-mpdal/crear-unidad-educativa-mpdal.component';
 import { UnidadEducativa } from './unidadEducativa';
 import { UnidadEducativaService } from './unidadEducativa.service';
+import { MatDialog } from '@angular/material/dialog';
+
 
 @Component({
   selector: 'app-unidad-educativa',
@@ -24,13 +28,16 @@ export class UnidadEducativaComponent {
   unidadEducativa: UnidadEducativa = new UnidadEducativa();
   titulo: string = 'Nuevo Unidad Educativa';
   inputTest="0";
+  errores: String [] = [];
   unidadesEducativasFiltrados: Observable<UnidadEducativa[]> = new Observable();
   constructor(
     public http: HttpClient,
     public authService: AuthService,
+    public dialog: MatDialog,
     public unidadEducativaService: UnidadEducativaService,
     public router: Router,
-    public activatedRoute: ActivatedRoute
+    public activatedRoute: ActivatedRoute,
+    //public modalRef: MatDialogRef<CrearUnidadEducativaMpdalComponent>
   ) {}
   
   ngOnInit() {
@@ -73,4 +80,51 @@ export class UnidadEducativaComponent {
 
   }
 
+  create(): void {
+    console.log(this.unidadEducativa);
+    this.unidadEducativaService.create(this.unidadEducativa)
+      .subscribe(
+        unidadEducativa => {
+          this.router.navigate(['/unidadEducativa']);
+          Swal.fire('Nueva unidad educativa', `La unidad educativa ${unidadEducativa.nombreUnidadEducativa} ha sido creado con éxito`, 'success');
+        },
+        err => {
+          this.errores = err.error.errors as string[];
+          console.error('Código del error desde el backend: ' + err.status);
+          console.error(err.error.errors);
+        }
+      );
+  }
+  
+
+  update(): void {
+    console.log(this.unidadEducativa);
+    this.unidadEducativaService.update(this.unidadEducativa)
+      .subscribe(
+        json => {
+          this.router.navigate(['/unidadEducativa']);
+          Swal.fire('Unidad educativa Actualizado', `${json.mensaje}: ${json.unidadEducativa.nombreUnidadEducativa}`, 'success');
+        },
+        err => {
+          this.errores = err.error.errors as string[];
+          console.error('Código del error desde el backend: ' + err.status);
+          console.error(err.error.errors);
+        }
+      )
+  }
+
+ 
+
+   crearUnidadEducativa(){ 
+    this.dialog.open(CrearUnidadEducativaMpdalComponent
+      ).afterClosed().subscribe(unidadEducativa=>{
+      console.log(" data: ", unidadEducativa)
+      }
+      );
+   }
+
+  cancelar(): void{
+   // this.modalRef.close();
+  }
+  
 }

@@ -27,6 +27,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import {MatDatepickerModule} from '@angular/material/datepicker';
 import { UnidadEducativaComponent } from './unidadEducativa/unidad-educativa/unidad-educativa.component';
 import { EspecialidadComponent } from './especialidad/especialidad/especialidad.component';
+import { CrearUnidadEducativaMpdalComponent } from './unidadEducativa/crear-unidad-educativa/crear-unidad-educativa-mpdal/crear-unidad-educativa-mpdal.component';
 
 
 
@@ -44,6 +45,7 @@ import { EspecialidadComponent } from './especialidad/especialidad/especialidad.
     ProfessionalComponent,
     UnidadEducativaComponent,
     EspecialidadComponent,
+    CrearUnidadEducativaMpdalComponent,
     
  
    
