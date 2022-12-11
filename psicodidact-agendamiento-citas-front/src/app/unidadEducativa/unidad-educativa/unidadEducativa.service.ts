@@ -94,7 +94,8 @@ export class UnidadEducativaService {
 
  
   create(unidadEducativa: UnidadEducativa): Observable<UnidadEducativa> {
-    return this.http.post(this.urlEndPointUnidadEducativa, unidadEducativa)
+    return this.http.post(this.urlEndPointUnidadEducativa, unidadEducativa,
+     { headers: this.agregarAuthorizationHeader()})
       .pipe(
         map((response: any) => response.unidadEducativa as UnidadEducativa),
         catchError(e => {
@@ -108,8 +109,10 @@ export class UnidadEducativaService {
         }));
   }
   
-  update(unidadEducativa: UnidadEducativa): Observable<any> {
-    return this.http.put<any>(`${this.urlEndPointUnidadEducativa}/${unidadEducativa.idUnidadEducativa}`, UnidadEducativa).pipe(
+  update(unidadEducativa: UnidadEducativa): Observable<UnidadEducativa> {
+    return this.http.put<UnidadEducativa>(`${this.urlEndPointUnidadEducativa}/${unidadEducativa.idUnidadEducativa}`, unidadEducativa,
+     { headers: this.agregarAuthorizationHeader()}).pipe(
+      
       catchError(e => {
         if (e.status == 400) {
           return throwError(e);
@@ -122,7 +125,7 @@ export class UnidadEducativaService {
   }
 
   delete(id: number): Observable<UnidadEducativa> {
-    return this.http.delete<UnidadEducativa>(`${this.urlEndPointUnidadEducativa}/${id}`).pipe(
+    return this.http.delete<UnidadEducativa>(`${this.urlEndPointUnidadEducativa}/${id}`, { headers: this.agregarAuthorizationHeader()}).pipe(
       catchError(e => {
         if (e.error.mensaje) {
           console.error(e.error.mensaje);

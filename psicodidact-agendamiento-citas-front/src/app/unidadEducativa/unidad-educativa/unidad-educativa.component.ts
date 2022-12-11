@@ -6,8 +6,16 @@ import { MatAutocompleteSelectedEvent } from '@angular/material/autocomplete';
 import { ActivatedRoute, Router } from '@angular/router';
 import { flatMap, map, Observable } from 'rxjs';
 import { AuthService } from 'src/app/users/login/auth.service';
+import Swal from 'sweetalert2';
+import { CrearUnidadEducativaMpdalComponent } from '../crear-unidad-educativa/crear-unidad-educativa-mpdal/crear-unidad-educativa-mpdal.component';
 import { UnidadEducativa } from './unidadEducativa';
 import { UnidadEducativaService } from './unidadEducativa.service';
+import { MatDialog } from '@angular/material/dialog';
+import { MatTableDataSource } from '@angular/material/table';
+import { Profesional } from 'src/app/models/profesional';
+import { DetallesUnidadEducativaModalComponent } from '../detalles_unidad_educativa/detalles-unidad-educativa-modal/detalles-unidad-educativa-modal.component';
+import { EditarUnidadEducativaModalComponent } from '../editar-unidad-educativa/editar-unidad-educativa-modal/editar-unidad-educativa-modal.component';
+
 
 @Component({
   selector: 'app-unidad-educativa',
@@ -16,21 +24,28 @@ import { UnidadEducativaService } from './unidadEducativa.service';
 })
 
 export class UnidadEducativaComponent {
-  mostrarColumnas: string[] = ['nombre', 'direccion','codigo'];
+  mostrarColumnas: string[] = ['codigo','nombre', 'direccion','editar','ver'];
+  //mostrarColumnasAlumnos: string[] = ['id', 'nombre', 'apellido', 'email', 'eliminar'];];
   //mostrarColumnasAlumnos: string[] = ['id', 'nombre', 'apellido', 'email', 'eliminar'];
+
+  dataSource = new MatTableDataSource<UnidadEducativa>();
 
   unidadesEducativasAsignar: UnidadEducativa [] = [];
   autocompleteControlNombre = new FormControl();
   unidadEducativa: UnidadEducativa = new UnidadEducativa();
   titulo: string = 'Nuevo Unidad Educativa';
   inputTest="0";
+  errores: String [] = [];
   unidadesEducativasFiltrados: Observable<UnidadEducativa[]> = new Observable();
+  data: UnidadEducativa = new UnidadEducativa();
   constructor(
     public http: HttpClient,
     public authService: AuthService,
+    public dialog: MatDialog,
     public unidadEducativaService: UnidadEducativaService,
     public router: Router,
-    public activatedRoute: ActivatedRoute
+    public activatedRoute: ActivatedRoute,
+    //public modalRef: MatDialogRef<CrearUnidadEducativaMpdalComponent>
   ) {}
   
   ngOnInit() {
@@ -73,4 +88,23 @@ export class UnidadEducativaComponent {
 
   }
 
-}
+
+   crearUnidadEducativa(){ 
+    this.dialog.open(CrearUnidadEducativaMpdalComponent)
+   }
+
+   editarUnidadEducativa(unidadEducativa: UnidadEducativa){ 
+    this.dialog.open(EditarUnidadEducativaModalComponent, { 
+      data: unidadEducativa
+     });
+     console.log( "Estoy en el editar",unidadEducativa.idUnidadEducativa);
+   }
+
+   verInformacionUnidadEducativa(unidadEducativa: UnidadEducativa){
+    this.dialog.open(DetallesUnidadEducativaModalComponent, { 
+      data: unidadEducativa
+     });
+   console.log( "Unidad Educativa",unidadEducativa);
+   }
+
+  }

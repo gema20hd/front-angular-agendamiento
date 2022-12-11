@@ -30,6 +30,9 @@ import { EditarProfesionalModalComponent } from './professional/professional/edi
 
 import { UnidadEducativaComponent } from './unidadEducativa/unidad-educativa/unidad-educativa.component';
 import { EspecialidadComponent } from './especialidad/especialidad/especialidad.component';
+import { CrearUnidadEducativaMpdalComponent } from './unidadEducativa/crear-unidad-educativa/crear-unidad-educativa-mpdal/crear-unidad-educativa-mpdal.component';
+import { DetallesUnidadEducativaModalComponent } from './unidadEducativa/detalles_unidad_educativa/detalles-unidad-educativa-modal/detalles-unidad-educativa-modal.component';
+import { EditarUnidadEducativaModalComponent } from './unidadEducativa/editar-unidad-educativa/editar-unidad-educativa-modal/editar-unidad-educativa-modal.component';
 
 
 
@@ -46,9 +49,11 @@ import { EspecialidadComponent } from './especialidad/especialidad/especialidad.
     CrearProfesionalModalComponent,
     DetalleProfesionalModalComponent,
     EditarProfesionalModalComponent,
-
     UnidadEducativaComponent,
     EspecialidadComponent,
+    CrearUnidadEducativaMpdalComponent,
+    DetallesUnidadEducativaModalComponent,
+    EditarUnidadEducativaModalComponent,
 
     
  
@@ -56,7 +61,10 @@ import { EspecialidadComponent } from './especialidad/especialidad/especialidad.
   ],
   entryComponents:[
     DetalleProfesionalModalComponent,    
-    CrearProfesionalModalComponent
+    CrearProfesionalModalComponent,
+    CrearUnidadEducativaMpdalComponent,
+    EditarProfesionalModalComponent,
+    DetallesUnidadEducativaModalComponent
   ],
   imports: [
     BrowserModule,

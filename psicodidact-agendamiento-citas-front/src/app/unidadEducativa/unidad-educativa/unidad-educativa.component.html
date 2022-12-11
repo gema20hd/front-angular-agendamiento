@@ -1,5 +1,5 @@
-
-<app-header></app-header>
+<app-header>
+</app-header>
 <br>
 <br>
 <br>
@@ -16,17 +16,16 @@
                 <mat-label>Nombre de Unidad Educativa</mat-label>
                 <input type="text" placeholder="Seleccioné un elemento" aria-label="UnidadEducativa" matInput [formControl]="autocompleteControlNombre" [matAutocomplete]="auto">
                 <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete" [displayWith]="mostrarNombre" (optionSelected)="seleccionarNombre($event)">
-                    <mat-option *ngFor="let unidadEducativa of unidadesEducativasFiltrados | async" [value]="unidadEducativa" [displayWith]="mostrarNombre">
-                        {{
-                            mostrarNombre(unidadEducativa)
-                        }}
+                    <mat-option *ngFor="let unidadEducativa of unidadesEducativasFiltrados | async" [value]="unidadEducativa">
+                        {{ mostrarNombre(unidadEducativa) }}
                     </mat-option>
                 </mat-autocomplete>
             </mat-form-field>
         </form>
     </div>
-    <div class="col-sm-6">
-        <button mat-stroked-button color="primary">Crear Unidad Educativa</button>
+
+    <div class="col-sm-4">
+        <button mat-stroked-button color="primary" (click)="crearUnidadEducativa()">Crear unidad educativa</button>
     </div>
 
 </div>
@@ -37,25 +36,38 @@
 <br>
 
 <table mat-table [dataSource]="unidadesEducativasFiltrados" class="mat-elevation-z8">
-    <!-- Name Column -->
-    <ng-container matColumnDef="nombre">
-        <th mat-header-cell *matHeaderCellDef> nombre de Unidad Educativa</th>
-        <td mat-cell *matCellDef="let unidadEducativa"> {{unidadEducativa.nombreUnidadEducativa}} </td>
-    </ng-container>
 
     <!-- Weight Column -->
     <ng-container matColumnDef="codigo">
-        <th mat-header-cell *matHeaderCellDef> Fecha de ingreso </th>
-        <td mat-cell *matCellDef="let unidadEducativa"> </td>
+        <th mat-header-cell *matHeaderCellDef>Código de la Instatiución </th>
+        <td mat-cell *matCellDef="let unidadEducativa">{{unidadEducativa.codigoInstitucion}} </td>
     </ng-container>
+
+    <!-- Name Column -->
+    <ng-container matColumnDef="nombre">
+        <th mat-header-cell *matHeaderCellDef> Nombre de la Unidad Educativa</th>
+        <td mat-cell *matCellDef="let unidadEducativa"> {{unidadEducativa.nombreUnidadEducativa}} </td>
+    </ng-container>
+    <!-- Name Column -->
     <ng-container matColumnDef="direccion">
+        <th mat-header-cell *matHeaderCellDef> Dirección de la Unidad Educativa</th>
+        <td mat-cell *matCellDef="let unidadEducativa"> {{unidadEducativa.direccionUnidadEducativa}} </td>
+    </ng-container>
+
+    <!-- Symbol Column -->
+    <ng-container matColumnDef="editar">
         <th mat-header-cell *matHeaderCellDef>Editar</th>
         <td mat-cell *matCellDef="let unidadEducativa">
-            <button mat-stroked-button color="primary" [disabled]="">Editar</button>
+            <button mat-stroked-button color="primary" (click)="editarUnidadEducativa(unidadEducativa)">Editar</button>
         </td>
     </ng-container>
     <!-- Symbol Column -->
-   
+    <ng-container matColumnDef="ver">
+        <th mat-header-cell *matHeaderCellDef>Ver detalle</th>
+        <td mat-cell *matCellDef="let unidadEducativa">
+            <button mat-stroked-button color="primary" (click)="verInformacionUnidadEducativa(unidadEducativa)">Ver</button>
+        </td>
+    </ng-container>
 
     <tr mat-header-row *matHeaderRowDef="mostrarColumnas "></tr>
     <tr mat-row *matRowDef="let row; columns: mostrarColumnas; "></tr>
