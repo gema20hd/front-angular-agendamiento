@@ -15,7 +15,7 @@
                     <div class="col-md-4">
                         <mat-form-field appearance="outline">
                             <mat-label>Nombres</mat-label>
-                            <input matInput placeholder="Apellidos" formControlName="Nombres" />
+                            <input matInput placeholder="Nombres" formControlName="Nombres" />
                         </mat-form-field>
                     </div>
                     <div class="col-md-4">
@@ -36,17 +36,19 @@
                         </mat-form-field>
                     </div>
 
-                    <!--
+
                     <div class="col-md-4">
                         <mat-form-field appearance="fill">
                             <mat-label>Género </mat-label>
-                            <mat-select [(ngModel)]="selectedGenero" name="genero" formControlName="genero">
+                            <mat-select [(ngModel)]="genero.idGenero" name="genero" formControlName="genero">
                                 <mat-option *ngFor="let genero of generos" [value]="genero.idGenero">
+                                    {{genero.descripcionGenero}}
                                 </mat-option>
+
                             </mat-select>
                         </mat-form-field>
                     </div>
-                    -->
+
                     <div class="col-md-4">
                         <mat-form-field appearance="outline">
                             <mat-label>Email</mat-label>
@@ -67,7 +69,7 @@
                     <div class="col-md-4">
                         <mat-form-field appearance="outline">
                             <mat-label>Telefóno</mat-label>
-                            <input matInput placeholder="teléfono" formControlName="telefono" />
+                            <input matInput placeholder="Teléfono" formControlName="telefono" />
                         </mat-form-field>
                     </div>
                     <div class="col-md-4">
@@ -86,10 +88,9 @@
                                 <div class="col-md-4">
                                     <mat-form-field appearance="fill">
                                         <mat-label>Tipo Discapacidad </mat-label>
-                                        <mat-select [(ngModel)]="selectTipoDiscapacidad" name="tipo.idTipoDiscapacidad" formControlName="tipoDiscapacidad">
-
-                                            <mat-option *ngFor="let tipo of tipoDiscapacidades">
-                                                {{tipo.descripcionTipoDiscapacidad}}
+                                        <mat-select [(ngModel)]="tiposDiscapacidades" name="tipo.idTipoDiscapacidad" formControlName="tipoDiscapacidad">
+                                            <mat-option *ngFor="let tipoDiscapacidad of tiposDiscapacidades">
+                                                {{tipoDiscapacidad.descripcionTipoDiscapacidad}}
                                             </mat-option>
 
                                         </mat-select>
@@ -109,38 +110,111 @@
                                         <input matInput placeholder="Descripcion Discapacidad" formControlName="descripcionDiscapacidad" />
                                     </mat-form-field>
                                 </div>
-
                             </div>
-
                         </ng-template>
+                    </div>
+
+                    <div class="col-md-4">
+                        <mat-form-field appearance="outline">
+                            <mat-label>Grado</mat-label>
+                            <input matInput placeholder="Grado" formControlName="grado" />
+                        </mat-form-field>
+                    </div>
 
 
-                        <!--
+                    <div class="col-md-4">
+                        <mat-form-field appearance="outline">
+                            <mat-label>PostGrado</mat-label>
+                            <input matInput placeholder="Postgrado" formControlName="postGrado" />
+                        </mat-form-field>
+                    </div>
+                </div>
+
+
+                <div class="row">
                     <div class="col-md-4">
                         <mat-form-field appearance="fill">
-                            <mat-label>Género </mat-label>
-                            <mat-select [(ngModel)]="selectedGenero" name="genero" formControlName="genero">
-                                <mat-option *ngFor="let genero of generos" [value]="genero.idGenero">
+                            <mat-label>Estado Civil </mat-label>
+                            <mat-select [(ngModel)]="estadoCivil.idEstadoCivil" name="estadoCivil" formControlName="estadoCivil">
+                                <mat-option *ngFor="let estadocivil of estadosCivil" [value]="estadoCivil.idEstadoCivil">
+                                    {{estadocivil.descripcionEstadoCivil}}
                                 </mat-option>
+
                             </mat-select>
                         </mat-form-field>
                     </div>
-                    -->
-                        <!--
+
                     <div class="col-md-4">
-                        <mat-form-field appearance="fill">
-                            <mat-label>Género </mat-label>
-                            <mat-select [(ngModel)]="selectedGenero" name="genero" formControlName="genero">
-                                <mat-option *ngFor="let genero of generos" [value]="genero.idGenero">
-                                </mat-option>
-                            </mat-select>
+                        <mat-form-field appearance="outline">
+                            <mat-label>Nivel Educacion</mat-label>
+                            <input matInput placeholder="Nivel Educación" formControlName="nivelEducacion" />
                         </mat-form-field>
                     </div>
-                    -->
+                    <div class="col-md-4">
+                        <mat-form-field appearance="outline">
+                            <mat-label>Estado del Profesional</mat-label>
+                            <input matInput placeholder="Estado del Profesional" formControlName="estadoProfesional" />
+                        </mat-form-field>
+                    </div>
 
+
+                </div>
+
+                <div class="row">
+                    <div class="col-md-4">
+                        <form class="example-form">
+                            <mat-form-field class="example-full-width" appearance="fill">
+                                <mat-label>Apellido Paterno</mat-label>
+                                <input type="text" placeholder="Seleccioné un elemento" aria-label="Profesionales" matInput [formControl]="autocompleteControlBanco" [matAutocomplete]="auto">
+                                <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete" [displayWith]="mostrarBanco" (optionSelected)="seleccionarBanco($event)">
+                                    <mat-option *ngFor="let profesional of bancosFiltrados | async" [value]="banco">
+                                        {{banco.descripcionBanco}}
+                                    </mat-option>
+                                </mat-autocomplete>
+                            </mat-form-field>
+                        </form>
+                    </div>
+                    <div class="col-md-4">
+                        <mat-form-field appearance="outline">
+                            <mat-label>Tipo Cuenta</mat-label>
+                            <input matInput placeholder="Tipo Cuenta" formControlName="cuentaBancaria" />
+                        </mat-form-field>
+                    </div>
+                    <div class="col-md-4">
+                        <mat-form-field appearance="outline">
+                            <mat-label>Cuenta Bancaria</mat-label>
+                            <input matInput placeholder="Cuenta Bancaria" formControlName="cuentaBancaria" />
+                        </mat-form-field>
                     </div>
 
                 </div>
+
+                <div class="row">
+                    <div class="col-md-4">
+                        <mat-form-field appearance="outline">
+                            <mat-label>Usuario</mat-label>
+                            <input matInput placeholder="Usuario" formControlName="usuario" />
+                        </mat-form-field>
+                    </div>
+                    <div class="col-md-4">
+                        <mat-form-field appearance="outline">
+                            <mat-label>Contraseña</mat-label>
+                            <input matInput placeholder="Contraseña" formControlName="contrasena" />
+                        </mat-form-field>
+                    </div>
+                    <div class="col-md-4">
+                        <mat-form-field appearance="outline">
+                            <mat-label>Confirmar Contraseña</mat-label>
+                            <input matInput placeholder="Confirmar Contraseña" formControlName="confirmarContrasena" />
+                        </mat-form-field>
+                    </div>
+
+                </div>
+
+
+
+
+
             </div>
 
         </div>
@@ -148,5 +222,5 @@
 </mat-dialog-content>
 <mat-dialog-actions align="end">
     <button mat-button (click)="cancelar()">Cancelar</button>
-    <button mat-button mat-raised-button class="button" (click)="creaeProfesionalCompleto()">Guardar</button>
+    <button mat-button mat-raised-button class="button" (click)="create()">Guardar</button>
 </mat-dialog-actions>

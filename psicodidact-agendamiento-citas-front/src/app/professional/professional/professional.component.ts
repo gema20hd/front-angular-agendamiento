@@ -40,17 +40,17 @@ export class ProfessionalComponent {
   dataSource = new MatTableDataSource<Profesional>();
 
   profesionalesAsignar: Profesional[] = [];
-  bancosAsignar: Banco[] = [];
+
 
 
   autocompleteControlCedula = new FormControl();
   autocompleteControlApellido = new FormControl();
-  autocompleteControlBanco = new FormControl();
+  
 
 
   profesionalesFiltrados: Observable<Profesional[]> = new Observable();
   cedulaProfesionalesFiltrados: Observable<Profesional[]> = new Observable();
-  bancosFiltrados: Observable<Banco[]> = new Observable();
+ 
   //generoFiltrados: Observable<Genero[]> = new Observable();
 
 
@@ -131,26 +131,7 @@ export class ProfessionalComponent {
 
   }
 
-  //banco
-  private _filterBanco(value: string): Observable<Banco[]> {
-    const filterValue = value;
-    return this.profesionalService.getFiltrarBanco(filterValue);
-  }
-
   
-  mostrarBanco(banco ? : Banco): string | "" {
-    return banco ? banco.descripcionBanco : "";
-  }
-
-  seleccionarBanco(event: MatAutocompleteSelectedEvent): void {
-    let banco = event.option.value as Banco;
-    console.log(banco);
-    this.bancosAsignar.push(banco);
-    this.autocompleteControlBanco.setValue('');
-    event.option.focus();
-    event.option.deselect();
-
-  }
 
   verInformacionProfesiona(row :any){
     this.dialog.open(DetalleProfesionalModalComponent,{
@@ -211,8 +192,18 @@ export class ProfessionalComponent {
 
    }
    */
+   editarInformacionProfesional(profesional:Profesional)
+   {}
+
+   crearProfesional(){ 
+    this.dialog.open(CrearProfesionalModalComponent
+      ).afterClosed().subscribe(profesional=>{
+      console.log(" data: ", profesional)
+      }
+      );
+   }
 
    
- }
+ 
 }
 

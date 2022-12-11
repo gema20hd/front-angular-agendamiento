@@ -26,6 +26,7 @@ const routes: Routes = [
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule],
+  exports: [RouterModule, MatInputModule,MatAutocompleteModule,MatFormFieldModule],
+
 })
 export class AppRoutingModule {}
