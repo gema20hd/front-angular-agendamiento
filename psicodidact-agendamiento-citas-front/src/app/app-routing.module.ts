@@ -2,8 +2,10 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { AppComponent } from './app.component';
 import { PageComponent } from './error_page/page/page.component';
+import { EspecialidadComponent } from './especialidad/especialidad/especialidad.component';
 import { HomeComponent } from './home/home/home.component';
 import { ProfessionalComponent } from './professional/professional/professional.component';
+import { UnidadEducativaComponent } from './unidadEducativa/unidad-educativa/unidad-educativa.component';
 import { AuthGuard } from './users/login/guards/auth.guard';
 import { DesactiveGuard } from './users/login/guards/desactive.guard';
 import { LoginComponent } from './users/login/login.component';
@@ -13,10 +15,13 @@ const routes: Routes = [
   { path: 'login', component: LoginComponent },
   {path: 'home',component: HomeComponent,pathMatch: 'full',canActivate: [DesactiveGuard] },
   { path: 'profesionales', component: ProfessionalComponent },
+  {path: 'especialidades', component: EspecialidadComponent },
+  {path: 'unidadEducativa', component: UnidadEducativaComponent },
   { path: 'profesionales/:id', component: ProfessionalComponent },
   { path: 'profesionales/identificacion/:dni', component: ProfessionalComponent },
   { path: 'profesionales/apellidoPaterno/:name', component: ProfessionalComponent },
   { path: 'profesionales/apellidoMaterno/:lastname', component: ProfessionalComponent },
+
 ];
 
 @NgModule({
