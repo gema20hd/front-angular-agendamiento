@@ -13,7 +13,7 @@ export class DetallesUnidadEducativaModalComponent {
 
   unidadEducativa?: UnidadEducativa;
   unidadEducativas: UnidadEducativa[]= [];
-
+  titulo: string = 'Detalles de la Unidad Educativa';
   constructor(
     private unidadEducativaService:UnidadEducativaService,
     @Inject(MAT_DIALOG_DATA) public data: any,
@@ -28,7 +28,7 @@ export class DetallesUnidadEducativaModalComponent {
 
 
   verInformacionUnidadEducativa(id:number){
-    this.unidadEducativaService.getUnidadEducativaId(id) .subscribe(rs => 
+    this.unidadEducativaService.getUnidadEducativaId(id).subscribe(rs => 
       { this.unidadEducativa =rs 
       console.log(rs)});
   }

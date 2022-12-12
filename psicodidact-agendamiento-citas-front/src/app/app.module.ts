@@ -11,14 +11,12 @@ import { HeaderLoginComponent } from './header_login/header-login/header-login.c
 import { HomeComponent } from './home/home/home.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import {HttpClientModule, HTTP_INTERCEPTORS} from '@angular/common/http';
-//import { CookieService } from 'ngx-cookie-service';
 import { LoginComponent } from './users/login/login.component';
 import { PageComponent } from './error_page/page/page.component';
 import { ProfessionalComponent } from './professional/professional/professional.component';
 import { ProfesionalesService } from './professional/professional/profesionales.service';
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core'
 import { MatTableModule } from '@angular/material/table'
-
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -27,12 +25,14 @@ import { CrearProfesionalModalComponent } from './professional/professional/crea
 import { DetalleProfesionalModalComponent } from './professional/professional/detalles_profesional/detalle-profesional-modal/detalle-profesional-modal.component';
 import {MatDialogModule} from '@angular/material/dialog';
 import { EditarProfesionalModalComponent } from './professional/professional/editar_profesional/editar-profesional-modal/editar-profesional-modal.component';
-
 import { UnidadEducativaComponent } from './unidadEducativa/unidad-educativa/unidad-educativa.component';
 import { EspecialidadComponent } from './especialidad/especialidad/especialidad.component';
 import { CrearUnidadEducativaMpdalComponent } from './unidadEducativa/crear-unidad-educativa/crear-unidad-educativa-mpdal/crear-unidad-educativa-mpdal.component';
 import { DetallesUnidadEducativaModalComponent } from './unidadEducativa/detalles_unidad_educativa/detalles-unidad-educativa-modal/detalles-unidad-educativa-modal.component';
 import { EditarUnidadEducativaModalComponent } from './unidadEducativa/editar-unidad-educativa/editar-unidad-educativa-modal/editar-unidad-educativa-modal.component';
+import { DetallesEspecialidadModalComponent } from './especialidad/detalles_especialidad/detalles-especialidad-modal/detalles-especialidad-modal.component';
+import { CrearEspecialidadModalComponent } from './especialidad/crear_especialidad/crear-especialidad-modal/crear-especialidad-modal.component';
+import { EditarEspecialidadModalComponent } from './especialidad/editar_especialidad/editar-especialidad-modal/editar-especialidad-modal.component';
 
 
 
@@ -54,6 +54,9 @@ import { EditarUnidadEducativaModalComponent } from './unidadEducativa/editar-un
     CrearUnidadEducativaMpdalComponent,
     DetallesUnidadEducativaModalComponent,
     EditarUnidadEducativaModalComponent,
+    DetallesEspecialidadModalComponent,
+    CrearEspecialidadModalComponent,
+    EditarEspecialidadModalComponent,
 
     
  
@@ -62,9 +65,15 @@ import { EditarUnidadEducativaModalComponent } from './unidadEducativa/editar-un
   entryComponents:[
     DetalleProfesionalModalComponent,    
     CrearProfesionalModalComponent,
-    CrearUnidadEducativaMpdalComponent,
     EditarProfesionalModalComponent,
-    DetallesUnidadEducativaModalComponent
+
+    CrearUnidadEducativaMpdalComponent,
+    EditarUnidadEducativaModalComponent,
+    DetallesUnidadEducativaModalComponent,
+    
+    EditarEspecialidadModalComponent,
+    DetallesEspecialidadModalComponent,
+    CrearEspecialidadModalComponent,
   ],
   imports: [
     BrowserModule,

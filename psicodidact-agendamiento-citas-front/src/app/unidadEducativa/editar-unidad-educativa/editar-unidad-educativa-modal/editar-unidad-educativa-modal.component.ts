@@ -23,7 +23,7 @@ export class EditarUnidadEducativaModalComponent {
   unidadesEducativasAsignar: UnidadEducativa [] = [];
   autocompleteControlNombre = new FormControl();
   unidadEducativa: UnidadEducativa;
-  titulo: string = 'Nuevo Unidad Educativa';
+  titulo: string = 'Editar Unidad Educativa';
   errores: String [] = [];
   unidadesEducativasFiltrados: Observable<UnidadEducativa[]> = new Observable();
   

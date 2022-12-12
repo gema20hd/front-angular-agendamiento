@@ -60,7 +60,7 @@ export class EspecialidadesService {
 
 getEspecialidadId(id: number): Observable<Especialidad> {
   return this.http.get<Especialidad>(`${this.urlEndPointEspecialidades}/${id}`, 
-  { headers: this.agregarAuthorizationHeader() }).pipe(
+  { headers: this.agregarAuthorizationHeader()}).pipe(
     catchError(e => {
       if (this.isNoAutorizado(e)) {
         return throwError(e);
@@ -81,7 +81,8 @@ getFiltrarNombreEspecialidad(nombre : String): Observable<Especialidad[]> {
  }
 
   create(especialidad: Especialidad): Observable<Especialidad> {
-    return this.http.post(this.urlEndPointEspecialidades, especialidad)
+    return this.http.post(this.urlEndPointEspecialidades, especialidad,
+      { headers: this.agregarAuthorizationHeader()})
       .pipe(
         map((response: any) => response.especialidad as Especialidad),
         catchError(e => {
@@ -98,7 +99,8 @@ getFiltrarNombreEspecialidad(nombre : String): Observable<Especialidad[]> {
  
 
   update(especialidad: Especialidad): Observable<any> {
-    return this.http.put<any>(`${this.urlEndPointEspecialidades}/${especialidad.idEspecialidad}`, Especialidad).pipe(
+    return this.http.put<any>(`${this.urlEndPointEspecialidades}/${especialidad.idEspecialidad}`, especialidad,
+    { headers: this.agregarAuthorizationHeader()}).pipe(
       catchError(e => {
         if (e.status == 400) {
           return throwError(e);
@@ -111,7 +113,8 @@ getFiltrarNombreEspecialidad(nombre : String): Observable<Especialidad[]> {
   }
 
   delete(id: number): Observable<Especialidad> {
-    return this.http.delete<Especialidad>(`${this.urlEndPointEspecialidades}/${id}`).pipe(
+    return this.http.delete<Especialidad>(`${this.urlEndPointEspecialidades}/${id}`,
+    { headers: this.agregarAuthorizationHeader()}).pipe(
       catchError(e => {
         if (e.error.mensaje) {
           console.error(e.error.mensaje);

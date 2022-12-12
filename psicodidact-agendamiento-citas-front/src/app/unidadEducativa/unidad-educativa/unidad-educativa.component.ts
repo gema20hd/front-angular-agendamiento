@@ -25,8 +25,7 @@ import { EditarUnidadEducativaModalComponent } from '../editar-unidad-educativa/
 
 export class UnidadEducativaComponent {
   mostrarColumnas: string[] = ['codigo','nombre', 'direccion','editar','ver'];
-  //mostrarColumnasAlumnos: string[] = ['id', 'nombre', 'apellido', 'email', 'eliminar'];];
-  //mostrarColumnasAlumnos: string[] = ['id', 'nombre', 'apellido', 'email', 'eliminar'];
+ 
 
   dataSource = new MatTableDataSource<UnidadEducativa>();
 
@@ -38,6 +37,7 @@ export class UnidadEducativaComponent {
   errores: String [] = [];
   unidadesEducativasFiltrados: Observable<UnidadEducativa[]> = new Observable();
   data: UnidadEducativa = new UnidadEducativa();
+  
   constructor(
     public http: HttpClient,
     public authService: AuthService,

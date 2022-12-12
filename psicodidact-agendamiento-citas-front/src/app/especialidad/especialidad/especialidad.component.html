@@ -8,7 +8,6 @@
 <br>
 <br>
 <div class="row">
-
     <div class="col-sm-6">
         <form class="example-form">
             <mat-form-field class="example-full-width" appearance="fill">
@@ -16,16 +15,16 @@
                 <input type="text" placeholder="Seleccioné un elemento" aria-label="Especialidades" matInput [formControl]="autocompleteControlNombre" [matAutocomplete]="auto">
                 <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete" [displayWith]="mostrarNombre" (optionSelected)="seleccionarNombre($event)">
                     <mat-option *ngFor="let especialidad of especialidadesFiltrados | async" [value]="especialidad">
-                        {{
-                            especialidad.descripcionEspecialidad
-                        }}
+                        {{ especialidad.descripcionEspecialidad }}
                     </mat-option>
                 </mat-autocomplete>
             </mat-form-field>
         </form>
     </div>
     <div class="col-sm-6">
-        <button mat-stroked-button color="primary">Crear Especialidad</button>
+        <div class="col-sm-4">
+            <button mat-stroked-button color="primary" (click)="crearEspecialidad()">Crear unidad educativa</button>
+        </div>
     </div>
 
 </div>
@@ -45,16 +44,24 @@
     <!-- Weight Column -->
     <ng-container matColumnDef="fechaIngreso">
         <th mat-header-cell *matHeaderCellDef> Fecha de ingreso </th>
-        <td mat-cell *matCellDef="let especialidad"> </td>
+        <td mat-cell *matCellDef="let especialidad"> {{especialidad.fechaIngreso}} </td>
     </ng-container>
+
+
+    <!-- Symbol Column -->
     <ng-container matColumnDef="editar">
         <th mat-header-cell *matHeaderCellDef>Editar</th>
         <td mat-cell *matCellDef="let especialidad">
-            <button mat-stroked-button color="primary" [disabled]="">Editar</button>
+            <button mat-stroked-button color="primary" (click)="editarEspecialidad(especialidad)">Editar</button>
         </td>
     </ng-container>
     <!-- Symbol Column -->
-   
+    <ng-container matColumnDef="ver">
+        <th mat-header-cell *matHeaderCellDef>Ver detalle</th>
+        <td mat-cell *matCellDef="let especialidad">
+            <button mat-stroked-button color="primary" (click)="verInformacionEspecialidad(especialidad)">Ver</button>
+        </td>
+    </ng-container>
 
     <tr mat-header-row *matHeaderRowDef="mostrarColumnas "></tr>
     <tr mat-row *matRowDef="let row; columns: mostrarColumnas; "></tr>

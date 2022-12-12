@@ -22,11 +22,8 @@ const routes: Routes = [
   { path: 'profesionales', component: ProfessionalComponent },
   {path: 'especialidades', component: EspecialidadComponent },
   {path: 'unidadEducativa', component: UnidadEducativaComponent },
-  {path: 'unidadEducativa/:id', component: UnidadEducativaComponent },
-  { path: 'profesionales/:id', component: ProfessionalComponent },
-  { path: 'profesionales/identificacion/:dni', component: ProfessionalComponent },
-  { path: 'profesionales/apellidoPaterno/:name', component: ProfessionalComponent },
-  { path: 'profesionales/apellidoMaterno/:lastname', component: ProfessionalComponent },
+
+
 
 ];
 

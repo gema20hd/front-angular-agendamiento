@@ -1,0 +1,26 @@
+<h2 mat-dialog-title class="card_title">Editar Unidad Educativa</h2>
+<mat-dialog-content>
+
+    <form [formGroup]="dialogForm">
+        <div class="container">
+            <div class="row">
+                <div class="row">
+                    <div class="col-md-4">
+                        <mat-form-field appearance="outline">
+                            <mat-label>Nombre de la Especialidad</mat-label>
+                            <input [(ngModel)]="especialidad.descripcionEspecialidad" matInput placeholder="Nombre de la Especialidad" formControlName="descripcionEspecialidad" />
+                        </mat-form-field>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </form>
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+    <button mat-button (click)="cancelar()">Cancelar</button>
+    <div class="col-sm-6">
+        <button class="btn btn-primary" role="button" (click)='update()'>Editar</button>
+
+    </div>
+</mat-dialog-actions>

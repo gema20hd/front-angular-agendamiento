@@ -2,9 +2,13 @@ import { HttpClient } from '@angular/common/http';
 import { Component } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { MatAutocompleteSelectedEvent } from '@angular/material/autocomplete';
+import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute, Router } from '@angular/router';
 import { flatMap, map, Observable } from 'rxjs';
 import { AuthService } from 'src/app/users/login/auth.service';
+import { CrearEspecialidadModalComponent } from '../crear_especialidad/crear-especialidad-modal/crear-especialidad-modal.component';
+import { DetallesEspecialidadModalComponent } from '../detalles_especialidad/detalles-especialidad-modal/detalles-especialidad-modal.component';
+import { EditarEspecialidadModalComponent } from '../editar_especialidad/editar-especialidad-modal/editar-especialidad-modal.component';
 import { Especialidad } from './especialidad';
 import { EspecialidadesService } from './especialidades.service';
 
@@ -14,8 +18,12 @@ import { EspecialidadesService } from './especialidades.service';
   styleUrls: ['./especialidad.component.css']
 })
 export class EspecialidadComponent {
-  mostrarColumnas: string[] = ['nombre', 'fechaIngreso','editar'];
-  //mostrarColumnasAlumnos: string[] = ['id', 'nombre', 'apellido', 'email', 'eliminar'];
+  mostrarColumnas: string[] = ['nombre','editar','ver'];
+
+
+  inputTest="0";
+  errores: String [] = [];
+
 
   especialidadesAsignar: Especialidad [] = [];
   autocompleteControlNombre = new FormControl();
@@ -27,6 +35,7 @@ export class EspecialidadComponent {
     public authService: AuthService,
     public especialidadService: EspecialidadesService,
     public router: Router,
+    public dialog: MatDialog,
     public activatedRoute: ActivatedRoute
   ) {}
   
@@ -37,7 +46,8 @@ export class EspecialidadComponent {
         flatMap(value => value ? this._filterNombre(value) : []));
 
   }
-  //cedula
+  
+
   private _filterNombre(value: string): Observable<Especialidad[]> {
     const filterValue = value.toLowerCase();
     return this.especialidadService.getFiltrarNombreEspecialidad(filterValue);
@@ -57,4 +67,25 @@ export class EspecialidadComponent {
 
   }
 
+
+  crearEspecialidad(){ 
+    this.dialog.open(CrearEspecialidadModalComponent)
+   }
+
+   editarEspecialidad(especialidad: Especialidad){ 
+    this.dialog.open(EditarEspecialidadModalComponent, { 
+      data: especialidad
+     });
+     console.log( "Estoy en el editar",especialidad.idEspecialidad);
+   }
+
+   verInformacionEspecialidad(especialidad: Especialidad){
+    this.dialog.open(DetallesEspecialidadModalComponent, { 
+      data: especialidad
+     });
+   console.log( "Especialidad",especialidad);
+   }
+
 }
+
+
