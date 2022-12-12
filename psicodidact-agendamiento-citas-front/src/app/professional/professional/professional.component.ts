@@ -42,15 +42,6 @@ export class ProfessionalComponent {
 
   dataSource = new MatTableDataSource<Profesional>();
 
-  profesionalesAsignar: Profesional[] = [];
-
-
-
-  autocompleteControlCedula = new FormControl();
-  autocompleteControlApellido = new FormControl();
-
-  
-  bancosAsignar: Banco[] = [];
   inputTest="0";
 
   autocompleteControlApellidoCedula = new FormControl();
@@ -93,89 +84,12 @@ export class ProfessionalComponent {
   ngOnInit() {
 
 	
-    this.profesionalesFiltrados = this.autocompleteControlApellido.valueChanges.pipe(
-      map(value => typeof value === 'string' ? value : value.apellidoPaternoProfesional), 
+    this.profesionalesFiltrados = this.autocompleteControlApellidoCedula.valueChanges.pipe(
+      map(value => typeof value === 'string' ? value : value.identificacionProfesional), 
       flatMap(value => value ? this._filterApellidoCedula(value) : []));
 	  
-	
-	
-
   }
 
-
-
-  verInformacionProfesiona(row :any){
-    this.dialog.open(DetalleProfesionalModalComponent,{
-      data:row
-    });
-    console.log('el  row '+row);
-   }
-
-   /*
-   // verInformacionProfesional(profesional: Profesional): void {
-     verInformacionProfesional(profesional: any) {
-  //  this.profesionalService.getProfesionalId( profesional.idProfesional)
-  //  .subscribe(rs => {
-    //  const modalRef = this.dialog.open(DetalleProfesionalModalComponent, {
-    //    width: '800px',
-    //    data: {rs}
-      
-    //  });
-   //   modalRef.afterClosed().subscribe(() => {
-   //     console.log('Modal ver detalle cerrado');
-   //   })
-   //   console.log( " data oficial", profesional)
-   // });
-   this.dialog.open(DetalleProfesionalModalComponent, { 
-       data: profesional
-      });
-
-   */
- 
-   verInformacionProfesional(profesional: Profesional) {
-     this.dialog.open(DetalleProfesionalModalComponent, { 
-       data: profesional
-      });
-
-  }
-  
-
- 
- 
-
-   /*
- private crearDtoProfesional(profesionales:Profesional[]){
-  this.dataSource = new MatTableDataSource<Profesional>();
-  let nuevoProfesional:AuxProfesional;
-
-  for (let i = 0; i < this.profesionales.length; i++) {
-    nuevoProfesional= new AuxProfesional();
-    this.profesional=profesionales[i];
-     
-    if (this.profesional) {
-      nuevoProfesional.id=this.profesional.idProfesional;
-      this.profesional.idProfesional ? nuevoProfesional.estado="Activo": nuevoProfesional.estado="Inactivo";
-      this.profesional.idProfesional ? nuevoProfesional.posee_carnet="Si":  nuevoProfesional.posee_carnet="No";
-      console.log("LO QUE INGRESA");
-      console.log(nuevoProfesional);
-      this.auxProfesionales.push(nuevoProfesional);
-    }
-
-   }
-   */
-   editarInformacionProfesional(profesional:Profesional)
-   {}
-
-   crearProfesional(){ 
-    this.dialog.open(CrearProfesionalModalComponent
-      ).afterClosed().subscribe(profesional=>{
-      console.log(" data: ", profesional)
-      }
-      );
-   }
-
-   
- 
 
   private _filterApellidoCedula(value: string): Observable<Profesional[]> {
     const filterValue = value.toLowerCase();
@@ -202,14 +116,30 @@ export class ProfessionalComponent {
   seleccionarApellidoCedula(event: MatAutocompleteSelectedEvent): void {
     let profesional = event.option.value as Profesional;
     console.log(profesional);
-    //this.profesionalesAsignar.push(profesional);
     this.autocompleteControlApellidoCedula.setValue('');
     event.option.focus();
     event.option.deselect();
 
   }
 
-  
+  verInformacionProfesional(row :any){
+    this.dialog.open(DetalleProfesionalModalComponent,{
+      data:row
+    });
+    console.log('el  row '+row);
+   }
+   crearProfesional(){ 
+    this.dialog.open(CrearProfesionalModalComponent)
+   }
+
+   editarProfesional(profesional: Profesional){ 
+    this.dialog.open(EditarProfesionalModalComponent , { 
+      data: profesional
+     });
+     console.log( "Estoy en el editar",profesional);
+   }
+
+   
   
   
 

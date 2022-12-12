@@ -52,7 +52,7 @@ export class EditarUnidadEducativaModalComponent {
       nombre: new FormControl('',Validators.required),
       direccion: new FormControl('',Validators.required)
 
-
+  
   });
   
   
