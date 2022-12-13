@@ -89,6 +89,9 @@ export class CrearProfesionalModalComponent {
 
   ngOnInit(): void {
 
+   // this.data.enabled = true;
+    //this.usuario.enabled = this.data.enabled;
+
     this.dialogForm=this.formBuilder.group({
 
     //Cuenta
