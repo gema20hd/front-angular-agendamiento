@@ -2,7 +2,7 @@ import { Component, Inject } from '@angular/core';
 import { Profesional } from '../../profesional';
 import { ProfesionalesService } from '../../profesionales.service';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { TipoDiscapacidad } from 'src/app/models/tipoDiscapacidad';
 import { Genero } from 'src/app/models/genero';
 import { Banco } from 'src/app/models/banco';
@@ -65,9 +65,8 @@ export class CrearProfesionalModalComponent {
   selectedGenero?:number;
   selectedTipoDiscapacidad?:number;
   selectedProfesionProfesional?:number;
-
-
   discapacidadRadio:number=2;
+
 
   dialogForm!: FormGroup;
 
@@ -90,11 +89,58 @@ export class CrearProfesionalModalComponent {
 
   ngOnInit(): void {
 
+    this.dialogForm=this.formBuilder.group({
+
+    //Cuenta
+    //idCuenta : new FormControl('',Validators.required),
+    numeroCuenta: new FormControl('',Validators.required),
+    banco: new FormControl('',Validators.required),
+    tipoCuenta: new FormControl('',Validators.required),
+
+    //profesional
+    //idProfesional : new FormControl('',Validators.required),
+    identificacionProfesional : new FormControl('',Validators.required),
+    nombresProfesional : new FormControl('',Validators.required),
+    apellidoPaternoProfesional : new FormControl('',Validators.required),
+    apellidoMaternoProfesional : new FormControl('',Validators.required),
+    fechaNacimientoProfesional : new FormControl('',Validators.required),
+    celularProfesional : new FormControl('',Validators.required),
+    telefonoEmergenciaProfesional : new FormControl('',Validators.required),
+    direccionDomicilioProfesional : new FormControl('',Validators.required),
+    correoElectronicoProfesional : new FormControl('',Validators.required),
+    estadoProfesional : new FormControl('',Validators.required),
+    hojaVida : new FormControl('',Validators.required),
+    tituloCuartoNivelProfesional : new FormControl('',Validators.required),
+
+	estadoCivil: new FormControl('',Validators.required),
+	tipoSangre : new FormControl('',Validators.required),
+  //discapacidad : new FormControl('',Validators.required),
+  descripcionDiscpacidad : new FormControl('',Validators.required),
+  porcentajeDiscapacidad: new FormControl('',Validators.required),
+  tipoDiscapacidad: new FormControl('',Validators.required),
+	genero : new FormControl('',Validators.required),
+  profesionProfesional : new FormControl('',Validators.required),
+  cuenta : new FormControl('',Validators.required),
+
+
+    //usuario
+
+    //idUsuario : new FormControl('',Validators.required),
+    username : new FormControl('',Validators.required),
+    password : new FormControl('',Validators.required),
+    password2: new FormControl('',Validators.required),
+    enabled : new FormControl('',Validators.required),
+    rol: new FormControl('',Validators.required),
+    profesional: new FormControl('',Validators.required),
+
+  });
+
     this.bancosFiltrados = this.autocompleteControlBanco.valueChanges.pipe(
       map(value => typeof value === 'string' ? value : value.descripcionBanco), 
       flatMap(value => value ? this._filterBanco(value) : []));
 
 
+      // get
       this.getTiposSangres();
       this.getGenero();
       this.getEstadoCivil ();
@@ -106,39 +152,6 @@ export class CrearProfesionalModalComponent {
   }
 
   
-  creaeCuenta(){
-    console.log(this.cuenta);
-    this.cuentaService.create(this.cuenta)
-      .subscribe(
-        cuenta => {
-          console.log(cuenta)
-            },
-        err => {
-          this.errores = err.error.errors as string[];
-          console.error('Código del error desde el backend: ' + err.status);
-          console.error(err.error.errors);
-        }
-      );
-
-  }
-
-  crearProfesional(profesional: Profesional){
-    console.log(this.cuenta);
-    this.profesionalService.create(this.profesional)
-      .subscribe(
-        profesional => {
-          console.log(profesional)
-            },
-        err => {
-          this.errores = err.error.errors as string[];
-          console.error('Código del error desde el backend: ' + err.status);
-          console.error(err.error.errors);
-        }
-      );
-
-
-  }
-
 
 
   create(): void {
@@ -186,6 +199,7 @@ private getTiposSangres(){
 private getGenero(){
 this.profesionalService.getGenero().subscribe(genero=>{
 this.generos=genero;
+
 
 } );
 }

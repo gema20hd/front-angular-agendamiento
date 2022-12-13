@@ -44,8 +44,6 @@ export class CrearUnidadEducativaMpdalComponent implements OnInit{
   ) {this.unidadEducativa = new UnidadEducativa()}
 
   ngOnInit(): void {
-
-
       this.dialogForm = new FormGroup({
       codigo: new FormControl('',Validators.required),
       nombre: new FormControl('',Validators.required),

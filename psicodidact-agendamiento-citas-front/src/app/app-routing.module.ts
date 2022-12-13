@@ -11,7 +11,7 @@ import { RoleGuard } from './users/login/guards/role.guard';
 import { LoginComponent } from './users/login/login.component';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { MatInputModule } from '@angular/material/input';
-import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatFormFieldControl, MatFormFieldModule } from '@angular/material/form-field';
 
 
 
@@ -28,8 +28,16 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule, MatInputModule,MatAutocompleteModule,MatFormFieldModule],
+  imports: [RouterModule.forRoot(routes),
+     MatInputModule,
+     MatFormFieldModule,
+     MatInputModule
+  ],
+  exports: [RouterModule, 
+    MatInputModule,
+    MatAutocompleteModule,
+    MatFormFieldModule, 
+    ],
 
 })
 export class AppRoutingModule {}
