@@ -8,6 +8,9 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+
 <div class="row">
     <div class="col-sm-6">
         <form class="example-form">
@@ -35,7 +38,6 @@
 <br>
 
 <table mat-table [dataSource]="unidadesEducativasFiltrados" class="mat-elevation-z8">
-
     <!-- Weight Column -->
     <ng-container matColumnDef="codigo">
         <th mat-header-cell *matHeaderCellDef>Código de la Instatiución </th>
@@ -68,8 +70,8 @@
         </td>
     </ng-container>
 
-    <tr mat-header-row *matHeaderRowDef="mostrarColumnas "></tr>
-    <tr mat-row *matRowDef="let row; columns: mostrarColumnas; "></tr>
+    <tr mat-header-row *matHeaderRowDef="mostrarColumnas"></tr>
+    <tr mat-row *matRowDef="let row; columns: mostrarColumnas;"></tr>
 </table>
 <br>
 <br>
@@ -79,11 +81,6 @@
 <br>
 <br>
 <br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
+
 
 <app-footer></app-footer>

@@ -14,7 +14,7 @@
 <br>
 <br>
 <div class="row">
-    <div class="col-sm-6">
+    <div class="col-sm-8">
         <form class="example-form">
             <mat-form-field class="example-full-width" appearance="fill">
                 <mat-label>Apellido o cedula de profesional</mat-label>
@@ -26,10 +26,9 @@
                 </mat-autocomplete>
             </mat-form-field>
         </form>
-        <div class="col-sm-2">
-            <button mat-stroked-button color="primary" (click)="crearProfesional()">Crear Profesional</button>
-        </div>
-
+    </div>
+    <div class="col-sm-2">
+        <button mat-stroked-button color="primary" (click)="crearProfesional()">Crear Profesional</button>
     </div>
 </div>
 <table mat-table [dataSource]="profesionalesFiltrados" class="mat-elevation-z8">

@@ -12,6 +12,7 @@ import { LoginComponent } from './users/login/login.component';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldControl, MatFormFieldModule } from '@angular/material/form-field';
+import {MatNativeDateModule} from '@angular/material/core';
 
 
 
@@ -31,12 +32,13 @@ const routes: Routes = [
   imports: [RouterModule.forRoot(routes),
      MatInputModule,
      MatFormFieldModule,
-     MatInputModule
+     MatInputModule,MatNativeDateModule
   ],
   exports: [RouterModule, 
     MatInputModule,
     MatAutocompleteModule,
     MatFormFieldModule, 
+    MatNativeDateModule
     ],
 
 })

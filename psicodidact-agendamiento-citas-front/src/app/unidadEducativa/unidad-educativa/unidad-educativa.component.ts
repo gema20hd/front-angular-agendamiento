@@ -25,14 +25,12 @@ import { EditarUnidadEducativaModalComponent } from '../editar-unidad-educativa/
 
 export class UnidadEducativaComponent {
   mostrarColumnas: string[] = ['codigo','nombre', 'direccion','editar','ver'];
- 
-
   dataSource = new MatTableDataSource<UnidadEducativa>();
 
   unidadesEducativasAsignar: UnidadEducativa [] = [];
   autocompleteControlNombre = new FormControl();
   unidadEducativa: UnidadEducativa = new UnidadEducativa();
-  titulo: string = 'Nuevo Unidad Educativa';
+  titulo: string = 'Nueva Unidad Educativa';
   inputTest="0";
   errores: String [] = [];
   unidadesEducativasFiltrados: Observable<UnidadEducativa[]> = new Observable();
@@ -51,7 +49,7 @@ export class UnidadEducativaComponent {
   ngOnInit() {
 
       this.unidadesEducativasFiltrados = this.autocompleteControlNombre.valueChanges.pipe(
-        map(value => typeof value === 'string' ? value : value.codigoInstitucion), 
+        map(value => typeof value === 'string' ? value : value.nombreUnidadEducativa), 
         flatMap(value => value ? this._filterNombre(value) : []));
 
      

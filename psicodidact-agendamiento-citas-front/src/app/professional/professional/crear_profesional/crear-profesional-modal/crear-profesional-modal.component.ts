@@ -29,6 +29,9 @@ import { MatAutocompleteSelectedEvent } from '@angular/material/autocomplete';
 })
 export class CrearProfesionalModalComponent {
 
+
+  titulo ="Crer el Profesional"
+  error: string[]=[];
   disableSelect = new FormControl(false);
   
   bancosFiltrados: Observable<Banco[]> = new Observable();
@@ -138,7 +141,7 @@ export class CrearProfesionalModalComponent {
 
   });
 
-    this.bancosFiltrados = this.autocompleteControlBanco.valueChanges.pipe(
+      this.bancosFiltrados = this.autocompleteControlBanco.valueChanges.pipe(
       map(value => typeof value === 'string' ? value : value.descripcionBanco), 
       flatMap(value => value ? this._filterBanco(value) : []));
 
@@ -250,9 +253,6 @@ seleccionarBanco(event: MatAutocompleteSelectedEvent): void {
   event.option.deselect();
 
 }
-
-
-
 cancelar(): void{
   this.modalRef.close();
 }
