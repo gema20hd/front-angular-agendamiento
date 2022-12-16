@@ -16,7 +16,26 @@ import { LoginComponent } from './users/login/login.component';
 import { PageComponent } from './error_page/page/page.component';
 import { ProfessionalComponent } from './professional/professional/professional.component';
 import { DetalleComponent } from './professional/professional/detalles/detalle/detalle.component';
+import { ProComponent } from './pro/pro/pro.component';
 
+import {MatMenuModule} from '@angular/material/menu';
+import { PacientesComponent } from './pacientes/pacientes.component';
+import {MatCardModule} from '@angular/material/card';
+import {MatInputModule} from '@angular/material/input';
+import {MatTableModule} from '@angular/material/table';
+import {MatIconModule} from '@angular/material/icon';
+import {MatPaginatorModule} from '@angular/material/paginator';
+import {MatDialogModule} from '@angular/material/dialog';
+import { DialogoCrearComponent } from './pacientes/dialogo-crear/dialogo-crear.component';
+import {MatDatepickerModule} from '@angular/material/datepicker';
+import { MatNativeDateModule } from '@angular/material/core';
+import {MatSelectModule} from '@angular/material/select';
+
+import {MatRadioModule} from '@angular/material/radio';
+import {MatTooltipModule} from '@angular/material/tooltip';
+import { DialogInformacionComponent } from './pacientes/dialog-informacion/dialog-informacion.component';
+
+import {MatAutocompleteModule} from '@angular/material/autocomplete';
 
 
 @NgModule({
@@ -30,8 +49,11 @@ import { DetalleComponent } from './professional/professional/detalles/detalle/d
     PageComponent,
     ProfessionalComponent,
     DetalleComponent,
-    ProfessionalComponent
- 
+    ProfessionalComponent,
+    ProComponent,
+    PacientesComponent,
+    DialogoCrearComponent,
+    DialogInformacionComponent,
    
   ],
   imports: [
@@ -41,7 +63,20 @@ import { DetalleComponent } from './professional/professional/detalles/detalle/d
     HttpClientModule,
     FormsModule,
     BrowserAnimationsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    MatMenuModule,
+    MatCardModule,
+    MatInputModule,
+    MatTableModule,
+    MatIconModule,
+    MatPaginatorModule,
+    MatDialogModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
+    MatSelectModule,
+    MatRadioModule,
+    MatTooltipModule,
+    MatAutocompleteModule
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -1,0 +1,163 @@
+<app-header></app-header>
+<div class="div_panel">
+
+
+
+  <div class="row">
+    <mat-card class="card">
+      <mat-card-title class="card_title">Panel de búsqueda</mat-card-title>
+    </mat-card>
+
+    <mat-card class="card2">
+ 
+      <mat-card-content>
+
+   
+        <form [formGroup]="dialogForm">
+          <div class="container">
+            <div class="row">
+              
+                <div class="col-lg-1 col-md-4">
+                  <br/>
+                  <label>Identificación</label>
+                </div>
+             
+
+              <div class="col-lg-3 col-md-4">
+                <mat-form-field class="example-full-width" appearance="outline">
+                  <mat-label>Ingrese identificación</mat-label>
+                  <input matInput placeholder="Indentificacion" formControlName="identificacion" />
+                </mat-form-field>
+                <br/>              
+                <span style="color:red;" *ngIf="identificacion && identificacion.invalid">Número de cédula no válida</span>
+              </div>
+           
+              <div class="col-lg-1 col-md-4">
+                <br/>
+                <label>Apellidos</label>
+              </div>
+
+              <div class="col-lg- col-md-4">
+                <mat-form-field class="example-full-width" appearance="outline">
+                  <mat-label>Ingrese apellidos</mat-label>
+                  <input matInput placeholder="Apellidos" formControlName="apellidos" />
+                </mat-form-field>
+                <br/>              
+                <span style="color:red;" *ngIf="apellidos && apellidos.invalid">Apellido no válido</span>
+              </div>
+            </div>
+          </div>
+          <div class="div_booton" >
+          <button class="button_Buscar"  [disabled]="dialogForm.invalid"  (click)="buscarBtn()">Buscar</button>
+          <button class= "button" (click)="openDiagCrearPaciente()">Nuevo</button>
+        </div>
+        </form>
+      
+      <!--
+
+
+<form class="example-form">
+  <mat-form-field class="example-full-width" appearance="fill">
+      <mat-label>Apellido o cedula de profesional</mat-label>
+      <input type="text" placeholder="Seleccioné un elemento" aria-label="Profesional" matInput [formControl]="autocompleteControlApellidoCedula" [matAutocomplete]="auto">
+      <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete" [displayWith]="mostrarApellidoCedula" (optionSelected)="seleccionarApellidoCedula($event)">
+          <mat-option *ngFor="let profesional of pacientesFiltrados | async" [value]="profesional">
+              {{ mostrarApellidoCedula(profesional) }}
+          </mat-option>
+      </mat-autocomplete>
+  </mat-form-field>
+</form>
+<div class="col-sm-2">
+  <button mat-stroked-button  class= "button" (click)="openDiagCrearPaciente()">Nuevo</button>
+</div>
+
+-->
+
+
+
+      </mat-card-content>
+    </mat-card>
+  </div>
+
+
+
+</div>
+
+<div class="div_table">
+  <div class="row">
+    <mat-card class="card">
+      <mat-card-title class="card_title">Panel de Resultados</mat-card-title>
+    </mat-card>
+    <div >
+      <div class="mat-elevation-z8">
+      <table mat-table [dataSource]="dataSource" matSort>
+        <!-- Position Column -->
+        <ng-container matColumnDef="Identificacion" class="centrar_column">
+          <th mat-header-cell *matHeaderCellDef class="centrar_column" mat-sort-header>Identificacion</th>
+          <td mat-cell *matCellDef="let element">{{ element.identificacion }}</td>
+        </ng-container>
+
+        <!-- Name Column -->
+        <ng-container matColumnDef="Nombres">
+          <th mat-header-cell *matHeaderCellDef class="centrar_column" mat-sort-header >Nombres</th>
+          <td mat-cell *matCellDef="let element">{{ element.nombres }}</td>
+        </ng-container>
+
+        <!-- Weight Column -->
+        <ng-container matColumnDef="Apellidos">
+          <th mat-header-cell *matHeaderCellDef class="centrar_column" mat-sort-header>Apellidos</th>
+          <td mat-cell *matCellDef="let element">{{ element.apellidos }}</td>
+        </ng-container>
+
+        <!-- Symbol Column -->
+        <ng-container matColumnDef="Representante"  >
+          <th mat-header-cell *matHeaderCellDef class="centrar_column" mat-sort-header>Representante</th>
+          <td mat-cell *matCellDef="let element" >{{ element.posee_representante }}</td>
+        </ng-container>
+
+         <!-- Symbol Column -->
+         <ng-container matColumnDef="Carnet_Discapacidad">
+          <th mat-header-cell *matHeaderCellDef class="centrar_column" mat-sort-header>Carnet Discapacidad</th>
+          <td mat-cell *matCellDef="let element">{{ element.posee_carnet }}</td>
+        </ng-container>
+
+         <!-- Symbol Column -->
+         <ng-container matColumnDef="Estado">
+          <th mat-header-cell *matHeaderCellDef class="centrar_column" mat-sort-header>Estado</th>
+          <td mat-cell *matCellDef="let element">{{ element.estado }}</td>
+        </ng-container>
+
+        <!-- action -->
+        <ng-container matColumnDef="accion" >
+          <th mat-header-cell *matHeaderCellDef class="centrar_column">Accion</th>
+          <td mat-cell *matCellDef="let element" class="centrar_column">
+
+            <button mat-icon-button color="primary" class="btn_Edit"  (click)="openDiagEditarPaciente(element)">
+              <mat-icon class="icon_Edit"  matTooltip="Editar">edit</mat-icon>
+              
+            </button>
+           
+            <button mat-icon-button color="warn" class="btn_Info"  (click)="openDiagInformacion(element)">
+              <mat-icon class="icon_Info" matTooltip="Ver Información">info</mat-icon>
+
+            </button>
+          </td>
+        </ng-container>
+
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+      </table>
+
+      <mat-paginator
+        [pageSizeOptions]="[5, 10, 20]"
+        showFirstLastButtons
+        aria-label="Select page of periodic elements"
+      >
+      </mat-paginator>
+      </div>
+    </div>
+  </div>
+</div>
+
+<app-footer></app-footer>

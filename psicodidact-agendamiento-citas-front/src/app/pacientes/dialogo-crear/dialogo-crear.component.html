@@ -1,0 +1,644 @@
+<h2 mat-dialog-title class="card_title">Panel ingreso Paciente</h2>
+<mat-dialog-content>
+  <form [formGroup]="dialogForm">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-6">
+          <mat-form-field appearance="outline">
+            <mat-label>Nombres</mat-label>
+            <input matInput placeholder="Nombres"  formControlName="nombres" />
+          </mat-form-field>
+        </div>
+
+        
+
+        <div class="col-md-6">
+          <mat-form-field appearance="outline">
+            <mat-label>Identificacion</mat-label>
+            <input matInput placeholder="Identificacion" formControlName="identificacion" />
+          </mat-form-field>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-md-6">
+          <mat-form-field appearance="outline">
+            <mat-label>Apellido Paterno</mat-label>
+            <input matInput placeholder="Apellido Paterno"  formControlName="apellidoPaterno" />
+          </mat-form-field>
+        </div>
+
+        <div class="col-md-6">
+          <mat-form-field appearance="outline">
+            <mat-label>Apellido Materno</mat-label>
+            <input matInput placeholder="Apellido Materno" formControlName="apellidoMaterno" />
+          </mat-form-field>
+        </div>
+      </div>
+
+      <div class="row">
+
+          <div class="col-md-6">
+            <label>Posee Antecedentes</label>
+            <br />
+            <mat-radio-group
+              aria-label="Select an option"
+              formControlName="poseeAntecedentes"
+              [(ngModel)]="antecedentesRadio"
+            >
+              <mat-radio-button class="div_radio_antecedentes" value="1" [checked]="checkPoseeAntecedentesSi">Si</mat-radio-button>
+              <mat-radio-button value="2"  [checked]="checkPoseeAntecedentesNo">No</mat-radio-button>
+            </mat-radio-group>
+          </div>
+   
+          
+          
+          <div class="col-md-6">
+            <mat-form-field appearance="fill">
+              <mat-label>Estado Civil </mat-label>
+              <mat-select [(ngModel)]="selectestadoCivil" name="estado.idEstadoCivil" formControlName="estadoCivil">
+                <mat-option *ngFor="let estado of estadoCivilList" [value]="estado.idEstadoCivil">
+                  {{estado.descripcionEstadoCivil}}
+                </mat-option>
+              
+              </mat-select>
+            </mat-form-field>
+          </div>
+
+
+      </div>
+
+
+
+
+      
+      <ng-template [ngIf]="antecedentesRadio == 1">
+       
+        <div class="row">
+          <div class="col-md-6">
+            <mat-form-field appearance="outline">
+              <mat-label>Síntoma Antecedente</mat-label>
+              <input matInput placeholder="Síntoma Antecedente" formControlName="sintomaAntecedentes"/>
+            </mat-form-field>
+          </div>
+
+          <div class="col-md-6">
+            <mat-form-field appearance="outline">
+              <mat-label>Enfermedad Antecedente</mat-label>
+              <input matInput placeholder="Enfermedad Antecedente" formControlName="enfermedadAntecedentes"/>
+            </mat-form-field>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-md-6">
+            <mat-form-field appearance="outline">
+              <mat-label>Enfermedad Paterna</mat-label>
+              <input matInput placeholder="Enfermedad Paterna" formControlName="enfermedadPeterna"/>
+            </mat-form-field>
+          </div>
+
+          <div class="col-md-6">
+            <mat-form-field appearance="outline">
+              <mat-label>Enfermedad Materna</mat-label>
+              <input matInput placeholder="Enfermedad Materna" formControlName="enfermedadMaterna"/>
+            </mat-form-field>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-md-6">
+            <mat-form-field appearance="outline">
+              <mat-label>Enfermedad Representante</mat-label>
+              <input matInput placeholder="Enfermedad Representante"  formControlName="enfermedadRepresenatante"/>
+            </mat-form-field>
+          </div>
+
+          <div class="col-md-6">
+            <mat-form-field appearance="outline">
+              <mat-label>Tratamiento Antecedente</mat-label>
+              <input matInput placeholder="Tratamiento Antecedente" formControlName="tratamientoAntecedente" />
+            </mat-form-field>
+          </div>
+        </div>
+        
+
+        <div class="row">
+          <div class="col-md-6">
+            <mat-form-field appearance="outline">
+              <mat-label>Alergia Antecedente</mat-label>
+              <input matInput placeholder="Alergia Antecedente"  formControlName="alergiaAntecedente"/>
+            </mat-form-field>
+          </div>
+
+          <div class="col-md-6">
+            <mat-form-field appearance="outline">
+              <mat-label>Medicamento Antecedente</mat-label>
+              <input matInput placeholder="Medicamento Antecedente" formControlName="medicamentoAntecedente"/>
+            </mat-form-field>
+          </div>
+        </div>
+      </ng-template>
+
+
+
+
+
+
+      <div class="row">
+        <div class="col-md-6">
+          <mat-form-field appearance="fill">
+            <mat-label>Tipo Sangre </mat-label>
+            <mat-select [(ngModel)]="selectedTipo" name="tipo" formControlName="tipoSangre">
+
+              <mat-option *ngFor="let tipo of tipoSangreList" [value]="tipo.idTipoSangre">
+                {{tipo.descripcionTipoSangre}}
+              </mat-option>
+            
+            </mat-select>
+          </mat-form-field>
+        </div>
+
+        <div class="col-md-6">
+          <mat-form-field appearance="fill">
+            <mat-label>Género </mat-label>
+            <mat-select [(ngModel)]="selectedGenero" name="genero" formControlName="genero" >
+
+              <mat-option *ngFor="let genero of generoList" [value]="genero.idGenero">
+                {{genero.descripcionGenero}}
+              </mat-option>
+            
+            </mat-select>
+          </mat-form-field>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-md-8">
+          <mat-form-field appearance="fill">
+            <mat-label>Fecha Nacimiento</mat-label>
+            <input matInput [matDatepicker]="picker" formControlName="fechaNacimiento" />
+            <mat-hint>MM/DD/YYYY</mat-hint>
+            <mat-datepicker-toggle
+              matSuffix
+              [for]="picker"
+            ></mat-datepicker-toggle>
+            <mat-datepicker #picker></mat-datepicker>
+          </mat-form-field>
+        </div>
+
+        <div class="col-md-4">
+          <label>Posee Educacion</label>
+          <br />
+          <mat-radio-group
+            aria-label="Select an option"
+            formControlName="poseeEducacion"
+            [(ngModel)]="educacionRadio"
+          >
+            <mat-radio-button class="div_radio" value="1" [checked]="checkPoseeEducacionSi">Si</mat-radio-button>
+            <mat-radio-button value="2" [checked]="true" [checked]="checkPoseeEducacionNo">No</mat-radio-button>
+          </mat-radio-group>
+        </div>
+      </div>
+
+      <div class="row">
+        <ng-template [ngIf]="educacionRadio == 1">
+          <div class="col-md-6">
+            <mat-form-field appearance="fill">
+              <mat-label>Unidad Educativa </mat-label>
+              <mat-select [(ngModel)]="selectUnidadEducativa" name="unidad.idUnidadEducativa" formControlName="unidadEducativa">
+  
+                <mat-option *ngFor="let unidad of unidadEducativaList" [value]="unidad.idUnidadEducativa">
+                  {{unidad.nombreUnidadEducativa}}
+                </mat-option>
+              
+              </mat-select>
+            </mat-form-field>
+          </div>
+
+          <div class="col-md-6">
+            <mat-form-field appearance="fill">
+              <mat-label>Nivel Educación </mat-label>
+              <mat-select [(ngModel)]="selectNivelEducacion" name="nivel.idNivelEducacionParalelo" formControlName="nivelEducacion">
+  
+                <mat-option *ngFor="let nivel of nivelEdicacionList" [value]="nivel.idNivelEducacionParalelo">
+                  {{nivel.descripcionNivelParalelo}}
+                </mat-option>
+              
+              </mat-select>
+            </mat-form-field>
+          </div>
+        </ng-template>
+      </div>
+
+
+
+
+      
+      <div class="row">
+        <div class="col-md-6">
+          <br/>
+          <label>Posee Discapacidad</label>
+        
+        </div>
+      
+          <div class="col-md-6">
+            <br/>
+          <mat-radio-group
+            aria-label="Select an option"
+            formControlName="poseeDiscapacidad"
+            [(ngModel)]="discapacidadRadio"
+          >
+            <mat-radio-button class="div_radio" value="1"  [checked]="checkPoseeDiscapacidadSi">Si</mat-radio-button>
+            <mat-radio-button value="2" [checked]="true"  [checked]="checkPoseeDiscapacidadNo">No</mat-radio-button>
+          </mat-radio-group>
+        </div>
+      </div>
+
+      <ng-template [ngIf]="discapacidadRadio == 1">
+        <div class="row">
+          <div class="col-md-6">
+            <mat-form-field appearance="fill">
+              <mat-label>Tipo Discapacidad </mat-label>
+              <mat-select [(ngModel)]="selectTipoDiscapacidad" name="tipo.idTipoDiscapacidad" formControlName="tipoDiscapacidad">
+  
+                <mat-option *ngFor="let tipo of tipoDiscapacidadList" [value]="tipo.idTipoDiscapacidad">
+                  {{tipo.descripcionTipoDiscapacidad}}
+                </mat-option>
+              
+              </mat-select>
+            </mat-form-field>
+          </div>
+
+
+          <div class="col-md-4">
+            <mat-form-field appearance="outline">
+              <mat-label>Porcentaje Discapacidad %</mat-label>
+              <input matInput placeholder="Porcentaje Discapacidad" formControlName="porcentajeDiscapacidad" /> 
+            </mat-form-field>
+          </div>
+        </div>
+
+        <div class="row descripcion">
+          <mat-form-field appearance="outline">
+            <mat-label>Descripcion Discapacidad</mat-label>
+            <input matInput placeholder="Descripcion Discapacidad" formControlName="descripcionDiscapacidad" />
+          </mat-form-field>
+        </div>
+      </ng-template>
+
+      <div class="row">
+        <div class="col-md-6">
+          <br/>
+          <label>Posee Representante</label>
+        
+        </div>
+        <div class="col-md-6">
+          <br/>
+          <mat-radio-group
+            aria-label="Select an option"
+            formControlName="poseeRepresentante"
+            [(ngModel)]="representanteRadio"
+          >
+            <mat-radio-button class="div_radio" value="1" [checked]="checkPoseeRepresentanteSi">Si</mat-radio-button>
+            <mat-radio-button value="2" [checked]="checkPoseeRepresentanteNo">No</mat-radio-button>
+          </mat-radio-group>
+        </div>
+      </div>
+
+      <ng-template [ngIf]="representanteRadio == 2">
+        <div class="row">
+          <div class="col-md-6">
+            <mat-form-field appearance="fill">
+              <mat-label>Profesion </mat-label>
+              <mat-select [(ngModel)]="selectProfesion" name="profesion.idProfesion" formControlName="profesion">
+  
+                <mat-option *ngFor="let profesion of profesionList" [value]="profesion.idProfesion">
+                  {{profesion.descripcionProfesion}}
+                </mat-option>
+              
+              </mat-select>
+            </mat-form-field>
+          </div>
+
+            <div class="col-md-6">
+              <mat-form-field appearance="fill">
+                <mat-label>Tipo Trabajo</mat-label>
+                <mat-select [(ngModel)]="selectTipoTrabajo" name="tipo.idTipoTrabajo" formControlName="tipoEmpleo">
+    
+                  <mat-option *ngFor="let tipo of tipoTrabajoList" [value]="tipo.idTipoTrabajo">
+                    {{tipo.descripcionTipoTrabajo}}
+                  </mat-option>
+                
+                </mat-select>
+              </mat-form-field>
+            </div>
+          </div>
+     
+
+        <div class="row">
+          <div class="col-md-6">
+            <mat-form-field appearance="outline">
+              <mat-label>Celular</mat-label>
+              <input matInput placeholder="Celular"  formControlName="celular"/>
+            </mat-form-field>
+          </div>
+
+          <div class="col-md-6">
+            <mat-form-field appearance="outline">
+              <mat-label>Teléfono emergencia</mat-label>
+              <input matInput placeholder="Teléfono emergencia" formControlName="telefonoEmergencia"/>
+            </mat-form-field>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-md-6">
+            <mat-form-field appearance="outline">
+              <mat-label>Dirección Trabajo</mat-label>
+              <input matInput placeholder="Dirección Trabajo" formControlName="direccionTrabajo" />
+            </mat-form-field>
+          </div>
+
+          <div class="col-md-6">
+            <mat-form-field appearance="outline">
+              <mat-label>Dirección Domicilio</mat-label>
+              <input matInput placeholder="Dirección Domicilio" formControlName="direccionDomicilio"/>
+            </mat-form-field>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-md-6">
+            <mat-form-field appearance="outline">
+              <mat-label>Correo</mat-label>
+              <input matInput placeholder="Correo" formControlName="correo" />
+            </mat-form-field>
+          </div>
+          <div class="col-md-6">
+            <mat-form-field appearance="outline">
+              <mat-label>Descripción Trabajo</mat-label>
+              <input matInput placeholder="Descripción Trabajo" formControlName="descripcionTrabajo" />
+            </mat-form-field>
+          </div>
+        </div>
+      </ng-template>
+
+      <ng-template [ngIf]="representanteRadio == 1">
+        <div class="row">
+          <div class="col-md-6">
+            <mat-form-field appearance="outline">
+              <mat-label>Nombres</mat-label>
+              <input matInput placeholder="Nombres" formControlName="nombreRepresentante"/>
+            </mat-form-field>
+          </div>
+
+
+          <div class="col-md-6">
+            <mat-form-field appearance="outline">
+              <mat-label>Identificación</mat-label>
+              <input matInput placeholder="Identificacion" formControlName="identificacionRepresentante"/>
+            </mat-form-field>
+          </div>
+
+        
+        </div>
+        <div class="row">
+        <div class="col-md-6">
+            <mat-form-field appearance="outline">
+              <mat-label>Apellido Paterno</mat-label>
+              <input matInput placeholder="Apellido Paterno" formControlName="apellidoPaternoRepresentante"/>
+            </mat-form-field>
+          </div>
+
+
+                  
+          <div class="col-md-6">
+            <mat-form-field appearance="outline">
+              <mat-label>Apellido Materno</mat-label>
+              <input matInput placeholder="Apellido Materno" formControlName="apellidoMaternoRepresentante"/>
+            </mat-form-field>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-md-6">
+            <mat-form-field appearance="fill">
+              <mat-label>Estado Civil </mat-label>
+              <mat-select [(ngModel)]="selectestadoCivilRepre" name="estado.idEstadoCivil" formControlName="estadoCivilRepre">
+                <mat-option *ngFor="let estado of estadoCivilList" [value]="estado.idEstadoCivil">
+                  {{estado.descripcionEstadoCivil}}
+                </mat-option>
+              
+              </mat-select>
+            </mat-form-field>
+          </div>
+
+
+
+          <div class="col-md-6">
+            <mat-form-field appearance="fill">
+              <mat-label>Fecha Nacimiento</mat-label>
+              <input matInput [matDatepicker]="picker" formControlName="fechaNacimientoRepresentante"/>
+              <mat-hint>MM/DD/YYYY</mat-hint>
+              <mat-datepicker-toggle
+                matSuffix
+                [for]="picker"
+              ></mat-datepicker-toggle>
+              <mat-datepicker #picker></mat-datepicker>
+            </mat-form-field>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-md-6">
+            <mat-form-field appearance="fill">
+              <mat-label>Género </mat-label>
+              <mat-select [(ngModel)]="selectGeneroRepresentante" name="genero" formControlName="generoRepresentante">
+  
+                <mat-option *ngFor="let genero of generoList" [value]="genero.idGenero">
+                  {{genero.descripcionGenero}}
+                </mat-option>
+              
+              </mat-select>
+            </mat-form-field>
+          </div>
+
+          <div class="col-md-6">
+            <mat-form-field appearance="fill">
+              <mat-label>Tipo Sangre </mat-label>
+              <mat-select [(ngModel)]="selectedTipoRepre" name="tipo" formControlName="tipoSangreRepresentante">
+  
+                <mat-option *ngFor="let tipo of tipoSangreList" [value]="tipo.idTipoSangre">
+                  {{tipo.descripcionTipoSangre}}
+                </mat-option>
+              
+              </mat-select>
+            </mat-form-field>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-md-6">
+            <mat-form-field appearance="outline">
+              <mat-label>Correo</mat-label>
+              <input matInput placeholder="Correo" formControlName="correoRepresentante" />
+            </mat-form-field>
+          </div>
+
+          <div class="col-md-6">
+            <mat-form-field appearance="outline">
+              <mat-label>Celular</mat-label>
+              <input matInput placeholder="Celular" formControlName="celularRepresentante"/>
+            </mat-form-field>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-md-6">
+            <mat-form-field appearance="outline">
+              <mat-label>Teléfono Emergencia</mat-label>
+              <input matInput placeholder="Teléfono Emergencia" formControlName="telefonoEmergenciaRepre"/>
+            </mat-form-field>
+          </div>
+
+          <div class="col-md-6">
+            <mat-form-field appearance="fill">
+              <mat-label>Profesión </mat-label>
+              <mat-select [(ngModel)]="selectProfesionRepresentante" name="profesion.idProfesion" formControlName="profesionRepresentante">
+  
+                <mat-option *ngFor="let profesion of profesionList" [value]="profesion.idProfesion">
+                  {{profesion.descripcionProfesion}}
+                </mat-option>
+              
+              </mat-select>
+            </mat-form-field>
+          </div>
+        </div>
+
+        <div class="row">
+         
+          <div class="col-md-6">
+            <mat-form-field appearance="fill">
+              <mat-label>Tipo Trabajo</mat-label>
+              <mat-select [(ngModel)]="selecttipoTrabajodRepresentante" name="tipo.idTipoTrabajo" formControlName="tipoEmpleoRepre">
+  
+                <mat-option *ngFor="let tipo of tipoTrabajoList" [value]="tipo.idTipoTrabajo">
+                  {{tipo.descripcionTipoTrabajo}}
+                </mat-option>
+              
+              </mat-select>
+            </mat-form-field>
+          </div>
+
+          <div class="col-md-6">
+            <mat-form-field appearance="outline">
+              <mat-label>Parentesco</mat-label>
+              <input matInput placeholder="Parentesco" formControlName="parentescoRepresentante" />
+            </mat-form-field>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-6">
+            <mat-form-field appearance="outline">
+              <mat-label>Dirección Domicilio</mat-label>
+              <input matInput placeholder="Dirección Domicilio" formControlName="direccionDomicilioRepre"/>
+            </mat-form-field>
+          </div>
+
+          <div class="col-md-6">
+            <mat-form-field appearance="outline">
+              <mat-label>Descripción Trabajo</mat-label>
+              <input matInput placeholder="Descripción Trabajo" formControlName="descripcionTrabajoRepresentante" />
+            </mat-form-field>
+          </div>
+        </div>
+
+        <div class="row">
+
+          <div class="col-md-6">
+            <mat-form-field appearance="outline">
+              <mat-label>Dirección Trabajo</mat-label>
+              <input matInput placeholder="Dirección Trabajo" formControlName="direccionTrabajoRepresentante" />
+            </mat-form-field>
+          </div>
+          
+          
+            <div class="col-md-6"> 
+              <label>Posee Posee Discapacidad</label>     
+              <br />
+       
+            <mat-radio-group
+              aria-label="Select an option"
+              formControlName="poseeDiscapacidadRepre"
+              [(ngModel)]="discapacidadRepresentanteRadio"
+            >
+              <mat-radio-button  class="div_radio" value="1"  [checked]="checkPoseeDisRepreSi">Si</mat-radio-button>
+              <mat-radio-button value="2"  [checked]="checkPoseeDisRepreNo">No</mat-radio-button>
+            </mat-radio-group>
+          </div>
+
+         
+        </div>
+
+        <ng-template [ngIf]="discapacidadRepresentanteRadio == 1">
+          <div class="row">
+            <div class="col-md-6">
+              <mat-form-field appearance="fill">
+                <mat-label>Tipo Discapacidad </mat-label>
+                <mat-select [(ngModel)]="selecttipoDiscapacidadRepresentante" name="tipo.idTipoDiscapacidad" formControlName="tipoDiscapacidadRepre">
+    
+                  <mat-option *ngFor="let tipo of tipoDiscapacidadList" [value]="tipo.idTipoDiscapacidad">
+                    {{tipo.descripcionTipoDiscapacidad}}
+                  </mat-option>
+                
+                </mat-select>
+              </mat-form-field>
+            </div>
+
+            <div class="col-md-6">
+              <mat-form-field appearance="outline">
+                <mat-label>Porcentaje Discapacidad</mat-label>
+                <input matInput placeholder="Porcentaje Discapacidad" formControlName="porcentajeDiscapacidadRepre"/>
+              </mat-form-field>
+            </div>
+          </div>
+
+          <div class="row descripcion">
+            <mat-form-field appearance="outline">
+              <mat-label>Descripción Discapacidad</mat-label>
+              <input matInput placeholder="Descripción Discapacidad" formControlName="descripcionDiscapacidadRepre"/>
+            </mat-form-field>
+          </div>
+        </ng-template>
+      </ng-template>
+
+      <ng-template [ngIf]="pacienteActivoPlantillaRadio == 1">
+        <div class="row">
+          <div class="col-md-6">
+            <br/>
+            <label>Estado Paciente</label>
+          
+          </div>
+        <div class="col-md-6">
+          <br/>
+          <mat-radio-group
+            aria-label="Select an option"
+            formControlName="pacienteActivo"
+            [(ngModel)]="pacienteActivoRadio"
+          >
+            <mat-radio-button class="div_radio" value="1" [checked]="checkActivoPaciente">Activo</mat-radio-button>
+            <mat-radio-button value="2" [checked]="checkInactivoPaciente">Inactivo</mat-radio-button>
+          </mat-radio-group>
+        </div>
+      </div>
+      </ng-template>
+
+    </div>
+  </form>
+
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+  <button mat-button mat-dialog-close class="button">Cancelar</button>
+  <button mat-button  mat-raised-button  class="button" (click)="crearPacienteGeneral()">{{btn_opcion}}</button>
+</mat-dialog-actions>

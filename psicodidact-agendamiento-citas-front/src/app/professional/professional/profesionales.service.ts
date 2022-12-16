@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { catchError, map, Observable, throwError } from 'rxjs';
@@ -11,8 +11,9 @@ import { ProfesionProfesional } from 'src/app/models/profesionProfesional';
 import { TipoCuenta } from 'src/app/models/tipoCuenta';
 import { TipoDiscapacidad } from 'src/app/models/tipoDiscapacidad';
 import { TipoSangre } from 'src/app/models/tipoSangre';
+import { AuthService } from 'src/app/users/login/auth.service';
 import { Profesional } from './profesional';
-
+import swal from 'sweetalert2';
 
 
 @Injectable({
@@ -22,13 +23,64 @@ export class ProfesionalesService {
  private profesional: Profesional;
  private urlEndPointProfesionales: string = 'http://localhost:8080/api/profesionales';
  private urlEndPointCuentas: string = 'http://localhost:8080/api/cuentas';
+ private urlEndPointGenero: string = 'http://localhost:8080/api';
 
-  constructor(public http: HttpClient, public router: Router) {
-    this.profesional=new Profesional();
+ private httpHeaders = new HttpHeaders({'Content-Type': 'application/json'})
+
+
+  constructor(public http: HttpClient, public router: Router,public authService: AuthService) {
+   this.profesional=new Profesional();
    }
 
+
+
+   private agregarAuthorizationHeader() {
+     
+    let token = sessionStorage.getItem('token');
+
+   
+    if (token != null) {
+      return this.httpHeaders.append('Authorization', 'Bearer ' + token);
+    }
+    return this.httpHeaders;
+  }
+
+  private isNoAutorizado(e: any): boolean {
+    if (e.status == 401) {
+
+      if (this.authService.isAuthenticated()) {
+        this.authService.logout();
+      }
+      this.router.navigate(['/login']);
+      return true;
+    }
+    if (e.status == 403) {
+      swal.fire('Acceso denegado', `Hola ${this.authService.usuario.username} no tienes acceso a este recurso!`, 'warning');
+      this.router.navigate(['/home']);
+      return true;
+    }
+    return false;
+  }
+
+
+
+
+
+
+
+
+
+
+
+
+
   getGenero(): Observable<Genero[]> {
-    return this.http.get<Genero[]>(this.urlEndPointProfesionales + '/genero');
+    return this.http.get<Genero[]>(this.urlEndPointGenero + '/genero',{ headers: this.agregarAuthorizationHeader()}).pipe(
+      catchError(e => {
+        this.isNoAutorizado(e);
+        return throwError(e);
+      })
+    );
   }
 
   getEstadoCivil(): Observable<EstadoCivil[]> {

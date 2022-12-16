@@ -1,0 +1,60 @@
+.card_title{
+    text-align: center;
+    background-color: #00A7E3;
+    cursor: pointer;
+    border-radius: 1.5rem;
+    -webkit-border-radius: 1.5rem;
+    -moz-border-radius: 1.5rem;
+    -ms-border-radius: 1.5rem;
+    -o-border-radius: 1.5rem;
+    font-size: 0.875rem;
+    font-family: "Roboto", sans-serif;
+}
+
+
+.descripcion{
+width: 102%;
+
+}
+
+.calendario{
+    width: 50%;  
+}
+
+
+
+  
+.div_radio{
+
+  
+    padding-right: 40px;
+  }
+
+  .button {
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    border: none;
+    font-size: 0.675rem;
+    color: #ffffff;
+    font-weight: bold;
+    background-color: #00A7E3;
+    width: 14%;
+    display: block;
+    margin-top: 0px;
+    padding: 0.275rem 0.2rem;
+    border-radius: 1.5rem;
+    box-shadow: 3px 3px 8px #b1b1b1, -3px -3px 8px #ffffff;
+    cursor: pointer;
+    -webkit-border-radius: 1.5rem;
+    -moz-border-radius: 1.5rem;
+    -ms-border-radius: 1.5rem;
+    -o-border-radius: 1.5rem;
+    margin-right: 10px;
+}
+
+
+.div_radio_antecedentes{
+
+  
+    padding-right: 40px;
+  }
