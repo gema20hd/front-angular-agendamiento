@@ -6,59 +6,95 @@
 <br>
 <br>
 <br>
-
-<body id="body">
-    <div class="container">
-        <div class="card bg-light mb-3 panel mt-5">
-            <div class="card-header border border-primary panel">Panel de búsqueda</div>
-            <div class="card-body">
-                <nav class="navbar navbar-light bg-light">
-                    <form class="form-inline">
-                        <input id="miid" class="input-align form-control mr-sm-3" type="search" placeholder="Cédula o pasaporte" aria-label="Search">
-                        <input id="miid" class="input-align form-control mr-sm-2" type="search" placeholder="Primer Apellido" aria-label="Search">
-                        <button class="button-align btn btn-outline-primary my-2 my-sm-0" type="submit ">Crear Profesional</button>
-                    </form>
-                </nav>
-            </div>
-        </div>
-        <div class="card border-primary mb-3 table ">
-            <div class="card-header ">Datos del Profesional</div>
-            <div class="card-body text-primary ">
-                <div *ngIf="profesionales?.length==0 " class="alert alert-info ">
-                    No hay registros en la base de datos!
-                </div>
-                <table class="table table-bordered table-striped ">
-                    <thead>
-                        <tr>
-                            <th>Identificación</th>
-                            <th>Nombres</th>
-                            <th>Apellidos</th>
-                            <th>Teléfono</th>
-                            <th>Especialidad</th>
-                            <th>Estado</th>
-                            <th>Acciones</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>1</td>
-                            <td>2</td>
-                            <td>3</td>
-                            <td>4</td>
-                            <td>5</td>
-                            <td>6</td>
-                            <td class="mb-5 small text-center ">
-                                <a class="btn btn-primary btn-circle btn-outline-success border border-light btn-sm small mr-sm-2 "><span>Editar</span></a>
-                                <a class="btn btn-primary btn-circle btn-outline-danger border border-light  btn-sm small  mr-sm-2 "> <span>Eliminar</span></a>
-                                <a class="btn btn-primary btn-circle btn-outline-info   border border-light btn-sm small  mr-sm-2 "> <span>Detalle</span></a>
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
-
-
-            </div>
-        </div>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<div class="row">
+    <div class="col-sm-8">
+        <form class="example-form">
+            <mat-form-field class="example-full-width" appearance="fill">
+                <mat-label>Apellido o cedula de profesional</mat-label>
+                <input type="text" placeholder="Seleccioné un elemento" aria-label="Profesional" matInput [formControl]="autocompleteControlApellidoCedula" [matAutocomplete]="auto">
+                <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete" [displayWith]="mostrarApellidoCedula" (optionSelected)="seleccionarApellidoCedula($event)">
+                    <mat-option *ngFor="let profesional of profesionalesFiltrados | async" [value]="profesional">
+                        {{ mostrarApellidoCedula(profesional)}}
+                    </mat-option>
+                </mat-autocomplete>
+            </mat-form-field>
+        </form>
     </div>
-</body>
+    <div class="col-sm-2">
+        <button mat-stroked-button color="primary" (click)="crearProfesional()">Crear Profesional</button>
+    </div>
+</div>
+<table mat-table [dataSource]="profesionalesFiltrados" class="mat-elevation-z8">
+
+    <!-- Name Column -->
+    <ng-container matColumnDef="identificacionProfesional">
+        <th mat-header-cell *matHeaderCellDef> Identificación </th>
+        <td mat-cell *matCellDef="let profesional"> {{profesional.identificacionProfesional}} </td>
+    </ng-container>
+
+    <!-- Weight Column -->
+    <ng-container matColumnDef="nombresProfesional">
+        <th mat-header-cell *matHeaderCellDef> Nombres </th>
+        <td mat-cell *matCellDef="let profesional"> {{profesional.nombresProfesional}}</td>
+    </ng-container>
+
+    <!-- Weight Column -->
+    <ng-container matColumnDef="apellidoPaternoProfesional">
+        <th mat-header-cell *matHeaderCellDef> Apellidos </th>
+        <td mat-cell *matCellDef="let profesional">{{profesional.apellidoPaternoProfesional}} </td>
+    </ng-container>
+
+
+    <!-- Symbol Column -->
+    <ng-container matColumnDef="celularProfesional">
+        <th mat-header-cell *matHeaderCellDef> Celular </th>
+        <td mat-cell *matCellDef="let profesional"> {{profesional.celularProfesional}} </td>
+    </ng-container>
+
+    <!-- Symbol Column -->
+    <ng-container matColumnDef="estado">
+        <th mat-header-cell *matHeaderCellDef>Estado </th>
+        <td mat-cell *matCellDef="let profesional"> {{profesional.estadoProfesional}} </td>
+    </ng-container>
+    <!-- Symbol Column -->
+    <ng-container matColumnDef="editar">
+        <th mat-header-cell *matHeaderCellDef>Editar</th>
+        <td mat-cell *matCellDef="let profesional">
+            <button mat-stroked-button color="primary" (click)="editarProfesional(profesional)">Editar</button>
+        </td>
+    </ng-container>
+    <!-- Symbol Column -->
+    <ng-container matColumnDef="ver">
+        <th mat-header-cell *matHeaderCellDef>Ver detalle</th>
+        <td mat-cell *matCellDef="let profesional">
+            <button mat-stroked-button color="primary" (click)="verInformacionProfesional(profesional)">Ver</button>
+        </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="mostrarColumnas "></tr>
+    <tr mat-row *matRowDef="let row; columns: mostrarColumnas; "></tr>
+</table>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+
 <app-footer></app-footer>

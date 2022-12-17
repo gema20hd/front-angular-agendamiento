@@ -36,15 +36,15 @@
                 <li class="nav-item">
                     <a class="nav-link nav-link active" href="#">Inicio <span class="sr-only">(current)</span></a>
                 </li>
-                <li class="nav-item dropdown" routerLinkActive="active">
+                <li *ngIf="authService.hasRole('ROLE_ADMIN')" class="nav-item dropdown" routerLinkActive="active">
                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                       Administrar
                     </a>
                     <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                         <a class="dropdown-item" [routerLink]="[ '/pacientes']">Paciente</a>
                         <a class="dropdown-item" [routerLink]="[ '/profesionales']">Profesional</a>
-                        <a class="dropdown-item" href="#">Especialidad</a>
-                        <a class="dropdown-item" href="#">Unidad Educativa</a>
+                        <a class="dropdown-item" [routerLink]="[ '/especialidades']">Especialidad</a>
+                        <a class="dropdown-item" [routerLink]="[ '/unidadEducativa']">Unidad Educativa</a>
                     </div>
                 </li>
                 <li class="nav-item" routerLinkActive="active">

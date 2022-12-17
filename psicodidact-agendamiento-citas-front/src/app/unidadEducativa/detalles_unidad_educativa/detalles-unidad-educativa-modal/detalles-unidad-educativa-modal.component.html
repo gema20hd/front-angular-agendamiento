@@ -1,0 +1,30 @@
+<h1 mat-dialog-title class="text-title">{{titulo}}</h1>
+<mat-dialog-content>
+    <!-- <mat-expansion-panel *ngFor="let profesional of profesionales"> -->
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="row">
+                    <div class="col-md-2 color_colum text">Código:</div>
+                    <div class="col-md-4 color_info">
+                        {{unidadEducativa?.codigoInstitucion}}
+                    </div>
+                    <div class="col-md-2 color_colum text">Nombre:</div>
+                    <div class="col-md-4 color_info">
+                        {{unidadEducativa?.nombreUnidadEducativa}}
+                    </div>
+                    <div class="col-md-2 color_colum text">Dirección:</div>
+                    <div class="col-md-4 color_info">
+                        {{unidadEducativa?.direccionUnidadEducativa}}
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+
+    </div>
+</mat-dialog-content>
+<div mat-dialog-actions align="end">
+    <button mat-button (click)="cerrar()">Cerrar</button>
+</div>

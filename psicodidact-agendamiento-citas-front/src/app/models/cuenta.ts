@@ -5,6 +5,6 @@ export class Cuenta {
     idCuenta: number =0;
     numeroCuenta: string="";
     banco: Banco = new Banco();
-    tipoCuenta: TipoCuenta = new TipoCuenta();
+    tipoCuenta?: TipoCuenta;
   }
   
