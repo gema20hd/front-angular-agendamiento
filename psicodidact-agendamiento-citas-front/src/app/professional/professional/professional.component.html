@@ -21,7 +21,7 @@
                 <input type="text" placeholder="Seleccioné un elemento" aria-label="Profesional" matInput [formControl]="autocompleteControlApellidoCedula" [matAutocomplete]="auto">
                 <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete" [displayWith]="mostrarApellidoCedula" (optionSelected)="seleccionarApellidoCedula($event)">
                     <mat-option *ngFor="let profesional of profesionalesFiltrados | async" [value]="profesional">
-                        {{ mostrarApellidoCedula(profesional) }}
+                        {{ mostrarApellidoCedula(profesional)}}
                     </mat-option>
                 </mat-autocomplete>
             </mat-form-field>

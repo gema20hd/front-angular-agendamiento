@@ -142,15 +142,15 @@ export class ProfesionalesService {
    );
  }
 
-  getBancos(): Observable<Banco[]> {
-    return this.http.get<Banco[]>(this.urlEndPointCuentas + '/bancos',
-    { headers: this.agregarAuthorizationHeader()}).pipe(
-     catchError(e => {
-       this.isNoAutorizado(e);
-       return throwError(e);
-     })
-   );
- }
+ getFiltrarBancos(banco: String): Observable<Banco[]> {
+  return this.http.get<Banco[]>(`${this.urlEndPointCuentas+'/bancos/filtro'}/${banco}`,
+  { headers: this.agregarAuthorizationHeader()}).pipe(
+   catchError(e => {
+     this.isNoAutorizado(e);
+     return throwError(e);
+   })
+ );
+}
 
 
   getProfesionales(): Observable<Profesional[]> {
@@ -245,7 +245,7 @@ getBancoId(id: number): Observable<Banco> {
   }
   
   update(profesional: Profesional): Observable<any> {
-    return this.http.put<any>(`${this.urlEndPointProfesionales}/${profesional.idProfesional}`, Profesional,
+    return this.http.put<any>(`${this.urlEndPointProfesionales}/${profesional.idProfesional}`, profesional,
     { headers: this.agregarAuthorizationHeader()}).pipe(
       catchError(e => {
         if (e.status == 400) {

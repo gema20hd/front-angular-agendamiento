@@ -90,8 +90,19 @@ export class EditarProfesionalModalComponent {
 
   ngOnInit(): void {
 
-   // this.data.enabled = true;
-    //this.usuario.enabled = this.data.enabled;
+    this.profesional.identificacionProfesional =this.data.identificacionProfesional
+    this.profesional.nombresProfesional =this.data.nombresProfesional
+    this.profesional.apellidoPaternoProfesional =this.data.apellidoPaternoProfesional
+    this.profesional.apellidoPaternoProfesional =this.data.apellidoMaternoProfesional
+    this.profesional.apellidoMaternoProfesional =this.data.fechaNacimientoProfesional
+    this.profesional.correoElectronicoProfesional =this.data.correoElectronicoProfesional
+    this.profesional.celularProfesional =this.data.celularProfesional
+    this.profesional.telefonoEmergenciaProfesional =this.data.telefonoEmergenciaProfesional
+    this.profesional.direccionDomicilioProfesional=this.data.direccionDomicilioProfesional
+    this.cuenta.numeroCuenta=this.data.cuenta.numeroCuenta
+    this.discapacidad.porcentajeDiscapacidad=this.data.discapacidad.porcentajeDiscapacidad
+    this.discapacidad.descripcionDiscpacidad=this.data.discapacidad.descripcionDiscpacidad
+
 
     this.dialogForm=this.formBuilder.group({
 
@@ -144,91 +155,20 @@ export class EditarProfesionalModalComponent {
       flatMap(value => value ? this._filterBanco(value) : []));
 
 
-      // get
-      this.getTiposSangres();
-      this.getGenero();
-      this.getEstadoCivil ();
-      this.getProfesionProfesional();
-      this.gettipoDiscapacidad();
-      
+
+            // get
+            this.profesionalService.getGenero().subscribe(generos => this.generos = generos);
+            this.profesionalService.getEstadoCivil().subscribe(estadosCivil => this.estadosCivil = estadosCivil);
+            this.profesionalService.getTipoSangre().subscribe(tiposSangre => this.tiposSangre = tiposSangre);
+            this.profesionalService.getTipoDiscapacidad().subscribe(tiposDiscapacidades => this.tiposDiscapacidades = tiposDiscapacidades);
+            this.profesionalService.getProfesionProfesional().subscribe(profesionProfesionales => this.profesionProfesionales = profesionProfesionales);
+            this.profesionalService.getTipoCuentas().subscribe(tiposCuentas => this.tiposCuentas = tiposCuentas);
       
   
   }
 
   
 
-
-  create(): void {
-    this.cuentaService.create(this.cuenta)
-      .subscribe(cuenta => {
-        console.log(cuenta)
-       }
-      );
-
-      this.profesionalService.create(this.profesional)
-      .subscribe(profesional => {
-        console.log(profesional)
-        if (this.discapacidadRadio==1) {
-          this.tipoDiscapacidad.idTipoDiscapcidad=this.dialogForm.controls['tipoDiscapacidad'].value;
-          this.discapacidad.tipoDiscapacidad=this.tipoDiscapacidad;
-          this.discapacidad.porcentajeDiscapacidad=this.dialogForm.controls['porcentajeDiscapacidad'].value;
-          this.discapacidad.descripcionDiscpacidad=this.dialogForm.controls['descripcionDiscapacidad'].value;
-          console.log('Ingresa', profesional);
-         }else{
-  
-        this.tipoDiscapacidad.idTipoDiscapcidad=11;
-        this.discapacidad.tipoDiscapacidad=this.tipoDiscapacidad;
-        this.discapacidad.porcentajeDiscapacidad="";
-        this.discapacidad.descripcionDiscpacidad="";
-        console.log('LO QUE ENVIO DE DISCAPACIDAD'+this.discapacidad.descripcionDiscpacidad);
-         } 
-      }
-      );
-
-      this.usuarioService.create(this.usuario)
-      .subscribe(usuario => {
-        this.router.navigate(['/profesional'])
-        console.log(usuario)
- }
-      );
-  }
-
-
-private getTiposSangres(){
-    this.profesionalService.getTipoSangre().subscribe(tipoSangre=>{
-    this.tiposSangre=tipoSangre;
-    } );
-}
-
-private getGenero(){
-this.profesionalService.getGenero().subscribe(genero=>{
-this.generos=genero;
-
-
-} );
-}
-
-private getProfesionProfesional(){
-this.profesionalService.getProfesionProfesional().subscribe(profesionProfesional=>{
-this.profesionProfesionales=profesionProfesional;
-
-} );
-}
-
-
-private gettipoDiscapacidad(){
-this.profesionalService.getTipoDiscapacidad().subscribe(tipoDiscapacidad=>{
-this.tiposDiscapacidades=tipoDiscapacidad;
-
-} );
-}
-
-private getEstadoCivil (){
-this.profesionalService.getEstadoCivil().subscribe(estadoCivil=>{
-this.estadosCivil=estadoCivil;
-
-} );
-}
 
 
 //banco
@@ -260,7 +200,7 @@ seleccionarBanco(event: MatAutocompleteSelectedEvent): void {
     this.profesionalService.getProfesionalId(id).subscribe(rs => { this.profesional =rs });
     }
       
-    editarInformacionProfesional(profesional: Profesional){
+   editarInformacionProfesional(profesional: Profesional){
       this.profesionalService.update(profesional).subscribe(profesional=> {
         console.log(profesional);
         Swal.fire('Modificado:', `Profesional ${profesional.nombresProfesional} actualizado con éxito`, 'success');
@@ -272,7 +212,52 @@ seleccionarBanco(event: MatAutocompleteSelectedEvent): void {
       });
     }
 
-    editarProfesional(){
-      
+    compararGenero(o1: Genero, o2: Genero): boolean {
+      if (o1 === undefined && o2 === undefined) {
+        return true;
+      }
+    
+      return o1 === null || o2 === null || o1 === undefined || o2 === undefined ? false : o1.idGenero === o2.idGenero;
     }
+    
+    compararEstadoCivil(o1: EstadoCivil, o2: EstadoCivil): boolean {
+      if (o1 === undefined && o2 === undefined) {
+        return true;
+      }
+      return o1 === null || o2 === null || o1 === undefined || o2 === undefined ? false : o1.idEstadoCivil === o1.idEstadoCivil;
+    }
+    
+    compararTipoDiscapacidad(o1: TipoDiscapacidad, o2: TipoDiscapacidad): boolean {
+      if (o1 === undefined && o2 === undefined) {
+        return true;
+      }
+      return o1 === null || o2 === null || o1 === undefined || o2 === undefined ? false : o1.idTipoDiscapcidad === o1.idTipoDiscapcidad;
+    }
+    
+    compararProfesionProfesional(o1: ProfesionProfesional, o2: ProfesionProfesional): boolean {
+      if (o1 === undefined && o2 === undefined) {
+        return true;
+      }
+      return o1 === null || o2 === null || o1 === undefined || o2 === undefined ? false : o1.idProfesionProfesional === o1.idProfesionProfesional;
+    }
+    
+    compararTipoSangre(o1: TipoSangre, o2: TipoSangre): boolean {
+      if (o1 === undefined && o2 === undefined) {
+        return true;
+      }
+      return o1 === null || o2 === null || o1 === undefined || o2 === undefined ? false : o1.idTipoSangre === o1.idTipoSangre;
+    }
+    
+    compararTipoCuenta(o1: TipoCuenta, o2: TipoCuenta): boolean {
+      if (o1 === undefined && o2 === undefined) {
+        return true;
+      }
+      return o1 === null || o2 === null || o1 === undefined || o2 === undefined ? false : o1.idTipoCuenta === o1.idTipoCuenta;
+    }
+    
+    
+    
+    
+
+  
 }
