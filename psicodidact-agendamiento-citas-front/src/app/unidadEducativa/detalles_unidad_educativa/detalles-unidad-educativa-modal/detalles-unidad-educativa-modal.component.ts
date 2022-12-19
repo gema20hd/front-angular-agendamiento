@@ -1,8 +1,7 @@
 import { Component, Inject } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { DetalleProfesionalModalComponent } from 'src/app/professional/professional/detalles_profesional/detalle-profesional-modal/detalle-profesional-modal.component';
-import { UnidadEducativa } from '../../unidad-educativa/unidadEducativa';
-import { UnidadEducativaService } from '../../unidad-educativa/unidadEducativa.service';
+import { UnidadEducativa } from 'src/app/models/unidadEducativa';
+import { UnidadEducativaService } from '../../../services/unidadEducativa.service';
 
 @Component({
   selector: 'app-detalles-unidad-educativa-modal',
@@ -15,7 +14,7 @@ export class DetallesUnidadEducativaModalComponent {
   unidadEducativas: UnidadEducativa[]= [];
   titulo: string = 'Detalles de la Unidad Educativa';
   constructor(
-    private unidadEducativaService:UnidadEducativaService,
+    public unidadEducativaService:UnidadEducativaService,
     @Inject(MAT_DIALOG_DATA) public data: any,
     public modalRef: MatDialogRef<DetallesUnidadEducativaModalComponent>) { 
     

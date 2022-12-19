@@ -1,6 +1,6 @@
 import { Component, Inject } from '@angular/core';
-import { Profesional } from '../../profesional';
-import { ProfesionalesService } from '../../profesionales.service';
+import { Profesional } from '../../../../models/profesional';
+import { ProfesionalesService } from '../../../../services/profesionales.service';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { TipoDiscapacidad } from 'src/app/models/tipoDiscapacidad';
@@ -11,8 +11,6 @@ import { Discapacidad } from 'src/app/models/discapacidad';
 import { TipoSangre } from 'src/app/models/tipoSangre';
 import { TipoCuenta } from 'src/app/models/tipoCuenta';
 import { ProfesionProfesional } from 'src/app/models/profesionProfesional';
-import { CuentasService } from '../../services/cuentas.service';
-import { UsuariosService } from '../../services/usuarios.service';
 import { Cuenta } from 'src/app/models/cuenta';
 import { Usuario } from 'src/app/users/login/usuario';
 import { HttpClient } from '@angular/common/http';
@@ -21,6 +19,8 @@ import { ActivatedRoute, Router } from '@angular/router';
 import Swal from 'sweetalert2';
 import { flatMap, map, Observable } from 'rxjs';
 import { MatAutocompleteSelectedEvent } from '@angular/material/autocomplete';
+import { CuentasService } from 'src/app/services/cuentas.service';
+import { UsuariosService } from 'src/app/services/usuarios.service';
 
 @Component({
   selector: 'app-editar-profesional-modal',
@@ -74,8 +74,6 @@ export class EditarProfesionalModalComponent {
 
   constructor(
     private profesionalService:ProfesionalesService,
-    private cuentaService:CuentasService,
-    private usuarioService:UsuariosService,
     public http: HttpClient,
     public authService: AuthService,
 
@@ -102,51 +100,48 @@ export class EditarProfesionalModalComponent {
     this.cuenta.numeroCuenta=this.data.cuenta.numeroCuenta
     this.discapacidad.porcetajeDiscapacidad=this.data.discapacidad.porcetajeDiscapacidad
     this.discapacidad.descripcionDiscapacidad=this.data.discapacidad.descripcionDiscapacidad
+    this.profesionProfesional.tercerNivelProfesionProfesional= this.data.tercerNivelProfesionProfesional
 
 
     this.dialogForm=this.formBuilder.group({
-
-    //Cuenta
-    //idCuenta : new FormControl('',Validators.required),
-    numeroCuenta: new FormControl('',Validators.required),
-    banco: new FormControl('',Validators.required),
-    tipoCuenta: new FormControl('',Validators.required),
-
-    //profesional
-    //idProfesional : new FormControl('',Validators.required),
-    identificacionProfesional : new FormControl('',Validators.required),
-    nombresProfesional : new FormControl('',Validators.required),
-    apellidoPaternoProfesional : new FormControl('',Validators.required),
-    apellidoMaternoProfesional : new FormControl('',Validators.required),
-    fechaNacimientoProfesional : new FormControl('',Validators.required),
-    celularProfesional : new FormControl('',Validators.required),
-    telefonoEmergenciaProfesional : new FormControl('',Validators.required),
-    direccionDomicilioProfesional : new FormControl('',Validators.required),
-    correoElectronicoProfesional : new FormControl('',Validators.required),
-    estadoProfesional : new FormControl('',Validators.required),
-    hojaVida : new FormControl('',Validators.required),
-    tituloCuartoNivelProfesional : new FormControl('',Validators.required),
-
-	estadoCivil: new FormControl('',Validators.required),
-	tipoSangre : new FormControl('',Validators.required),
-  //discapacidad : new FormControl('',Validators.required),
-  descripcionDiscpacidad : new FormControl('',Validators.required),
-  porcentajeDiscapacidad: new FormControl('',Validators.required),
-  tipoDiscapacidad: new FormControl('',Validators.required),
-	genero : new FormControl('',Validators.required),
-  profesionProfesional : new FormControl('',Validators.required),
-  cuenta : new FormControl('',Validators.required),
-
-
-    //usuario
-
-    //idUsuario : new FormControl('',Validators.required),
-    username : new FormControl('',Validators.required),
-    password : new FormControl('',Validators.required),
-    password2: new FormControl('',Validators.required),
-    enabled : new FormControl('',Validators.required),
-    rol: new FormControl('',Validators.required),
-    profesional: new FormControl('',Validators.required),
+      poseeDiscapacidad: new FormControl('',Validators.required),//radio
+      numeroCuenta: new FormControl('',Validators.required),
+      banco: new FormControl('',Validators.required),
+      tipoCuenta: new FormControl('',Validators.required),
+  
+      //profesional
+      //idProfesional : new FormControl('',Validators.required),
+      identificacionProfesional : new FormControl('',Validators.required),
+      nombresProfesional : new FormControl('',Validators.required),
+      apellidoPaternoProfesional : new FormControl('',Validators.required),
+      apellidoMaternoProfesional : new FormControl('',Validators.required),
+      fechaNacimientoProfesional : new FormControl('',Validators.required),
+      celularProfesional : new FormControl('',Validators.required),
+      telefonoEmergenciaProfesional : new FormControl('',Validators.required),
+      direccionDomicilioProfesional : new FormControl('',Validators.required),
+      correoElectronicoProfesional : new FormControl('',Validators.required),
+      estadoProfesional : new FormControl('',Validators.required),
+      hojaVida : new FormControl('',Validators.required),
+      tituloCuartoNivelProfesional : new FormControl('',Validators.required),
+  
+      idTipoDiscapcidad: new FormControl('',Validators.required),
+      estadoCivil: new FormControl('',Validators.required),
+      tipoSangre : new FormControl('',Validators.required),
+      discapacidad : new FormControl('',Validators.required),
+      descripcionDiscpacidad : new FormControl('',Validators.required),
+      porcentajeDiscapacidad: new FormControl('',Validators.required),
+      tipoDiscapacidad: new FormControl('',Validators.required),
+      genero : new FormControl('',Validators.required),
+      profesionProfesional : new FormControl('',Validators.required),
+      cuenta : new FormControl('',Validators.required),
+  
+  
+      username : new FormControl('',Validators.required),
+      password : new FormControl('',Validators.required),
+      password2: new FormControl('',Validators.required),
+      enabled : new FormControl('',Validators.required),
+      profesional: new FormControl('',Validators.required),
+      profesion: new FormControl('',Validators.required),
 
   });
 

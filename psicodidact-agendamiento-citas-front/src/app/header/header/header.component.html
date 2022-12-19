@@ -23,23 +23,22 @@
         </div>
     </div>
 </div>
-<!-- Navegación -->
 <header id="header" class="fixed-top">
-    <nav class="navbar navbar-expand-lg navbar-dark nav-menu">
-        <a class="navbar-brand" href="#"></a>
+    <nav class="navbar navbar-expand-lg navbar-light  nav-menu">
+        <a class="navbar-brand"></a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon text-dark"></span>
-        </button>
+      <span class="navbar-toggler-icon"></span>
+    </button>
 
-        <div class="container-fluid collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="nav navbar-nav">
-                <li class="nav-item">
-                    <a class="nav-link nav-link active" href="#">Inicio <span class="sr-only">(current)</span></a>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item active">
+                    <a class="nav-link" [routerLink]="['/home']">Home <span class="sr-only">(current)</span></a>
                 </li>
-                <li *ngIf="authService.hasRole('ROLE_ADMIN')" class="nav-item dropdown" routerLinkActive="active">
+                <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                      Administrar
-                    </a>
+                       Administrar
+                      </a>
                     <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                         <a class="dropdown-item" [routerLink]="[ '/pacientes']">Paciente</a>
                         <a class="dropdown-item" [routerLink]="[ '/profesionales']">Profesional</a>
@@ -48,20 +47,21 @@
                     </div>
                 </li>
                 <li class="nav-item" routerLinkActive="active">
-                    <a class="nav-link">Agendamiento</a>
+                    <a class="nav-link" [routerLink]="['/unidadEducativa']">Agendamiento</a>
                 </li>
 
                 <li class="nav-item" routerLinkActive="active">
-                    <a class="nav-link">Subir Información</a>
+                    <a class="nav-link" [routerLink]="['/unidadEducativa']">Subir Información</a>
                 </li>
                 <li class="nav-item" routerLinkActive="active">
-                    <a class="nav-link">Pagos</a>
+                    <a class="nav-link" [routerLink]="['/unidadEducativa']">Pagos</a>
                 </li>
+
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                       Reportes
                     </a>
-                    <div id="" class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                         <a class="dropdown-item" href="#">Clinica</a>
                         <a class="dropdown-item" href="#">Pagos</a>
                         <a class="dropdown-item" href="#">Citas</a>
@@ -71,17 +71,17 @@
                 <li class="nav-item" routerLinkActive="active">
                     <a class="nav-link">Nosotros</a>
                 </li>
-
-
-
             </ul>
-            <ul class="nav navbar-nav navbar-right">
+            <ul class="nav navbar-nav navbar-right navbar-right-salir">
                 <li *ngIf="authService.isAuthenticated()" class="nav-item">
                     <a class="nav-link" (click)=" logout() ">Salir</a>
                 </li>
 
             </ul>
+
         </div>
     </nav>
-
 </header>
+<br>
+<br>
+<br>

@@ -4,9 +4,9 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Observable } from 'rxjs';
+import { UnidadEducativa } from 'src/app/models/unidadEducativa';
 import Swal from 'sweetalert2';
-import { UnidadEducativa } from '../../unidad-educativa/unidadEducativa';
-import { UnidadEducativaService } from '../../unidad-educativa/unidadEducativa.service';
+import { UnidadEducativaService } from '../../../services/unidadEducativa.service';
 
 @Component({
   selector: 'app-editar-unidad-educativa-modal',
@@ -35,7 +35,7 @@ export class EditarUnidadEducativaModalComponent {
   @Inject(MAT_DIALOG_DATA) public data: any,
   public modalRef: MatDialogRef<EditarUnidadEducativaModalComponent>,
   public http: HttpClient,
-  public unidadEducativaService: UnidadEducativaService
+  private unidadEducativaService: UnidadEducativaService
 
   ) {this.unidadEducativa = new UnidadEducativa()}
 

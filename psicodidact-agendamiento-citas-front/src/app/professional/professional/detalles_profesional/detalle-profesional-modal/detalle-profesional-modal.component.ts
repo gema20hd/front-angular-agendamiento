@@ -1,7 +1,7 @@
 import { Component, Inject } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { Profesional } from '../../profesional';
-import { ProfesionalesService } from '../../profesionales.service';
+import { Profesional } from '../../../../models/profesional';
+import { ProfesionalesService } from '../../../../services/profesionales.service';
 
 @Component({
   selector: 'app-detalle-profesional-modal',

@@ -2,12 +2,13 @@ import { Antecedente } from "./antecedente";
 import { Discapacidad } from "./discapacidad";
 import { EstadoCivil } from "./estadoCivil";
 import { Genero } from "./genero";
-import { NivelEducacionParalelo } from "./nivel-educacion-paralelo";
+import { NivelEducacionParalelo } from "./nivelEducacionParalelo";
 import { Profesion } from "./profesion";
 import { Representante } from "./representante";
 import { TipoSangre } from "./tipoSangre";
 import { Trabajo } from "./trabajo";
-import { UnidadEducativa } from "./unidad-educativa";
+import { UnidadEducativa } from "./unidadEducativa";
+
 
 export class Paciente {
 

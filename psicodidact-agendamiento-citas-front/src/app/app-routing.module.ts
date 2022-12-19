@@ -5,7 +5,6 @@ import { PageComponent } from './error_page/page/page.component';
 import { EspecialidadComponent } from './especialidad/especialidad/especialidad.component';
 import { HomeComponent } from './home/home/home.component';
 import { PacientesComponent } from './pacientes/pacientes.component';
-import { ProComponent } from './pro/pro/pro.component';
 import { ProfessionalComponent } from './professional/professional/professional.component';
 import { UnidadEducativaComponent } from './unidadEducativa/unidad-educativa/unidad-educativa.component';
 import { AuthGuard } from './users/login/guards/auth.guard';
@@ -19,7 +18,7 @@ import {MatNativeDateModule} from '@angular/material/core';
 
 
 const routes: Routes = [
-  {path: '',component: LoginComponent, pathMatch: 'full', canActivate: [AuthGuard]},
+  {path: '',component: LoginComponent, pathMatch: 'full'},
   { path: 'login', component: LoginComponent },
   {path: 'home',component: HomeComponent,pathMatch: 'full' },
   { path: 'profesionales', component: ProfessionalComponent },

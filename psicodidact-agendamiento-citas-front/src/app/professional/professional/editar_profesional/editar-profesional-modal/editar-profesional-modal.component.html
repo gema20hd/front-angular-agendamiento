@@ -1,184 +1,202 @@
-<div class="container">
-    <h2 mat-dialog-title class="card_title">
-        {{titulo}}</h2>
-    <mat-dialog-content>
-        <form [formGroup]="dialogForm ">
-            <div class="container">
-                <div class="row">
-                    <div class="row">
-                        <div class="col-md-4">
-                            <mat-form-field appearance="outline">
-                                <mat-label>Identificación</mat-label>
-                                <input [(ngModel)]="profesional.identificacionProfesional" matInput placeholder="Identificación" formControlName="identificacionProfesional" />
-                            </mat-form-field>
-                        </div>
-
-                        <div class="col-md-4">
-                            <mat-form-field appearance="outline">
-                                <mat-label>Nombres</mat-label>
-                                <input [(ngModel)]="profesional.nombresProfesional" matInput placeholder="Nombres" formControlName="nombresProfesional" />
-                            </mat-form-field>
-                        </div>
-                        <div class="col-md-4">
-                            <mat-form-field appearance="outline">
-                                <mat-label>Apellido Paterno</mat-label>
-                                <input [(ngModel)]="profesional.apellidoPaternoProfesional" matInput placeholder="Apellido Paterno" formControlName="apellidoPaternoProfesional" />
-                            </mat-form-field>
-                        </div>
-
-                    </div>
+<h2 mat-dialog-title class="text-title">{{titulo}}</h2>
+<mat-dialog-content>
+    <form [formGroup]="dialogForm">
+        <div class="container">
 
 
-                    <div class="row">
-                        <div class="col-md-4">
-                            <mat-form-field appearance="outline">
-                                <mat-label>Apellido Materno</mat-label>
-                                <input [(ngModel)]="profesional.apellidoMaternoProfesional" matInput placeholder="Apellido Materno" formControlName="apellidoMaternoProfesional" />
-                            </mat-form-field>
-                        </div>
+            <div class="row">
+                <div class="col-md-4">
+                    <mat-form-field appearance="outline">
+                        <mat-label>Identificacion</mat-label>
+                        <input [(ngModel)]="profesional.identificacionProfesional" matInput placeholder="Identificacion" formControlName="identificacionProfesional" />
+                    </mat-form-field>
+                </div>
+
+                <div class="col-md-4">
+                    <mat-form-field appearance="outline">
+                        <mat-label>Nombres</mat-label>
+                        <input [(ngModel)]="profesional.nombresProfesional" matInput placeholder="Nombres" formControlName="nombresProfesional" />
+                    </mat-form-field>
+                </div>
+                <div class="col-md-4">
+                    <mat-form-field appearance="outline">
+                        <mat-label>Apellido Paterno</mat-label>
+                        <input [(ngModel)]="profesional.apellidoPaternoProfesional" matInput placeholder="Apellido Paterno" formControlName="apellidoPaternoProfesional" />
+                    </mat-form-field>
+                </div>
+            </div>
 
 
-                        <div class="col-md-4">
-                            <input class="my-select" [matDatepicker]="miDatepicker" [(ngModel)]="profesional.fechaNacimientoProfesional" formControlName="fechaNacimientoProfesional">
-                            <mat-datepicker-toggle [for]="miDatepicker"></mat-datepicker-toggle>
-                            <mat-datepicker #miDatepicker></mat-datepicker>
+            <div class="row">
+                <div class="col-md-4">
+                    <mat-form-field appearance="outline">
+                        <mat-label>Apellido Materno</mat-label>
+                        <input [(ngModel)]="profesional.apellidoMaternoProfesional" matInput placeholder="Apellido Materno" formControlName="apellidoMaternoProfesional" />
+                    </mat-form-field>
+                </div>
+                <div class="col-md-4">
+                    <mat-form-field appearance="fill">
+                        <mat-label>Fecha Nacimiento</mat-label>
+                        <input class="my-select" [(ngModel)]="profesional.fechaNacimientoProfesional" matInput [matDatepicker]="picker" formControlName="fechaNacimientoProfesional" />
+                        <mat-hint>MM/DD/YYYY</mat-hint>
+                        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                        <mat-datepicker #picker></mat-datepicker>
+                    </mat-form-field>
+                </div>
+                <div class="col-md-4">
+                    <mat-form-field appearance="outline">
+                        <mat-label>Correo Electrónico</mat-label>
+                        <input [(ngModel)]="profesional.correoElectronicoProfesional" matInput placeholder="Correo electronico" formControlName="correoElectronicoProfesional" />
+                    </mat-form-field>
+                </div>
+            </div>
 
-                        </div>
+            <div class="row">
+                <div class="col-md-4">
+                    <mat-form-field appearance="outline">
+                        <mat-label>Celular</mat-label>
+                        <input [(ngModel)]="profesional.celularProfesional" matInput placeholder="Celular" formControlName="celularProfesional" />
+                    </mat-form-field>
+                </div>
+                <div class="col-md-4">
+                    <mat-form-field appearance="outline">
+                        <mat-label>Teléfono</mat-label>
+                        <input [(ngModel)]="profesional.telefonoEmergenciaProfesional" matInput placeholder="Teléfono" formControlName="telefonoEmergenciaProfesional" />
+                    </mat-form-field>
+                </div>
+                <div class="col-md-4">
+                    <mat-form-field appearance="outline">
+                        <mat-label>Dirección</mat-label>
+                        <input [(ngModel)]="profesional.direccionDomicilioProfesional" matInput placeholder="Dirección" formControlName="direccionDomicilioProfesional" />
+                    </mat-form-field>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-4">
+                    <mat-form-field appearance="fill">
+                        <mat-label>Tipo Discapacidad</mat-label>
+                        <mat-select [(ngModel)]="profesional.discapacidad.tipoDiscapacidad" name="tipoDiscapacidad" formControlName="tipoDiscapacidad">
+                            <mat-option *ngFor="let tipoDiscapacidad of tiposDiscapacidades" [value]="tipoDiscapacidad.idTipoDiscapacidad">
+                                {{tipoDiscapacidad.descripcionTipoDiscapacidad}}
+                            </mat-option>
 
-                        <div class="col-md-4">
-                            <mat-form-field appearance="outline">
-                                <mat-label>Email</mat-label>
-                                <input [(ngModel)]="profesional.correoElectronicoProfesional" matInput placeholder="Correo Eléctronica" formControlName="correoElectronicoProfesional" />
-                            </mat-form-field>
-                        </div>
-
-                    </div>
-
-                    <div class="row">
-                        <div class="col-md-4">
-                            <mat-form-field appearance="outline">
-                                <mat-label>Celular</mat-label>
-                                <input [(ngModel)]="profesional.celularProfesional" matInput placeholder="Celular" formControlName="celularProfesional" />
-                            </mat-form-field>
-                        </div>
-
-                        <div class="col-md-4">
-                            <mat-form-field appearance="outline">
-                                <mat-label>Telefóno</mat-label>
-                                <input [(ngModel)]="profesional.telefonoEmergenciaProfesional" matInput placeholder="Teléfono" formControlName="telefonoEmergenciaProfesional" />
-                            </mat-form-field>
-                        </div>
-                        <div class="col-md-4">
-                            <mat-form-field appearance="outline">
-                                <mat-label>Dirección</mat-label>
-                                <input [(ngModel)]="profesional.direccionDomicilioProfesional" matInput placeholder="Direccion" formControlName="direccionDomicilioProfesional" />
-                            </mat-form-field>
-                        </div>
-
-                    </div>
-
-
-                    <div class="row">
-                        <div class="col-md-4">
-                            <select class="my-select" [compareWith]="compararTipoDiscapacidad" [(ngModel)]="discapacidad.tipoDiscapacidad" name="tipoDiscapacidad">
-                                    <option [ngValue]="undefined">--- selecionar un tipo de discapacidad ---</option>
-                                    <option *ngFor="let tipoDiscapacidad of tiposDiscapacidades" [ngValue]="tipoDiscapacidad">{{tipoDiscapacidad.descripcionTipoDiscapacidad}}</option>
-                                </select>
-                        </div>
-                        <div class="col-md-4">
-                            <mat-form-field appearance="outline">
-                                <mat-label>Porcentaje Discapacidad</mat-label>
-                                <input [(ngModel)]="discapacidad.porcetajeDiscapacidad" matInput placeholder="Porcentaje Discapacidad" formControlName="porcentajeDiscapacidad" />
-                            </mat-form-field>
-                        </div>
-
-                        <div class="col-md-4">
-                            <mat-form-field appearance="outline">
-                                <mat-label>Descripcion Discapacidad</mat-label>
-                                <input [(ngModel)]="discapacidad.descripcionDiscapacidad" matInput placeholder="Descripcion Discapacidad" formControlName="descripcionDiscpacidad" />
-                            </mat-form-field>
-                        </div>
-                    </div>
-
-
-                    <div class="row">
-                        <div class="col-md-4">
-                            <select class="my-select" [compareWith]="compararTipoSangre" [(ngModel)]="profesional.tipoSangre" name="tipoSangre">
-                                <option [ngValue]="undefined">--- selecionar un tipo de sangre ---</option>
-                                <option *ngFor="let tipoSangre of tiposSangre" [ngValue]="tipoSangre"  >{{tipoSangre.descripcionTipoSangre}}</option>
-                            </select>
-                        </div>
-
-                        <div class="col-md-4">
-                            <select class="my-select" [compareWith]="compararEstadoCivil" [(ngModel)]="profesional.estadoCivil" name="estadoCivil">
-                                <option [ngValue]="undefined">--- selecionar un estado civil ---</option>
-                                <option *ngFor="let estadoCivil of estadosCivil" [ngValue]="estadoCivil"  >{{estadoCivil.descripcionEstadoCivil}}</option>
-                            </select>
-                        </div>
-                        <br>
-                        <br>
-                        <br>
-                        <div class="col-md-4">
-                            <select class="my-select" class="my-select" [compareWith]="compararGenero" [(ngModel)]="profesional.genero" name="genero">
-                                <option [ngValue]="undefined">--- selecionar un genero ---</option>
-                                <option *ngFor="let genero of generos" [ngValue]="genero">{{genero.descripcionGenero}}</option>
-                            </select>
-                        </div>
-
-                    </div>
-
-                    <div class="row">
-                        <div class="col-md-4">
-                            <form class="example-form">
-                                <mat-form-field class="example-full-width" appearance="fill">
-
-                                    <input class="my-select" type="text" placeholder="Añadir Banco" aria-label="bancosFiltrados" matInput [formControl]="autocompleteControlBanco" [matAutocomplete]="auto">
-                                    <mat-autocomplete #auto="matAutocomplete" [displayWith]="mostrarBanco" (optionSelected)="seleccionarBanco($event)">
-                                        <mat-option *ngFor="let producto of bancosFiltrados | async" [value]="producto">
-                                            {{producto.descripcionBanco}}
-                                        </mat-option>
-                                    </mat-autocomplete>
-
-                                </mat-form-field>
-                            </form>
-                        </div>
-                        <div class="col-md-4">
-                            <select class="my-select" [compareWith]="compararTipoCuenta" [(ngModel)]="tipoCuenta.descripcionTipoCuenta" formControlName="tipo">
-                                <option [ngValue]="undefined">--- selecionar un tipo de cuenta---</option>
-                                <option *ngFor="let tipoCuenta of tiposCuentas" [ngValue]="tipoCuenta">{{tipoCuenta.descripcionTipoCuenta}}</option>
-                            </select>
-
-                        </div>
-                        <div class="col-md-4">
-                            <mat-form-field appearance="outline">
-                                <mat-label>Cuenta Bancaria</mat-label>
-                                <input [(ngModel)]="cuenta.numeroCuenta" matInput placeholder="Cuenta Bancaria" formControlName="cuenta" /> </mat-form-field>
-                        </div>
-
-                    </div>
-
-                    <div class="row">
-                        <div class="col-md-4">
-                            <select class="my-select" [compareWith]="compararProfesionProfesional" [(ngModel)]="profesionProfesional.tercerNivelProfesionProfesional" name="profesion">
-                                <option [ngValue]="undefined ">--- selecionar una profesión ---</option>
-                                <option *ngFor="let profesion of profesionProfesionales " [ngValue]="profesion">{{profesion.tercerNivelProfesionProfesional}}</option>
-                            </select>
-
-                        </div>
-
-                    </div>
+                        </mat-select>
+                    </mat-form-field>
+                </div>
+                <div class="col-md-4">
+                    <mat-form-field appearance="outline">
+                        <mat-label>Porcentaje</mat-label>
+                        <input matInput placeholder="Porcentaje" formControlName="porcentajeDiscapacidad" />
+                    </mat-form-field>
+                </div>
+                <div class="col-md-4">
+                    <mat-form-field appearance="outline">
+                        <mat-label>Descripción</mat-label>
+                        <input matInput placeholder="Descripción de la Discapacidad" formControlName="descripcionDiscpacidad" />
+                    </mat-form-field>
+                </div>
+            </div>
 
 
-
-
-
+            <div class="row">
+                <div class="col-md-4">
+                    <mat-form-field appearance="fill">
+                        <mat-label>Genero</mat-label>
+                        <mat-select [(ngModel)]="profesional.genero.descripcionGenero" name="genero" formControlName="genero">
+                            <mat-option *ngFor="let genero of generos" [value]="genero.idGenero">
+                                {{genero.descripcionGenero}}
+                            </mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                </div>
+                <div class="col-md-4">
+                    <mat-form-field appearance="fill">
+                        <mat-label>Tipo de Sangre </mat-label>
+                        <mat-select [(ngModel)]="profesional.tipoSangre.descripcionTipoSangre" name="tipoSangre" formControlName="tipoSangre">
+                            <mat-option *ngFor="let tipoSangre of tiposSangre" [value]="tipoSangre.idTipoSangre">
+                                {{tipoSangre.descripcionTipoSangre}}
+                            </mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                </div>
+                <div class="col-md-4">
+                    <mat-form-field appearance="fill">
+                        <mat-label>Estado Civil </mat-label>
+                        <mat-select [(ngModel)]="profesional.estadoCivil.descripcionEstadoCivil" name="estadoCivil" formControlName="estadoCivil">
+                            <mat-option *ngFor="let estado of estadosCivil" [value]="estado.idEstadoCivil">
+                                {{estado.descripcionEstadoCivil}}
+                            </mat-option>
+                        </mat-select>
+                    </mat-form-field>
                 </div>
 
             </div>
-        </form>
-    </mat-dialog-content>
-    <mat-dialog-actions align="end">
-        <button mat-button (click)="cancelar() ">Cancelar</button>
-        <button mat-button mat-raised-button class="button " (click)="editarInformacionProfesional(profesional)">Guardar</button>
-    </mat-dialog-actions>
-</div>
+
+
+
+            <div class="row">
+                <div class="col-md-4">
+                    <form class="example-form">
+                        <mat-form-field class="example-full-width" appearance="fill">
+                            <input [(ngModel)]="profesional.cuenta.banco" class="my-select" type="text" placeholder="Añadir Banco" aria-label="bancosFiltrados" matInput [formControl]="autocompleteControlBanco" [matAutocomplete]="auto">
+                            <mat-autocomplete #auto="matAutocomplete" [displayWith]="mostrarBanco">
+                                <mat-option *ngFor="let producto of bancosFiltrados | async" [value]="producto">
+                                    {{producto.descripcionBanco}}
+                                </mat-option>
+                            </mat-autocomplete>
+
+                        </mat-form-field>
+                    </form>
+                </div>
+                <div class="col-md-4">
+                    <mat-form-field appearance="fill">
+                        <mat-label>Tipo de Cuenta </mat-label>
+                        <mat-select [(ngModel)]="profesional.cuenta.tipoCuenta" name="tipoCuenta" formControlName="tipoCuenta">
+                            <mat-option *ngFor="let tipoCuenta of tiposCuentas" [value]="tipoCuenta.idTipoCuenta">
+                                {{tipoCuenta.descripcionTipoCuenta}}
+                            </mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                </div>
+                <div class="col-md-4">
+                    <mat-form-field appearance="outline">
+                        <mat-label>Número de cuenta</mat-label>
+                        <input matInput placeholder="Número de cuenta" formControlName="numeroCuenta" />
+                    </mat-form-field>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-4">
+                    <mat-form-field appearance="fill">
+                        <mat-label>Profesión </mat-label>
+                        <mat-select [(ngModel)]="profesional.profesionProfesional.tercerNivelProfesionProfesional" name="Profesion" formControlName="profesion">
+                            <mat-option *ngFor="let profesion of profesionProfesionales" [value]="profesion.idProfesionProfesional">
+                                {{profesion.tercerNivelProfesionProfesional}}
+                            </mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                </div>
+                <div class="col-md-4">
+                    <mat-form-field appearance="outline">
+                        <mat-label>Clave</mat-label>
+                        <input matInput placeholder="Usuario" formControlName="password" />
+                    </mat-form-field>
+                </div>
+                <div class="col-md-4">
+                    <mat-form-field appearance="outline">
+                        <mat-label>Repita la clave</mat-label>
+                        <input matInput placeholder="Repita el usuario" formControlName="password2" />
+                    </mat-form-field>
+                </div>
+            </div>
+
+
+        </div>
+    </form>
+
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+    <button class="mat-stroked-button-cancelar" (click)="cancelar()">Cancelar</button>
+    <button class="mat-stroked-button-guardar" (click)="editarInformacionProfesional(profesional)">Guardar</button>
+</mat-dialog-actions>

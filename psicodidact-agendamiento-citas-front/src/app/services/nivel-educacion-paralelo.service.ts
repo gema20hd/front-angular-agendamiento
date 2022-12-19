@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { catchError, Observable, throwError } from 'rxjs';
 import { Genero } from '../models/genero';
-import { NivelEducacionParalelo } from '../models/nivel-educacion-paralelo';
+import { NivelEducacionParalelo } from '../models/nivelEducacionParalelo';
 import { AuthService } from '../users/login/auth.service';
 import swal from 'sweetalert2';
 

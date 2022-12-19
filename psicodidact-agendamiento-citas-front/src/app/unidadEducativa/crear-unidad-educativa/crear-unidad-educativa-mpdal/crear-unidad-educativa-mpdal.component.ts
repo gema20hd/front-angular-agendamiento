@@ -3,11 +3,11 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Component, Inject, OnInit } from '@angular/core';
-import { UnidadEducativa } from '../../unidad-educativa/unidadEducativa';
 import { Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
-import { UnidadEducativaService } from '../../unidad-educativa/unidadEducativa.service';
+import { UnidadEducativaService } from '../../../services/unidadEducativa.service';
 import Swal from 'sweetalert2';
+import { UnidadEducativa } from 'src/app/models/unidadEducativa';
 
 
 @Component({
@@ -20,8 +20,7 @@ import Swal from 'sweetalert2';
 export class CrearUnidadEducativaMpdalComponent implements OnInit{
 
   mostrarColumnas: string[] = ['nombre', 'direccion','codigo'];
-  //mostrarColumnasAlumnos: string[] = ['id', 'nombre', 'apellido', 'email', 'eliminar'];
-
+  
   dialogForm!: FormGroup;
   unidadesEducativasAsignar: UnidadEducativa [] = [];
   autocompleteControlNombre = new FormControl();
@@ -39,7 +38,7 @@ export class CrearUnidadEducativaMpdalComponent implements OnInit{
   @Inject(MAT_DIALOG_DATA) public data: any,
   public modalRef: MatDialogRef<CrearUnidadEducativaMpdalComponent>,
   public http: HttpClient,
-  public unidadEducativaService: UnidadEducativaService
+  private unidadEducativaService: UnidadEducativaService
 
   ) {this.unidadEducativa = new UnidadEducativa()}
 
@@ -59,16 +58,10 @@ export class CrearUnidadEducativaMpdalComponent implements OnInit{
   create(): void {
     
     this.unidadEducativaService.create(this.unidadEducativa)
-      .subscribe(
-        unidadEducativa => {
+      .subscribe(unidadEducativa => {
           this.router.navigate(['/unidadEducativa']);
           console.log(" hola ....",unidadEducativa);
           Swal.fire('Nueva unidad educativa', `La unidad educativa ${unidadEducativa.nombreUnidadEducativa} ha sido creado con éxito`, 'success');
-        },
-        err => {
-          this.errores = err.error.errors as string[];
-          console.error('Código del error desde el backend: ' + err.status);
-          console.error(err.error.errors);
         }
       );
   }

@@ -1,6 +1,6 @@
 import { Component, Inject } from '@angular/core';
-import { Profesional } from '../../profesional';
-import { ProfesionalesService } from '../../profesionales.service';
+import { Profesional } from '../../../../models/profesional';
+import { ProfesionalesService } from '../../../../services/profesionales.service';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { TipoDiscapacidad } from 'src/app/models/tipoDiscapacidad';
@@ -11,8 +11,6 @@ import { Discapacidad } from 'src/app/models/discapacidad';
 import { TipoSangre } from 'src/app/models/tipoSangre';
 import { TipoCuenta } from 'src/app/models/tipoCuenta';
 import { ProfesionProfesional } from 'src/app/models/profesionProfesional';
-import { CuentasService } from '../../services/cuentas.service';
-import { UsuariosService } from '../../services/usuarios.service';
 import { Cuenta } from 'src/app/models/cuenta';
 import { Usuario } from 'src/app/users/login/usuario';
 import { HttpClient } from '@angular/common/http';
@@ -21,6 +19,8 @@ import { ActivatedRoute, Router } from '@angular/router';
 import Swal from 'sweetalert2';
 import { flatMap, map, Observable } from 'rxjs';
 import { MatAutocompleteSelectedEvent } from '@angular/material/autocomplete';
+import { UsuariosService } from 'src/app/services/usuarios.service';
+import { CuentasService } from 'src/app/services/cuentas.service';
 
 @Component({
   selector: 'app-crear-profesional-modal',
@@ -129,8 +129,8 @@ export class CrearProfesionalModalComponent {
     password : new FormControl('',Validators.required),
     password2: new FormControl('',Validators.required),
     enabled : new FormControl('',Validators.required),
-    rol: new FormControl('',Validators.required),
     profesional: new FormControl('',Validators.required),
+    profesion: new FormControl('',Validators.required),
 
 
   });
@@ -154,8 +154,8 @@ export class CrearProfesionalModalComponent {
     this.profesionalService.create(this.profesional)
       .subscribe(
         profesional => {
-          this.router.navigate(['/profesionales']);
           Swal.fire('Nuevo profesional', `El Profesional ${profesional.nombresProfesional} ha sido creado con éxito`, 'success');
+          this.router.navigate(['/profesionales']);
         },
         err => {
           this.errores = err.error.errors as string[];

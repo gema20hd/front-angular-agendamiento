@@ -1,11 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { Profesional } from './profesional';
+import { Profesional } from '../../models/profesional';
 import swal from 'sweetalert2';
 import { HttpClient } from '@angular/common/http';
 import { AuthService } from 'src/app/users/login/auth.service';
-import { ProfesionalesService } from './profesionales.service';
+import { ProfesionalesService } from '../../services/profesionales.service';
 import { ActivatedRoute, Router } from '@angular/router';
-import { FormControl } from '@angular/forms';
+import { FormControl, FormGroup } from '@angular/forms';
 import { Genero } from 'src/app/models/genero';
 import { EstadoCivil } from 'src/app/models/estadoCivil';
 import { Discapacidad } from 'src/app/models/discapacidad';
@@ -25,7 +25,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { DetalleProfesionalModalComponent } from './detalles_profesional/detalle-profesional-modal/detalle-profesional-modal.component';
 import { EditarProfesionalModalComponent } from './editar_profesional/editar-profesional-modal/editar-profesional-modal.component';
 import { CrearProfesionalModalComponent } from './crear_profesional/crear-profesional-modal/crear-profesional-modal.component';
-import { AuxProfesional } from 'src/app/models/auxProfesional';
+
 
 
 @Component({
@@ -58,10 +58,10 @@ export class ProfessionalComponent {
 
   titulo: string = 'Nuevo Profesional';
   profesional: Profesional = new Profesional();
-  auxProfesionales: AuxProfesional[] =[];
   banco: Banco = new Banco();
   genero: Genero = new Genero();
 
+  dialogForm!: FormGroup;
 
 
   profesionales: Profesional[] = [];

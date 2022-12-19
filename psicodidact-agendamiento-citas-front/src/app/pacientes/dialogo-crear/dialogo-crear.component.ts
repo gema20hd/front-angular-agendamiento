@@ -3,11 +3,10 @@ import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms'
 import { catchError, map, Observable, startWith } from 'rxjs';
 import { Antecedente } from 'src/app/models/antecedente';
 import { Genero } from 'src/app/models/genero';
-import { NivelEducacionParalelo } from 'src/app/models/nivel-educacion-paralelo';
+import { NivelEducacionParalelo } from 'src/app/models/nivelEducacionParalelo';
 import { Profesion } from 'src/app/models/profesion';
 
 import { Trabajo } from 'src/app/models/trabajo';
-import { UnidadEducativa } from 'src/app/models/unidad-educativa';
 import { AntecedenteService } from 'src/app/services/antecedente.service';
 import { GeneroService } from 'src/app/services/genero.service';
 import { NivelEducacionParaleloService } from 'src/app/services/nivel-educacion-paralelo.service';
@@ -26,10 +25,11 @@ import { PacienteService } from 'src/app/services/paciente.service';
 import Swal from 'sweetalert2';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { TipoTrabajoService } from 'src/app/services/tipo-trabajo.service';
-import { TipoTrabajo } from 'src/app/models/tipo-trabajo';
+import { TipoTrabajo } from 'src/app/models/tipoTrabajo';
 import { EstadoCivil } from 'src/app/models/estadoCivil';
 import { TipoSangre } from 'src/app/models/tipoSangre';
 import { TipoDiscapacidad } from 'src/app/models/tipoDiscapacidad';
+import { UnidadEducativa } from 'src/app/models/unidadEducativa';
 
 @Component({
   selector: 'app-dialogo-crear',

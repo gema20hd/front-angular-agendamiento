@@ -1,5 +1,43 @@
 .my-select {
-    width: 200px;
-    max-width: 200px;
+    width: 160px;
+    max-width: 160px;
     font-size: 15px;
+}
+
+.mat-stroked-button-guardar {
+    letter-spacing: 0.05em;
+    border: none;
+    font-size: 13px;
+    color: #ffffff;
+    font-weight: bold;
+    background-color: #00A7E3;
+    max-width: 100%;
+    display: block;
+    padding: 8px;
+    border-radius: 0.5rem;
+    box-shadow: 3px 3px 8px #b1b1b1, -3px -3px 8px #ffffff;
+    cursor: pointer;
+    margin: 10px;
+}
+
+.mat-stroked-button-cancelar {
+    margin: 10px;
+    border: none;
+    font-size: 13px;
+    color: #ffffff;
+    font-weight: bold;
+    background-color: #cf1635;
+    max-width: 100%;
+    display: block;
+    padding: 8px;
+    border-radius: 0.5rem;
+    box-shadow: 3px 3px 8px #b1b1b1, -3px -3px 8px #ffffff;
+    cursor: pointer;
+}
+
+.text-title {
+    color: #00A7E3;
+    font-size: 20px;
+    font-weight: 600;
+    text-align: center;
 }

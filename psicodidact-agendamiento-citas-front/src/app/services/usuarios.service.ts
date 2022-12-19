@@ -4,8 +4,8 @@ import { Router } from '@angular/router';
 import { catchError, map, Observable, throwError } from 'rxjs';
 import { AuthService } from 'src/app/users/login/auth.service';
 import { Usuario } from 'src/app/users/login/usuario';
-import { Profesional } from '../profesional';
 import swal from 'sweetalert2';
+import { Profesional } from '../models/profesional';
 
 @Injectable({
   providedIn: 'root'
@@ -26,7 +26,7 @@ export class UsuariosService {
     private agregarAuthorizationHeader() {
      
       let token = sessionStorage.getItem('token');
-      //console.log("token desde sessionStorage",token)
+      console.log("token desde sessionStorage",token)
      
       if (token != null) {
         return this.httpHeaders.append('Authorization', 'Bearer ' + token);

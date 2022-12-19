@@ -1,4 +1,4 @@
-import { TipoTrabajo } from "./tipo-trabajo";
+import { TipoTrabajo } from "./tipoTrabajo";
 
 export class Trabajo {
 

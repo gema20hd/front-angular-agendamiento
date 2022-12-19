@@ -2,9 +2,9 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { catchError, Observable, throwError } from 'rxjs';
-import { UnidadEducativa } from '../models/unidad-educativa';
 import { AuthService } from '../users/login/auth.service';
 import swal from 'sweetalert2';
+import { UnidadEducativa } from '../models/unidadEducativa';
 
 @Injectable({
   providedIn: 'root'

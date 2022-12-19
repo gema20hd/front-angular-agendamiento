@@ -2,7 +2,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { catchError, Observable, throwError } from 'rxjs';
-import { TipoTrabajo } from '../models/tipo-trabajo';
+import { TipoTrabajo } from '../models/tipoTrabajo';
 import { AuthService } from '../users/login/auth.service';
 import swal from 'sweetalert2';
 

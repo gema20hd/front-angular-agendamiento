@@ -8,13 +8,13 @@ import { flatMap, map, Observable } from 'rxjs';
 import { AuthService } from 'src/app/users/login/auth.service';
 import Swal from 'sweetalert2';
 import { CrearUnidadEducativaMpdalComponent } from '../crear-unidad-educativa/crear-unidad-educativa-mpdal/crear-unidad-educativa-mpdal.component';
-import { UnidadEducativa } from './unidadEducativa';
-import { UnidadEducativaService } from './unidadEducativa.service';
+import { UnidadEducativaService } from '../../services/unidadEducativa.service';
 import { MatDialog } from '@angular/material/dialog';
 import { MatTableDataSource } from '@angular/material/table';
 import { Profesional } from 'src/app/models/profesional';
 import { DetallesUnidadEducativaModalComponent } from '../detalles_unidad_educativa/detalles-unidad-educativa-modal/detalles-unidad-educativa-modal.component';
 import { EditarUnidadEducativaModalComponent } from '../editar-unidad-educativa/editar-unidad-educativa-modal/editar-unidad-educativa-modal.component';
+import { UnidadEducativa } from 'src/app/models/unidadEducativa';
 
 
 @Component({

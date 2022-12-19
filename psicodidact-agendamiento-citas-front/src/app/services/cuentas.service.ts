@@ -3,9 +3,9 @@ import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { Cuenta } from 'src/app/models/cuenta';
 import { AuthService } from 'src/app/users/login/auth.service';
-import { Profesional } from '../profesional';
 import swal from 'sweetalert2';
 import { catchError, map, Observable, throwError } from 'rxjs';
+import { Profesional } from '../models/profesional';
 
 @Injectable({
   providedIn: 'root'

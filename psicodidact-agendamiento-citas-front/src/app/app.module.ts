@@ -14,9 +14,9 @@ import {HttpClientModule, HTTP_INTERCEPTORS} from '@angular/common/http';
 import { LoginComponent } from './users/login/login.component';
 import { PageComponent } from './error_page/page/page.component';
 import { ProfessionalComponent } from './professional/professional/professional.component';
-import { ProComponent } from './pro/pro/pro.component';
 
-import { ProfesionalesService } from './professional/professional/profesionales.service';
+
+import { ProfesionalesService } from './services/profesionales.service';
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core'
 import { MatTableModule } from '@angular/material/table'
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
@@ -65,7 +65,7 @@ import { DialogInformacionComponent } from './pacientes/dialog-informacion/dialo
     PageComponent,
     ProfessionalComponent,
     ProfessionalComponent,
-    ProComponent,
+
     PacientesComponent,
     DialogoCrearComponent,
     DialogInformacionComponent,

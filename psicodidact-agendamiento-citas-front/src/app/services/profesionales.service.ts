@@ -12,7 +12,7 @@ import { TipoCuenta } from 'src/app/models/tipoCuenta';
 import { TipoDiscapacidad } from 'src/app/models/tipoDiscapacidad';
 import { TipoSangre } from 'src/app/models/tipoSangre';
 import { AuthService } from 'src/app/users/login/auth.service';
-import { Profesional } from './profesional';
+import { Profesional } from '../models/profesional';
 import swal from 'sweetalert2';
 
 
