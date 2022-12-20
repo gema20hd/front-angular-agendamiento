@@ -18,7 +18,7 @@ export class Representante {
     telefonoEmergenciaRepresentante?:string;
     parentescoRepresentante?:string;
     direccionDomicilioRepresentan?:string;
-    estadoRepresentante?:boolean;
+    estadoRepresentante?:string;
     estadoCivil?:  EstadoCivil;
     tipoSangre?:TipoSangre;
     //ingreso

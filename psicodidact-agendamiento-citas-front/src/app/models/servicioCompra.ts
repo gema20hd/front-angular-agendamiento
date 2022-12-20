@@ -7,7 +7,7 @@ export class ServicioCompra {
     servicio?:Servicio;
     especialidad?:Especialidad;
     descripcionServicioCompra?:string;
-    costoServicioCompra?:string;
+    costoServicioCompra?:number;
    
 
 }

@@ -2,8 +2,8 @@ export class Asistencia {
  
     idAsistencia?:number;
     estadoAsistencia?:string;
-    estadoReagendado?:string;
-    estadoJutificado?:string;
-  
+    estadoReagendado?:number;
+    estadoJutificado?:number;
+    fechaCreacion?:Date;
 
 }

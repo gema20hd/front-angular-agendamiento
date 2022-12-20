@@ -21,6 +21,6 @@ export class Cita {
   profesionalCita?: Profesional;
   subServicioCita?: SubServicio;
   asistenciaCita?: Asistencia;
-  
+  fechaCreacion?:Date;
 }
   

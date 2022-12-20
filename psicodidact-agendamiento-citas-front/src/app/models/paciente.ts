@@ -22,7 +22,7 @@ export class Paciente {
     telefonoPaciente?:string;
     correoElectronicoPaciente?:string;
     apellidoMaternoPaciente?:string;
-    estadoPaciente?:boolean;
+    estadoPaciente?:string;
     //ingreso
     representante?:  Representante;
     //id

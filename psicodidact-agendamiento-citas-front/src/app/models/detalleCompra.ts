@@ -10,7 +10,7 @@ export class DetalleCompra {
     descuentoDetalleCompra?:number;
     periodoDetalleCompra?:string;
     totalPagarDetalleCompra?:number;
-	
+	createAt?:Date;
 
 	
 }
