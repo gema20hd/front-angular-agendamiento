@@ -38,10 +38,6 @@
     </form>
 </mat-dialog-content>
 <mat-dialog-actions align="end">
-    <button mat-button (click)="cancelar()">Cancelar</button>
-    <div class="col-sm-6">
-        <button class="btn btn-primary" role="button" (click)='create()'>Crear</button>
-
-
-    </div>
+    <button class="mat-stroked-button-cancelar" (click)="cancelar()">Cancelar</button>
+    <button class="mat-stroked-button-guardar" (click)='create()'>Crear</button>
 </mat-dialog-actions>

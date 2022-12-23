@@ -87,3 +87,14 @@ table {
     background-color: transparent;
     border: none;
 }
+
+table {
+    width: 100%;
+    margin-top: 1px;
+    margin-left: 0px;
+    padding-left: 0px;
+}
+
+.mat-header-row {
+    text-align: center;
+}

@@ -42,6 +42,8 @@ table {
     margin-top: 1px;
 }
 
+.mat-header-row {}
+
 .etiqueta {
     text-align: center;
 }

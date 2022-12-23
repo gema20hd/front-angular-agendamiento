@@ -1,6 +1,6 @@
 <h2 mat-dialog-title class="text-title">{{titulo}}</h2>
 <mat-dialog-content>
-    <form [formGroup]="dialogForm">
+    <form [formGroup]="dialogForm" novalidate>
         <div class="container">
 
 
@@ -72,6 +72,10 @@
                 </div>
             </div>
             <div class="row">
+                <mat-radio-group aria-label="Select an option">
+                    <mat-radio-button value="1">SI </mat-radio-button>
+                    <mat-radio-button [checked]="true" value="2">NO </mat-radio-button>
+                </mat-radio-group>
                 <div class="col-md-4">
                     <mat-form-field appearance="fill">
                         <mat-label>Tipo Discapacidad</mat-label>
@@ -180,13 +184,23 @@
                 <div class="col-md-4">
                     <mat-form-field appearance="outline">
                         <mat-label>Clave</mat-label>
-                        <input [(ngModel)]="usuario.password" matInput placeholder="Usuario" formControlName="password" />
+                        <input type="password" [(ngModel)]="usuario.password" matInput placeholder="Usuario" formControlName="password" [ngClass]="verifyPasswords('password', dialogForm)" />
+                        <div *ngIf="!isFieldValid('password', dialogForm)" class="invalid-feedback">
+                            Inválido
+                        </div>
+
                     </mat-form-field>
                 </div>
                 <div class="col-md-4">
                     <mat-form-field appearance="outline">
                         <mat-label>Repita la clave</mat-label>
-                        <input [(ngModel)]="usuario.passwordRepeat" matInput placeholder="Repita el usuario" formControlName="password2" />
+                        <input type="password" [(ngModel)]="usuario.passwordRepeat" matInput placeholder="Repita el usuario" formControlName="confirmPassword" [ngClass]="verifyPasswords('confirmPassword', dialogForm)" />
+                        <div *ngIf="!isFieldValid('confirmPassword', dialogForm)" class="invalid-feedback">
+                            Inválido
+                        </div>
+                        <div *ngIf="!passwordsMatch(dialogForm)" class="invalid-feedback">
+                            Las contraseñas no coinciden.
+                        </div>
                     </mat-form-field>
                 </div>
             </div>

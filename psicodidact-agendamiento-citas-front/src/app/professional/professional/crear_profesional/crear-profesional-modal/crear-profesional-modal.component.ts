@@ -127,8 +127,8 @@ export class CrearProfesionalModalComponent {
 
 
     username : new FormControl('',Validators.required),
-    password : new FormControl('',Validators.required),
-    password2: new FormControl('',Validators.required),
+    password: ['', [Validators.required]],
+    confirmPassword: ['', [Validators.required]],
     enabled : new FormControl('',Validators.required),
     profesional: new FormControl('',Validators.required),
     profesion: new FormControl('',Validators.required),
@@ -292,6 +292,35 @@ compararTipoCuenta(o1: TipoCuenta, o2: TipoCuenta): boolean {
   return o1 === null || o2 === null || o1 === undefined || o2 === undefined ? false : o1.idTipoCuenta === o1.idTipoCuenta;
 }
 
+
+
+     public passwordsMatch = (_form: FormGroup): boolean => {
+      if (_form.controls['password'].touched && _form.controls['confirmPassword'].touched) {
+          if (_form.value.password === _form.value.confirmPassword) {
+              return true;
+          } else {
+              return false;
+          }
+      }
+      return true;
+  }
+
+
+  public verifyPasswords = (_field: string, _form: FormGroup): any => {
+      let result = false;
+      if (!this.passwordsMatch(_form) || !this.isFieldValid(_field, _form)) {
+          result = true;
+      }
+      return { 'is-invalid': result };
+  }
+
+  public isFieldValid(_field: string, _form: FormGroup): boolean {
+      let valid = true;
+      if (_form.get(_field)?.invalid && _form.get(_field)?.touched) {
+          valid = false;
+      }
+      return valid;
+  }
 
 
 

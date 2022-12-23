@@ -87,3 +87,7 @@ table {
     background-color: transparent;
     border: none;
 }
+
+.mat-header-row {
+    text-align: center;
+}
