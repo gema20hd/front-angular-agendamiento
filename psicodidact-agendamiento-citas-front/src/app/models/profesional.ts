@@ -18,10 +18,10 @@ export class Profesional {
     telefonoEmergenciaProfesional: string = "";
     direccionDomicilioProfesional: string = "";
     correoElectronicoProfesional: string = "";
-    estadoProfesional: string = "";
-    hojaVida: string = "";
-    nivelEducacion: string = "";
-    tituloCuartoNivelProfesional: string = "";
+    estadoProfesional: string = "ACTIVO";
+    hojaVida: string = "SI";
+    nivelEducacion: string = "TERCER NIVEL";
+    tituloCuartoNivelProfesional: string = "NO TIENE";
     estadoCivil: EstadoCivil = new EstadoCivil;
     tipoSangre: TipoSangre = new TipoSangre();
     discapacidad: Discapacidad = new Discapacidad();

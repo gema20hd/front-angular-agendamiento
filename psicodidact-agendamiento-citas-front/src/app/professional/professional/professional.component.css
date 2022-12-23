@@ -51,13 +51,13 @@ table {
 .mat-stroked-button {
     letter-spacing: 0.05em;
     border: none;
-    font-size: 12px;
+    font-size: 14px;
     color: #ffffff;
     font-weight: bold;
     background-color: #00A7E3;
     max-width: 100%;
     display: block;
-    padding: 10px;
+    padding: 9px;
     border-radius: 0.5rem;
     box-shadow: 3px 3px 8px #b1b1b1, -3px -3px 8px #ffffff;
     cursor: pointer;

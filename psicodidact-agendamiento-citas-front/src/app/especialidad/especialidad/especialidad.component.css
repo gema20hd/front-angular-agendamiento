@@ -1,14 +1,89 @@
+.panel {
+    width: 100%;
+    max-width: 100%;
+    margin: 0 auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
 
 table {
     width: 100%;
+    max-width: 100%;
+    margin: 0 auto;
+}
+
+#miid::placeholder {
+    color: rgb(19, 18, 18);
+    margin-left: 0px !important;
+}
+
+#body {
+    padding-top: 30px;
+    padding-bottom: 30px;
 }
 
 .example-form {
-    min-width: 150px;
-    max-width: 500px;
+    min-width: 20%;
+    max-width: 60%;
     width: 100%;
 }
 
 .example-full-width {
     width: 100%;
+}
+
+.card {
+    max-width: 100%;
+    min-width: 10%;
+    text-align: center;
+    display: inline-block;
+    margin: 0 auto;
+    width: 83%;
+}
+
+.text-buscar {
+    font-size: 18px;
+    color: #00A7E3;
+}
+
+.mat-stroked-button {
+    letter-spacing: 0.05em;
+    border: none;
+    font-size: 14px;
+    color: #ffffff;
+    font-weight: bold;
+    background-color: #00A7E3;
+    max-width: 100%;
+    display: block;
+    padding: 9px;
+    border-radius: 0.5rem;
+    box-shadow: 3px 3px 8px #b1b1b1, -3px -3px 8px #ffffff;
+    cursor: pointer;
+}
+
+.mat-header-row {
+    font-size: 14px;
+    color: #0e0101;
+}
+
+.button-icon-info {
+    cursor: pointer;
+    color: #036A1C;
+}
+
+.button-info {
+    background-color: transparent;
+    border: none;
+}
+
+.button-icon-edict {
+    cursor: pointer;
+    color: #00A7E3;
+}
+
+.button-edict {
+    background-color: transparent;
+    border: none;
 }

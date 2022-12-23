@@ -86,13 +86,13 @@
                 <div class="col-md-4">
                     <mat-form-field appearance="outline">
                         <mat-label>Porcentaje</mat-label>
-                        <input matInput placeholder="Porcentaje" formControlName="porcentajeDiscapacidad" />
+                        <input [(ngModel)]="profesional.discapacidad.porcetajeDiscapacidad" matInput placeholder="Porcentaje" formControlName="porcentajeDiscapacidad" />
                     </mat-form-field>
                 </div>
                 <div class="col-md-4">
                     <mat-form-field appearance="outline">
                         <mat-label>Descripción</mat-label>
-                        <input matInput placeholder="Descripción de la Discapacidad" formControlName="descripcionDiscpacidad" />
+                        <input [(ngModel)]="profesional.discapacidad.descripcionDiscapacidad" matInput placeholder="Descripción de la Discapacidad" formControlName="descripcionDiscpacidad" />
                     </mat-form-field>
                 </div>
             </div>
@@ -161,7 +161,7 @@
                 <div class="col-md-4">
                     <mat-form-field appearance="outline">
                         <mat-label>Número de cuenta</mat-label>
-                        <input matInput placeholder="Número de cuenta" formControlName="numeroCuenta" />
+                        <input [(ngModel)]="profesional.cuenta.numeroCuenta" matInput placeholder="Número de cuenta" formControlName="numeroCuenta" />
                     </mat-form-field>
                 </div>
             </div>
@@ -180,13 +180,13 @@
                 <div class="col-md-4">
                     <mat-form-field appearance="outline">
                         <mat-label>Clave</mat-label>
-                        <input matInput placeholder="Usuario" formControlName="password" />
+                        <input [(ngModel)]="usuario.password" matInput placeholder="password" formControlName="password" />
                     </mat-form-field>
                 </div>
                 <div class="col-md-4">
                     <mat-form-field appearance="outline">
                         <mat-label>Repita la clave</mat-label>
-                        <input matInput placeholder="Repita el usuario" formControlName="password2" />
+                        <input [(ngModel)]="usuario.passwordRepeat" matInput placeholder="Repita el password" formControlName="password2" />
                     </mat-form-field>
                 </div>
             </div>

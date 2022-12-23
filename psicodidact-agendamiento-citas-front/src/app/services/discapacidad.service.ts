@@ -52,7 +52,8 @@ export class DiscapacidadService {
 
   listarDiscapacidad():Observable<Discapacidad[]>{
 
-    return this.http.get<Discapacidad[]>(this.urlEndPointDiscapacidad,{ headers: this.agregarAuthorizationHeader()}).pipe(
+    return this.http.get<Discapacidad[]>(this.urlEndPointDiscapacidad,
+      { headers: this.agregarAuthorizationHeader()}).pipe(
       catchError(e => {
         this.isNoAutorizado(e);
         return throwError(e);
@@ -63,7 +64,8 @@ export class DiscapacidadService {
 
 
   crearDiscapacidad(discapacidad: Discapacidad): Observable<Discapacidad> {
-    return this.http.post(this.urlEndPointDiscapacidad,discapacidad,{ headers: this.agregarAuthorizationHeader()})
+    return this.http.post(this.urlEndPointDiscapacidad,discapacidad,
+      { headers: this.agregarAuthorizationHeader()})
       .pipe(
         map((response: any) => response.discapacidad as Discapacidad),
         catchError(e => {

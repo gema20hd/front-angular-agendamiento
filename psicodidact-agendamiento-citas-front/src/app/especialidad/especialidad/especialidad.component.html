@@ -4,86 +4,80 @@
 <br>
 <br>
 <br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
+<div class="row py-5">
+    <mat-card class="card">
+        <mat-card-title class="card_title">Panel de búsqueda</mat-card-title>
+    </mat-card>
+    <mat-card class="card">
+        <div class="row">
+            <div class="col-sm-8">
+                <form class="example-form">
+                    <mat-form-field class="example-full-width" appearance="fill">
+                        <mat-label class="text-buscar">Nombre de especialidad</mat-label>
+                        <input type="text" placeholder="Seleccioné un elemento" aria-label="Especialidades" matInput [formControl]="autocompleteControlNombre" [matAutocomplete]="auto">
+                        <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete" [displayWith]="mostrarNombre" (optionSelected)="seleccionarNombre($event)">
+                            <mat-option *ngFor="let especialidad of especialidadesFiltrados | async" [value]="especialidad">
+                                {{ especialidad.descripcionEspecialidad }}
+                            </mat-option>
+                        </mat-autocomplete>
+                    </mat-form-field>
+                </form>
+            </div>
+
+            <div class="col-sm-4">
+                <button class="mat-stroked-button" (click)="crearEspecialidad()">Crear Especialidad</button>
+            </div>
+
+
+        </div>
+    </mat-card>
+</div>
+
 <div class="row">
-    <div class="col-sm-6">
-        <form class="example-form">
-            <mat-form-field class="example-full-width" appearance="fill">
-                <mat-label>Nombre de especialidad</mat-label>
-                <input type="text" placeholder="Seleccioné un elemento" aria-label="Especialidades" matInput [formControl]="autocompleteControlNombre" [matAutocomplete]="auto">
-                <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete" [displayWith]="mostrarNombre" (optionSelected)="seleccionarNombre($event)">
-                    <mat-option *ngFor="let especialidad of especialidadesFiltrados | async" [value]="especialidad">
-                        {{ especialidad.descripcionEspecialidad }}
-                    </mat-option>
-                </mat-autocomplete>
-            </mat-form-field>
-        </form>
-    </div>
+    <mat-card class="card">
+        <table mat-table [dataSource]="especialidadesFiltrados" class="table table-bordered jumbotron">
+            <!-- Name Column -->
+            <ng-container matColumnDef="nombre">
+                <th class="mat-header-row" mat-header-cell *matHeaderCellDef> Nombre de especialidad</th>
+                <td mat-cell *matCellDef="let especialidad"> {{especialidad.descripcionEspecialidad}} </td>
+            </ng-container>
 
-    <div class="col-sm-4">
-        <button mat-stroked-button color="primary" (click)="crearEspecialidad()">Crear Especialidad</button>
-    </div>
+            <!-- Weight Column -->
+            <ng-container matColumnDef="fechaIngreso">
+                <th class="mat-header-row" mat-header-cell *matHeaderCellDef> Fecha de ingreso </th>
+                <td mat-cell *matCellDef="let especialidad"> {{especialidad.fechaIngreso}} </td>
+            </ng-container>
 
 
+            <ng-container matColumnDef="editar">
+                <th class="mat-header-row" mat-header-cell *matHeaderCellDef>Editar</th>
+                <td mat-cell *matCellDef="let especialidad">
+                    <button mat-icon-button class="button-edict" (click)="editarEspecialidad(especialidad)">
+                <mat-icon class="button-icon-edict" matTooltip="editar">editar</mat-icon>
+            </button>
+
+                </td>
+            </ng-container>
+
+            <ng-container matColumnDef="ver">
+                <th class="mat-header-row" mat-header-cell *matHeaderCellDef>Ver detalle</th>
+                <td mat-cell *matCellDef="let especialidad">
+                    <button mat-icon-button color="warn" class="button-info" (click)="verInformacionEspecialidad(especialidad)"><mat-icon class="button-icon-info" matTooltip="ver">info</mat-icon></button>
+
+                </td>
+            </ng-container>
+
+            <tr mat-header-row *matHeaderRowDef="mostrarColumnas "></tr>
+            <tr mat-row *matRowDef="let row; columns: mostrarColumnas; "></tr>
+        </table>
+    </mat-card>
 </div>
 <br>
 <br>
 <br>
 <br>
 <br>
+<br>
 
-<table mat-table [dataSource]="especialidadesFiltrados" class="mat-elevation-z8">
-    <!-- Name Column -->
-    <ng-container matColumnDef="nombre">
-        <th mat-header-cell *matHeaderCellDef> nombre de especialidad</th>
-        <td mat-cell *matCellDef="let especialidad"> {{especialidad.descripcionEspecialidad}} </td>
-    </ng-container>
-
-    <!-- Weight Column -->
-    <ng-container matColumnDef="fechaIngreso">
-        <th mat-header-cell *matHeaderCellDef> Fecha de ingreso </th>
-        <td mat-cell *matCellDef="let especialidad"> {{especialidad.fechaIngreso}} </td>
-    </ng-container>
-
-
-    <!-- Symbol Column -->
-    <ng-container matColumnDef="editar">
-        <th mat-header-cell *matHeaderCellDef>Editar</th>
-        <td mat-cell *matCellDef="let especialidad">
-            <button mat-stroked-button color="primary" (click)="editarEspecialidad(especialidad)">Editar</button>
-        </td>
-    </ng-container>
-    <!-- Symbol Column -->
-    <ng-container matColumnDef="ver">
-        <th mat-header-cell *matHeaderCellDef>Ver detalle</th>
-        <td mat-cell *matCellDef="let especialidad">
-            <button mat-stroked-button color="primary" (click)="verInformacionEspecialidad(especialidad)">Ver</button>
-        </td>
-    </ng-container>
-
-    <tr mat-header-row *matHeaderRowDef="mostrarColumnas "></tr>
-    <tr mat-row *matRowDef="let row; columns: mostrarColumnas; "></tr>
-</table>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
 
 <app-footer></app-footer>

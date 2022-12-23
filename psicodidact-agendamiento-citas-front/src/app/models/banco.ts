@@ -1,5 +1,5 @@
 export class Banco {
-    idBanco: number =0;
+    idBanco: number =1;
     descripcionBanco: string="";
   }
   

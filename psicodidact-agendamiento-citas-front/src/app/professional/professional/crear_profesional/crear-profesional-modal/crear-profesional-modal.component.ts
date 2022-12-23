@@ -21,6 +21,7 @@ import { flatMap, map, Observable } from 'rxjs';
 import { MatAutocompleteSelectedEvent } from '@angular/material/autocomplete';
 import { UsuariosService } from 'src/app/services/usuarios.service';
 import { CuentasService } from 'src/app/services/cuentas.service';
+import { DiscapacidadService } from 'src/app/services/discapacidad.service';
 
 @Component({
   selector: 'app-crear-profesional-modal',
@@ -74,7 +75,7 @@ export class CrearProfesionalModalComponent {
     private usuarioService:UsuariosService,
     public http: HttpClient,
     public authService: AuthService,
-
+    private discapacidadService:DiscapacidadService,
     public router: Router,
     public dialog: MatDialog,
     public activatedRoute: ActivatedRoute,
@@ -149,20 +150,81 @@ export class CrearProfesionalModalComponent {
 
   }
 
+ 
   create(): void {
-    console.log(this.profesional);
-    this.profesionalService.create(this.profesional)
-      .subscribe(
-        profesional => {
-          Swal.fire('Nuevo profesional', `El Profesional ${profesional.nombresProfesional} ha sido creado con éxito`, 'success');
-          this.router.navigate(['/profesionales']);
-        },
-        err => {
-          this.errores = err.error.errors as string[];
-          console.error('Código del error desde el backend: ' + err.status);
-          console.error(err.error.errors);
-        }
-      );
+
+   this.discapacidadService.crearDiscapacidad(this.discapacidad)
+   .subscribe(
+     discapacidadCreada => {
+      console.log('discapacidad creada con éxito', discapacidadCreada.idDiscapacidad);
+      this.profesional.discapacidad.tipoDiscapacidad.idTipoDiscapacidad = this.discapacidad.tipoDiscapacidad.idTipoDiscapacidad;
+      this.profesional.discapacidad.idDiscapacidad=discapacidadCreada.idDiscapacidad;
+       console.log(" cuenta",this.cuenta);
+       this.cuentaService.create(this.cuenta)
+         .subscribe(
+           cuentaCreada => {
+            console.log('cuenta creada con éxito', cuentaCreada);
+         
+            this.profesional.cuenta.banco.idBanco = this.cuenta.banco.idBanco;
+             this.profesional.cuenta.tipoCuenta.idTipoCuenta = this.cuenta.tipoCuenta.idTipoCuenta;
+             this.profesional.cuenta.idCuenta=cuentaCreada.idCuenta;
+             this.profesional.tipoSangre.idTipoSangre= this.tipoSangre.idTipoSangre;
+             this.profesional.estadoCivil.idEstadoCivil=this.estadoCivil.idEstadoCivil;
+             this.profesional.genero.idGenero= this.genero.idGenero;
+             this.profesional.profesionProfesional.idProfesionProfesional= this.profesionProfesional.idProfesionProfesional;
+           
+             console.log("Lo que se envia Profesional",this.profesional);
+             this.profesionalService.create(this.profesional)
+               .subscribe(
+                 profesionalCreado=> {
+                   console.log("me trae el profesional creado",profesionalCreado);
+                   this.usuario.profesional.idProfesional=profesionalCreado.idProfesional;
+                   this.usuario.username=profesionalCreado.correoElectronicoProfesional;
+                     console.log('lo que envio', this.usuario);
+                    this.usuarioService.create(this.usuario)
+                        .subscribe(
+                  usuario=> {
+                 
+                    console.log('usuario creado con éxito', usuario);
+                  },
+                  err => {
+                    this.errores = err.error.errors as string[];
+                    console.error('Código del error desde el backend: ' + err.status);
+                    console.error(err.error.errors);
+                  }
+                );
+  
+                
+                },
+                 err => {
+                   this.errores = err.error.errors as string[];
+                   console.error('Código del error desde el backend: ' + err.status);
+                   console.error(err.error.errors);
+                 }
+               );
+        
+           },
+           err => {
+             this.errores = err.error.errors as string[];
+             console.error('Código del error desde el backend: ' + err.status);
+             console.error(err.error.errors);
+           }
+         );
+
+
+     },
+     err => {
+       this.errores = err.error.errors as string[];
+       console.error('Código del error desde el backend: ' + err.status);
+       console.error(err.error.errors);
+     }
+   );
+  
+      
+ 
+       
+   
+
   }
 
 //banco
@@ -229,6 +291,9 @@ compararTipoCuenta(o1: TipoCuenta, o2: TipoCuenta): boolean {
   }
   return o1 === null || o2 === null || o1 === undefined || o2 === undefined ? false : o1.idTipoCuenta === o1.idTipoCuenta;
 }
+
+
+
 
 
 

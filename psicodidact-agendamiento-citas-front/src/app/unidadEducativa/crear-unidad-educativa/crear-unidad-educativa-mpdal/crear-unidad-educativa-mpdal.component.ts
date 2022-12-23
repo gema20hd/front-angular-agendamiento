@@ -56,7 +56,6 @@ export class CrearUnidadEducativaMpdalComponent implements OnInit{
 
 
   create(): void {
-    
     this.unidadEducativaService.create(this.unidadEducativa)
       .subscribe(unidadEducativa => {
           this.router.navigate(['/unidadEducativa']);
