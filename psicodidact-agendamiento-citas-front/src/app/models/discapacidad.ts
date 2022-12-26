@@ -1,9 +1,9 @@
 import { TipoDiscapacidad } from "./tipoDiscapacidad";
 
 export class Discapacidad {
-  idDiscapacidad:number =1;
+  idDiscapacidad:number =0;
   porcetajeDiscapacidad?:number =0;
-  descripcionDiscapacidad?:string = "NO TIENE";
+  descripcionDiscapacidad?:string = "";
   tipoDiscapacidad:TipoDiscapacidad = new TipoDiscapacidad();
   }
   

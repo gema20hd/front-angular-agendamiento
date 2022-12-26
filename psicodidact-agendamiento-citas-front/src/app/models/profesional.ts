@@ -28,6 +28,7 @@ export class Profesional {
     genero: Genero = new Genero();
     profesionProfesional: ProfesionProfesional = new ProfesionProfesional();
     cuenta: Cuenta = new Cuenta();
+    edadProfesional: number=0;
 
 
 }

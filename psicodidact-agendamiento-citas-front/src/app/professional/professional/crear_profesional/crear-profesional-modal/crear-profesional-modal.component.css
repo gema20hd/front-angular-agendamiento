@@ -45,3 +45,14 @@
 .mat-mdc-radio-button~.mat-mdc-radio-button {
     margin-left: 16px;
 }
+
+.div_radio {
+    padding-right: 40px;
+}
+
+.text {
+    color: #00A7E3;
+    font-size: 15px;
+    font-weight: 600;
+    text-align: center;
+}

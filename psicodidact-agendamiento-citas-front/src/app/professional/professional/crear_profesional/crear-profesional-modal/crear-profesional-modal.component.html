@@ -1,27 +1,30 @@
 <h2 mat-dialog-title class="text-title">{{titulo}}</h2>
+<ul class="alert alert-danger" *ngIf="errores.length > 0">
+    <li *ngFor="let err of errores">
+        {{ err }}
+    </li>
+</ul>
 <mat-dialog-content>
     <form [formGroup]="dialogForm" novalidate>
         <div class="container">
-
-
             <div class="row">
                 <div class="col-md-4">
                     <mat-form-field appearance="outline">
                         <mat-label>Identificacion</mat-label>
-                        <input [(ngModel)]="profesional.identificacionProfesional" matInput placeholder="Identificacion" formControlName="identificacionProfesional" />
+                        <input type="text" [(ngModel)]="profesional.identificacionProfesional" matInput placeholder="Identificacion" formControlName="identificacionProfesional" />
                     </mat-form-field>
                 </div>
 
                 <div class="col-md-4">
                     <mat-form-field appearance="outline">
                         <mat-label>Nombres</mat-label>
-                        <input [(ngModel)]="profesional.nombresProfesional" matInput placeholder="Nombres" formControlName="nombresProfesional" />
+                        <input type="text" [(ngModel)]="profesional.nombresProfesional" matInput placeholder="Nombres" formControlName="nombresProfesional" />
                     </mat-form-field>
                 </div>
                 <div class="col-md-4">
                     <mat-form-field appearance="outline">
                         <mat-label>Apellido Paterno</mat-label>
-                        <input [(ngModel)]="profesional.apellidoPaternoProfesional" matInput placeholder="Apellido Paterno" formControlName="apellidoPaternoProfesional" />
+                        <input type="text" [(ngModel)]="profesional.apellidoPaternoProfesional" matInput placeholder="Apellido Paterno" formControlName="apellidoPaternoProfesional" />
                     </mat-form-field>
                 </div>
             </div>
@@ -31,7 +34,7 @@
                 <div class="col-md-4">
                     <mat-form-field appearance="outline">
                         <mat-label>Apellido Materno</mat-label>
-                        <input [(ngModel)]="profesional.apellidoMaternoProfesional" matInput placeholder="Apellido Materno" formControlName="apellidoMaternoProfesional" />
+                        <input type="text" [(ngModel)]="profesional.apellidoMaternoProfesional" matInput placeholder="Apellido Materno" formControlName="apellidoMaternoProfesional" />
                     </mat-form-field>
                 </div>
                 <div class="col-md-4">
@@ -46,7 +49,7 @@
                 <div class="col-md-4">
                     <mat-form-field appearance="outline">
                         <mat-label>Correo Electrónico</mat-label>
-                        <input [(ngModel)]="profesional.correoElectronicoProfesional" matInput placeholder="Correo electronico" formControlName="correoElectronicoProfesional" />
+                        <input type="email" [(ngModel)]="profesional.correoElectronicoProfesional" matInput placeholder="Correo electronico" formControlName="correoElectronicoProfesional" />
                     </mat-form-field>
                 </div>
             </div>
@@ -55,13 +58,13 @@
                 <div class="col-md-4">
                     <mat-form-field appearance="outline">
                         <mat-label>Celular</mat-label>
-                        <input [(ngModel)]="profesional.celularProfesional" matInput placeholder="Celular" formControlName="celularProfesional" />
+                        <input type="number" [(ngModel)]="profesional.celularProfesional" matInput placeholder="Celular" formControlName="celularProfesional" />
                     </mat-form-field>
                 </div>
                 <div class="col-md-4">
                     <mat-form-field appearance="outline">
                         <mat-label>Teléfono</mat-label>
-                        <input [(ngModel)]="profesional.telefonoEmergenciaProfesional" matInput placeholder="Teléfono" formControlName="telefonoEmergenciaProfesional" />
+                        <input type="number" [(ngModel)]="profesional.telefonoEmergenciaProfesional" matInput placeholder="Teléfono" formControlName="telefonoEmergenciaProfesional" />
                     </mat-form-field>
                 </div>
                 <div class="col-md-4">
@@ -71,35 +74,73 @@
                     </mat-form-field>
                 </div>
             </div>
-            <div class="row">
-                <mat-radio-group aria-label="Select an option">
-                    <mat-radio-button value="1">SI </mat-radio-button>
-                    <mat-radio-button [checked]="true" value="2">NO </mat-radio-button>
-                </mat-radio-group>
-                <div class="col-md-4">
-                    <mat-form-field appearance="fill">
-                        <mat-label>Tipo Discapacidad</mat-label>
-                        <mat-select [(ngModel)]="discapacidad.tipoDiscapacidad.idTipoDiscapacidad" name="tipoDiscapacidad" formControlName="tipoDiscapacidad">
-                            <mat-option *ngFor="let tipoDiscapacidad of tiposDiscapacidades" [value]="tipoDiscapacidad.idTipoDiscapacidad">
-                                {{tipoDiscapacidad.descripcionTipoDiscapacidad}}
-                            </mat-option>
 
-                        </mat-select>
+            <div class="row">
+
+                <div class="col-md-4">
+                    <mat-form-field appearance="outline">
+                        <mat-label>Nivel de Educación</mat-label>
+                        <input [(ngModel)]="profesional.nivelEducacion" matInput placeholder="Nivel de educación" formControlName="nivelEducacion" />
                     </mat-form-field>
                 </div>
                 <div class="col-md-4">
                     <mat-form-field appearance="outline">
-                        <mat-label>Porcentaje</mat-label>
-                        <input [(ngModel)]="discapacidad.porcetajeDiscapacidad" matInput placeholder="Porcentaje" formControlName="porcentajeDiscapacidad" />
+                        <mat-label>Cuarto Nivel de Educación</mat-label>
+                        <input [(ngModel)]="profesional.tituloCuartoNivelProfesional" matInput placeholder="Título de cuarto nivel" formControlName="tituloCuartoNivelProfesional" />
                     </mat-form-field>
                 </div>
+
                 <div class="col-md-4">
                     <mat-form-field appearance="outline">
-                        <mat-label>Descripción</mat-label>
-                        <input [(ngModel)]="discapacidad.descripcionDiscapacidad" matInput placeholder="Descripción de la Discapacidad" formControlName="descripcionDiscpacidad" />
+                        <mat-label>Presenta Hoja de Vida</mat-label>
+                        <input type="text" [(ngModel)]="profesional.hojaVida" matInput placeholder="tiene Hoja de Vida" formControlName="hojaVida" />
                     </mat-form-field>
                 </div>
             </div>
+
+            <div class="row">
+                <div class="col-md-4">
+                    <br/>
+                    <mat-radio-group aria-label="Select an option" formControlName="poseeDiscapacidad" [(ngModel)]="discapacidadRadio">
+                        <mat-radio-button class="div_radio" value="1" [checked]="checkPoseeDiscapacidadSi">SI</mat-radio-button>
+                        <mat-radio-button value="2" [checked]="true" [checked]="checkPoseeDiscapacidadNo">No</mat-radio-button>
+                    </mat-radio-group>
+                </div>
+                <div class="col-md-8">
+                    <br/>
+                    <label class="text">Posee Discapacidad</label>
+                </div>
+
+            </div>
+            <br>
+            <ng-template [ngIf]="discapacidadRadio == 1">
+                <div class="row">
+
+                    <div class="col-md-4">
+                        <mat-form-field appearance="fill">
+                            <mat-label>Tipo Discapacidad</mat-label>
+                            <mat-select [(ngModel)]="discapacidad.tipoDiscapacidad.idTipoDiscapacidad" name="tipoDiscapacidad" formControlName="tipoDiscapacidad">
+                                <mat-option *ngFor="let tipoDiscapacidad of tiposDiscapacidades" [value]="tipoDiscapacidad.idTipoDiscapacidad">
+                                    {{tipoDiscapacidad.descripcionTipoDiscapacidad}}
+                                </mat-option>
+
+                            </mat-select>
+                        </mat-form-field>
+                    </div>
+                    <div class="col-md-4">
+                        <mat-form-field appearance="outline">
+                            <mat-label>Porcentaje</mat-label>
+                            <input type="number" [(ngModel)]="discapacidad.porcetajeDiscapacidad" matInput placeholder="Porcentaje" formControlName="porcentajeDiscapacidad" />
+                        </mat-form-field>
+                    </div>
+                    <div class="col-md-4">
+                        <mat-form-field appearance="outline">
+                            <mat-label>Descripción</mat-label>
+                            <input type="text" [(ngModel)]="discapacidad.descripcionDiscapacidad" matInput placeholder="Descripción de la Discapacidad" formControlName="descripcionDiscpacidad" />
+                        </mat-form-field>
+                    </div>
+                </div>
+            </ng-template>
 
 
             <div class="row">
@@ -165,7 +206,7 @@
                 <div class="col-md-4">
                     <mat-form-field appearance="outline">
                         <mat-label>Número de cuenta</mat-label>
-                        <input [(ngModel)]="cuenta.numeroCuenta" matInput placeholder="Número de cuenta" formControlName="numeroCuenta" />
+                        <input type="number" [(ngModel)]="cuenta.numeroCuenta" matInput placeholder="Número de cuenta" formControlName="numeroCuenta" />
                     </mat-form-field>
                 </div>
             </div>

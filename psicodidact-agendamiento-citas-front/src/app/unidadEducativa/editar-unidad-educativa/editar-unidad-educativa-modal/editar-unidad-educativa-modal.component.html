@@ -1,4 +1,9 @@
 <h2 mat-dialog-title class="text-title">{{titulo}}</h2>
+<ul class="alert alert-danger" *ngIf="errores.length > 0">
+    <li *ngFor="let err of errores">
+        {{ err }}
+    </li>
+</ul>
 <mat-dialog-content>
 
     <form [formGroup]="dialogForm">
@@ -8,21 +13,21 @@
                     <div class="col-md-4">
                         <mat-form-field appearance="outline">
                             <mat-label>Código de la Institución</mat-label>
-                            <input [(ngModel)]="unidadEducativa.codigoInstitucion" matInput placeholder="Código de la Institución" formControlName="codigo" />
+                            <input [(ngModel)]="unidadEducativa.codigoInstitucion" matInput placeholder="Código de la Institución" formControlName="codigoInstitucion" />
                         </mat-form-field>
                     </div>
 
                     <div class="col-md-4">
                         <mat-form-field appearance="outline">
                             <mat-label>Nombre de la Institución</mat-label>
-                            <input [(ngModel)]="unidadEducativa.nombreUnidadEducativa" matInput placeholder="Nombre de la Institución" formControlName="nombre" />
+                            <input [(ngModel)]="unidadEducativa.nombreUnidadEducativa" matInput placeholder="Nombre de la Institución" formControlName="nombreUnidadEducativa" />
                         </mat-form-field>
                     </div>
 
                     <div class="col-md-4">
                         <mat-form-field appearance="outline">
                             <mat-label>Dirección de la Institución</mat-label>
-                            <input [(ngModel)]="unidadEducativa.direccionUnidadEducativa" matInput placeholder="Dirección de la Institución" formControlName="direccion" />
+                            <input [(ngModel)]="unidadEducativa.direccionUnidadEducativa" matInput placeholder="Dirección de la Institución" formControlName="direccionUnidadEducativa" />
                         </mat-form-field>
                     </div>
 

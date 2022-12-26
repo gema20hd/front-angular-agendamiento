@@ -27,7 +27,7 @@ export class CrearUnidadEducativaMpdalComponent implements OnInit{
   unidadEducativa: UnidadEducativa;
   titulo: string = 'Nuevo Unidad Educativa';
   inputTest="0";
-  errores: String [] = [];
+  errores: string [] = [];
   unidadesEducativasFiltrados: Observable<UnidadEducativa[]> = new Observable();
   
   constructor(
@@ -58,9 +58,16 @@ export class CrearUnidadEducativaMpdalComponent implements OnInit{
   create(): void {
     this.unidadEducativaService.create(this.unidadEducativa)
       .subscribe(unidadEducativa => {
-          this.router.navigate(['/unidadEducativa']);
           console.log(" hola ....",unidadEducativa);
           Swal.fire('Nueva unidad educativa', `La unidad educativa ${unidadEducativa.nombreUnidadEducativa} ha sido creado con éxito`, 'success');
+          this.cancelar();
+        },
+        (err) => {
+          this.errores = err.error.errors as string[];
+          console.error(
+            'Código del error desde el backend: ' + err.status
+          );
+          console.error(err.error.errors);
         }
       );
   }

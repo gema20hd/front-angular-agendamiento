@@ -6,7 +6,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import Swal from 'sweetalert2';
 import { Especialidad } from '../../especialidad/especialidad';
-import { EspecialidadesService } from '../../especialidad/especialidades.service';
+import { EspecialidadesService } from '../../../services/especialidades.service';
 
 @Component({
   selector: 'app-crear-especialidad-modal',
@@ -56,6 +56,7 @@ export class CrearEspecialidadModalComponent {
           this.router.navigate(['/especialidades']);
           console.log(" hola ....",especialidad);
           Swal.fire('Nueva Especialidad', `La Especialidad ${especialidad.descripcionEspecialidad} ha sido creado con éxito`, 'success');
+          this.cancelar();
         },
         err => {
           this.errores = err.error.errors as string[];

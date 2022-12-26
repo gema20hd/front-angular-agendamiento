@@ -1,5 +1,5 @@
 export class TipoCuenta {
-    idTipoCuenta: number =1;
+    idTipoCuenta: number =0;
     descripcionTipoCuenta: string="";
   }
   

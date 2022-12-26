@@ -65,21 +65,19 @@ export class DiscapacidadService {
 
   crearDiscapacidad(discapacidad: Discapacidad): Observable<Discapacidad> {
     return this.http.post(this.urlEndPointDiscapacidad,discapacidad,
-      { headers: this.agregarAuthorizationHeader()})
-      .pipe(
-        map((response: any) => response.discapacidad as Discapacidad),
-        catchError(e => {
-          if (e.status == 400) {
+      { headers: this.agregarAuthorizationHeader()}).pipe(
+          map((response: any) => response.discapacidad as Discapacidad),
+          catchError(e => {
+            if (e.status == 400) {
+              return throwError(e);
+            }
+            if (e.error.mensaje) {
+              console.error(e.error.mensaje);
+            }
             return throwError(e);
-          }
-          if (e.error.mensaje) {
-            console.error(e.error.mensaje);
-          }
-          return throwError(e);
-        }));
-  }
-
-
+          }));
+    }
+  
   
   actualizarDiscapacidad(discapacidad: Discapacidad): Observable<Discapacidad> {
     return this.http.put<any>(`${this.urlEndPointDiscapacidad}/${discapacidad.idDiscapacidad}`, discapacidad,{ headers: this.agregarAuthorizationHeader()})

@@ -10,7 +10,7 @@ import { UnidadEducativaService } from '../../../services/unidadEducativa.servic
 })
 export class DetallesUnidadEducativaModalComponent {
 
-  unidadEducativa?: UnidadEducativa;
+  unidadEducativa: UnidadEducativa = new UnidadEducativa();
   unidadEducativas: UnidadEducativa[]= [];
   titulo: string = 'Detalles de la Unidad Educativa';
   constructor(
@@ -22,6 +22,8 @@ export class DetallesUnidadEducativaModalComponent {
 
   ngOnInit(): void {
 
+     this.unidadEducativa.idUnidadEducativa =this.data.idUnidadEducativa;
+     console.log("viene", this.unidadEducativa.idUnidadEducativa )
     this.verInformacionUnidadEducativa(this.data.idUnidadEducativa);
   }
 

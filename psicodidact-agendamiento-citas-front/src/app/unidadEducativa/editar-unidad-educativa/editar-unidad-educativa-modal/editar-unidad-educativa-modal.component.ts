@@ -24,7 +24,7 @@ export class EditarUnidadEducativaModalComponent {
   autocompleteControlNombre = new FormControl();
   unidadEducativa: UnidadEducativa;
   titulo: string = 'Editar Unidad Educativa';
-  errores: String [] = [];
+  errores: string [] = [];
   unidadesEducativasFiltrados: Observable<UnidadEducativa[]> = new Observable();
   
   constructor(
@@ -35,22 +35,23 @@ export class EditarUnidadEducativaModalComponent {
   @Inject(MAT_DIALOG_DATA) public data: any,
   public modalRef: MatDialogRef<EditarUnidadEducativaModalComponent>,
   public http: HttpClient,
-  private unidadEducativaService: UnidadEducativaService
+  public unidadEducativaService: UnidadEducativaService
 
   ) {this.unidadEducativa = new UnidadEducativa()}
 
   ngOnInit(): void {
-
+    console.log(this.data.idUnidadEducativa)
     this.unidadEducativa.idUnidadEducativa =this.data.idUnidadEducativa;
+   
     this.unidadEducativa.codigoInstitucion=this.data.codigoInstitucion;
     this.unidadEducativa.nombreUnidadEducativa =this.data.nombreUnidadEducativa;
     this.unidadEducativa.direccionUnidadEducativa =this.data.direccionUnidadEducativa;
 
     this.dialogForm = new FormGroup({
   
-      codigo: new FormControl('',Validators.required),
-      nombre: new FormControl('',Validators.required),
-      direccion: new FormControl('',Validators.required)
+      codigoInstitucion: new FormControl('',Validators.required),
+      nombreUnidadEducativa: new FormControl('',Validators.required),
+      direccionUnidadEducativa: new FormControl('',Validators.required)
 
   
   });
@@ -63,8 +64,8 @@ export class EditarUnidadEducativaModalComponent {
     console.log(" estoy entrando al ac.....",this.unidadEducativa);
     this.unidadEducativaService.update(this.unidadEducativa)
       .subscribe(unidadEducativa => {
-        this.router.navigate(['/unidadEducativa']);
-        Swal.fire('Unidad Educativa Actualizado', `La unidad educativa ${this.unidadEducativa.nombreUnidadEducativa} ha sido actualizada con éxito`, 'success');
+        Swal.fire('Unidad Educativa Actualizado', `La unidad educativa ${unidadEducativa.nombreUnidadEducativa} ha sido actualizada con éxito`, 'success');
+        this.cancelar();
       },
       err => {
         this.errores = err.error.errors as string[];

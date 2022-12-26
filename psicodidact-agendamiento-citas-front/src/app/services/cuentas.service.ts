@@ -72,5 +72,22 @@ export class CuentasService {
       }));
   }
 
+  
+  update(cuenta: Cuenta): Observable<Cuenta> {
+    return this.http.put<any>(`${this.urlEndPointCuentas}/${cuenta.idCuenta}`, cuenta,
+      { headers: this.agregarAuthorizationHeader()})
+    .pipe(
+      map((response: any) => response.cuenta as Cuenta),
+      catchError(e => {
+        if (e.status == 400) {
+          return throwError(e);
+        }
+        if (e.error.mensaje) {
+          console.error(e.error.mensaje);
+        }
+        return throwError(e);
+      }));
+  }
+
 
 }
