@@ -1,9 +1,11 @@
 <h2 mat-dialog-title class="text-title">{{titulo}}</h2>
-<ul class="alert alert-danger" *ngIf="errores.length > 0">
+<!-- -->
+<ul class="alert alert-danger" *ngIf="errores?.length">
     <li *ngFor="let err of errores">
         {{ err }}
     </li>
 </ul>
+
 <mat-dialog-content>
     <form [formGroup]="dialogForm" novalidate>
         <div class="container">
