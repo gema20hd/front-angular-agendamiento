@@ -274,6 +274,8 @@ export class CrearProfesionalModalComponent {
     }
   
   }
+
+
   //banco
   private _filterBanco(value: string): Observable<Banco[]> {
     const filterValue = value.toLowerCase();
