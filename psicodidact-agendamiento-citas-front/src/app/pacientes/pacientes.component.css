@@ -128,3 +128,47 @@ table {
     background-color: transparent;
     border: none;
 }
+
+
+.mat-header-row {
+    font-size: 14px;
+    color: #0e0101;
+}
+
+
+.button {
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    border: none;
+    font-size: 0.675rem;
+    color: #ffffff;
+    font-weight: bold;
+    background-color: #00A7E3;
+    width: 14%;
+    display: block;
+    margin-top: 0px;
+    padding: 0.275rem 0.2rem;
+    border-radius: 1.5rem;
+    box-shadow: 3px 3px 8px #b1b1b1, -3px -3px 8px #ffffff;
+    cursor: pointer;
+    -webkit-border-radius: 1.5rem;
+    -moz-border-radius: 1.5rem;
+    -ms-border-radius: 1.5rem;
+    -o-border-radius: 1.5rem;
+    margin-right: 10px;
+}
+
+
+.text-buscar {
+    font-size: 14px;
+    color: #00A7E3;
+}
+.example-form {
+    min-width: 20%;
+    max-width: 60%;
+    width: 100%;
+}
+
+.example-full-width {
+    width: 50%;
+}

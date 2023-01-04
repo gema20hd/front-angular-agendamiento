@@ -22,24 +22,23 @@ export class DialogInformacionComponent implements OnInit {
   pacienteSelect?: Paciente;
 
 
-  dato='Porcentaje Discapacidad';
-  dato2='UNIDAD EDUCATIVA TRES DE DICIEMBRE DE LOS MONTES CALES';
-  dato3='UNIDAD EDUCATIVA TRES DE DICIEMBRE';
+
   constructor(private pacienteService:PacienteService,
     @Inject(MAT_DIALOG_DATA) public infoData:any,
     private dialogRefInfo:MatDialogRef<DialogInformacionComponent>) { }
 
 
-    dtoTablaPacientes?:DtoTablaPacientes;
+   // dtoTablaPacientes?:DtoTablaPacientes;
 
+   paciente?:Paciente;
   ngOnInit(): void {
 
     this.obtenerPacientes();
-    this.buscarByIdpaciente(this.infoData.id);
-    console.log('hay algo con Id'+this.infoData.id);
+    this.buscarByIdpaciente(this.infoData.idPaciente);
+    console.log('hay algo con Id'+this.infoData.idPaciente);
     console.log('hay algo sin id'+this.infoData);
-    this.dtoTablaPacientes=this.infoData;
-   
+   // this.dtoTablaPacientes=this.infoData;
+   this.paciente=this.infoData;
   }
 
   private obtenerPacientes(){

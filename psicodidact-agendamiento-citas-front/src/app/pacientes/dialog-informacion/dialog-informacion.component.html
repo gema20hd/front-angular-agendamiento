@@ -1,96 +1,44 @@
-<h2 mat-dialog-title class="card_title">Detalle Paciente</h2>
+<h2 mat-dialog-title class="card_title text_detalle">Detalle Paciente</h2>
 <mat-dialog-content class="mat-dialog">
   <form>
     <div class="container">
       <div class="row">
-        <div class="col-md-2 color_colum">Nombres</div>
+        <div class="col-md-2 color_colum text">Nombres</div>
         <div class="col-md-4 color_info">
       {{pacienteSelect?.nombresPaciente}}
         </div>
-        <div class="col-md-2 color_colum">Apellidos</div>
+        <div class="col-md-2 color_colum text">Apellidos</div>
         <div class="col-md-4 color_info">
       
          {{pacienteSelect?.apellidoPaternoPaciente}}   {{pacienteSelect?.apellidoMaternoPaciente}}
         </div>
       </div>
+      
       <br />
       <div class="row">
-        <div class="col-md-2 color_colum">Identificación</div>
+        <div class="col-md-2 color_colum text">Identificación</div>
         <div class="col-md-4 color_info">
   
         {{pacienteSelect?.identificacionPaciente}}
         </div>
-        <div class="col-md-2 color_colum">Síntoma Antecedentes</div>
+
+        <div class="col-md-2 color_colum text">Tipo Sangre</div>
         <div class="col-md-4 color_info">
-          
-         {{pacienteSelect?.antecedente?.sintomaAntecedente}}
+           {{pacienteSelect?.tipoSangre?.descripcionTipoSangre}}
+
         </div>
+
       </div>
       <br />
 
-      <div class="row">
-        <div class="col-md-2 color_colum">Enfermedad Antecedentes</div>
-        <div class="col-md-4 color_info">
-        
-         {{pacienteSelect?.antecedente?.enfermedadAntecedente}}
-        </div>
-        <div class="col-md-2 color_colum">Enfermedad Paterna</div>
-        <div class="col-md-4 color_info">
-         {{pacienteSelect?.antecedente?.enfermedadPaterna}}
-
-        </div>
-      </div>
-      <br />
-
-      <div class="row">
-         <div class="col-md-2 color_colum">Enfermedad Materna</div>
-         <div class="col-md-4 color_info">
-            {{pacienteSelect?.antecedente?.enfermedadMaterna}}
-            
-         </div>
-         <div class="col-md-2 color_colum">Enfermedad Representante</div>
-         <div class="col-md-4 color_info">
-           
-            {{pacienteSelect?.antecedente?.enfermedadRepresentante}}
-         </div>
-       </div>
-       <br />
-
+     
        <div class="row">
-         <div class="col-md-2 color_colum">Tratamiento Antecedentes</div>
-         <div class="col-md-4 color_info">
-            {{pacienteSelect?.antecedente?.tratamientoAntecedente}}
-            
-         </div>
-         <div class="col-md-2 color_colum">Alergia Antecedentes</div>
-         <div class="col-md-4 color_info">
-      
-            {{pacienteSelect?.antecedente?.alergiaAntecedente}}
-         </div>
-       </div>
-       <br />
-
-       <div class="row">
-         <div class="col-md-2 color_colum">Medicamento Antecedentes</div>
-         <div class="col-md-4 color_info">
-          
-            {{pacienteSelect?.antecedente?.medicamentoAntecedente}}
-         </div>
-         <div class="col-md-2 color_colum">Tipo Sangre</div>
-         <div class="col-md-4 color_info">
-            {{pacienteSelect?.tipoSangre?.descripcionTipoSangre}}
-
-         </div>
-       </div>
-       <br />
-
-       <div class="row">
-         <div class="col-md-2 color_colum">Género</div>
+         <div class="col-md-2 color_colum text">Género</div>
          <div class="col-md-4 color_info">
             {{pacienteSelect?.genero?.descripcionGenero}}
             
          </div>
-         <div class="col-md-2 color_colum">Fecha Nacimiento</div>
+         <div class="col-md-2 color_colum text">Fecha Nacimiento</div>
          <div class="col-md-4 color_info">
            
             {{pacienteSelect?.fechaNacimientoPaciente}}
@@ -98,66 +46,14 @@
        </div>
        <br />
 
-    
-
-       <div class="row">
-         <div class="col-md-2 color_colum">Unidad Educativa</div>
-         <div class="col-md-4 color_info">
-           
-            {{pacienteSelect?.unidadEducativa?.nombreUnidadEducativa}}
-         </div>
-         <div class="col-md-2 color_colum">Nivel Educación</div>
-         <div class="col-md-4 color_info">
-            {{pacienteSelect?.nivelEducacionParalelo?.descripcionNivelParalelo}}
-
-         </div>
-       </div>
-       <br />
-
-
-       <div >
-    
-        </div>
-
-        <div class="row">
-         <div class="col-md-2 color_colum">Tipo Discapacidad </div>
-         <div class="col-md-4 color_info">
-          
-            {{pacienteSelect?.discapacidad?.tipoDiscapacidad?.descripcionTipoDiscapacidad}}
-         </div>
-         <div class="col-md-2 color_colum">Porcentaje Discapacidad</div>
-         <div class="col-md-4 color_info">
-           
-            {{pacienteSelect?.discapacidad?.porcetajeDiscapacidad}} %
-         </div>
-       </div>
-       <br />
-
-       <div class="row">
-         <div class="col-md-2 color_colum">Descripcion Discapacidad</div>
-         <div class="col-md-4 color_info">
-            {{pacienteSelect?.discapacidad?.descripcionDiscapacidad}}
-            
-         </div>
-         <div class="col-md-2 color_colum">Profesion </div>
-         <div class="col-md-4 color_info">
-         
-            {{pacienteSelect?.profesion?.descripcionProfesion}}
-
-         </div>
-       </div>
-       <br />
-
-
-
         <div class="row">
          
-         <div class="col-md-2 color_colum">Tipo Trabajo</div>
+         <div class="col-md-2 color_colum text">Tipo Trabajo</div>
          <div class="col-md-4 color_info">
             {{pacienteSelect?.trabajo?.tipoTrabajo?.descripcionTipoTrabajo}}
 
          </div>
-         <div class="col-md-2 color_colum">Descripción Empleo </div>
+         <div class="col-md-2 color_colum text ">Descripción Empleo </div>
          <div class="col-md-4 color_info">
             {{pacienteSelect?.trabajo?.descripcionTrabajo}}
             
@@ -167,12 +63,12 @@
 
        <div class="row">
          
-         <div class="col-md-2 color_colum">Dirección Empleo </div>
+         <div class="col-md-2 color_colum text">Dirección Empleo </div>
          <div class="col-md-4 color_info">
             {{pacienteSelect?.trabajo?.direccionTrabajo}}
 
          </div>
-         <div class="col-md-2 color_colum">Celular </div>
+         <div class="col-md-2 color_colum text">Celular </div>
          <div class="col-md-4 color_info">
             {{pacienteSelect?.celularPaciente}}
             
@@ -182,11 +78,11 @@
 
        <div class="row">
          
-         <div class="col-md-2 color_colum">Teléfono emergencia</div>
+         <div class="col-md-2 color_colum text">Teléfono emergencia</div>
          <div class="col-md-4 color_info">
             {{pacienteSelect?.telefonoPaciente}}
          </div>
-         <div class="col-md-2 color_colum">Correo</div>
+         <div class="col-md-2 color_colum text">Correo</div>
          <div class="col-md-4 color_info">
             {{pacienteSelect?.correoElectronicoPaciente}}
          </div>
@@ -195,27 +91,155 @@
 
        <div class="row">
          
-         <div class="col-md-2 color_colum">Dirección Domicilio</div>
+         <div class="col-md-2 color_colum text">Dirección Domicilio</div>
          <div class="col-md-4 color_info">
             {{pacienteSelect?.direccionDomicilio}}
+         </div>
+
+         <div class="col-md-2 color_colum text">Profesion </div>
+         <div class="col-md-4 color_info" *ngIf="pacienteSelect?.profesion?.descripcionProfesion!='NINGUNO'">
+         
+            {{pacienteSelect?.profesion?.descripcionProfesion}}
+
+         </div>
+         <div class="col-md-4 color_info" *ngIf="pacienteSelect?.profesion?.descripcionProfesion=='NINGUNO'">
+
+
          </div>
 
        </div>
        <br />
 
+       <div class="row">
+         <div class="col-md-2 color_colum text">Unidad Educativa</div>
+         <div class="col-md-4 color_info" *ngIf="pacienteSelect?.unidadEducativa?.nombreUnidadEducativa!='NINGUNO'">
+           
+            {{pacienteSelect?.unidadEducativa?.nombreUnidadEducativa}}
+         </div>
+         <div class="col-md-4 color_info" *ngIf="pacienteSelect?.unidadEducativa?.nombreUnidadEducativa=='NINGUNO'">
+           
+            
+         </div>
+         <div class="col-md-2 color_colum text">Nivel Educación</div>
+         <div class="col-md-4 color_info" *ngIf="pacienteSelect?.nivelEducacionParalelo?.descripcionNivelParalelo!='NINGUNO'">
+            {{pacienteSelect?.nivelEducacionParalelo?.descripcionNivelParalelo}}
+
+         </div>
+         <div class="col-md-4 color_info" *ngIf="pacienteSelect?.nivelEducacionParalelo?.descripcionNivelParalelo=='NINGUNO'">
+           
+
+         </div>
+       </div>
+       <br />
+
+       <div class="row">
+         <div class="col-md-2 color_colum text">Enfermedad Antecedentes</div>
+         <div class="col-md-4 color_info">
+         
+          {{pacienteSelect?.antecedente?.enfermedadAntecedente}}
+         </div>
+         <div class="col-md-2 color_colum text">Enfermedad Paterna</div>
+         <div class="col-md-4 color_info">
+          {{pacienteSelect?.antecedente?.enfermedadPaterna}}
+ 
+         </div>
+       </div>
+       <br />
+ 
+       <div class="row">
+          <div class="col-md-2 color_colum text">Enfermedad Materna</div>
+          <div class="col-md-4 color_info">
+             {{pacienteSelect?.antecedente?.enfermedadMaterna}}
+             
+          </div>
+          <div class="col-md-2 color_colum text">Enfermedad Representante</div>
+          <div class="col-md-4 color_info">
+            
+             {{pacienteSelect?.antecedente?.enfermedadRepresentante}}
+          </div>
+        </div>
+        <br />
+ 
+        <div class="row">
+          <div class="col-md-2 color_colum text">Tratamiento Antecedentes</div>
+          <div class="col-md-4 color_info">
+             {{pacienteSelect?.antecedente?.tratamientoAntecedente}}
+             
+          </div>
+          <div class="col-md-2 color_colum text">Alergia Antecedentes</div>
+          <div class="col-md-4 color_info">
+       
+             {{pacienteSelect?.antecedente?.alergiaAntecedente}}
+          </div>
+        </div>
+        <br />
+ 
+        <div class="row">
+          <div class="col-md-2 color_colum text">Medicamento Antecedentes</div>
+          <div class="col-md-4 color_info">
+           
+             {{pacienteSelect?.antecedente?.medicamentoAntecedente}}
+          </div>
+         
+          <div class="col-md-2 color_colum text">Síntoma Antecedentes</div>
+          <div class="col-md-4 color_info">
+            
+           {{pacienteSelect?.antecedente?.sintomaAntecedente}}
+          </div>
+        </div>
+        <br />
+ 
+
+
+
+
+       <div class="row">
+         <div class="col-md-2 color_colum text">Tipo Discapacidad </div>
+         <div class="col-md-4 color_info" *ngIf="pacienteSelect?.discapacidad?.tipoDiscapacidad?.descripcionTipoDiscapacidad!='NINGUNO'">
+          
+            {{pacienteSelect?.discapacidad?.tipoDiscapacidad?.descripcionTipoDiscapacidad}}
+         </div>
+         <div class="col-md-4 color_info" *ngIf="pacienteSelect?.discapacidad?.tipoDiscapacidad?.descripcionTipoDiscapacidad=='NINGUNO'">
+          
+
+         </div>
+         <div class="col-md-2 color_colum text">Porcentaje Discapacidad</div>
+         <div class="col-md-4 color_info" *ngIf="pacienteSelect?.discapacidad?.porcetajeDiscapacidad!=0">
+           
+            {{pacienteSelect?.discapacidad?.porcetajeDiscapacidad}} %
+         </div>
+         <div class="col-md-4 color_info" *ngIf="pacienteSelect?.discapacidad?.porcetajeDiscapacidad==0">
+           
+    
+         </div>
+
+       </div>
+       <br />
+
+       <div class="row">
+         <div class="col-md-2 color_colum text">Descripcion Discapacidad</div>
+         <div class="col-md-4 color_info">
+            {{pacienteSelect?.discapacidad?.descripcionDiscapacidad}}
+            
+         </div>
+        
+       </div>
+       <br />
+
+
        <ng-template [ngIf]="pacienteSelect?.representante?.identificacionRepresentante">
 
-       <div class="card_title texto_negrita">
+       <div class="card_title text_detalle cardRepresentante">
          Información  Representante Paciente
       </div>
   
-
+      <br />
        <div class="row">
-         <div class="col-md-2 color_colum">Nombres</div>
+         <div class="col-md-2 color_colum text">Nombres</div>
          <div class="col-md-4 color_info">
             {{pacienteSelect?.representante?.nombresRepresentante}}
          </div>
-         <div class="col-md-2 color_colum">Apellidos</div>
+         <div class="col-md-2 color_colum text">Apellidos</div>
          <div class="col-md-4 color_info">
             {{pacienteSelect?.representante?.apellidoPaternoRepresentante}} {{pacienteSelect?.representante?.apellidoMaternoRepresentante}}
          </div>
@@ -225,11 +249,11 @@
 
        <div class="row">
          
-         <div class="col-md-2 color_colum">Identificación</div>
+         <div class="col-md-2 color_colum text">Identificación</div>
          <div class="col-md-4 color_info">
             {{pacienteSelect?.representante?.identificacionRepresentante}}
          </div>
-         <div class="col-md-2 color_colum">Fecha Nacimiento</div>
+         <div class="col-md-2 color_colum text">Fecha Nacimiento</div>
          <div class="col-md-4 color_info">
             {{pacienteSelect?.representante?.identificacionRepresentante}}
          </div>
@@ -251,11 +275,11 @@
 
        <div class="row">
          
-         <div class="col-md-2 color_colum">Correo</div>
+         <div class="col-md-2 color_colum text">Correo</div>
          <div class="col-md-4 color_info">
             {{pacienteSelect?.representante?.correoElectronicoRepresentante}}
          </div>
-         <div class="col-md-2 color_colum">Celular</div>
+         <div class="col-md-2 color_colum text">Celular</div>
          <div class="col-md-4 color_info">
             {{pacienteSelect?.representante?.celularRepresentante}}
          </div>
@@ -264,11 +288,11 @@
 
 
        <div class="row">        
-         <div class="col-md-2 color_colum">Teléfono Emergencia</div>
+         <div class="col-md-2 color_colum text">Teléfono Emergencia</div>
          <div class="col-md-4 color_info">
             {{pacienteSelect?.representante?.telefonoEmergenciaRepresentante}}
          </div>
-         <div class="col-md-2 color_colum">Profesión</div>
+         <div class="col-md-2 color_colum text">Profesión</div>
          <div class="col-md-4 color_info">
             {{pacienteSelect?.representante?.profesion?.descripcionProfesion}}
          </div>
@@ -278,11 +302,11 @@
 
        <div class="row">
          
-         <div class="col-md-2 color_colum">Tipo Trabajo</div>
+         <div class="col-md-2 color_colum text">Tipo Trabajo</div>
          <div class="col-md-4 color_info">
             {{pacienteSelect?.representante?.trabajo?.tipoTrabajo?.descripcionTipoTrabajo}}
          </div>
-         <div class="col-md-2 color_colum">Parentesco</div>
+         <div class="col-md-2 color_colum text">Parentesco</div>
          <div class="col-md-4 color_info">
             {{pacienteSelect?.representante?.parentescoRepresentante}}
          </div>
@@ -293,11 +317,11 @@
 
        <div class="row">
          
-         <div class="col-md-2 color_colum">Dirección Domicilio</div>
+         <div class="col-md-2 color_colum text">Dirección Domicilio</div>
          <div class="col-md-4 color_info">
             {{pacienteSelect?.representante?.direccionDomicilioRepresentan}}
          </div>
-         <div class="col-md-2 color_colum">Estado Civil</div>
+         <div class="col-md-2 color_colum text">Estado Civil</div>
          <div class="col-md-4 color_info">
             {{pacienteSelect?.representante?.estadoCivil?.descripcionEstadoCivil}}
          </div>
@@ -306,11 +330,11 @@
 
 
        <div class="row">
-         <div class="col-md-2 color_colum">Tipo Discapacidad</div>
+         <div class="col-md-2 color_colum text">Tipo Discapacidad</div>
          <div class="col-md-4 color_info">
             {{pacienteSelect?.representante?.discapacidad?.tipoDiscapacidad?.descripcionTipoDiscapacidad}}
          </div>
-         <div class="col-md-2 color_colum">Porcentaje Discapacidad</div>
+         <div class="col-md-2 color_colum text">Porcentaje Discapacidad</div>
          <div class="col-md-4 color_info">
             {{pacienteSelect?.representante?.discapacidad?.porcetajeDiscapacidad}} %
          </div>
@@ -319,7 +343,7 @@
 
 
        <div class="row">
-         <div class="col-md-2 color_colum">Descripcion Discapacidad</div>
+         <div class="col-md-2 color_colum text">Descripcion Discapacidad</div>
          <div class="col-md-4 color_info">
          
             {{pacienteSelect?.representante?.discapacidad?.descripcionDiscapacidad}}

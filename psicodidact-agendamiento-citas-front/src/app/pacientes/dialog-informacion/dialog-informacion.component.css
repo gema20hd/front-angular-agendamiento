@@ -7,9 +7,13 @@
     -moz-border-radius: 1.5rem;
     -ms-border-radius: 1.5rem;
     -o-border-radius: 1.5rem;
-    font-size: 0.875rem;
+    font-size: 0.975rem;
     font-family: "Roboto", sans-serif;
+    color: white;
+
 }
+
+
 
 
 .descripcion{
@@ -91,3 +95,16 @@ width: 102%;
     font-weight: lighter;
     color: black;
    }
+
+
+   .text {
+    font-weight: lighter;
+    color: black;
+    font-weight: 600;
+}
+
+
+.cardRepresentante{
+  height: 30px;
+  text-align: center;
+}

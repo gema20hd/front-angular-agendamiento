@@ -114,9 +114,10 @@ export class PacienteService {
 
 
 
-  obtenerPacienteByCedula(cedula:string):Observable<Paciente>{
+  obtenerPacienteByCedula(cedula:string):Observable<Paciente[]>{
    
-    return this.http.get<Paciente>(`${this.urlEndPointPaciente}/cedula/${cedula}`,{ headers: this.agregarAuthorizationHeader()}).pipe(
+    return this.http.get<Paciente[]>(`${this.urlEndPointPaciente}/cedula/${cedula}`,{ headers: this.agregarAuthorizationHeader()}).pipe(
+    
       catchError(e => {
         this.isNoAutorizado(e);
         return throwError(e);
@@ -135,5 +136,27 @@ export class PacienteService {
   }
   
 
+
+  getFiltrarPacienteApellidoPaterno(apellidoPaterno: String): Observable<Paciente[]> {
+    return this.http.get<Paciente[]>(`${this.urlEndPointPaciente+'/apellido/paterno'}/${apellidoPaterno}`,
+    { headers: this.agregarAuthorizationHeader()}).pipe(
+     catchError(e => {
+       this.isNoAutorizado(e);
+       return throwError(e);
+     })
+   );
+ }
+
+
+  getFiltrarPacienteDni(dni: String): Observable<Paciente[]> {
+    return this.http.get<Paciente[]>(`${this.urlEndPointPaciente+'/identificacion'}/${dni}`,
+    { headers: this.agregarAuthorizationHeader()}).pipe(
+     catchError(e => {
+       this.isNoAutorizado(e);
+       return throwError(e);
+     })
+   );
+ }
+  
 
 }

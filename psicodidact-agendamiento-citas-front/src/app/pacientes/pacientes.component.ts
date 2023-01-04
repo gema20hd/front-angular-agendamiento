@@ -21,14 +21,15 @@ import { MatAutocompleteSelectedEvent } from '@angular/material/autocomplete';
 export class PacientesComponent implements OnInit ,AfterViewInit{
    
   displayedColumns: string[] = ['Identificacion','Nombres','Apellidos','Representante','Carnet_Discapacidad','Estado','accion'];
-  dataSource = new MatTableDataSource<DtoTablaPacientes>();
+//  dataSource = new MatTableDataSource<Paciente>();
 
   dialogForm!: FormGroup;
   errores?: string[];
   //cedula traida desde el dialogo crear
   cedula?:string;
   
-  pacientesDtoFiltrados: Observable<DtoTablaPacientes[]> = new Observable();
+ // pacientesDtoFiltrados: Observable<Paciente[]> = new Observable();
+
   autocompleteControlApellidoCedula = new FormControl();
   inputTest="0";
 
@@ -39,7 +40,7 @@ export class PacientesComponent implements OnInit ,AfterViewInit{
  private diagCrearPaciente:MatDialog,
  //private dialogRefCrear:MatDialogRef<DialogoCrearComponent>,
   private diagCrearInformacion:MatDialog,
-  private formBuilder: FormBuilder, 
+ // private formBuilder: FormBuilder, 
   
   ) { }
 
@@ -54,34 +55,50 @@ export class PacientesComponent implements OnInit ,AfterViewInit{
 
   ngOnInit(): void {
 
-    this.obtenerPacientes();
+   // this.obtenerPacientes();
 
-  
-
+  // this.pacientesDtoFiltrados=this.pacienteService.listarPaciente();
+/*
     this.dialogForm=this.formBuilder.group({
  
       identificacion: new FormControl('',[Validators.pattern('[0-9]{10}')]),
       apellidos: new FormControl('',[Validators.pattern('[a-zA-Z]+$')]),
 
     });
-    
-    this.pacientesFiltrados = this.autocompleteControlApellidoCedula.valueChanges.pipe(
+    */
+
+   
+    this.pacientesFiltrados= this.obtenerFiltros('');
+
+
+  }
+
+
+  private  obtenerFiltros(valor:string): Observable<Paciente[]> {
+
+ // console.log('GATOOOOOOOOOOOOOOOOOOOOO');
+       this.autocompleteControlApellidoCedula.setValue(valor);
+      
+  
+   console.log('VALORRRRRRRRRRRRRRRRRRRR'+this.autocompleteControlApellidoCedula.value)
+    return this.autocompleteControlApellidoCedula.valueChanges.pipe(
       map(value => typeof value === 'string' ? value : value.identificacionPaciente), 
       flatMap(value => value ? this._filterApellidoCedula(value) : []));
-
   }
 
 
   private _filterApellidoCedula(value: string): Observable<Paciente[]> {
     const filterValue = value.toLowerCase();
     
- //   if(filterValue.match(/^[0-9]+$/)) {
-    //  this.inputTest="0";
-    //  return this.pacienteService.obtenerPacienteByCedula(filterValue);
-  // } else {
-     // this.inputTest="1";
-      return this.pacienteService.obtenerPacienteByApellido(filterValue);
-   // }
+   if(filterValue.match(/^[0-9]+$/)) {
+     this.inputTest="0";
+     console.log('eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee'+value);
+     return  this.pacienteService.getFiltrarPacienteDni(filterValue);
+     
+   } else {
+      this.inputTest="1";
+      return this.pacienteService.getFiltrarPacienteApellidoPaterno(filterValue);
+    }
     
   }
 
@@ -95,23 +112,13 @@ export class PacientesComponent implements OnInit ,AfterViewInit{
   }
 
   mostrarApellidoCedula(paciente ? : Paciente): string | "" {
-    //if(this.inputTest=="0"){
-   //   return profesional ? profesional.identificacionProfesional : "";
-    //}else{
+    if(this.inputTest=="0"){
+      return paciente ? paciente.identificacionPaciente! : "";
+    }else{
       return paciente ? paciente.apellidoPaternoPaciente!: "";
-    //}  
-  ///
+    }  
+  
   }
-/*
-  seleccionarApellidoCedula({ event }: { event: MatAutocompleteSelectedEvent; }): void {
-    let paciente = event.option.value as Paciente;
-    console.log(paciente);
-    this.autocompleteControlApellidoCedula.setValue('');
-    event.option.focus();
-    event.option.deselect();
-
-  }
-*/
 
   //para validar
   get identificacion(){
@@ -124,24 +131,26 @@ export class PacientesComponent implements OnInit ,AfterViewInit{
    }
 
 
-  @ViewChild(MatPaginator) paginator!: MatPaginator;
-  @ViewChild(MatSort) sort!: MatSort;
+ // @ViewChild(MatPaginator) paginator!: MatPaginator;
+ // @ViewChild(MatSort) sort!: MatSort;
   
   ngAfterViewInit() {
-    this.dataSource.paginator = this.paginator;
-    this.dataSource.sort = this.sort;
+   // this.dataSource.paginator = this.paginator;
+   // this.dataSource.sort = this.sort;
     
   }
 
 
 
-  private obtenerPacientes(){
+private obtenerPacientes(): Observable<Paciente[]> {
 
 
     
-    this.pacienteService.listarPaciente().subscribe(data =>{
+return this.pacienteService.listarPaciente();
+/* 
+.subscribe(data =>{
       this.pacientes=data;
-      //Ingresa a cambiar por los parametros de la tabla
+ /*     //Ingresa a cambiar por los parametros de la tabla
       this.crearDtoPaciente(this.pacientes);
 
       console.log("AUX LISTAR"+this.auxPacientes);
@@ -151,17 +160,29 @@ export class PacientesComponent implements OnInit ,AfterViewInit{
    //  console.log("los pacientes son as notas son inacivas");
      this.dataSource.paginator = this.paginator;
 
+     this.dataSource.data=data;
+
      });
-    
+    */
    }
 
 
    openDiagCrearPaciente(){ 
     this.diagCrearPaciente.open(DialogoCrearComponent
       ).afterClosed().subscribe(valor=>{
-        if (valor==="guardar") {
-          this.obtenerPacientes();
+        console.log("EL VALOR ES "+valor);
+        
+        if (valor) {
+        console.log("INGREAAAAAA-======")
+      //  this.pacientesFiltrados=  this.obtenerPacienteByCedula(valor);
+      this.pacientesFiltrados=this.obtenerPacienteByCedula(valor);
+      setTimeout(() => {
+        this.pacientesFiltrados=this.obtenerFiltros('');
+      }, 1000)
+     
         }
+        //CONTINUA ESCUCHANDO EL OBSERVABLE
+       
       }
         );
    }
@@ -172,12 +193,24 @@ export class PacientesComponent implements OnInit ,AfterViewInit{
       {
         data:row
       }).afterClosed().subscribe(valor=>{
-        if (valor==="update") {
-          this.obtenerPacientes();
+        if (valor) {
+          console.log("INGREAAAAAA-RRRRR-----------------------------======");
+      
+          this.pacientesFiltrados=this.obtenerPacienteByCedula(valor);
+          setTimeout(() => {
+            this.pacientesFiltrados=this.obtenerFiltros('');
+          }, 1000)
+         console.log("-------------------====tyyyyyyyyyyyyyyyyy");
+         
         }
+    //CONTINUA ESCUCHANDO EL OBSERVABLE
+    
+
       }
+      
         );
-       
+      
+     
    }
 
    //listarPaciente():Observable<Paciente[]>{
@@ -190,7 +223,7 @@ export class PacientesComponent implements OnInit ,AfterViewInit{
 
    private crearDtoPaciente(pacientes:Paciente[]){
     this.auxPacientes=[];
-    this.dataSource = new MatTableDataSource<DtoTablaPacientes>();
+   // this.dataSource = new MatTableDataSource<DtoTablaPacientes>();
 
     let nuevoPaciente:DtoTablaPacientes;
 
@@ -205,12 +238,9 @@ export class PacientesComponent implements OnInit ,AfterViewInit{
         nuevoPaciente.id=paciente.idPaciente;
         nuevoPaciente.apellidos=paciente.apellidoPaternoPaciente+" "+paciente.apellidoMaternoPaciente;
         nuevoPaciente.nombres=paciente.nombresPaciente;
-        nuevoPaciente.identificacion=paciente.identificacionPaciente;
-        if (paciente.estadoPaciente==true) {
-          nuevoPaciente.estado="Activo";
-        }else{
-          nuevoPaciente.estado="Inactivo";
-        }
+        nuevoPaciente.identificacion=paciente.identificacionPaciente;  
+        nuevoPaciente.estado=paciente.estadoPaciente;
+       
 
         if (paciente.representante?.identificacionRepresentante) {
           nuevoPaciente.posee_representante="Si";
@@ -239,13 +269,15 @@ export class PacientesComponent implements OnInit ,AfterViewInit{
    
    openDiagInformacion(row :any){
     this.diagCrearInformacion.open(DialogInformacionComponent,{
-     
+ 
+      width: '850px',
       data:row
+      
     });
 
-    console.log('el  row '+row);
+    console.log('el  row '+row.discapacidad.idDiscapacidad);
    }
-
+/*
 
 
    buscarBtn(){
@@ -365,6 +397,18 @@ export class PacientesComponent implements OnInit ,AfterViewInit{
     }
   );
    }
+*/
+
+
+ private obtenerPacienteByCedula(cedula:any): Observable<Paciente[]>{
+
+
+console.log("INGRESA METODO OBTENER PACIENTES BY CEDULA");
+ return this.pacienteService.obtenerPacienteByCedula(cedula);
+
+  }
+  
+  
 
 }
 
