@@ -45,10 +45,6 @@ export class ProfessionalComponent {
   inputTest="0";
 
   autocompleteControlApellidoCedula = new FormControl();
-
-  
-
-
   profesionalesFiltrados: Observable<Profesional[]> = new Observable();
 
   cedulaProfesionalesFiltrados: Observable<Profesional[]> = new Observable();
@@ -73,9 +69,6 @@ export class ProfessionalComponent {
     public profesionalService: ProfesionalesService,
     public router: Router,
     public dialog: MatDialog,
-
-
-
     public activatedRoute: ActivatedRoute
   ) {}
 

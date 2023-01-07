@@ -11,11 +11,10 @@ import { UnidadEducativa } from "./unidadEducativa";
 
 
 export class Paciente {
-
-    idPaciente?:number;
-    identificacionPaciente?:string;
+    idPaciente:number =0;
+    identificacionPaciente:string = "";
     nombresPaciente?:string;
-    apellidoPaternoPaciente?:string;
+    apellidoPaternoPaciente :string = "";
     fechaNacimientoPaciente?:Date;
     celularPaciente?:string;
     direccionDomicilio?:string;
