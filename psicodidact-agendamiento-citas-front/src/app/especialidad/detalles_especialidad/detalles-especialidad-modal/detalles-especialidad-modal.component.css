@@ -1,0 +1,27 @@
+.text {
+    color: black;
+    font-size: 15px;
+    font-weight: 600;
+}
+
+.text-title {
+    color: blue;
+    font-size: 20px;
+    font-weight: 600;
+    text-align: center;
+}
+
+.mat-stroked-button {
+    letter-spacing: 0.05em;
+    border: none;
+    font-size: 14px;
+    color: #ffffff;
+    font-weight: bold;
+    background-color: #00A7E3;
+    max-width: 100%;
+    display: block;
+    padding: 8px;
+    border-radius: 0.5rem;
+    box-shadow: 3px 3px 8px #b1b1b1, -3px -3px 8px #ffffff;
+    cursor: pointer;
+}

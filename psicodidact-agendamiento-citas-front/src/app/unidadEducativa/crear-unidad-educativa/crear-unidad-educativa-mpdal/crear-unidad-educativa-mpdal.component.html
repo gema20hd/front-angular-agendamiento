@@ -1,4 +1,9 @@
 <h2 mat-dialog-title class="card_title">Crear Unidad Educativa</h2>
+<ul class="alert alert-danger" *ngIf="errores.length > 0">
+    <li *ngFor="let err of errores">
+        {{ err }}
+    </li>
+</ul>
 <mat-dialog-content>
 
     <form [formGroup]="dialogForm">
@@ -38,10 +43,6 @@
     </form>
 </mat-dialog-content>
 <mat-dialog-actions align="end">
-    <button mat-button (click)="cancelar()">Cancelar</button>
-    <div class="col-sm-6">
-        <button class="btn btn-primary" role="button" (click)='create()'>Crear</button>
-
-
-    </div>
+    <button class="mat-stroked-button-cancelar" (click)="cancelar()">Cancelar</button>
+    <button class="mat-stroked-button-guardar" (click)='create()'>Crear</button>
 </mat-dialog-actions>

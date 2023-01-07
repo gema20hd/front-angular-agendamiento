@@ -1,6 +1,5 @@
 export class EstadoCivil {
-  idEstadoCivil?:number;
-
-  descripcionEstadoCivil?:string;
+  idEstadoCivil:number =0;
+  descripcionEstadoCivil:string ="";
   }
   

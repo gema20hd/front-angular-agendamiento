@@ -5,74 +5,83 @@
 <br>
 <br>
 <br>
-<br>
-<br>
-<br>
-<br>
-<br>
+
+
+
+<div class="row py-5">
+    <mat-card class="card">
+        <mat-card-title class="card_title">Panel de búsqueda</mat-card-title>
+    </mat-card>
+    <mat-card class="card">
+        <div class="row">
+            <div class="col-sm-8">
+                <form class="example-form">
+                    <mat-form-field class="example-full-width" appearance="fill">
+                        <mat-label class="text-title">Nombre de Unidad Educativa</mat-label>
+                        <input type="text" placeholder="Seleccioné un elemento" aria-label="UnidadEducativa" matInput [formControl]="autocompleteControlNombre" [matAutocomplete]="auto">
+                        <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete" [displayWith]="mostrarNombre" (optionSelected)="seleccionarNombre($event)">
+                            <mat-option *ngFor="let unidadEducativa of unidadesEducativasFiltrados | async" [value]="unidadEducativa">
+                                {{mostrarNombre(unidadEducativa)}}
+                            </mat-option>
+                        </mat-autocomplete>
+                    </mat-form-field>
+                </form>
+            </div>
+
+            <div class="col-sm-4">
+                <button class="mat-stroked-button" (click)="crearUnidadEducativa()">Crear unidad educativa</button>
+            </div>
+
+
+
+        </div>
+    </mat-card>
+</div>
 
 <div class="row">
-    <div class="col-sm-6">
-        <form class="example-form">
-            <mat-form-field class="example-full-width" appearance="fill">
-                <mat-label>Nombre de Unidad Educativa</mat-label>
-                <input type="text" placeholder="Seleccioné un elemento" aria-label="UnidadEducativa" matInput [formControl]="autocompleteControlNombre" [matAutocomplete]="auto">
-                <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete" [displayWith]="mostrarNombre" (optionSelected)="seleccionarNombre($event)">
-                    <mat-option *ngFor="let unidadEducativa of unidadesEducativasFiltrados | async" [value]="unidadEducativa">
-                        {{ mostrarNombre(unidadEducativa) }}
-                    </mat-option>
-                </mat-autocomplete>
-            </mat-form-field>
-        </form>
-    </div>
+    <mat-card class="card">
 
-    <div class="col-sm-4">
-        <button mat-stroked-button color="primary" (click)="crearUnidadEducativa()">Crear unidad educativa</button>
-    </div>
+        <table mat-table [dataSource]="unidadesEducativasFiltrados" class="mat-elevation-z8">
+            <!-- Weight Column -->
+            <ng-container matColumnDef="codigo">
+                <th class="mat-header-row" mat-header-cell *matHeaderCellDef>Código de la Instatiución </th>
+                <td class="mat-header-row" mat-cell *matCellDef="let unidadEducativa">{{unidadEducativa.codigoInstitucion}} </td>
+            </ng-container>
 
+            <!-- Name Column -->
+            <ng-container matColumnDef="nombre">
+                <th class="mat-header-row" mat-header-cell *matHeaderCellDef> Nombre de la Unidad Educativa</th>
+                <td class="mat-header-row" mat-cell *matCellDef="let unidadEducativa"> {{unidadEducativa.nombreUnidadEducativa}} </td>
+            </ng-container>
+            <!-- Name Column -->
+            <ng-container matColumnDef="direccion">
+                <th class="mat-header-row" mat-header-cell *matHeaderCellDef> Dirección de la Unidad Educativa</th>
+                <td class="mat-header-row" mat-cell *matCellDef="let unidadEducativa"> {{unidadEducativa.direccionUnidadEducativa}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="editar">
+                <th class="mat-header-row" mat-header-cell *matHeaderCellDef>Editar</th>
+                <td class="mat-header-row" mat-cell *matCellDef="let unidadEducativa">
+                    <button mat-icon-button class="button-edict" (click)="editarUnidadEducativa(unidadEducativa)">
+                <mat-icon class="button-icon-edict" matTooltip="editar">editar</mat-icon>
+            </button>
+
+                </td>
+            </ng-container>
+
+            <ng-container matColumnDef="ver">
+                <th class="mat-header-row" mat-header-cell *matHeaderCellDef>Ver detalle</th>
+                <td class="mat-header-row" mat-cell *matCellDef="let unidadEducativa">
+                    <button mat-icon-button color="warn" class="button-info" (click)="verInformacionUnidadEducativa(unidadEducativa)"><mat-icon class="button-icon-info" matTooltip="ver">info</mat-icon></button>
+
+                </td>
+            </ng-container>
+
+            <tr mat-header-row *matHeaderRowDef="mostrarColumnas"></tr>
+            <tr mat-row *matRowDef="let row; columns: mostrarColumnas;"></tr>
+        </table>
+    </mat-card>
 </div>
-<br>
-<br>
-<br>
-<br>
-<br>
-
-<table mat-table [dataSource]="unidadesEducativasFiltrados" class="mat-elevation-z8">
-    <!-- Weight Column -->
-    <ng-container matColumnDef="codigo">
-        <th mat-header-cell *matHeaderCellDef>Código de la Instatiución </th>
-        <td mat-cell *matCellDef="let unidadEducativa">{{unidadEducativa.codigoInstitucion}} </td>
-    </ng-container>
-
-    <!-- Name Column -->
-    <ng-container matColumnDef="nombre">
-        <th mat-header-cell *matHeaderCellDef> Nombre de la Unidad Educativa</th>
-        <td mat-cell *matCellDef="let unidadEducativa"> {{unidadEducativa.nombreUnidadEducativa}} </td>
-    </ng-container>
-    <!-- Name Column -->
-    <ng-container matColumnDef="direccion">
-        <th mat-header-cell *matHeaderCellDef> Dirección de la Unidad Educativa</th>
-        <td mat-cell *matCellDef="let unidadEducativa"> {{unidadEducativa.direccionUnidadEducativa}} </td>
-    </ng-container>
-
-    <!-- Symbol Column -->
-    <ng-container matColumnDef="editar">
-        <th mat-header-cell *matHeaderCellDef>Editar</th>
-        <td mat-cell *matCellDef="let unidadEducativa">
-            <button mat-stroked-button color="primary" (click)="editarUnidadEducativa(unidadEducativa)">Editar</button>
-        </td>
-    </ng-container>
-    <!-- Symbol Column -->
-    <ng-container matColumnDef="ver">
-        <th mat-header-cell *matHeaderCellDef>Ver detalle</th>
-        <td mat-cell *matCellDef="let unidadEducativa">
-            <button mat-stroked-button color="primary" (click)="verInformacionUnidadEducativa(unidadEducativa)">Ver</button>
-        </td>
-    </ng-container>
-
-    <tr mat-header-row *matHeaderRowDef="mostrarColumnas"></tr>
-    <tr mat-row *matRowDef="let row; columns: mostrarColumnas;"></tr>
-</table>
 <br>
 <br>
 <br>

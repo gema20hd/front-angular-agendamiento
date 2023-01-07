@@ -32,7 +32,7 @@
                 <div class="row">
                     <div class="col-md-2 color_colum text">Edad:</div>
                     <div class="col-md-4 color_info">
-                        02/04/1995
+                        {{profesional?.edadProfesional}}
                     </div>
                     <div class="col-md-2 color_colum text">Genero:</div>
                     <div class="col-md-4 color_info">
@@ -62,7 +62,7 @@
                     </div>
                     <div class="col-md-2 color_colum text">Email:</div>
                     <div class="col-md-4 color_info">
-                        hdhadsh
+                        {{profesional?.correoElectronicoProfesional}}
                     </div>
                 </div>
             </div>
@@ -91,9 +91,23 @@
                     </div>
                 </div>
             </div>
+
+            <div class="col-sm-12">
+                <div class="row">
+                    <div class="col-md-2 color_colum text">Tipo Discapcidad</div>
+                    <div class="col-md-4 color_info">
+                        {{profesional?.discapacidad?.tipoDiscapacidad?.descripcionTipoDiscapacidad}}
+                    </div>
+                    <div class="col-md-2 color_colum text">Discapacidad</div>
+                    <div class="col-md-4 color_info">
+                        {{profesional?.discapacidad?.descripcionDiscapacidad}}
+                    </div>
+                </div>
+            </div>
+
             <br>
             <br>
-            <div class="card_title  text-center text">
+            <div class="card_title  text-center text-title">
                 Información Adicional
             </div>
             <br>
@@ -131,5 +145,5 @@
     <!--  </mat-expansion-panel> -->
 </mat-dialog-content>
 <div mat-dialog-actions align="end">
-    <button mat-button (click)="cerrar()">Cerrar</button>
+    <button class="mat-stroked-button" (click)="cerrar()">Cerrar</button>
 </div>

@@ -4,7 +4,7 @@ import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dial
 import { ActivatedRoute, Router } from '@angular/router';
 import Swal from 'sweetalert2';
 import { Especialidad } from '../../especialidad/especialidad';
-import { EspecialidadesService } from '../../especialidad/especialidades.service';
+import { EspecialidadesService } from '../../../services/especialidades.service';
 
 @Component({
   selector: 'app-editar-especialidad-modal',
@@ -17,6 +17,7 @@ export class EditarEspecialidadModalComponent {
  
   errores: String [] = [];
   titulo: string = 'Editar Especialidad';
+  
   constructor(
     public router: Router,
     public dialog: MatDialog,
@@ -32,12 +33,8 @@ export class EditarEspecialidadModalComponent {
       this.especialidad.descripcionEspecialidad =this.data.descripcionEspecialidad;
 
       this.dialogForm = new FormGroup({
-    
         descripcionEspecialidad: new FormControl('',Validators.required),
-       
       
-  
-  
     });
     
     
@@ -47,9 +44,9 @@ export class EditarEspecialidadModalComponent {
     update(): void {
       console.log(" estoy entrando al ac.....",this.especialidad);
       this.especialidadesService.update(this.especialidad)
-        .subscribe(unidadEducativa => {
-          this.router.navigate(['/especialidades']);
-          Swal.fire('Especialidad Actualizado', `La La especialidad ${this.especialidad.descripcionEspecialidad} ha sido actualizada con éxito`, 'success');
+        .subscribe(especialidad => {
+          Swal.fire('Especialidad Actualizado', `La La especialidad ${especialidad.descripcionEspecialidad} ha sido actualizada con éxito`, 'success');
+          this.cancelar();
         },
         err => {
           this.errores = err.error.errors as string[];

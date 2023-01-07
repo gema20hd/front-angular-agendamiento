@@ -36,30 +36,30 @@
 
             <ng-container matColumnDef="identificacionProfesional">
                 <th class="mat-header-row" mat-header-cell *matHeaderCellDef> Identificación </th>
-                <td mat-cell *matCellDef="let profesional"> {{profesional.identificacionProfesional}} </td>
+                <td class="mat-header-row" mat-cell *matCellDef="let profesional"> {{profesional.identificacionProfesional}} </td>
             </ng-container>
             <ng-container matColumnDef="nombresProfesional">
                 <th class="mat-header-row" mat-header-cell *matHeaderCellDef> Nombres </th>
-                <td mat-cell *matCellDef="let profesional"> {{profesional.nombresProfesional}}</td>
+                <td class="mat-header-row" mat-cell *matCellDef="let profesional"> {{profesional.nombresProfesional}}</td>
             </ng-container>
             <ng-container matColumnDef="apellidoPaternoProfesional">
                 <th class="mat-header-row" mat-header-cell *matHeaderCellDef> Apellidos </th>
-                <td mat-cell *matCellDef="let profesional">{{profesional.apellidoPaternoProfesional}} </td>
+                <td class="mat-header-row" mat-cell *matCellDef="let profesional">{{profesional.apellidoPaternoProfesional}} </td>
             </ng-container>
 
             <ng-container matColumnDef="celularProfesional">
                 <th class="mat-header-row" mat-header-cell *matHeaderCellDef> Celular </th>
-                <td mat-cell *matCellDef="let profesional"> {{profesional.celularProfesional}} </td>
+                <td class="mat-header-row" mat-cell *matCellDef="let profesional"> {{profesional.celularProfesional}} </td>
             </ng-container>
 
             <ng-container matColumnDef="estado">
                 <th class="mat-header-row" mat-header-cell *matHeaderCellDef>Estado </th>
-                <td mat-cell *matCellDef="let profesional"> {{profesional.estadoProfesional}} </td>
+                <td class="mat-header-row" mat-cell *matCellDef="let profesional"> {{profesional.estadoProfesional}} </td>
             </ng-container>
 
             <ng-container matColumnDef="editar">
                 <th class="mat-header-row" mat-header-cell *matHeaderCellDef>Editar</th>
-                <td mat-cell *matCellDef="let profesional">
+                <td class="mat-header-row" mat-cell *matCellDef="let profesional">
                     <button mat-icon-button class="button-edict" (click)="editarProfesional(profesional)">
                         <mat-icon class="button-icon-edict" matTooltip="editar">editar</mat-icon>
                     </button>
@@ -69,7 +69,7 @@
 
             <ng-container matColumnDef="ver">
                 <th class="mat-header-row" mat-header-cell *matHeaderCellDef>Ver detalle</th>
-                <td mat-cell *matCellDef="let profesional">
+                <td class="mat-header-row" mat-cell *matCellDef="let profesional">
                     <button mat-icon-button color="warn" class="button-info" (click)="verInformacionProfesional(profesional)"><mat-icon class="button-icon-info" matTooltip="ver">info</mat-icon></button>
 
                 </td>

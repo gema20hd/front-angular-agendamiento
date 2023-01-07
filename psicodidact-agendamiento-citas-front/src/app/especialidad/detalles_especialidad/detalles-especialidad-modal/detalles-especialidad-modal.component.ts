@@ -1,7 +1,7 @@
 import { Component, Inject } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { Especialidad } from '../../especialidad/especialidad';
-import { EspecialidadesService } from '../../especialidad/especialidades.service';
+import { EspecialidadesService } from '../../../services/especialidades.service';
 
 @Component({
   selector: 'app-detalles-especialidad-modal',

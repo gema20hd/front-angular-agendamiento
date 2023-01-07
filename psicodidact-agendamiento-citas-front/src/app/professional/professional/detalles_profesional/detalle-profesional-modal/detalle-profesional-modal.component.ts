@@ -9,7 +9,7 @@ import { ProfesionalesService } from '../../../../services/profesionales.service
   styleUrls: ['./detalle-profesional-modal.component.css']
 })
 export class DetalleProfesionalModalComponent {
-  profesional?: Profesional;
+  profesional: Profesional = new Profesional();
   profesionales: Profesional[] = [];
 
 
@@ -23,6 +23,8 @@ export class DetalleProfesionalModalComponent {
   ngOnInit(): void {
 
     //this.profesionales = this.data.idProfesional ;
+    const date = new Date(this.profesional.fechaNacimientoProfesional.toLocaleDateString());
+    this.profesional.fechaNacimientoProfesional = date
     this.verInformacionProfesional(this.data.idProfesional);
    // console.log(" detalle p sin objet ",this.profesional)
     //console.log(" detalle p ",this.data as Profesional)

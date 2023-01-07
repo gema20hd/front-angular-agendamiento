@@ -14,6 +14,8 @@ import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldControl, MatFormFieldModule } from '@angular/material/form-field';
 import {MatNativeDateModule} from '@angular/material/core';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { BrowserModule } from '@angular/platform-browser';
 
 
 
@@ -22,7 +24,6 @@ const routes: Routes = [
   { path: 'login', component: LoginComponent },
   {path: 'home',component: HomeComponent,pathMatch: 'full' },
   { path: 'profesionales', component: ProfessionalComponent },
-
   { path: 'pacientes', component: PacientesComponent },
   { path: 'profesionales/:id', component: ProfessionalComponent },
   { path: 'profesionales/identificacion/:dni', component: ProfessionalComponent },
@@ -40,13 +41,18 @@ const routes: Routes = [
   imports: [RouterModule.forRoot(routes),
      MatInputModule,
      MatFormFieldModule,
-     MatInputModule,MatNativeDateModule
+     MatInputModule,MatNativeDateModule, 
+     ReactiveFormsModule,
+     FormsModule,
+     BrowserModule
   ],
   exports: [RouterModule, 
     MatInputModule,
     MatAutocompleteModule,
     MatFormFieldModule, 
-    MatNativeDateModule
+    MatNativeDateModule,
+    ReactiveFormsModule,
+    FormsModule
     ],
 
 })

@@ -109,7 +109,7 @@ import { DialogInformacionComponent } from './pacientes/dialog-informacion/dialo
     FormsModule,
     BrowserAnimationsModule,
     ReactiveFormsModule,
-
+   
     MatMenuModule,
     MatCardModule,
     MatInputModule,
