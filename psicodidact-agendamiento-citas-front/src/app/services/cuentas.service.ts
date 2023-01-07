@@ -15,7 +15,6 @@ export class CuentasService {
   cuenta: Cuenta = new Cuenta();
   profesional: Profesional = new Profesional();
  
-  //private urlEndPointProfesionales: string = 'http://localhost:8080/api/profesionales';
   private urlEndPointCuentas: string = 'http://localhost:8080/api/cuentas';
  
   private httpHeaders = new HttpHeaders({'Content-Type': 'application/json'})
@@ -82,6 +81,17 @@ export class CuentasService {
         if (e.status == 400) {
           return throwError(e);
         }
+        if (e.error.mensaje) {
+          console.error(e.error.mensaje);
+        }
+        return throwError(e);
+      }));
+  }
+
+  eliminarCuenta(id: number): Observable<Cuenta> {
+    return this.http.delete<Cuenta>(`${this.urlEndPointCuentas}/${id}`,
+    { headers: this.agregarAuthorizationHeader()}).pipe(
+      catchError(e => {
         if (e.error.mensaje) {
           console.error(e.error.mensaje);
         }

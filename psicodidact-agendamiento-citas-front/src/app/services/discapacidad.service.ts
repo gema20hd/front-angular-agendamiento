@@ -12,7 +12,7 @@ import { Router } from '@angular/router';
 })
 export class DiscapacidadService {
 
-  private urlEndPointDiscapacidad:string="http://localhost:8080/api/discapacidad";
+  private urlEndPointDiscapacidad:string="http://localhost:8080/api/discapacidades";
   private httpHeaders= new HttpHeaders({'Content-Type':'application/json'});
   
   
@@ -108,7 +108,16 @@ export class DiscapacidadService {
   }
   
 
-
+  eliminarDiscapacidad(id: number): Observable<Discapacidad> {
+    return this.http.delete<Discapacidad>(`${this.urlEndPointDiscapacidad}/${id}`,
+    { headers: this.agregarAuthorizationHeader()}).pipe(
+      catchError(e => {
+        if (e.error.mensaje) {
+          console.error(e.error.mensaje);
+        }
+        return throwError(e);
+      }));
+  }
 
 
 }
