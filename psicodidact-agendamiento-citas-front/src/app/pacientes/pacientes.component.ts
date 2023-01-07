@@ -206,7 +206,7 @@ export class PacientesComponent implements OnInit ,AfterViewInit{
         nuevoPaciente.apellidos=paciente.apellidoPaternoPaciente+" "+paciente.apellidoMaternoPaciente;
         nuevoPaciente.nombres=paciente.nombresPaciente;
         nuevoPaciente.identificacion=paciente.identificacionPaciente;
-        if (paciente.estadoPaciente==true) {
+        if (paciente.estadoPaciente=="") {
           nuevoPaciente.estado="Activo";
         }else{
           nuevoPaciente.estado="Inactivo";
