@@ -44,24 +44,14 @@ export class CrearProfesionalModalComponent {
   discapacidadRadio: number =2;
   checkPoseeDiscapacidadSi:boolean=false;
   checkPoseeDiscapacidadNo:boolean=true;
-
+  profesional:Profesional=new Profesional();
   bancosFiltrados: Observable<Banco[]> = new Observable();
   autocompleteControlBanco = new FormControl();
-
   cuenta: Cuenta = new Cuenta();
   discapacidad: Discapacidad = new Discapacidad();
   usuario: Usuario = new Usuario();
   tipoCuenta: TipoCuenta = new TipoCuenta();
-  profesional: Profesional = new Profesional();
-  tipoDiscapacidad: TipoDiscapacidad = new TipoDiscapacidad();
-  tipoSangre: TipoSangre = new TipoSangre();
   banco: Banco = new Banco();
-  estadoCivil: EstadoCivil = new EstadoCivil();
-  genero: Genero = new Genero();
-  profesionProfesional: ProfesionProfesional = new ProfesionProfesional();
-
-
-
   profesionales: Profesional[] = [];
   generos: Genero[] = [];
   estadosCivil: EstadoCivil[] = [];
@@ -71,13 +61,12 @@ export class CrearProfesionalModalComponent {
   tiposCuentas: TipoCuenta[] = [];
   bancos: Banco[] = [];
   profesionProfesionales: ProfesionProfesional[] = [];
-
   bancosAsignar: Banco[] = [];
-
-
-
-  dialogForm!: FormGroup;
-
+ tipoSangre: TipoSangre=new TipoSangre();
+ genero: Genero=new Genero();
+ estadoCivil: EstadoCivil=new EstadoCivil();
+ profesionProfesional: ProfesionProfesional= new ProfesionProfesional();
+dialogForm!: FormGroup;
   constructor(
     private profesionalService: ProfesionalesService,
     private cuentaService: CuentasService,
@@ -90,8 +79,10 @@ export class CrearProfesionalModalComponent {
     public activatedRoute: ActivatedRoute,
     @Inject(MAT_DIALOG_DATA) public data: any,
     public modalRef: MatDialogRef<CrearProfesionalModalComponent>,
+
     private formBuilder: FormBuilder
   ) {}
+    
 
   ngOnInit(): void {
     this.bancosFiltrados = this.autocompleteControlBanco.valueChanges.pipe(
@@ -141,7 +132,8 @@ export class CrearProfesionalModalComponent {
       profesional: new FormControl('', Validators.required),
       profesion: new FormControl('', Validators.required),
     });
-
+    poseeDiscapacidad: new FormControl('',Validators.required),//radio
+    
     // get
     this.profesionalService.getGenero() .subscribe((generos) => (this.generos = generos));
     this.profesionalService.getEstadoCivil().subscribe((estadosCivil) => (this.estadosCivil = estadosCivil));
@@ -331,7 +323,6 @@ export class CrearProfesionalModalComponent {
     );
 
     }
-  
   }
 
 
@@ -448,3 +439,14 @@ export class CrearProfesionalModalComponent {
     this.modalRef.close();
   }
 }
+
+
+
+
+
+
+
+
+
+
+
