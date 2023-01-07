@@ -77,7 +77,11 @@ export class CuentasService {
       { headers: this.agregarAuthorizationHeader()})
     .pipe(
       map((response: any) => response.cuenta as Cuenta),
+      
       catchError(e => {
+        if(e.validarNumeroCuentaRepetida){
+          console.error(e.error.validarNumeroCuentaRepetida);
+        }
         if (e.status == 400) {
           return throwError(e);
         }

@@ -39,11 +39,12 @@ import { DiscapacidadService } from 'src/app/services/discapacidad.service';
 })
 export class CrearProfesionalModalComponent {
   titulo = 'Crer el Profesional';
+  error: any;
   errores: string[] = [];
   discapacidadRadio: number =2;
   checkPoseeDiscapacidadSi:boolean=false;
   checkPoseeDiscapacidadNo:boolean=true;
-  camposValidos :boolean=false;
+
   bancosFiltrados: Observable<Banco[]> = new Observable();
   autocompleteControlBanco = new FormControl();
 
@@ -101,18 +102,14 @@ export class CrearProfesionalModalComponent {
     );
 
     this.dialogForm = this.formBuilder.group({
-      poseeDiscapacidad: new FormControl(''), //radio
+      poseeDiscapacidad: new FormControl('', Validators.required), //radio
       numeroCuenta: new FormControl('', Validators.required),
-      banco: new FormControl(''),
-      tipoCuenta: new FormControl(''),
+      banco: new FormControl('', Validators.required),
+      tipoCuenta: new FormControl('', Validators.required),
 
       //profesional
       //idProfesional : new FormControl('',Validators.required),
-      identificacionProfesional: new FormControl(
-        '',
-        [Validators.required, Validators.minLength(6), Validators.maxLength(10)]
-      ),
-
+      identificacionProfesional: new FormControl('', Validators.required),
       nombresProfesional: new FormControl('', Validators.required),
       apellidoPaternoProfesional: new FormControl('', Validators.required),
       apellidoMaternoProfesional: new FormControl('', Validators.required),
@@ -121,24 +118,24 @@ export class CrearProfesionalModalComponent {
       telefonoEmergenciaProfesional: new FormControl('', Validators.required),
       direccionDomicilioProfesional: new FormControl('', Validators.required),
       correoElectronicoProfesional: new FormControl('', Validators.required),
-      estadoProfesional: new FormControl(''),
-      hojaVida: new FormControl(''),
+      estadoProfesional: new FormControl('', Validators.required),
+      hojaVida: new FormControl('', Validators.required),
       tituloCuartoNivelProfesional: new FormControl('', Validators.required),
 
-      idTipoDiscapcidad: new FormControl(''),
-      estadoCivil: new FormControl(''),
-      tipoSangre: new FormControl(''),
-      discapacidad: new FormControl(''),
-      descripcionDiscpacidad: new FormControl(''),
-      porcentajeDiscapacidad: new FormControl(''),
-      nivelEducacion: new FormControl(''),
-      tipoDiscapacidad: new FormControl(''),
-      genero: new FormControl(''),
-      profesionProfesional: new FormControl(''),
-      cuenta: new FormControl(''),
+      idTipoDiscapcidad: new FormControl('', Validators.required),
+      estadoCivil: new FormControl('', Validators.required),
+      tipoSangre: new FormControl('', Validators.required),
+      discapacidad: new FormControl('', Validators.required),
+      descripcionDiscpacidad: new FormControl(),
+      porcentajeDiscapacidad: new FormControl(),
+      nivelEducacion: new FormControl('', Validators.required),
+      tipoDiscapacidad: new FormControl('', Validators.required),
+      genero: new FormControl('', Validators.required),
+      profesionProfesional: new FormControl('', Validators.required),
+      cuenta: new FormControl('', Validators.required),
 
-      username: new FormControl(''),
-      password: ['', Validators.required],
+      username: new FormControl('', Validators.required),
+      password: ['', [Validators.required]],
       confirmPassword: ['', [Validators.required]],
       enabled: new FormControl('', Validators.required),
       profesional: new FormControl('', Validators.required),
@@ -158,10 +155,7 @@ export class CrearProfesionalModalComponent {
   }
 
   create(): void {
-    //this.validarCamposVacios();
-    
-    //if(!this.dialogForm.invalid){
-      if(this.discapacidad.porcetajeDiscapacidad !=0){
+    if(this.discapacidad.porcetajeDiscapacidad !=0){
 
     this.discapacidadService.crearDiscapacidad(this.discapacidad).subscribe(
       (discapacidadCreada) => {
@@ -169,7 +163,6 @@ export class CrearProfesionalModalComponent {
           'discapacidad creada con éxito',
           discapacidadCreada.idDiscapacidad
         );
-        
         this.profesional.discapacidad.tipoDiscapacidad.idTipoDiscapacidad =
           this.discapacidad.tipoDiscapacidad.idTipoDiscapacidad;
         this.profesional.discapacidad.idDiscapacidad =
@@ -208,108 +201,13 @@ export class CrearProfesionalModalComponent {
                     Swal.fire(
                       'Nuevo Profesional',`El Profesional ${this.profesional.nombresProfesional} ${this.profesional.apellidoPaternoProfesional}ha sido creado con éxito`,'success' );
                     this.cancelar();
-                  },
-                  (err) => {
-                    this.errores = err.error.errors as string[];
-                    console.error(
-                      'Código del error desde el backend: ' + err.status
-                    );
-                    console.error(err.error.errors);
-                    
-                    
-                  }
-                );
-              },
-              (err) => {
+                  });
+                  
+              },(err) => {
                 this.errores = err.error.errors as string[];
-                console.error(
-                  'Código del error desde el backend: ' + err.status
-                );
+                console.error('Código del error desde el backend: ' + err.status);
+                //console.error('Cuenta bnacaria ya existe: ' + err.validarNumeroCuentaRepetida);
                 console.error(err.error.errors);
-                
-                this.discapacidadService.eliminarDiscapacidad(this.profesional.discapacidad.idDiscapacidad).subscribe(
-                  () => {
-                    console.log(
-                      'discapacidad eliminada con éxito',
-                      discapacidadCreada.idDiscapacidad
-                    );
-              }
-            );
-
-            this.cuentaService.eliminarCuenta(this.profesional.cuenta.idCuenta).subscribe(
-              () => {
-                console.log(
-                  'cuenta eliminada con éxito',
-                  cuentaCreada.idCuenta
-                );
-          }
-        );
-              }
-            );
-          },
-          (err) => {
-            this.errores = err.error.errors as string[];
-            console.error('Código del error desde el backend: ' + err.status);
-            console.error(err.error.errors);
-            
-          }
-        );
-      },
-      (err) => {
-        this.errores = err.error.errors as string[];
-        console.error('Código del error desde el backend: ' + err.status);
-        console.error(err.error.errors);
-      });
-   } else{
-        this.profesional.discapacidad.tipoDiscapacidad.idTipoDiscapacidad = 11;
-        this.profesional.discapacidad.idDiscapacidad = 1;
-        this.profesional.cuenta.banco.idBanco = this.cuenta.banco.idBanco;
-        this.profesional.cuenta.tipoCuenta.idTipoCuenta =this.cuenta.tipoCuenta.idTipoCuenta;
-        this.cuentaService.create(this.cuenta).subscribe(
-          (cuentaCreada) => {
-            console.log('cuenta creada con éxito', cuentaCreada);
-            this.profesional.cuenta.idCuenta = cuentaCreada.idCuenta;
-            this.profesional.tipoSangre.idTipoSangre =
-              this.tipoSangre.idTipoSangre;
-            this.profesional.estadoCivil.idEstadoCivil =
-              this.estadoCivil.idEstadoCivil;
-            this.profesional.genero.idGenero = this.genero.idGenero;
-            this.profesional.profesionProfesional.idProfesionProfesional =
-              this.profesionProfesional.idProfesionProfesional;
-
-            console.log('Lo que se envia Profesional', this.profesional);
-            this.profesionalService.create(this.profesional).subscribe(
-              (profesionalCreado) => {
-                console.log('me trae el profesional creado', profesionalCreado);
-                this.usuario.profesional.idProfesional =
-                  profesionalCreado.idProfesional;
-                this.usuario.username =
-                  profesionalCreado.correoElectronicoProfesional;
-                console.log('lo que envio', this.usuario);
-
-                this.usuarioService.create(this.usuario).subscribe(
-                  (usuario) => {
-                    console.log('usuario creado con éxito', usuario);
-                    Swal.fire(
-                      'Nuevo Profesional',`El Profesional ${this.profesional.nombresProfesional} ${this.profesional.apellidoPaternoProfesional}  ha sido creado con éxito`,'success' );
-                    this.cancelar();
-                  },
-                  (err) => {
-                    this.errores = err.error.errors as string[];
-                    console.error(
-                      'Código del error desde el backend: ' + err.status
-                    );
-                    console.error(err.error.errors);
-                  }
-                );
-              },
-              (err) => {
-                this.errores = err.error.errors as string[];
-                console.error(
-                  'Código del error desde el backend: ' + err.status
-                );
-                console.error(err.error.errors);
-               
                 this.discapacidadService.eliminarDiscapacidad(this.profesional.discapacidad.idDiscapacidad).subscribe(
                   () => {
                     console.log(
@@ -318,34 +216,124 @@ export class CrearProfesionalModalComponent {
                     );
               }
             );
-
+    
             this.cuentaService.eliminarCuenta(this.profesional.cuenta.idCuenta).subscribe(
               () => {
                 console.log(
                   'cuenta eliminada con éxito',
-                  cuentaCreada.idCuenta
+                  this.profesional.cuenta.idCuenta
                 );
           }
         );
+              }
+            );
+            
+          });
+      },
+      (err) => {
+        console.error('Código del error desde el backend: ' + err.status);
+        console.error(err.error.errors);
+        this.discapacidadService.eliminarDiscapacidad(this.profesional.discapacidad.idDiscapacidad).subscribe(
+          () => {
+            console.log(
+              'discapacidad eliminada con éxito',
+              this.profesional.discapacidad.idDiscapacidad
+            );
+      }
+    );
+
+    this.cuentaService.eliminarCuenta(this.profesional.cuenta.idCuenta).subscribe(
+      () => {
+        console.log(
+          'cuenta eliminada con éxito',
+          this.profesional.cuenta.idCuenta
+        );
+  }
+);
+      });
+   }else{
+    //this.profesional.discapacidad.tipoDiscapacidad.idTipoDiscapacidad = 11;
+    this.profesional.discapacidad.idDiscapacidad = 1;
+    this.profesional.cuenta.banco.idBanco = this.cuenta.banco.idBanco;
+    this.profesional.cuenta.tipoCuenta.idTipoCuenta =this.cuenta.tipoCuenta.idTipoCuenta;
+    this.cuentaService.create(this.cuenta).subscribe(
+      (cuentaCreada) => {
+        console.log('cuenta creada con éxito', cuentaCreada);
+        this.profesional.cuenta.idCuenta = cuentaCreada.idCuenta;
+        this.profesional.tipoSangre.idTipoSangre =
+          this.tipoSangre.idTipoSangre;
+        this.profesional.estadoCivil.idEstadoCivil =
+          this.estadoCivil.idEstadoCivil;
+        this.profesional.genero.idGenero = this.genero.idGenero;
+        this.profesional.profesionProfesional.idProfesionProfesional =
+          this.profesionProfesional.idProfesionProfesional;
+
+        console.log('Lo que se envia Profesional', this.profesional);
+        this.profesionalService.create(this.profesional).subscribe(
+          (profesionalCreado) => {
+            console.log('me trae el profesional creado', profesionalCreado);
+            this.usuario.profesional.idProfesional =
+              profesionalCreado.idProfesional;
+            this.usuario.username =
+              profesionalCreado.correoElectronicoProfesional;
+            console.log('lo que envio', this.usuario);
+
+            this.usuarioService.create(this.usuario).subscribe(
+              (usuario) => {
+                console.log('usuario creado con éxito', usuario);
+                Swal.fire(
+                  'Nuevo Profesional',`El Profesional ${this.profesional.nombresProfesional} ${this.profesional.apellidoPaternoProfesional}  ha sido creado con éxito`,'success' );
+                this.cancelar();
+              },
+              (err) => {
+                this.errores = err.error.errors as string[];
+                console.error(
+                  'Código del error desde el backend: ' + err.status
+                );
+                console.error(err.error.errors);
+                
               }
             );
           },
           (err) => {
             this.errores = err.error.errors as string[];
             console.error('Código del error desde el backend: ' + err.status);
+            //console.error('Cuenta bnacaria ya existe: ' + err.validarNumeroCuentaRepetida);
             console.error(err.error.errors);
-            
+            this.discapacidadService.eliminarDiscapacidad(this.profesional.discapacidad.idDiscapacidad).subscribe(
+              () => {
+                console.log(
+                  'discapacidad eliminada con éxito',
+                  this.profesional.discapacidad.idDiscapacidad
+                );
           }
-          
         );
 
+        this.cuentaService.eliminarCuenta(this.profesional.cuenta.idCuenta).subscribe(
+          () => {
+            console.log(
+              'cuenta eliminada con éxito',
+              this.profesional.cuenta.idCuenta
+            );
       }
-    //}else{
-      //console.log(this.dialogForm.errors)
-      //return ;
-   //}
-  }
+    );
+          }
+        );
+      },
+      (err) => {
+        this.errores = err.error.errors as string[];
+        console.error('Código del error desde el backend: ' + err.status);
+        console.error('Cuenta bancaria ya existe: ' + err.validarNumeroCuentaRepetida);
+        
+       
+        console.error(err.error.errors);
+      }
+    );
+
+    }
   
+  }
+
 
   //banco
   private _filterBanco(value: string): Observable<Banco[]> {
@@ -459,5 +447,4 @@ export class CrearProfesionalModalComponent {
   cancelar(): void {
     this.modalRef.close();
   }
-
 }

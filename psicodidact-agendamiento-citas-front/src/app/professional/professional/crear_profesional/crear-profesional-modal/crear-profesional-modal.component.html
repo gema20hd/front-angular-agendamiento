@@ -1,9 +1,11 @@
 <h2 mat-dialog-title class="text-title">{{titulo}}</h2>
-<ul class="alert alert-danger" *ngIf="errores.length > 0">
+<!-- -->
+<ul class="alert alert-danger" *ngIf="errores?.length">
     <li *ngFor="let err of errores">
         {{ err }}
     </li>
 </ul>
+
 <mat-dialog-content>
     <form [formGroup]="dialogForm" novalidate>
         <div class="container">
@@ -41,7 +43,7 @@
                     <mat-form-field appearance="fill">
                         <mat-label>Fecha Nacimiento</mat-label>
                         <input class="my-select" [(ngModel)]="profesional.fechaNacimientoProfesional" matInput [matDatepicker]="picker" formControlName="fechaNacimientoProfesional" />
-                        <mat-hint>MM/DD/YYYY</mat-hint>
+                        <mat-hint>YYYY/MM/DD</mat-hint>
                         <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
                         <mat-datepicker #picker></mat-datepicker>
                     </mat-form-field>

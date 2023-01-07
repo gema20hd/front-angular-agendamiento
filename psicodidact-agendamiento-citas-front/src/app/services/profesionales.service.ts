@@ -243,14 +243,24 @@ getBancoId(id: number): Observable<Banco> {
       .pipe(
         map((response: any) => response.profesional as Profesional),
         catchError(e => {
+
           console.log(profesional.cuenta.idCuenta+ "estoy en error de profesional");
           this.servicioCuenta.eliminarCuenta(profesional.cuenta.idCuenta);
           this.servicioDiscapacidad.eliminarDiscapacidad(profesional.discapacidad.idDiscapacidad);
+
+
+          if(e.validarCedulaRepetida){
+            console.error( "Ced R",e.error.validarCedulaRepetida);
+          }
+          if(e.validarCorreoRepetida){
+            console.error( " CR",e.error.validarCorreoRepetida);
+          }
+
           if (e.status == 400) {
             return throwError(e);
           }
           if (e.error.mensaje) {
-            console.error(e.error.mensaje);
+            console.error("Mensaje",e.error.mensaje);
           }
           return throwError(e);
         }));
