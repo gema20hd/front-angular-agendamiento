@@ -156,7 +156,9 @@ export class CrearProfesionalModalComponent {
 
   create(): void {
     if(this.discapacidad.porcetajeDiscapacidad !=0){
-
+      console.log("1:"+this.discapacidad.tipoDiscapacidad.idTipoDiscapacidad);
+    console.log("2:"+this.discapacidad.porcetajeDiscapacidad);
+    console.log("3:"+this.discapacidad.descripcionDiscapacidad);
     this.discapacidadService.crearDiscapacidad(this.discapacidad).subscribe(
       (discapacidadCreada) => {
         console.log(
