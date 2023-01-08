@@ -51,6 +51,8 @@ import {MatSelectModule} from '@angular/material/select';
 import {MatRadioModule} from '@angular/material/radio';
 import {MatTooltipModule} from '@angular/material/tooltip';
 import { DialogInformacionComponent } from './pacientes/dialog-informacion/dialog-informacion.component';
+import { FacturasComponent } from './facturas/facturas/facturas.component';
+import { CrearFacturaComponent } from './facturas/crear-facturas/crear-factura/crear-factura.component';
 
 
 
@@ -81,6 +83,8 @@ import { DialogInformacionComponent } from './pacientes/dialog-informacion/dialo
     DetallesEspecialidadModalComponent,
     CrearEspecialidadModalComponent,
     EditarEspecialidadModalComponent,
+    FacturasComponent,
+    CrearFacturaComponent,
     
 
     

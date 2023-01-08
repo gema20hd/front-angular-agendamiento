@@ -9,12 +9,12 @@ import { ProfesionalesService } from '../../../../services/profesionales.service
   styleUrls: ['./detalle-profesional-modal.component.css']
 })
 export class DetalleProfesionalModalComponent {
-  profesional: Profesional = new Profesional();
-  profesionales: Profesional[] = [];
+ public profesional: Profesional = new Profesional();
+ public  profesionales: Profesional[] = [];
 
 
   constructor(
-    private profesionalService:ProfesionalesService,
+    public profesionalService:ProfesionalesService,
     @Inject(MAT_DIALOG_DATA) public data: any,
     public modalRef: MatDialogRef<DetalleProfesionalModalComponent>) { 
     
