@@ -14,6 +14,8 @@ import { TipoSangre } from 'src/app/models/tipoSangre';
 import { AuthService } from 'src/app/users/login/auth.service';
 import { Profesional } from '../models/profesional';
 import swal from 'sweetalert2';
+import { CuentasService } from './cuentas.service';
+import { DiscapacidadService } from './discapacidad.service';
 
 
 @Injectable({
@@ -21,15 +23,20 @@ import swal from 'sweetalert2';
 })
 export class ProfesionalesService {
  private profesional: Profesional;
+ 
  private urlEndPointProfesionales: string = 'http://localhost:8080/api/profesionales';
  private urlEndPointCuentas: string = 'http://localhost:8080/api/cuentas';
  private urlEndPointGenero: string = 'http://localhost:8080/api';
 
  private httpHeaders = new HttpHeaders({'Content-Type': 'application/json'})
-
+ private servicioCuenta: CuentasService;
+ private servicioDiscapacidad: DiscapacidadService;
 
   constructor(public http: HttpClient, public router: Router, public authService: AuthService) {
     this.profesional=new Profesional();
+    this.servicioCuenta=new CuentasService(http,router,authService);
+    this.servicioDiscapacidad= new DiscapacidadService(http,router,authService);
+
    }
 
    private agregarAuthorizationHeader() {
@@ -228,46 +235,59 @@ getBancoId(id: number): Observable<Banco> {
    );
  }
 
+ create(profesional: Profesional): Observable<Profesional> {
 
-  create(profesional: Profesional): Observable<Profesional> {
-    return this.http.post(this.urlEndPointProfesionales, profesional,
-      { headers: this.agregarAuthorizationHeader()})
-      .pipe(
-        map((response: any) => response.profesional as Profesional),
-        catchError(e => {
-          if (e.status == 400) {
-            return throwError(e);
-          }
-          if (e.error.mensaje) {
-            console.error(e.error.mensaje);
-          }
-          return throwError(e);
-        }));
-  }
-  
-  update(profesional: Profesional): Observable<any> {
-    return this.http.put<any>(`${this.urlEndPointProfesionales}/${profesional.idProfesional}`, profesional,
-    { headers: this.agregarAuthorizationHeader()}).pipe(
+  return this.http.post(this.urlEndPointProfesionales, profesional,
+    { headers: this.agregarAuthorizationHeader()})
+    .pipe(
+      map((response: any) => response.profesional as Profesional),
       catchError(e => {
+
+        console.log(profesional.cuenta.idCuenta+ "estoy en error de profesional");
+        this.servicioCuenta.eliminarCuenta(profesional.cuenta.idCuenta);
+        this.servicioDiscapacidad.eliminarDiscapacidad(profesional.discapacidad.idDiscapacidad);
+
+
+        if(e.validarCedulaRepetida){
+          console.error( "Ced R",e.error.validarCedulaRepetida);
+        }
+        if(e.validarCorreoRepetida){
+          console.error( " CR",e.error.validarCorreoRepetida);
+        }
+
         if (e.status == 400) {
           return throwError(e);
         }
         if (e.error.mensaje) {
-          console.error(e.error.mensaje);
+          console.error("Mensaje",e.error.mensaje);
         }
         return throwError(e);
       }));
-  }
+}
 
-  delete(id: number): Observable<Profesional> {
-    return this.http.delete<Profesional>(`${this.urlEndPointProfesionales}/${id}`,
-    { headers: this.agregarAuthorizationHeader()}).pipe(
-      catchError(e => {
-        if (e.error.mensaje) {
-          console.error(e.error.mensaje);
-        }
+update(profesional: Profesional): Observable<any> {
+  return this.http.put<any>(`${this.urlEndPointProfesionales}/${profesional.idProfesional}`, profesional,
+  { headers: this.agregarAuthorizationHeader()}).pipe(
+    catchError(e => {
+      if (e.status == 400) {
         return throwError(e);
-      }));
-  }
+      }
+      if (e.error.mensaje) {
+        console.error(e.error.mensaje);
+      }
+      return throwError(e);
+    }));
+}
+
+delete(id: number): Observable<Profesional> {
+  return this.http.delete<Profesional>(`${this.urlEndPointProfesionales}/${id}`,
+  { headers: this.agregarAuthorizationHeader()}).pipe(
+    catchError(e => {
+      if (e.error.mensaje) {
+        console.error(e.error.mensaje);
+      }
+      return throwError(e);
+    }));
+}
 
 }

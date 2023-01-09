@@ -53,6 +53,11 @@ table {
     margin-top: 1px;
 }
 
+.mat-header-row {
+    font-size: 14px;
+    color: #0e0101;
+}
+
 .etiqueta {
     text-align: center;
 }

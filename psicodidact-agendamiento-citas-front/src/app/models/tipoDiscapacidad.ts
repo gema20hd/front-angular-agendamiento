@@ -1,5 +1,5 @@
 export class TipoDiscapacidad {
-  idTipoDiscapacidad?:number;
-  descripcionTipoDiscapacidad?:string;
+  idTipoDiscapacidad:number = 0;
+  descripcionTipoDiscapacidad:string = "";
   }
   

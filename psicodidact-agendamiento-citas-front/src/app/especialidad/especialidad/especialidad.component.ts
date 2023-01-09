@@ -10,7 +10,7 @@ import { CrearEspecialidadModalComponent } from '../crear_especialidad/crear-esp
 import { DetallesEspecialidadModalComponent } from '../detalles_especialidad/detalles-especialidad-modal/detalles-especialidad-modal.component';
 import { EditarEspecialidadModalComponent } from '../editar_especialidad/editar-especialidad-modal/editar-especialidad-modal.component';
 import { Especialidad } from './especialidad';
-import { EspecialidadesService } from './especialidades.service';
+import { EspecialidadesService } from '../../services/especialidades.service';
 
 @Component({
   selector: 'app-especialidad',

@@ -135,6 +135,25 @@ export class PacienteService {
     );
   }
   
+  getFiltrarPacienteDni(dni: String): Observable<Paciente[]> {
+    return this.http.get<Paciente[]>(`${this.urlEndPointPaciente+'/identificacion'}/${dni}`,
+    { headers: this.agregarAuthorizationHeader()}).pipe(
+     catchError(e => {
+       this.isNoAutorizado(e);
+       return throwError(e);
+     })
+   );
+ }
+
+  getFiltrarPacienteApellidoPaterno(apellidoPaterno: String): Observable<Paciente[]> {
+    return this.http.get<Paciente[]>(`${this.urlEndPointPaciente+'/apellido/paterno'}/${apellidoPaterno}`,
+    { headers: this.agregarAuthorizationHeader()}).pipe(
+     catchError(e => {
+       this.isNoAutorizado(e);
+       return throwError(e);
+     })
+   );
+ }
 
 
   getFiltrarPacienteApellidoPaterno(apellidoPaterno: String): Observable<Paciente[]> {

@@ -575,7 +575,11 @@ this.btn_opcion="Editar";
     this.dialogForm.controls['correo'].setValue(this.pacienteEditar.correoElectronicoPaciente);
     this.dialogForm.controls['descripcionTrabajo'].setValue(this.pacienteEditar.trabajo?.descripcionTrabajo);
     
+
     if (this.pacienteEditar.estadoPaciente==='ACTIVO') {
+
+   // if (this.pacienteEditar.estadoPaciente===true) {
+
       this.checkActivoPaciente=true;
       this.pacienteActivoRadio=1;
     }else{
@@ -1174,7 +1178,11 @@ crearRepresentante(){
                     representante.telefonoEmergenciaRepresentante=this.dialogForm.controls['telefonoEmergenciaRepre'].value;
                     representante.parentescoRepresentante=this.dialogForm.controls['parentescoRepresentante'].value;
                     representante.direccionDomicilioRepresentan=this.dialogForm.controls['direccionDomicilioRepre'].value;
+
                     representante.estadoRepresentante='ACTIVO';
+
+                    //representante.estadoRepresentante=true;
+
                    
                     estadoCivil.idEstadoCivil=this.dialogForm.controls['estadoCivilRepre'].value;
                     representante.estadoCivil=estadoCivil;
@@ -1296,7 +1304,11 @@ crearRepresentante(){
                     representante.telefonoEmergenciaRepresentante="";
                     representante.parentescoRepresentante="";
                     representante.direccionDomicilioRepresentan="";
+
                     representante.estadoRepresentante='INACTIVO';
+
+                    //representante.estadoRepresentante=false;
+
                    
                     estadoCivil.idEstadoCivil=this.estadoCivilNinguno.idEstadoCivil//8
                     representante.estadoCivil=estadoCivil;
@@ -1564,11 +1576,17 @@ crearRepresentante(){
            genero.idGenero=this.dialogForm.controls['genero'].value;
            paciente.genero=genero;
 
+
            paciente.estadoPaciente='ACTIVO';
  
            console.log('PACIENTE CREADO=================================');
            console.log('PACIENTE CREADO DESCRIPCION================================='+paciente.profesion?.descripcionProfesion);
           
+
+           //paciente.estadoPaciente=true;
+
+           console.log('Ingresa paciente 10');
+
            this.pacienteService.crearPaciente(paciente)
            .subscribe(
              pacienteCreado => {
@@ -1716,7 +1734,11 @@ console.log("INGRESA REPRESENTANTE EDITAR");
                 this.representanteREditar.telefonoEmergenciaRepresentante=this.dialogForm.controls['telefonoEmergenciaRepre'].value;
                 this.representanteREditar.parentescoRepresentante=this.dialogForm.controls['parentescoRepresentante'].value;
                 this.representanteREditar.direccionDomicilioRepresentan=this.dialogForm.controls['direccionDomicilioRepre'].value;
+
                 this.representanteREditar.estadoRepresentante='ACTIVO';
+
+                //this.representanteREditar.estadoRepresentante=true;
+
                    
                     this.estadoCivilEditar.idEstadoCivil=this.dialogForm.controls['estadoCivilRepre'].value;
                     this.representanteREditar.estadoCivil= this.estadoCivilEditar;
@@ -1835,7 +1857,11 @@ console.log("INGRESA REPRESENTANTE EDITAR");
                     this.representanteREditar.telefonoEmergenciaRepresentante="";
                     this.representanteREditar.parentescoRepresentante="";
                     this.representanteREditar.direccionDomicilioRepresentan="";
+
                     this.representanteREditar.estadoRepresentante='INACTIVO';
+
+                    ///this.representanteREditar.estadoRepresentante=false;
+
                    
                     this.estadoCivilEditar.idEstadoCivil=this.estadoCivilNinguno.idEstadoCivil;
                     this.representanteREditar.estadoCivil= this.estadoCivilEditar;
@@ -2090,13 +2116,21 @@ editarPaciente(representante:Representante){
                     //ACTUALIZAR EL ESTADO
           if (this.pacienteActivoRadio==1) {
             console.log("INHRESA-----------------------1");
+
              this.pacientePacienteEditar.estadoPaciente='ACTIVO';
+
+            // this.pacientePacienteEditar.estadoPaciente=true;
+
                       
             }else{
              
               if (this.pacienteActivoRadio==2) {
                 console.log("INHRESA-----------------------2");
+
                 this.pacientePacienteEditar.estadoPaciente='INACTIVO';
+
+               // this.pacientePacienteEditar.estadoPaciente=false;
+
               }
              
             }

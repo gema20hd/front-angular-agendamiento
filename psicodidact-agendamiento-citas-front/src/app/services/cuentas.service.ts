@@ -15,7 +15,6 @@ export class CuentasService {
   cuenta: Cuenta = new Cuenta();
   profesional: Profesional = new Profesional();
  
-  //private urlEndPointProfesionales: string = 'http://localhost:8080/api/profesionales';
   private urlEndPointCuentas: string = 'http://localhost:8080/api/cuentas';
  
   private httpHeaders = new HttpHeaders({'Content-Type': 'application/json'})
@@ -58,17 +57,50 @@ export class CuentasService {
 
   create(cuenta: Cuenta): Observable<Cuenta> {
     return this.http.post(this.urlEndPointCuentas, cuenta,
-    { headers: this.agregarAuthorizationHeader()}).pipe(
-        map((response: any) => response.cuenta as Cuenta),
-        catchError(e => {
-          if (e.status == 400) {
-            return throwError(e);
-          }
-          if (e.error.mensaje) {
-            console.error(e.error.mensaje);
-          }
+      { headers: this.agregarAuthorizationHeader()})
+    .pipe(
+      map((response: any) => response.cuenta as Cuenta),
+      catchError(e => {
+        if (e.status == 400) {
           return throwError(e);
-        }));
+        }
+        if (e.error.mensaje) {
+          console.error(e.error.mensaje);
+        }
+        return throwError(e);
+      }));
+  }
+
+  
+  update(cuenta: Cuenta): Observable<Cuenta> {
+    return this.http.put<any>(`${this.urlEndPointCuentas}/${cuenta.idCuenta}`, cuenta,
+      { headers: this.agregarAuthorizationHeader()})
+    .pipe(
+      map((response: any) => response.cuenta as Cuenta),
+      
+      catchError(e => {
+        if(e.validarNumeroCuentaRepetida){
+          console.error(e.error.validarNumeroCuentaRepetida);
+        }
+        if (e.status == 400) {
+          return throwError(e);
+        }
+        if (e.error.mensaje) {
+          console.error(e.error.mensaje);
+        }
+        return throwError(e);
+      }));
+  }
+
+  eliminarCuenta(id: number): Observable<Cuenta> {
+    return this.http.delete<Cuenta>(`${this.urlEndPointCuentas}/${id}`,
+    { headers: this.agregarAuthorizationHeader()}).pipe(
+      catchError(e => {
+        if (e.error.mensaje) {
+          console.error(e.error.mensaje);
+        }
+        return throwError(e);
+      }));
   }
 
 

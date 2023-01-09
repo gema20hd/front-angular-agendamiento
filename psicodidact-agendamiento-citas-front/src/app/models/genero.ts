@@ -1,6 +1,5 @@
 export class Genero {
-
-  idGenero?:number;
-  descripcionGenero?:string;
+  idGenero:number =0;
+  descripcionGenero:string = "";
   }
   

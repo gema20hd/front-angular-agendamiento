@@ -21,6 +21,7 @@ import { flatMap, map, Observable } from 'rxjs';
 import { MatAutocompleteSelectedEvent } from '@angular/material/autocomplete';
 import { CuentasService } from 'src/app/services/cuentas.service';
 import { UsuariosService } from 'src/app/services/usuarios.service';
+import { DiscapacidadService } from 'src/app/services/discapacidad.service';
 
 @Component({
   selector: 'app-editar-profesional-modal',
@@ -30,14 +31,11 @@ import { UsuariosService } from 'src/app/services/usuarios.service';
 export class EditarProfesionalModalComponent {
 
  titulo ="Editar el Profesional"
-  error: string[]=[];
 
-  disableSelect = new FormControl(false);
   bancosFiltrados: Observable<Banco[]> = new Observable();
   autocompleteControlBanco = new FormControl();
   cuenta: Cuenta = new Cuenta();
   discapacidad: Discapacidad = new Discapacidad();
-  usuario: Usuario = new Usuario()
   tipoCuenta: TipoCuenta = new TipoCuenta();
   profesional: Profesional = new Profesional();
   tipoDiscapacidad: TipoDiscapacidad = new TipoDiscapacidad();
@@ -60,23 +58,21 @@ export class EditarProfesionalModalComponent {
   errores: string[] = [];
   bancosAsignar: Banco[] = [];
 
-  selectedTipoSangre?:number;
-  selectedEstadoCivil?:number;
-  selectedBanco?:number;
-  selectedGenero?:number;
-  selectedTipoDiscapacidad?:number;
-  selectedProfesionProfesional?:number;
-  discapacidadRadio:number=2;
+ 
+  estadoActivoProfesional:boolean=false;
+  estadoInactivoProfesional:boolean=false;
+
 
 
   dialogForm!: FormGroup;
 
 
   constructor(
-    private profesionalService:ProfesionalesService,
+    private profesionalService: ProfesionalesService,
+    private cuentaService: CuentasService,
     public http: HttpClient,
     public authService: AuthService,
-
+    private discapacidadService: DiscapacidadService,
     public router: Router,
     public dialog: MatDialog,
     public activatedRoute: ActivatedRoute,
@@ -88,171 +84,258 @@ export class EditarProfesionalModalComponent {
 
   ngOnInit(): void {
 
+    this.bancosFiltrados = this.autocompleteControlBanco.valueChanges.pipe(
+      map((value) =>
+        typeof value === 'string' ? value : value.descripcionBanco
+      ),
+      flatMap((value) => (value ? this._filterBanco(value) : []))
+    );
+
+    this.profesional.idProfesional =this.data.idProfesional
     this.profesional.identificacionProfesional =this.data.identificacionProfesional
     this.profesional.nombresProfesional =this.data.nombresProfesional
     this.profesional.apellidoPaternoProfesional =this.data.apellidoPaternoProfesional
-    this.profesional.apellidoPaternoProfesional =this.data.apellidoMaternoProfesional
-    this.profesional.apellidoMaternoProfesional =this.data.fechaNacimientoProfesional
+    this.profesional.apellidoMaternoProfesional =this.data.apellidoMaternoProfesional
     this.profesional.correoElectronicoProfesional =this.data.correoElectronicoProfesional
     this.profesional.celularProfesional =this.data.celularProfesional
     this.profesional.telefonoEmergenciaProfesional =this.data.telefonoEmergenciaProfesional
     this.profesional.direccionDomicilioProfesional=this.data.direccionDomicilioProfesional
+    this.profesional.estadoProfesional=this.data.estadoProfesional
+
+    this.cuenta.banco.idBanco=this.data.cuenta.banco.idBanco
+    this.cuenta.tipoCuenta.idTipoCuenta=this.data.cuenta.tipoCuenta.idTipoCuenta
+    this.cuenta.idCuenta=this.data.cuenta.idCuenta
     this.cuenta.numeroCuenta=this.data.cuenta.numeroCuenta
+
+    
+    this.discapacidad.tipoDiscapacidad.idTipoDiscapacidad=this.data.discapacidad.tipoDiscapacidad.idTipoDiscapacidad
+    this.discapacidad.tipoDiscapacidad.descripcionTipoDiscapacidad=this.data.discapacidad.tipoDiscapacidad.descripcionTipoDiscapacida
+    this.discapacidad.idDiscapacidad=this.data.discapacidad.idDiscapacidad
+    this.discapacidad.porcetajeDiscapacidad=this.data.discapacidad.porcetajeDiscapacidad
     this.discapacidad.porcetajeDiscapacidad=this.data.discapacidad.porcetajeDiscapacidad
     this.discapacidad.descripcionDiscapacidad=this.data.discapacidad.descripcionDiscapacidad
+
+    this.profesionProfesional.idProfesionProfesional= this.data.idProfesionProfesional
     this.profesionProfesional.tercerNivelProfesionProfesional= this.data.tercerNivelProfesionProfesional
+    
+    this.genero.idGenero= this.data.idGenero
+    this.genero.descripcionGenero= this.data.descripcionGenero
 
+    this.dialogForm = this.formBuilder.group({
+      poseeDiscapacidad: new FormControl('', Validators.required), //radio
+      numeroCuenta: new FormControl('', Validators.required),
+      banco: new FormControl('', Validators.required),
+      tipoCuenta: new FormControl('', Validators.required),
 
-    this.dialogForm=this.formBuilder.group({
-      poseeDiscapacidad: new FormControl('',Validators.required),//radio
-      numeroCuenta: new FormControl('',Validators.required),
-      banco: new FormControl('',Validators.required),
-      tipoCuenta: new FormControl('',Validators.required),
-  
       //profesional
       //idProfesional : new FormControl('',Validators.required),
-      identificacionProfesional : new FormControl('',Validators.required),
-      nombresProfesional : new FormControl('',Validators.required),
-      apellidoPaternoProfesional : new FormControl('',Validators.required),
-      apellidoMaternoProfesional : new FormControl('',Validators.required),
-      fechaNacimientoProfesional : new FormControl('',Validators.required),
-      celularProfesional : new FormControl('',Validators.required),
-      telefonoEmergenciaProfesional : new FormControl('',Validators.required),
-      direccionDomicilioProfesional : new FormControl('',Validators.required),
-      correoElectronicoProfesional : new FormControl('',Validators.required),
-      estadoProfesional : new FormControl('',Validators.required),
-      hojaVida : new FormControl('',Validators.required),
-      tituloCuartoNivelProfesional : new FormControl('',Validators.required),
-  
-      idTipoDiscapcidad: new FormControl('',Validators.required),
-      estadoCivil: new FormControl('',Validators.required),
-      tipoSangre : new FormControl('',Validators.required),
-      discapacidad : new FormControl('',Validators.required),
-      descripcionDiscpacidad : new FormControl('',Validators.required),
-      porcentajeDiscapacidad: new FormControl('',Validators.required),
-      tipoDiscapacidad: new FormControl('',Validators.required),
-      genero : new FormControl('',Validators.required),
-      profesionProfesional : new FormControl('',Validators.required),
-      cuenta : new FormControl('',Validators.required),
-  
-  
-      username : new FormControl('',Validators.required),
-      password : new FormControl('',Validators.required),
-      password2: new FormControl('',Validators.required),
-      enabled : new FormControl('',Validators.required),
-      profesional: new FormControl('',Validators.required),
-      profesion: new FormControl('',Validators.required),
+      identificacionProfesional: new FormControl(
+        this.profesional.identificacionProfesional,
+        [Validators.required, Validators.minLength(6), Validators.maxLength(10)]
+      ),
 
-  });
+      nombresProfesional: new FormControl('', Validators.required),
+      apellidoPaternoProfesional: new FormControl('', Validators.required),
+      apellidoMaternoProfesional: new FormControl('', Validators.required),
+      fechaNacimientoProfesional: new FormControl('', Validators.required),
+      celularProfesional: new FormControl('', Validators.required),
+      telefonoEmergenciaProfesional: new FormControl('', Validators.required),
+      direccionDomicilioProfesional: new FormControl('', Validators.required),
+      correoElectronicoProfesional: new FormControl('', Validators.required),
+      estadoProfesional: new FormControl('', Validators.required),
+      hojaVida: new FormControl('', Validators.required),
+      tituloCuartoNivelProfesional: new FormControl('', Validators.required),
 
-      this.bancosFiltrados = this.autocompleteControlBanco.valueChanges.pipe(
-      map(value => typeof value === 'string' ? value : value.descripcionBanco), 
-      flatMap(value => value ? this._filterBanco(value) : []));
+      idTipoDiscapcidad: new FormControl('', Validators.required),
+      estadoCivil: new FormControl('', Validators.required),
+      tipoSangre: new FormControl('', Validators.required),
+      discapacidad: new FormControl('', Validators.required),
+      descripcionDiscpacidad: new FormControl(),
+      porcentajeDiscapacidad: new FormControl(),
+      nivelEducacion: new FormControl('', Validators.required),
+      tipoDiscapacidad: new FormControl('', Validators.required),
+      genero: new FormControl('', Validators.required),
+      profesionProfesional: new FormControl('', Validators.required),
+      cuenta: new FormControl('', Validators.required),
 
+      username: new FormControl('', Validators.required),
+      password: ['', [Validators.required]],
+      confirmPassword: ['', [Validators.required]],
+      enabled: new FormControl('', Validators.required),
+      profesional: new FormControl('', Validators.required),
+      profesion: new FormControl('', Validators.required),
+    });
 
-
-            // get
-            this.profesionalService.getGenero().subscribe(generos => this.generos = generos);
-            this.profesionalService.getEstadoCivil().subscribe(estadosCivil => this.estadosCivil = estadosCivil);
-            this.profesionalService.getTipoSangre().subscribe(tiposSangre => this.tiposSangre = tiposSangre);
-            this.profesionalService.getTipoDiscapacidad().subscribe(tiposDiscapacidades => this.tiposDiscapacidades = tiposDiscapacidades);
-            this.profesionalService.getProfesionProfesional().subscribe(profesionProfesionales => this.profesionProfesionales = profesionProfesionales);
-            this.profesionalService.getTipoCuentas().subscribe(tiposCuentas => this.tiposCuentas = tiposCuentas);
-      
-  
+    // get
+    this.profesionalService.getGenero() .subscribe((generos) => (this.generos = generos));
+    this.profesionalService.getEstadoCivil().subscribe((estadosCivil) => (this.estadosCivil = estadosCivil));
+    this.profesionalService.getTipoSangre().subscribe((tiposSangre) => (this.tiposSangre = tiposSangre));
+    this.profesionalService.getTipoDiscapacidad().subscribe((tiposDiscapacidades) =>(this.tiposDiscapacidades = tiposDiscapacidades));
+    this.profesionalService.getProfesionProfesional().subscribe((profesionProfesionales) =>(this.profesionProfesionales = profesionProfesionales));
+    this.profesionalService.getTipoCuentas().subscribe((tiposCuentas) => (this.tiposCuentas = tiposCuentas));
+  }
+  get name() {
+    return this.dialogForm.get('identificacionProfesional');
   }
 
-  
+  update(): void {
+    this.discapacidadService.actualizarDiscapacidad(this.discapacidad).subscribe(
+      (discapacidadCreada) => {
+        console.log(
+          'discapacidad actualizada con éxito',
+          discapacidadCreada.idDiscapacidad
+        );
+        this.profesional.discapacidad.tipoDiscapacidad.idTipoDiscapacidad =
+          this.discapacidad.tipoDiscapacidad.idTipoDiscapacidad;
+        this.profesional.discapacidad.idDiscapacidad =
+          discapacidadCreada.idDiscapacidad;
+        
+        
+        this.profesional.cuenta.banco.idBanco = this.cuenta.banco.idBanco;
+        this.profesional.cuenta.tipoCuenta.idTipoCuenta =this.cuenta.tipoCuenta.idTipoCuenta;
+        this.cuentaService.update(this.cuenta).subscribe(
+          (cuentaCreada) => {
+            console.log('cuenta actualizada con éxito', cuentaCreada);
+            this.profesional.cuenta.idCuenta = cuentaCreada.idCuenta;
+            this.profesional.tipoSangre.idTipoSangre = this.tipoSangre.idTipoSangre;
+            this.profesional.estadoCivil.idEstadoCivil =this.estadoCivil.idEstadoCivil;
+            this.profesional.genero.idGenero = this.genero.idGenero;
+            this.profesional.profesionProfesional.idProfesionProfesional =this.profesionProfesional.idProfesionProfesional;
+            console.log('Lo que se envia Profesional', this.profesional);
+            this.profesionalService.update(this.profesional).subscribe(
+              (profesionalCreado) => {
+                console.log('profesional actualizada con éxito', profesionalCreado);
+                Swal.fire(
+                  'Actualización Profesional',`El Profesional ${this.profesional.nombresProfesional} ${this.profesional.apellidoPaternoProfesional}ha sido actualizado con éxito`,'success' );
+                this.cancelar();
 
+              });   
+          },
+          (err) => {
+            this.errores = err.error.errors as string[];
+            console.error('Código del error desde el backend: ' + err.status);
+            console.error(err.error.errors);
+          }
+        );
+      },
+      (err) => {
+        this.errores = err.error.errors as string[];
+        console.error('Código del error desde el backend: ' + err.status);
+        console.error(err.error.errors);
+      }
 
-
-//banco
-private _filterBanco(value: string): Observable<Banco[]> {
-  const filterValue = value;
-  return this.profesionalService.getFiltrarBanco(filterValue);
+      );  
 }
+  //banco
+  private _filterBanco(value: string): Observable<Banco[]> {
+    const filterValue = value.toLowerCase();
+    return this.profesionalService.getFiltrarBancos(filterValue);
+  }
 
+  mostrarBanco(banco?: Banco): string | '' {
+    return banco ? banco.descripcionBanco : '';
+  }
 
-mostrarBanco(banco ? : Banco): string | "" {
-  return banco ? banco.descripcionBanco : "";
-}
+  seleccionarBanco(event: MatAutocompleteSelectedEvent): void {
+    let banco = event.option.value as Banco;
+    console.log(banco);
+    this.autocompleteControlBanco.setValue('');
+    event.option.focus();
+    event.option.deselect();
+  }
 
-seleccionarBanco(event: MatAutocompleteSelectedEvent): void {
-  let banco = event.option.value as Banco;
-  console.log(banco);
-  this.bancosAsignar.push(banco);
-  this.autocompleteControlBanco.setValue('');
-  event.option.focus();
-  event.option.deselect();
+  compararGenero(o1: Genero, o2: Genero): boolean {
+    if (o1 === undefined && o2 === undefined) {
+      return true;
+    }
 
-}
+    return o1 === null || o2 === null || o1 === undefined || o2 === undefined
+      ? false
+      : o1.idGenero === o2.idGenero;
+  }
 
-  cancelar(): void{
+  compararEstadoCivil(o1: EstadoCivil, o2: EstadoCivil): boolean {
+    if (o1 === undefined && o2 === undefined) {
+      return true;
+    }
+    return o1 === null || o2 === null || o1 === undefined || o2 === undefined
+      ? false
+      : o1.idEstadoCivil === o1.idEstadoCivil;
+  }
+
+  compararTipoDiscapacidad(
+    o1: TipoDiscapacidad,
+    o2: TipoDiscapacidad
+  ): boolean {
+    if (o1 === undefined && o2 === undefined) {
+      return true;
+    }
+    return o1 === null || o2 === null || o1 === undefined || o2 === undefined
+      ? false
+      : o1.idTipoDiscapacidad === o1.idTipoDiscapacidad;
+  }
+
+  compararProfesionProfesional(
+    o1: ProfesionProfesional,
+    o2: ProfesionProfesional
+  ): boolean {
+    if (o1 === undefined && o2 === undefined) {
+      return true;
+    }
+    return o1 === null || o2 === null || o1 === undefined || o2 === undefined
+      ? false
+      : o1.idProfesionProfesional === o1.idProfesionProfesional;
+  }
+
+  compararTipoSangre(o1: TipoSangre, o2: TipoSangre): boolean {
+    if (o1 === undefined && o2 === undefined) {
+      return true;
+    }
+    return o1 === null || o2 === null || o1 === undefined || o2 === undefined
+      ? false
+      : o1.idTipoSangre === o1.idTipoSangre;
+  }
+
+  compararTipoCuenta(o1: TipoCuenta, o2: TipoCuenta): boolean {
+    if (o1 === undefined && o2 === undefined) {
+      return true;
+    }
+    return o1 === null || o2 === null || o1 === undefined || o2 === undefined
+      ? false
+      : o1.idTipoCuenta === o1.idTipoCuenta;
+  }
+
+  public passwordsMatch = (_form: FormGroup): boolean => {
+    if (
+      _form.controls['password'].touched &&
+      _form.controls['confirmPassword'].touched
+    ) {
+      if (_form.value.password === _form.value.confirmPassword) {
+        return true;
+      } else {
+        return false;
+      }
+    }
+    return true;
+  };
+
+  public verifyPasswords = (_field: string, _form: FormGroup): any => {
+    let result = false;
+    if (!this.passwordsMatch(_form) || !this.isFieldValid(_field, _form)) {
+      result = true;
+    }
+    return { 'is-invalid': result };
+  };
+
+  public isFieldValid(_field: string, _form: FormGroup): boolean {
+    let valid = true;
+    if (_form.get(_field)?.invalid && _form.get(_field)?.touched) {
+      valid = false;
+    }
+    return valid;
+  }
+
+  cancelar(): void {
     this.modalRef.close();
   }
-
-  verInformacionProfesional(id: number) {
-    this.profesionalService.getProfesionalId(id).subscribe(rs => { this.profesional =rs });
-    }
-      
-   editarInformacionProfesional(profesional: Profesional){
-      this.profesionalService.update(profesional).subscribe(profesional=> {
-        console.log(profesional);
-        Swal.fire('Modificado:', `Profesional ${profesional.nombresProfesional} actualizado con éxito`, 'success');
-      }, err => {
-        if(err.status === 400){
-          this.error = err.error;
-          console.log(this.error);
-        }
-      });
-    }
-
-    compararGenero(o1: Genero, o2: Genero): boolean {
-      if (o1 === undefined && o2 === undefined) {
-        return true;
-      }
-    
-      return o1 === null || o2 === null || o1 === undefined || o2 === undefined ? false : o1.idGenero === o2.idGenero;
-    }
-    
-    compararEstadoCivil(o1: EstadoCivil, o2: EstadoCivil): boolean {
-      if (o1 === undefined && o2 === undefined) {
-        return true;
-      }
-      return o1 === null || o2 === null || o1 === undefined || o2 === undefined ? false : o1.idEstadoCivil === o1.idEstadoCivil;
-    }
-    
-    compararTipoDiscapacidad(o1: TipoDiscapacidad, o2: TipoDiscapacidad): boolean {
-      if (o1 === undefined && o2 === undefined) {
-        return true;
-      }
-      return o1 === null || o2 === null || o1 === undefined || o2 === undefined ? false : o1.idTipoDiscapacidad === o1.idTipoDiscapacidad;
-    }
-    
-    compararProfesionProfesional(o1: ProfesionProfesional, o2: ProfesionProfesional): boolean {
-      if (o1 === undefined && o2 === undefined) {
-        return true;
-      }
-      return o1 === null || o2 === null || o1 === undefined || o2 === undefined ? false : o1.idProfesionProfesional === o1.idProfesionProfesional;
-    }
-    
-    compararTipoSangre(o1: TipoSangre, o2: TipoSangre): boolean {
-      if (o1 === undefined && o2 === undefined) {
-        return true;
-      }
-      return o1 === null || o2 === null || o1 === undefined || o2 === undefined ? false : o1.idTipoSangre === o1.idTipoSangre;
-    }
-    
-    compararTipoCuenta(o1: TipoCuenta, o2: TipoCuenta): boolean {
-      if (o1 === undefined && o2 === undefined) {
-        return true;
-      }
-      return o1 === null || o2 === null || o1 === undefined || o2 === undefined ? false : o1.idTipoCuenta === o1.idTipoCuenta;
-    }
-    
-    
-    
-    
-
-  
 }

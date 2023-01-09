@@ -1,7 +1,11 @@
+import { Profesional } from "src/app/models/profesional";
+
 export class Usuario {
-  idUsuario?:number;
+  idUsuario:number =0;
   username: string = "";
   password: string = "";
-  enabled: boolean= false;
+  enabled: boolean= true;
+  passwordRepeat?: string;
   roles: string[] = [];
+  profesional: Profesional= new Profesional()
 }

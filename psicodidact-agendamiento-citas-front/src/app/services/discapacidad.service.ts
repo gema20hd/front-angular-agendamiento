@@ -12,7 +12,7 @@ import { Router } from '@angular/router';
 })
 export class DiscapacidadService {
 
-  private urlEndPointDiscapacidad:string="http://localhost:8080/api/discapacidad";
+  private urlEndPointDiscapacidad:string="http://localhost:8080/api/discapacidades";
   private httpHeaders= new HttpHeaders({'Content-Type':'application/json'});
   
   
@@ -52,7 +52,8 @@ export class DiscapacidadService {
 
   listarDiscapacidad():Observable<Discapacidad[]>{
 
-    return this.http.get<Discapacidad[]>(this.urlEndPointDiscapacidad,{ headers: this.agregarAuthorizationHeader()}).pipe(
+    return this.http.get<Discapacidad[]>(this.urlEndPointDiscapacidad,
+      { headers: this.agregarAuthorizationHeader()}).pipe(
       catchError(e => {
         this.isNoAutorizado(e);
         return throwError(e);
@@ -63,21 +64,20 @@ export class DiscapacidadService {
 
 
   crearDiscapacidad(discapacidad: Discapacidad): Observable<Discapacidad> {
-    return this.http.post(this.urlEndPointDiscapacidad,discapacidad,{ headers: this.agregarAuthorizationHeader()})
-      .pipe(
-        map((response: any) => response.discapacidad as Discapacidad),
-        catchError(e => {
-          if (e.status == 400) {
+    return this.http.post(this.urlEndPointDiscapacidad,discapacidad,
+      { headers: this.agregarAuthorizationHeader()}).pipe(
+          map((response: any) => response.discapacidad as Discapacidad),
+          catchError(e => {
+            if (e.status == 400) {
+              return throwError(e);
+            }
+            if (e.error.mensaje) {
+              console.error(e.error.mensaje);
+            }
             return throwError(e);
-          }
-          if (e.error.mensaje) {
-            console.error(e.error.mensaje);
-          }
-          return throwError(e);
-        }));
-  }
-
-
+          }));
+    }
+  
   
   actualizarDiscapacidad(discapacidad: Discapacidad): Observable<Discapacidad> {
     return this.http.put<any>(`${this.urlEndPointDiscapacidad}/${discapacidad.idDiscapacidad}`, discapacidad,{ headers: this.agregarAuthorizationHeader()})
@@ -108,7 +108,16 @@ export class DiscapacidadService {
   }
   
 
-
+  eliminarDiscapacidad(id: number): Observable<Discapacidad> {
+    return this.http.delete<Discapacidad>(`${this.urlEndPointDiscapacidad}/${id}`,
+    { headers: this.agregarAuthorizationHeader()}).pipe(
+      catchError(e => {
+        if (e.error.mensaje) {
+          console.error(e.error.mensaje);
+        }
+        return throwError(e);
+      }));
+  }
 
 
 }

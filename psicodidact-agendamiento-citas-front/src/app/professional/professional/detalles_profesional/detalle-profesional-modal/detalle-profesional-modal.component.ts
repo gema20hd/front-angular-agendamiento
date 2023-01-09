@@ -9,12 +9,12 @@ import { ProfesionalesService } from '../../../../services/profesionales.service
   styleUrls: ['./detalle-profesional-modal.component.css']
 })
 export class DetalleProfesionalModalComponent {
-  profesional?: Profesional;
-  profesionales: Profesional[] = [];
+ public profesional: Profesional = new Profesional();
+ public  profesionales: Profesional[] = [];
 
 
   constructor(
-    private profesionalService:ProfesionalesService,
+    public profesionalService:ProfesionalesService,
     @Inject(MAT_DIALOG_DATA) public data: any,
     public modalRef: MatDialogRef<DetalleProfesionalModalComponent>) { 
     
@@ -23,6 +23,8 @@ export class DetalleProfesionalModalComponent {
   ngOnInit(): void {
 
     //this.profesionales = this.data.idProfesional ;
+    const date = new Date(this.profesional.fechaNacimientoProfesional.toLocaleDateString());
+    this.profesional.fechaNacimientoProfesional = date
     this.verInformacionProfesional(this.data.idProfesional);
    // console.log(" detalle p sin objet ",this.profesional)
     //console.log(" detalle p ",this.data as Profesional)

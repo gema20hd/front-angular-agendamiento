@@ -1,4 +1,9 @@
-<h2 mat-dialog-title class="card_title">Editar Unidad Educativa</h2>
+<h2 mat-dialog-title class="text-title">{{titulo}}</h2>
+<ul class="alert alert-danger" *ngIf="errores.length > 0">
+    <li *ngFor="let err of errores">
+        {{ err }}
+    </li>
+</ul>
 <mat-dialog-content>
 
     <form [formGroup]="dialogForm">
@@ -8,7 +13,7 @@
                     <div class="col-md-4">
                         <mat-form-field appearance="outline">
                             <mat-label>Nombre de la Especialidad</mat-label>
-                            <input [(ngModel)]="especialidad.descripcionEspecialidad" matInput placeholder="Nombre de la Especialidad" formControlName="descripcionEspecialidad" />
+                            <input class="nombre-especialidad" [(ngModel)]="especialidad.descripcionEspecialidad" matInput placeholder="Nombre de la Especialidad" formControlName="descripcionEspecialidad" />
                         </mat-form-field>
                     </div>
                 </div>
@@ -18,9 +23,7 @@
     </form>
 </mat-dialog-content>
 <mat-dialog-actions align="end">
-    <button mat-button (click)="cancelar()">Cancelar</button>
-    <div class="col-sm-6">
-        <button class="btn btn-primary" role="button" (click)='update()'>Editar</button>
+    <button class="mat-stroked-button-cancelar" (click)="cancelar()">Cancelar</button>
+    <button class="mat-stroked-button-guardar" (click)="update()">Guardar</button>
 
-    </div>
 </mat-dialog-actions>

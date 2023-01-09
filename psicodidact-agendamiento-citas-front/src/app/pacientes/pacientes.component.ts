@@ -238,9 +238,18 @@ return this.pacienteService.listarPaciente();
         nuevoPaciente.id=paciente.idPaciente;
         nuevoPaciente.apellidos=paciente.apellidoPaternoPaciente+" "+paciente.apellidoMaternoPaciente;
         nuevoPaciente.nombres=paciente.nombresPaciente;
+
         nuevoPaciente.identificacion=paciente.identificacionPaciente;  
         nuevoPaciente.estado=paciente.estadoPaciente;
        
+
+        nuevoPaciente.identificacion=paciente.identificacionPaciente;
+      //  if (paciente.estadoPaciente==true) {
+          nuevoPaciente.estado="Activo";
+       // }else{
+          nuevoPaciente.estado="Inactivo";
+        //}
+
 
         if (paciente.representante?.identificacionRepresentante) {
           nuevoPaciente.posee_representante="Si";

@@ -18,16 +18,17 @@ export class Profesional {
     telefonoEmergenciaProfesional: string = "";
     direccionDomicilioProfesional: string = "";
     correoElectronicoProfesional: string = "";
-    estadoProfesional: string = "";
-    hojaVida: string = "";
-    nivelEducacion: string = "";
-    tituloCuartoNivelProfesional: string = "";
+    estadoProfesional: string = "ACTIVO";
+    hojaVida: string = "SI";
+    nivelEducacion: string = "TERCER NIVEL";
+    tituloCuartoNivelProfesional: string = "NO TIENE";
     estadoCivil: EstadoCivil = new EstadoCivil;
     tipoSangre: TipoSangre = new TipoSangre();
     discapacidad: Discapacidad = new Discapacidad();
     genero: Genero = new Genero();
     profesionProfesional: ProfesionProfesional = new ProfesionProfesional();
     cuenta: Cuenta = new Cuenta();
+    edadProfesional: number=0;
 
 
 }
