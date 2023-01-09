@@ -155,7 +155,7 @@ export class PacienteService {
    );
  }
 
-
+/*
   getFiltrarPacienteApellidoPaterno(apellidoPaterno: String): Observable<Paciente[]> {
     return this.http.get<Paciente[]>(`${this.urlEndPointPaciente+'/apellido/paterno'}/${apellidoPaterno}`,
     { headers: this.agregarAuthorizationHeader()}).pipe(
@@ -177,5 +177,5 @@ export class PacienteService {
    );
  }
   
-
+*/
 }
