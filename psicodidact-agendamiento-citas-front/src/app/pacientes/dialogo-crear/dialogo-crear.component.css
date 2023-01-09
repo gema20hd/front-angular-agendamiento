@@ -58,3 +58,28 @@ width: 102%;
   
     padding-right: 40px;
   }
+
+  .cardAdicional{
+    height: 30px;
+    text-align: center;
+    font-weight: lighter;
+    color: black;
+    font-weight: 500;
+  }
+
+  .text_center{
+    text-align: center;
+  }
+
+
+  .size_fecha{
+    width: 13rem;
+  }
+
+.example-full-width {
+    width: 100%;
+}
+
+.heigth_unidad{
+  height: 13px;
+}

@@ -39,6 +39,9 @@ export class DialogInformacionComponent implements OnInit {
     console.log('hay algo sin id'+this.infoData);
    // this.dtoTablaPacientes=this.infoData;
    this.paciente=this.infoData;
+
+   console.log("====================yyuuy=======================");
+
   }
 
   private obtenerPacientes(){
@@ -54,11 +57,56 @@ export class DialogInformacionComponent implements OnInit {
    public buscarByIdpaciente(id:number){
    this.pacienteService.obtenerPacienteById(id).subscribe(data =>{
       this.pacienteSelect=data;
+
+     let edad= this.obtenerEdad(this.pacienteSelect);
+     this.pacienteSelect.edadPaciente=edad;
      
+     console.log("EDAD=============="+edad);
    });
    }
 
 
-   
+   public obtenerEdad(paciente:Paciente):number{
+    let fechaNacimiento: Date = new Date(paciente?.fechaNacimientoPaciente+"");
+    let anioNacimiento=fechaNacimiento.getFullYear();
+
+    console.log("ANIO NACIMIENTO"+anioNacimiento);
+
+    let mesNacimiento=fechaNacimiento.getMonth();
+    console.log("MES NACIMIENTO"+mesNacimiento);
+
+    let diaNacimiento=fechaNacimiento.getDate();
+    console.log("MES NACIMIENTO"+diaNacimiento);
+
+    let fechaActual: Date = new Date();
+
+    let anioActual=fechaActual.getFullYear();
+    console.log("anioActual=========="+anioActual);
+
+    let mesActual=fechaActual.getMonth();
+    console.log("mesActual=========="+mesActual);
+
+    let diaActual=fechaActual.getDate();
+    console.log("diaActual"+diaActual);
+
+    let edad=anioActual-anioNacimiento;
+
+    if (diaActual>diaNacimiento) {
+      if (mesActual>mesNacimiento) {
+        edad=edad;
+      }else{
+        edad=edad-1;
+      }
+
+    }else{
+      if (mesActual>mesNacimiento) {
+        edad=edad;
+      }else{
+        edad=edad-1;
+      }
+    }
+    
+   return edad; 
+   }
 
 }

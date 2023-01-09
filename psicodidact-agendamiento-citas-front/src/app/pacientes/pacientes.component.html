@@ -82,14 +82,19 @@
     </div>
 </div>
 
+<div class="row">
+    <mat-card class="card">
+<!--
 <div class="div_table">
+
     <div class="row">
         <mat-card class="card">
             <mat-card-title class="card_title">Panel de Resultados</mat-card-title>
         </mat-card>
         <div>
             <div class="mat-elevation-z8">
-                <table mat-table [dataSource]="pacientesFiltrados" matSort>
+-->
+                <table mat-table [dataSource]="pacientesFiltrados" class="mat-elevation-z8">
                     <!-- Position Column -->
                     <ng-container matColumnDef="Identificacion" class="centrar_column">
                         <th mat-header-cell *matHeaderCellDef class="centrar_column mat-header-row" mat-sort-header>Identificacion</th>
@@ -163,11 +168,18 @@
                     <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
                     <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
                 </table>
-
+<!--
            
             </div>
         </div>
     </div>
-</div>
 
+</div>
+-->
+</mat-card>
+</div>
+<br>
+<br>
+<br>
+<br>
 <app-footer></app-footer>

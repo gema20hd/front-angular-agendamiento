@@ -56,5 +56,14 @@ export class UnidadEducativaService {
     );
   }
 
+  getFiltrarUnidadEducativaNombre(nombreUnidadEducativa: String): Observable<UnidadEducativa[]> {
+    return this.http.get<UnidadEducativa[]>(`${this.url+'/nombre'}/${nombreUnidadEducativa}`,
+    { headers: this.agregarAuthorizationHeader()}).pipe(
+     catchError(e => {
+       this.isNoAutorizado(e);
+       return throwError(e);
+     })
+   );
+ }
 
 }

@@ -1,6 +1,6 @@
 import { Component, EventEmitter, Inject, OnInit, Optional, Output } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
-import { catchError, map, Observable, startWith } from 'rxjs';
+import { catchError, flatMap, map, Observable, startWith } from 'rxjs';
 import { Antecedente } from 'src/app/models/antecedente';
 import { Genero } from 'src/app/models/genero';
 import { NivelEducacionParalelo } from 'src/app/models/nivelEducacionParalelo';
@@ -30,6 +30,7 @@ import { EstadoCivil } from 'src/app/models/estadoCivil';
 import { TipoSangre } from 'src/app/models/tipoSangre';
 import { TipoDiscapacidad } from 'src/app/models/tipoDiscapacidad';
 import { UnidadEducativa } from 'src/app/models/unidadEducativa';
+import { MatAutocompleteSelectedEvent } from '@angular/material/autocomplete';
 
 @Component({
   selector: 'app-dialogo-crear',
@@ -197,10 +198,105 @@ selecttipoTrabajodRepresentante?:number;
    
   }
 
+//==================================  Autocomplete===
+  autocompleteControl = new FormControl();
+  autocompleteControlProfesionPctn = new FormControl();
+  autocompleteControlProfesionRepre = new FormControl();
+
+
+  unidadFiltrados!: Observable<UnidadEducativa[]> ;
+  profesionPctnFiltrados!: Observable<Profesion[]> ;
+  profesionRepreFiltrados!: Observable<Profesion[]> ;
+
+  unidadNueva:UnidadEducativa= new UnidadEducativa();
+  profesionPctn:Profesion= new Profesion();
+  profesionRepre:Profesion= new Profesion();
+
+   private _filter(value: string): Observable<UnidadEducativa[]> {
+    const filterValue = value.toLowerCase();
+
+    return this.unidadEducativaService.getFiltrarUnidadEducativaNombre(filterValue);
+  }
+
+  private _filterPctn(value: string): Observable<Profesion[]> {
+    const filterValue = value.toLowerCase();
+
+    return this.profesionService.getFiltrarProfesionNombre(filterValue);
+  }
+
+
+  mostrarNombre(unidad: UnidadEducativa): string  {
+    return unidad ? unidad.nombreUnidadEducativa : "";
+  }
+
+  mostrarNombrePctn(profesion: Profesion): string  {
+    return profesion ? profesion.descripcionProfesion : "";
+  }
+
+  seleccionarProducto(event: MatAutocompleteSelectedEvent):void {
+    let unidad = event.option.value as UnidadEducativa;
+    console.log(unidad.nombreUnidadEducativa+"===============LA UNIDAD ESA");
+
+   // this.autocompleteControl.setValue('');
+    event.option.focus();
+    event.option.deselect();
+    this.unidadNueva=unidad;
+
+  };
+
+  seleccionarProfesion(event: MatAutocompleteSelectedEvent):void {
+    let profesion = event.option.value as Profesion;
+    console.log(profesion.descripcionProfesion+"===============LA PROFESION ESA");
+
+   // this.autocompleteControl.setValue('');
+    event.option.focus();
+    event.option.deselect();
+    this.profesionPctn=profesion;
+
+  };
+
+  seleccionarProfesionRepre(event: MatAutocompleteSelectedEvent):void {
+    let profesion = event.option.value as Profesion;
+    console.log(profesion.descripcionProfesion+"===============LA PROFESION ESA REPRE");
+
+   // this.autocompleteControl.setValue('');
+    event.option.focus();
+    event.option.deselect();
+    this.profesionRepre=profesion;
+
+  };
+
+//==========
 
   ngOnInit(): void {
 
-    
+    //SET TIME PARA HACER UN DELAY ANTES DE LA ESCUCHA
+    setTimeout(() => {
+    this.unidadFiltrados = this.autocompleteControl.valueChanges
+    .pipe(
+      map(value => typeof value === 'string' ? value : value.nombre),
+      flatMap(value => value ? this._filter(value) : [])
+    );
+    }, 1000)
+
+    setTimeout(() => {
+    this.profesionPctnFiltrados = this.autocompleteControlProfesionPctn.valueChanges
+    .pipe(
+      map(value => typeof value === 'string' ? value : value.nombre),
+      flatMap(value => value ? this._filterPctn(value) : [])
+    );
+  }, 1000)
+
+  setTimeout(() => {
+    this.profesionRepreFiltrados = this.autocompleteControlProfesionRepre.valueChanges
+    .pipe(
+      map(value => typeof value === 'string' ? value : value.nombre),
+      flatMap(value => value ? this._filterPctn(value) : [])
+    );
+
+   }, 1000)
+
+
    // console.log('EL RADIO DE POSEE'+this.educacionRadio);
    // this.dialogForm.controls['poseeAntecedentes'].setValue(-1);
   
@@ -218,7 +314,7 @@ selecttipoTrabajodRepresentante?:number;
      
 
       identificacion: new FormControl('',Validators.required),
-
+   
       sintomaAntecedentes:new FormControl(''),
       enfermedadAntecedentes:new FormControl(''),
       enfermedadPeterna:new FormControl(''),
@@ -233,6 +329,7 @@ selecttipoTrabajodRepresentante?:number;
       fechaNacimiento:new FormControl('',Validators.required),//calendario
       poseeEducacion: new FormControl('',Validators.required),//radio
       unidadEducativa:new FormControl('',Validators.required),//list autocomplete
+
       nivelEducacion:new FormControl('',Validators.required),//list
       poseeDiscapacidad: new FormControl('',Validators.required),//radio
       tipoDiscapacidad:new FormControl('',Validators.required),//list
@@ -416,9 +513,19 @@ this.btn_opcion="Editar";
     }
 
     
-    
+    /*
     this.dialogForm.controls['unidadEducativa'].setValue(this.pacienteEditar.unidadEducativa);
     this.selectUnidadEducativa=this.pacienteEditar.unidadEducativa?.idUnidadEducativa;
+   
+    this.unidadNueva=this.pacienteEditar.unidadEducativa!;
+    this.mostrarNombre(this.pacienteEditar.unidadEducativa!);
+     */
+
+    this.unidadFiltrados= this.unidadEducativaService.getFiltrarUnidadEducativaNombre(this.pacienteEditar.unidadEducativa?.nombreUnidadEducativa!);
+    this.unidadNueva=this.pacienteEditar.unidadEducativa!;
+    this.autocompleteControl.setValue(this.pacienteEditar.unidadEducativa!);
+
+
     this.dialogForm.controls['nivelEducacion'].setValue(this.pacienteEditar.nivelEducacionParalelo);
     this.selectNivelEducacion=this.pacienteEditar.nivelEducacionParalelo?.idNivelEducacionParalelo;
 
@@ -450,10 +557,11 @@ this.btn_opcion="Editar";
     
     
     //PROPIO VALIDADOR---------------------posee paciente==1 NO REQUIRED------------------------------------------------
-    
+    /*
     this.dialogForm.controls['profesion'].setValue(this.pacienteEditar.profesion);
     this.selectProfesion=this.pacienteEditar.profesion?.idProfesion;
 
+  */
     this.dialogForm.controls['tipoEmpleo'].setValue(this.pacienteEditar.trabajo?.tipoTrabajo);
     this.selectTipoTrabajo=this.pacienteEditar.trabajo?.tipoTrabajo?.idTipoTrabajo;
 
@@ -500,9 +608,22 @@ this.btn_opcion="Editar";
     this.dialogForm.controls['celularRepresentante'].setValue(this.representanteEditar.celularRepresentante);
     
     this.dialogForm.controls['telefonoEmergenciaRepre'].setValue(this.representanteEditar.telefonoEmergenciaRepresentante);
+   
+   
     this.dialogForm.controls['profesionRepresentante'].setValue(this.representanteEditar.profesion);
     this.selectProfesionRepresentante=this.representanteEditar.profesion?.idProfesion;
-    
+  
+
+  
+   this.profesionPctn=this.pacienteEditar.profesion!;
+   this.profesionPctnFiltrados= this.profesionService.getFiltrarProfesionNombre(this.pacienteEditar.profesion?.descripcionProfesion!);
+   this.autocompleteControlProfesionPctn.setValue(this.pacienteEditar.profesion!);
+
+   this.profesionRepre=this.representanteEditar.profesion!;
+   this.profesionRepreFiltrados= this.profesionService.getFiltrarProfesionNombre(this.representanteEditar.profesion?.descripcionProfesion!);
+   this.autocompleteControlProfesionRepre.setValue(this.representanteEditar.profesion!);
+
+
    // this.dialogForm.controls['tipoEmpleoRepre'].setValue(this.representanteEditar.trabajo?.tipoTrabajo);
    
     this.dialogForm.controls['tipoEmpleoRepre'].setValue(this.representanteEditar.trabajo?.tipoTrabajo);
@@ -759,7 +880,8 @@ this.obtenerTipoTrabajoNinguno();
   private obtenerTiposSangres(){
 
       this.tipoSangreService.listarTipoSangre().subscribe(data=>{
-      const filter = data.filter((item) => item.descripcionTipoSangre !== 'NINGUNO');
+      //const filter = data.filter((item) => item.descripcionTipoSangre !== 'NINGUNO');
+      const filter = data.filter((item) => item.idTipoSangre !=10);
       this.tipoSangreList=filter;
 
       } );
@@ -777,7 +899,8 @@ this.obtenerTipoTrabajoNinguno();
 private obtenerGenero(){
 
   this.generoServicio.listarGenero().subscribe(data=>{
-    const filter = data.filter((item) => item.descripcionGenero !== 'NINGUNO');
+// const filter = data.filter((item) => item.descripcionGenero !== 'NINGUNO');
+ const filter = data.filter((item) => item.idGenero !=5);
   this.generoList=filter;
 
   } );
@@ -786,7 +909,8 @@ private obtenerGenero(){
 private obtenerUnidadEducativa(){
 
   this.unidadEducativaService.listarUnidadEducativa().subscribe(data=>{
-    const filter = data.filter((item) => item.nombreUnidadEducativa !== 'NINGUNO');
+//const filter = data.filter((item) => item.nombreUnidadEducativa !== 'NINGUNO');
+  const filter = data.filter((item) => item.idUnidadEducativa != 1075);
   this.unidadEducativaList=filter;
 
   } );
@@ -795,7 +919,8 @@ private obtenerUnidadEducativa(){
 private obtenerNivelEducacion(){
 
   this.nivelEducacionService.listarNivelEdicacion().subscribe(data=>{
-  const filter = data.filter((item) => item.descripcionNivelParalelo !== 'NINGUNO');
+ // const filter = data.filter((item) => item.descripcionNivelParalelo !== 'NINGUNO');
+  const filter = data.filter((item) => item.idNivelEducacionParalelo !=24);
   this.nivelEdicacionList=filter;
 
   } );
@@ -804,7 +929,8 @@ private obtenerNivelEducacion(){
 private obtenertipoDiscapacidad(){
 
   this.tipoDiscapcidadService.listarTipoDiscapacidad().subscribe(data=>{
-  const filter = data.filter((item) => item.descripcionTipoDiscapacidad !== 'NINGUNO');
+  //const filter = data.filter((item) => item.descripcionTipoDiscapacidad !== 'NINGUNO');
+  const filter = data.filter((item) => item.idTipoDiscapacidad !=11);
   this.tipoDiscapacidadList=filter;
 
   } );
@@ -813,7 +939,8 @@ private obtenertipoDiscapacidad(){
 private obtenertipoTrabajo(){
 
   this.tipoTrabajoService.listarTipoTrabajo().subscribe(data=>{
-  const filter = data.filter((item) => item.descripcionTipoTrabajo !== 'NINGUNO');
+  //const filter = data.filter((item) => item.descripcionTipoTrabajo !== 'NINGUNO');
+  const filter = data.filter((item) => item.idTipoTrabajo !=3);
   this.tipoTrabajoList=filter;
 
   } );
@@ -823,7 +950,8 @@ private obtenertipoTrabajo(){
 private obtenerProfesion (){
 
   this.profesionService.listarProfesion().subscribe(data=>{
-    const filter = data.filter((item) => item.descripcionProfesion !== 'NINGUNO');
+   // const filter = data.filter((item) => item.descripcionProfesion !== 'NINGUNO');
+    const filter = data.filter((item) => item.idProfesion !=58);
   this.profesionList=filter;
 
   } );
@@ -841,8 +969,8 @@ private obtenerTrabajo (){
 private obtenerEstadoCivil (){
 
   this.estadoCivilService.listarEstadoCivil().subscribe(data=>{
-  const filter = data.filter((item) => item.descripcionEstadoCivil !== 'NINGUNO');
-
+  //const filter = data.filter((item) => item.descripcionEstadoCivil !== 'NINGUNO');
+  const filter = data.filter((item) => item.idEstadoCivil !=8);
   this.estadoCivilList=filter;
 
   } );
@@ -855,7 +983,8 @@ private obtenerEstadoCivil (){
 private obtenerEstadoCivilNinguno (){
   let filter:EstadoCivil[]=[];
   this.estadoCivilService.listarEstadoCivil().subscribe(data=>{
-   filter = data.filter((item) => item.descripcionEstadoCivil === 'NINGUNO');
+   //filter = data.filter((item) => item.descripcionEstadoCivil === 'NINGUNO');
+     filter = data.filter((item) => item.idEstadoCivil ==8);
    this.estadoCivilNinguno=filter[0];
   } );
  
@@ -864,7 +993,8 @@ private obtenerEstadoCivilNinguno (){
 private obtenerTipoSangrelNinguno (){
   let filter:TipoSangre[]=[];
   this.tipoSangreService.listarTipoSangre().subscribe(data=>{
-   filter = data.filter((item) => item.descripcionTipoSangre === 'NINGUNO');
+ //  filter = data.filter((item) => item.descripcionTipoSangre === 'NINGUNO');
+     filter = data.filter((item) => item.idTipoSangre ==10);
    this.tipoSangreNinguno=filter[0];
   } );
  
@@ -874,7 +1004,8 @@ private obtenerTipoSangrelNinguno (){
 private obtenerGeneroNinguno (){
   let filter:Genero[]=[];
   this.generoServicio.listarGenero().subscribe(data=>{
-   filter = data.filter((item) => item.descripcionGenero === 'NINGUNO');
+//   filter = data.filter((item) => item.descripcionGenero === 'NINGUNO');
+     filter = data.filter((item) => item.idGenero ==5);
    this.generoNinguno=filter[0];
   } );
  
@@ -885,7 +1016,8 @@ private obtenerGeneroNinguno (){
 private obtenerProfesionNinguno (){
   let filter:Profesion[]=[];
   this.profesionService.listarProfesion().subscribe(data=>{
-   filter = data.filter((item) => item.descripcionProfesion === 'NINGUNO');
+  // filter = data.filter((item) => item.descripcionProfesion === 'NINGUNO');
+     filter = data.filter((item) => item.idProfesion ==58);
    this.profesionNinguno=filter[0];
   } );
  
@@ -896,7 +1028,8 @@ private obtenerProfesionNinguno (){
 private obtenerTipoDiscapacidadNinguno (){
   let filter:TipoDiscapacidad[]=[];
   this.tipoDiscapcidadService.listarTipoDiscapacidad().subscribe(data=>{
-   filter = data.filter((item) => item.descripcionTipoDiscapacidad === 'NINGUNO');
+ //  filter = data.filter((item) => item.descripcionTipoDiscapacidad === 'NINGUNO');
+     filter = data.filter((item) => item.idTipoDiscapacidad ==11);
    this.tipoDiscapacidadNinguno=filter[0];
   } );
  
@@ -909,7 +1042,8 @@ private obtenerTipoDiscapacidadNinguno (){
 private obtenerTipoTrabajoNinguno (){
   let filter:TipoTrabajo[]=[];
   this.tipoTrabajoService.listarTipoTrabajo().subscribe(data=>{
-   filter = data.filter((item) => item.descripcionTipoTrabajo === 'NINGUNO');
+   //filter = data.filter((item) => item.descripcionTipoTrabajo === 'NINGUNO');
+    filter = data.filter((item) => item.idTipoTrabajo ==3);
    this.tipoTrabajoNinguno=filter[0];
   } );
  
@@ -920,7 +1054,8 @@ private obtenerTipoTrabajoNinguno (){
 private obtenernivelEducacionNinguno (){
   let filter:NivelEducacionParalelo[]=[];
   this.nivelEducacionService.listarNivelEdicacion().subscribe(data=>{
-   filter = data.filter((item) => item.descripcionNivelParalelo === 'NINGUNO');
+     filter = data.filter((item) => item.idNivelEducacionParalelo ==24);
+  // filter = data.filter((item) => item.descripcionNivelParalelo === 'NINGUNO');
    this.nivelEducacionParaleloNinguno=filter[0];
   } );
  
@@ -931,7 +1066,9 @@ private obtenernivelEducacionNinguno (){
 private obtenerUnidadEducativaNinguno (){
   let filter:UnidadEducativa[]=[];
   this.unidadEducativaService.listarUnidadEducativa().subscribe(data=>{
-   filter = data.filter((item) => item.nombreUnidadEducativa === 'NINGUNO');
+  // filter = data.filter((item) => item.nombreUnidadEducativa === 'NINGUNO');
+     filter = data.filter((item) => item.idUnidadEducativa == 1075);
+   
    this.unidadEducativaNinguno=filter[0];
   } );
  
@@ -983,8 +1120,6 @@ crearRepresentante(){
 
     //posee discapacidad
     if (this.discapacidadRepresentanteRadio==1) {
-
-
       tipoDiscapacidad.idTipoDiscapacidad=this.dialogForm.controls['tipoDiscapacidadRepre'].value;
       discapacidad.tipoDiscapacidad=tipoDiscapacidad;
       discapacidad.porcetajeDiscapacidad=parseInt(this.dialogForm.controls['porcentajeDiscapacidadRepre'].value);
@@ -992,8 +1127,6 @@ crearRepresentante(){
       //necesito id discapacidad
      // discapacidad.idDiscapacidad=24;
       console.log('LO QUE ENVIO DE DISCAPACIDAD'+discapacidad.descripcionDiscapacidad);
-
-
     }else{
       tipoDiscapacidad.idTipoDiscapacidad=this.tipoDiscapacidadNinguno.idTipoDiscapacidad;
       discapacidad.tipoDiscapacidad=tipoDiscapacidad;
@@ -1002,7 +1135,6 @@ crearRepresentante(){
       //necesito id discapacidad
      // discapacidad.idDiscapacidad=24;
       console.log('LO QUE ENVIO DE DISCAPACIDAD'+discapacidad.descripcionDiscapacidad);
-
     }
 
 
@@ -1053,9 +1185,13 @@ crearRepresentante(){
                     genero.idGenero=this.dialogForm.controls['generoRepresentante'].value;
                     representante.genero=genero;
                     
-                    profesion.idProfesion=this.dialogForm.controls['profesionRepresentante'].value;
+
+                    //PROFESION   this.profesionPctn
+                 //   profesion.idProfesion=this.dialogForm.controls['profesionRepresentante'].value;
+                    console.log(this.profesionRepre.descripcionProfesion+"DESCRIPCION PROFESION=========================");
+                    profesion.idProfesion=this.profesionRepre.idProfesion;
                     representante.profesion=profesion;
-                   trabajoCreado
+                 //  trabajoCreado
   
                    console.log('Va a crear representante');
                     this.representanteService.crearRepresentante(representante)
@@ -1308,8 +1444,10 @@ crearRepresentante(){
 
              if (this.educacionRadio==1) {
               
-              unidadEducativa.idUnidadEducativa=this.dialogForm.controls['unidadEducativa'].value;
-              paciente.unidadEducativa=unidadEducativa;
+
+          //    unidadEducativa.idUnidadEducativa=this.dialogForm.controls['unidadEducativa'].value;
+            unidadEducativa.idUnidadEducativa=this.unidadNueva.idUnidadEducativa;
+             paciente.unidadEducativa=unidadEducativa;
 
               nivelEducacionParalelo.idNivelEducacionParalelo=this.dialogForm.controls['nivelEducacion'].value;
               paciente.nivelEducacionParalelo=nivelEducacionParalelo;
@@ -1378,8 +1516,10 @@ crearRepresentante(){
                
               
             }else{
-
-              profesion.idProfesion=this.dialogForm.controls['profesion'].value;
+             
+             // profesion.idProfesion=this.dialogForm.controls['profesion'].value;
+             console.log(this.profesionPctn.descripcionProfesion+"DESCRIPCION PROFESION PACIENTE=========================");
+              profesion.idProfesion= this.profesionPctn.idProfesion;
               paciente.profesion=profesion; 
               
 
@@ -1425,8 +1565,10 @@ crearRepresentante(){
            paciente.genero=genero;
 
            paciente.estadoPaciente='ACTIVO';
-
-           console.log('Ingresa paciente 10');
+ 
+           console.log('PACIENTE CREADO=================================');
+           console.log('PACIENTE CREADO DESCRIPCION================================='+paciente.profesion?.descripcionProfesion);
+          
            this.pacienteService.crearPaciente(paciente)
            .subscribe(
              pacienteCreado => {
@@ -1454,7 +1596,7 @@ crearRepresentante(){
              }
            );
 
-
+          
                 }
                },
                   err => {//error repre trabajo
@@ -1585,7 +1727,8 @@ console.log("INGRESA REPRESENTANTE EDITAR");
                     this.generoEditar.idGenero=this.dialogForm.controls['generoRepresentante'].value;
                     this.representanteREditar.genero=this.generoEditar;
                     
-                    this.profesionEditar.idProfesion=this.dialogForm.controls['profesionRepresentante'].value;
+                   // this.profesionEditar.idProfesion=this.dialogForm.controls['profesionRepresentante'].value;
+                   this.profesionEditar.idProfesion= this.profesionRepre.idProfesion;
                     this.representanteREditar.profesion=this.profesionEditar;
 
 
@@ -1817,8 +1960,11 @@ editarPaciente(representante:Representante){
 
              if (this.educacionRadio==1) {
               
-              this.unidadEducativaPacienteEditar.idUnidadEducativa=this.dialogForm.controls['unidadEducativa'].value;
-              this.pacientePacienteEditar.unidadEducativa=this.unidadEducativaPacienteEditar;
+
+            
+             // this.unidadEducativaPacienteEditar.idUnidadEducativa=this.dialogForm.controls['unidadEducativa'].value;
+             this.unidadEducativaPacienteEditar.idUnidadEducativa= this.unidadNueva.idUnidadEducativa;
+             this.pacientePacienteEditar.unidadEducativa=this.unidadEducativaPacienteEditar;
 
               this.nivelEducacionParaleloPacienteEditar.idNivelEducacionParalelo=this.dialogForm.controls['nivelEducacion'].value;
               this.pacientePacienteEditar.nivelEducacionParalelo=this.nivelEducacionParaleloPacienteEditar;
@@ -1889,7 +2035,9 @@ editarPaciente(representante:Representante){
               
             }else{
 
-              this.profesionPacienteEditar.idProfesion=this.dialogForm.controls['profesion'].value;
+             // this.profesionPacienteEditar.idProfesion=this.dialogForm.controls['profesion'].value;
+             this.profesionPacienteEditar.idProfesion= this.profesionPctn.idProfesion;
+       
               this.pacientePacienteEditar.profesion=this.profesionPacienteEditar; 
               
 

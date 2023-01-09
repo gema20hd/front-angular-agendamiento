@@ -15,8 +15,9 @@
 }
 
 .card_title {
-    font-size: 15px;
+    font-size: 20px;
     font-family: "Roboto", sans-serif;
+    text-align: center;
 }
 
 .card {
@@ -24,6 +25,16 @@
     text-align: inherit;
     border-width: 1px;
     border-style: groove;
+}
+
+
+.card_busqueda {
+    max-width: 100%;
+    min-width: 10%;
+    text-align: center;
+    display: inline-block;
+    margin: 0 auto;
+    width: 83%;
 }
 
 .card2 {
@@ -140,14 +151,14 @@ table {
     text-transform: uppercase;
     letter-spacing: 0.05em;
     border: none;
-    font-size: 0.675rem;
+    font-size: 0.85rem;
     color: #ffffff;
     font-weight: bold;
     background-color: #00A7E3;
-    width: 14%;
+    width: 20%;
     display: block;
     margin-top: 0px;
-    padding: 0.275rem 0.2rem;
+    padding: 0.475rem 0.4rem;
     border-radius: 1.5rem;
     box-shadow: 3px 3px 8px #b1b1b1, -3px -3px 8px #ffffff;
     cursor: pointer;

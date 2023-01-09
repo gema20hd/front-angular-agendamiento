@@ -59,4 +59,17 @@ export class ProfesionService {
     );
   }
 
+  getFiltrarProfesionNombre(profesion: String): Observable<Profesion[]> {
+    return this.http.get<Profesion[]>(`${this.url+'/nombre'}/${profesion}`,
+    { headers: this.agregarAuthorizationHeader()}).pipe(
+     catchError(e => {
+       this.isNoAutorizado(e);
+       return throwError(e);
+     })
+   );
+ }
+
+
+
+
 }

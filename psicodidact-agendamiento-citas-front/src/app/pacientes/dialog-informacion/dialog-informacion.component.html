@@ -53,10 +53,11 @@
             {{pacienteSelect?.trabajo?.tipoTrabajo?.descripcionTipoTrabajo}}
 
          </div>
-         <div class="col-md-2 color_colum text ">Descripción Empleo </div>
+ 
+         <div class="col-md-2 color_colum text">Edad</div>
          <div class="col-md-4 color_info">
-            {{pacienteSelect?.trabajo?.descripcionTrabajo}}
-            
+           
+            {{pacienteSelect?.edadPaciente}}
          </div>
        </div>
        <br />
@@ -64,48 +65,65 @@
        <div class="row">
          
          <div class="col-md-2 color_colum text">Dirección Empleo </div>
-         <div class="col-md-4 color_info">
+         <div class="col-md-4 color_info" *ngIf="pacienteSelect?.trabajo?.direccionTrabajo!=''">
             {{pacienteSelect?.trabajo?.direccionTrabajo}}
 
          </div>
-         <div class="col-md-2 color_colum text">Celular </div>
-         <div class="col-md-4 color_info">
-            {{pacienteSelect?.celularPaciente}}
+         <div class="col-md-4 color_info " *ngIf="pacienteSelect?.trabajo?.direccionTrabajo==''">
+            NINGUNO
+           </div>
+
+          <div class="col-md-2 color_colum text ">Descripción Empleo </div>
+         <div class="col-md-4 color_info" *ngIf="pacienteSelect?.trabajo?.descripcionTrabajo!=''">
+            {{pacienteSelect?.trabajo?.descripcionTrabajo}}
             
          </div>
+         <div class="col-md-4 color_info " *ngIf="pacienteSelect?.trabajo?.descripcionTrabajo==''">
+            NINGUNO
+           </div>
+
        </div>
        <br />
 
        <div class="row">
          
-         <div class="col-md-2 color_colum text">Teléfono emergencia</div>
-         <div class="col-md-4 color_info">
+         <div class="col-md-2 color_colum text">Teléfono Emergencia</div>
+         <div class="col-md-4 color_info"  *ngIf="pacienteSelect?.telefonoPaciente!=''">
             {{pacienteSelect?.telefonoPaciente}}
          </div>
-         <div class="col-md-2 color_colum text">Correo</div>
-         <div class="col-md-4 color_info">
-            {{pacienteSelect?.correoElectronicoPaciente}}
+         <div class="col-md-4 color_info " *ngIf="pacienteSelect?.telefonoPaciente==''">
+            NINGUNO
+           </div>
+               <div class="col-md-2 color_colum text">Celular </div>
+         <div class="col-md-4 color_info" *ngIf="pacienteSelect?.trabajo?.descripcionTrabajo!=''">
+            {{pacienteSelect?.celularPaciente}}
+            
          </div>
+         <div class="col-md-4 color_info " *ngIf="pacienteSelect?.trabajo?.descripcionTrabajo==''">
+            NINGUNO
+           </div>
+
        </div>
        <br />
 
        <div class="row">
          
          <div class="col-md-2 color_colum text">Dirección Domicilio</div>
-         <div class="col-md-4 color_info">
+         <div class="col-md-4 color_info" *ngIf="pacienteSelect?.direccionDomicilio!=''">
             {{pacienteSelect?.direccionDomicilio}}
          </div>
+         <div class="col-md-4 color_info " *ngIf="pacienteSelect?.direccionDomicilio==''">
+            NINGUNO
+           </div>
 
-         <div class="col-md-2 color_colum text">Profesion </div>
-         <div class="col-md-4 color_info" *ngIf="pacienteSelect?.profesion?.descripcionProfesion!='NINGUNO'">
-         
-            {{pacienteSelect?.profesion?.descripcionProfesion}}
-
+          <div class="col-md-2 color_colum text">Correo</div>
+         <div class="col-md-4 color_info" *ngIf="pacienteSelect?.correoElectronicoPaciente!=''">
+            {{pacienteSelect?.correoElectronicoPaciente}}
          </div>
-         <div class="col-md-4 color_info" *ngIf="pacienteSelect?.profesion?.descripcionProfesion=='NINGUNO'">
+         <div class="col-md-4 color_info " *ngIf="pacienteSelect?.correoElectronicoPaciente==''">
+            NINGUNO
+           </div>
 
-
-         </div>
 
        </div>
        <br />
@@ -117,75 +135,110 @@
             {{pacienteSelect?.unidadEducativa?.nombreUnidadEducativa}}
          </div>
          <div class="col-md-4 color_info" *ngIf="pacienteSelect?.unidadEducativa?.nombreUnidadEducativa=='NINGUNO'">
-           
+          NINGUNO 
             
          </div>
-         <div class="col-md-2 color_colum text">Nivel Educación</div>
-         <div class="col-md-4 color_info" *ngIf="pacienteSelect?.nivelEducacionParalelo?.descripcionNivelParalelo!='NINGUNO'">
-            {{pacienteSelect?.nivelEducacionParalelo?.descripcionNivelParalelo}}
+        
+
+         <div class="col-md-2 color_colum text">Profesión </div>
+         <div class="col-md-4 color_info" *ngIf="pacienteSelect?.profesion?.descripcionProfesion!='NINGUNO'">
+         
+            {{pacienteSelect?.profesion?.descripcionProfesion}}
 
          </div>
-         <div class="col-md-4 color_info" *ngIf="pacienteSelect?.nivelEducacionParalelo?.descripcionNivelParalelo=='NINGUNO'">
-           
+         <div class="col-md-4 color_info" *ngIf="pacienteSelect?.profesion?.descripcionProfesion=='NINGUNO'">
 
+       NINGUNO
          </div>
+
        </div>
        <br />
 
        <div class="row">
          <div class="col-md-2 color_colum text">Enfermedad Antecedentes</div>
-         <div class="col-md-4 color_info">
+         <div class="col-md-4 color_info" *ngIf="pacienteSelect?.antecedente?.enfermedadAntecedente!=''">
          
           {{pacienteSelect?.antecedente?.enfermedadAntecedente}}
          </div>
-         <div class="col-md-2 color_colum text">Enfermedad Paterna</div>
-         <div class="col-md-4 color_info">
-          {{pacienteSelect?.antecedente?.enfermedadPaterna}}
- 
+         <div class="col-md-4 color_info "  *ngIf="pacienteSelect?.antecedente?.enfermedadAntecedente==''">
+            NINGUNO
+          </div>
+
+          <div class="col-md-2 color_colum text">Nivel Educación</div>
+         <div class="col-md-4 color_info" *ngIf="pacienteSelect?.nivelEducacionParalelo?.descripcionNivelParalelo!='NINGUNO'">
+            {{pacienteSelect?.nivelEducacionParalelo?.descripcionNivelParalelo}}
+
          </div>
-       </div>
+         <div class="col-md-4 color_info" *ngIf="pacienteSelect?.nivelEducacionParalelo?.descripcionNivelParalelo=='NINGUNO'">
+           NINGUNO
+
+         </div>
+
+      </div>
        <br />
  
        <div class="row">
           <div class="col-md-2 color_colum text">Enfermedad Materna</div>
-          <div class="col-md-4 color_info">
+          <div class="col-md-4 color_info"  *ngIf="pacienteSelect?.antecedente?.enfermedadMaterna!=''">
              {{pacienteSelect?.antecedente?.enfermedadMaterna}}
              
           </div>
-          <div class="col-md-2 color_colum text">Enfermedad Representante</div>
-          <div class="col-md-4 color_info">
-            
-             {{pacienteSelect?.antecedente?.enfermedadRepresentante}}
+          <div class="col-md-4 color_info "  *ngIf="pacienteSelect?.antecedente?.enfermedadMaterna==''">
+            NINGUNO
           </div>
-        </div>
+         
+<div class="col-md-2 color_colum text">Enfermedad Paterna</div>
+         <div class="col-md-4 color_info" *ngIf="pacienteSelect?.antecedente?.enfermedadPaterna!=''">
+          {{pacienteSelect?.antecedente?.enfermedadPaterna}}
+ 
+         </div>
+         <div class="col-md-4 color_info "  *ngIf="pacienteSelect?.antecedente?.enfermedadPaterna==''">
+            NINGUNO
+          </div>
+       </div>
         <br />
  
         <div class="row">
           <div class="col-md-2 color_colum text">Tratamiento Antecedentes</div>
-          <div class="col-md-4 color_info">
+          <div class="col-md-4 color_info" *ngIf="pacienteSelect?.antecedente?.tratamientoAntecedente!=''">
              {{pacienteSelect?.antecedente?.tratamientoAntecedente}}
              
           </div>
-          <div class="col-md-2 color_colum text">Alergia Antecedentes</div>
-          <div class="col-md-4 color_info">
-       
-             {{pacienteSelect?.antecedente?.alergiaAntecedente}}
+          <div class="col-md-4 color_info " *ngIf="pacienteSelect?.antecedente?.tratamientoAntecedente==''">
+            NINGUNO
           </div>
+         
+    <div class="col-md-2 color_colum text">Enfermedad Paciente</div>
+          <div class="col-md-4 color_info" *ngIf="pacienteSelect?.antecedente?.enfermedadRepresentante!=''">
+            
+             {{pacienteSelect?.antecedente?.enfermedadRepresentante}}
+          </div>
+          <div class="col-md-4 color_info " *ngIf="pacienteSelect?.antecedente?.enfermedadRepresentante==''">
+            NINGUNO
+          </div>
+
         </div>
         <br />
  
         <div class="row">
           <div class="col-md-2 color_colum text">Medicamento Antecedentes</div>
-          <div class="col-md-4 color_info">
+          <div class="col-md-4 color_info" *ngIf="pacienteSelect?.antecedente?.medicamentoAntecedente!=''">
            
              {{pacienteSelect?.antecedente?.medicamentoAntecedente}}
           </div>
-         
-          <div class="col-md-2 color_colum text">Síntoma Antecedentes</div>
-          <div class="col-md-4 color_info">
-            
-           {{pacienteSelect?.antecedente?.sintomaAntecedente}}
+          <div class="col-md-4 color_info " *ngIf="pacienteSelect?.antecedente?.medicamentoAntecedente==''">
+            NINGUNO
           </div>
+          
+       <div class="col-md-2 color_colum text">Alergia Antecedentes</div>
+          <div class="col-md-4 color_info" *ngIf="pacienteSelect?.antecedente?.alergiaAntecedente!=''">
+       
+             {{pacienteSelect?.antecedente?.alergiaAntecedente}}
+          </div>
+          <div class="col-md-4 color_info " *ngIf="pacienteSelect?.antecedente?.alergiaAntecedente==''">
+            NINGUNO
+          </div>
+
         </div>
         <br />
  
@@ -201,29 +254,47 @@
          </div>
          <div class="col-md-4 color_info" *ngIf="pacienteSelect?.discapacidad?.tipoDiscapacidad?.descripcionTipoDiscapacidad=='NINGUNO'">
           
-
+          NINGUNO
          </div>
-         <div class="col-md-2 color_colum text">Porcentaje Discapacidad</div>
+         
+         <div class="col-md-2 color_colum text">Síntoma Antecedentes</div>
+          <div class="col-md-4 color_info" *ngIf="pacienteSelect?.antecedente?.sintomaAntecedente!=''">
+            
+           {{pacienteSelect?.antecedente?.sintomaAntecedente}}
+          </div>
+          <div class="col-md-4 color_info " *ngIf="pacienteSelect?.antecedente?.sintomaAntecedente==''">
+            NINGUNO
+          </div>
+     
+
+
+       </div>
+       <br />
+
+       <div class="row">
+         <div class="col-md-2 color_colum text">Descripción Discapacidad</div>
+         <div class="col-md-4 color_info" *ngIf="pacienteSelect?.discapacidad?.descripcionDiscapacidad!=''">
+            {{pacienteSelect?.discapacidad?.descripcionDiscapacidad}}
+            
+         </div>
+         <div class="col-md-4 color_info" *ngIf="pacienteSelect?.discapacidad?.descripcionDiscapacidad==''">
+           
+            NINGUNO
+          </div>
+        
+    
+
+       <div class="col-md-2 color_colum text">Porcentaje Discapacidad</div>
          <div class="col-md-4 color_info" *ngIf="pacienteSelect?.discapacidad?.porcetajeDiscapacidad!=0">
            
             {{pacienteSelect?.discapacidad?.porcetajeDiscapacidad}} %
          </div>
          <div class="col-md-4 color_info" *ngIf="pacienteSelect?.discapacidad?.porcetajeDiscapacidad==0">
            
-    
+           NINGUNO
          </div>
 
-       </div>
-       <br />
-
-       <div class="row">
-         <div class="col-md-2 color_colum text">Descripcion Discapacidad</div>
-         <div class="col-md-4 color_info">
-            {{pacienteSelect?.discapacidad?.descripcionDiscapacidad}}
-            
-         </div>
-        
-       </div>
+      </div>
        <br />
 
 
@@ -262,11 +333,11 @@
 
 
        <div class="row">
-         <div class="col-md-2 color_colum">Género</div>
+         <div class="col-md-2 color_colum text">Género</div>
          <div class="col-md-4 color_info">
             {{pacienteSelect?.representante?.genero?.descripcionGenero}}
          </div>
-         <div class="col-md-2 color_colum">Dirección Trabajo</div>
+         <div class="col-md-2 color_colum text">Dirección Trabajo</div>
          <div class="col-md-4 color_info">
             {{pacienteSelect?.representante?.trabajo?.direccionTrabajo}}
          </div>
@@ -292,6 +363,7 @@
          <div class="col-md-4 color_info">
             {{pacienteSelect?.representante?.telefonoEmergenciaRepresentante}}
          </div>
+         
          <div class="col-md-2 color_colum text">Profesión</div>
          <div class="col-md-4 color_info">
             {{pacienteSelect?.representante?.profesion?.descripcionProfesion}}
@@ -331,19 +403,25 @@
 
        <div class="row">
          <div class="col-md-2 color_colum text">Tipo Discapacidad</div>
-         <div class="col-md-4 color_info">
+         <div class="col-md-4 color_info " *ngIf="pacienteSelect?.representante?.discapacidad?.tipoDiscapacidad?.descripcionTipoDiscapacidad!='NINGUNO'">
             {{pacienteSelect?.representante?.discapacidad?.tipoDiscapacidad?.descripcionTipoDiscapacidad}}
          </div>
+         <div class="col-md-4 color_info " *ngIf="pacienteSelect?.representante?.discapacidad?.tipoDiscapacidad?.descripcionTipoDiscapacidad=='NINGUNO'">
+          NINGUNO
+         </div>
          <div class="col-md-2 color_colum text">Porcentaje Discapacidad</div>
-         <div class="col-md-4 color_info">
+         <div class="col-md-4 color_info "  *ngIf="pacienteSelect?.representante?.discapacidad?.porcetajeDiscapacidad!=0">
             {{pacienteSelect?.representante?.discapacidad?.porcetajeDiscapacidad}} %
+         </div>
+         <div class="col-md-4 color_info "  *ngIf="pacienteSelect?.representante?.discapacidad?.porcetajeDiscapacidad==0">
+           0%
          </div>
        </div>
        <br />
 
 
        <div class="row">
-         <div class="col-md-2 color_colum text">Descripcion Discapacidad</div>
+         <div class="col-md-2 color_colum text">Descripción Discapacidad</div>
          <div class="col-md-4 color_info">
          
             {{pacienteSelect?.representante?.discapacidad?.descripcionDiscapacidad}}

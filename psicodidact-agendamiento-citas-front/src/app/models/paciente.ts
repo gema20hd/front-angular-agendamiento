@@ -44,6 +44,9 @@ export class Paciente {
     //ingreso
     antecedente?:Antecedente;
 
+    edadPaciente:number=0;
+
+
 
 
 }
