@@ -98,11 +98,13 @@ export class EditarProfesionalModalComponent {
     this.profesional.apellidoMaternoProfesional =this.data.apellidoMaternoProfesional
     this.profesional.correoElectronicoProfesional =this.data.correoElectronicoProfesional
     this.profesional.celularProfesional =this.data.celularProfesional
+    this.profesional.fechaNacimientoProfesional =this.data.fechaNacimientoProfesional
     this.profesional.telefonoEmergenciaProfesional =this.data.telefonoEmergenciaProfesional
     this.profesional.direccionDomicilioProfesional=this.data.direccionDomicilioProfesional
     this.profesional.estadoProfesional=this.data.estadoProfesional
 
     this.cuenta.banco.idBanco=this.data.cuenta.banco.idBanco
+    this.cuenta.banco.descripcionBanco=this.data.cuenta.banco.descripcionBanco
     this.cuenta.tipoCuenta.idTipoCuenta=this.data.cuenta.tipoCuenta.idTipoCuenta
     this.cuenta.idCuenta=this.data.cuenta.idCuenta
     this.cuenta.numeroCuenta=this.data.cuenta.numeroCuenta
@@ -115,11 +117,18 @@ export class EditarProfesionalModalComponent {
     this.discapacidad.porcetajeDiscapacidad=this.data.discapacidad.porcetajeDiscapacidad
     this.discapacidad.descripcionDiscapacidad=this.data.discapacidad.descripcionDiscapacidad
 
-    this.profesionProfesional.idProfesionProfesional= this.data.idProfesionProfesional
-    this.profesionProfesional.tercerNivelProfesionProfesional= this.data.tercerNivelProfesionProfesional
+    this.profesionProfesional.idProfesionProfesional= this.data.profesionProfesional.idProfesionProfesional
+    this.profesionProfesional.tercerNivelProfesionProfesional= this.data.profesionProfesional.tercerNivelProfesionProfesional
     
-    this.genero.idGenero= this.data.idGenero
-    this.genero.descripcionGenero= this.data.descripcionGenero
+    this.genero.idGenero= this.data.genero.idGenero
+    this.genero.descripcionGenero= this.data.genero.descripcionGenero
+
+    this.tipoSangre.idTipoSangre= this.data.tipoSangre.idTipoSangre
+    this.tipoSangre.descripcionTipoSangre= this.data.tipoSangre.descripcionTipoSangre
+
+    this.estadoCivil.idEstadoCivil= this.data.estadoCivil.idEstadoCivil
+    this.estadoCivil.descripcionEstadoCivil= this.data.estadoCivil.descripcionEstadoCivil
+
 
     this.dialogForm = this.formBuilder.group({
       poseeDiscapacidad: new FormControl('', Validators.required), //radio
@@ -155,7 +164,6 @@ export class EditarProfesionalModalComponent {
       nivelEducacion: new FormControl('', Validators.required),
       tipoDiscapacidad: new FormControl('', Validators.required),
       genero: new FormControl('', Validators.required),
-      profesionProfesional: new FormControl('', Validators.required),
       cuenta: new FormControl('', Validators.required),
 
       username: new FormControl('', Validators.required),
@@ -167,16 +175,16 @@ export class EditarProfesionalModalComponent {
     });
 
     // get
-    this.profesionalService.getGenero() .subscribe((generos) => (this.generos = generos));
+    this.profesionalService.getGenero().subscribe((generos) => (this.generos = generos));
     this.profesionalService.getEstadoCivil().subscribe((estadosCivil) => (this.estadosCivil = estadosCivil));
     this.profesionalService.getTipoSangre().subscribe((tiposSangre) => (this.tiposSangre = tiposSangre));
     this.profesionalService.getTipoDiscapacidad().subscribe((tiposDiscapacidades) =>(this.tiposDiscapacidades = tiposDiscapacidades));
     this.profesionalService.getProfesionProfesional().subscribe((profesionProfesionales) =>(this.profesionProfesionales = profesionProfesionales));
     this.profesionalService.getTipoCuentas().subscribe((tiposCuentas) => (this.tiposCuentas = tiposCuentas));
+  
+   
   }
-  get name() {
-    return this.dialogForm.get('identificacionProfesional');
-  }
+
 
   update(): void {
     this.discapacidadService.actualizarDiscapacidad(this.discapacidad).subscribe(
@@ -185,10 +193,8 @@ export class EditarProfesionalModalComponent {
           'discapacidad actualizada con éxito',
           discapacidadCreada.idDiscapacidad
         );
-        this.profesional.discapacidad.tipoDiscapacidad.idTipoDiscapacidad =
-          this.discapacidad.tipoDiscapacidad.idTipoDiscapacidad;
-        this.profesional.discapacidad.idDiscapacidad =
-          discapacidadCreada.idDiscapacidad;
+        this.profesional.discapacidad.tipoDiscapacidad.idTipoDiscapacidad = this.discapacidad.tipoDiscapacidad.idTipoDiscapacidad;
+        this.profesional.discapacidad.idDiscapacidad =discapacidadCreada.idDiscapacidad;
         
         
         this.profesional.cuenta.banco.idBanco = this.cuenta.banco.idBanco;
@@ -206,7 +212,7 @@ export class EditarProfesionalModalComponent {
               (profesionalCreado) => {
                 console.log('profesional actualizada con éxito', profesionalCreado);
                 Swal.fire(
-                  'Actualización Profesional',`El Profesional ${this.profesional.nombresProfesional} ${this.profesional.apellidoPaternoProfesional}ha sido actualizado con éxito`,'success' );
+                  'Actualización Profesional',`El Profesional ${this.profesional.nombresProfesional} ${this.profesional.apellidoPaternoProfesional} ha sido actualizado con éxito`,'success' );
                 this.cancelar();
 
               });   

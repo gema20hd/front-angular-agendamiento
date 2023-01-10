@@ -165,15 +165,14 @@
                                     {{producto.descripcionBanco}}
                                 </mat-option>
                             </mat-autocomplete>
-
                         </mat-form-field>
                     </form>
                 </div>
                 <div class="col-md-4">
                     <mat-form-field appearance="fill">
                         <mat-label>Tipo de Cuenta </mat-label>
-                        <mat-select [(ngModel)]="cuenta.tipoCuenta" name="tipoCuenta" formControlName="tipoCuenta">
-                            <mat-option *ngFor="let tipoCuenta of tiposCuentas" [value]="tipoCuenta">
+                        <mat-select [(ngModel)]="cuenta.tipoCuenta.idTipoCuenta" name="tipoCuenta" formControlName="tipoCuenta">
+                            <mat-option *ngFor="let tipoCuenta of tiposCuentas" [value]="tipoCuenta.idTipoCuenta">
                                 {{tipoCuenta.descripcionTipoCuenta}}
                             </mat-option>
                         </mat-select>
